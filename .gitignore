@@ -1,0 +1,12 @@
+*.blk
+*.ppl
+*.xml
+*.yml
+*.json
+*.log
+*.geany
+eco.jar
+per.jar
+net.jar
+tests.jar
+MANIFEST.MF

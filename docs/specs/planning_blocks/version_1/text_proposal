@@ -1,0 +1,22 @@
+[PROPOSAL]
+Version:    Int
+Year:       Int
+Iteration:  Int
+Tree:       String
+Level:      Int
+Link:       Long
+
+[PRODUCT]
+Id:         Long
+Qty:        Long
+Name:       String
+Desc:       String
+Amount:     Int
+Prefix:     String
+Unit:       String
+Down:       Int
+Up:         Int
+Absolute:   Long
+Price:      Long
+Sensetive:  Boolean
+Analogue:   Boolean
