@@ -1,0 +1,27 @@
+{
+   "debug" :
+   {
+      "MAIN_SAVE_LOAD": true,
+      "MAIN_INITIALIZE": false,
+      "MAIN_BOOTSTRAP": true,
+      "SERVICE_NODE_INTERNAL": false,
+
+      "CONTACT_CONNECT": true,
+      "CONTACT_PUT": false,
+      "CONTACT_GET": false,
+      "CONTACT_INFO": false,
+
+      "CONTENT_FIND": true,
+      "CONTENT_PUT_GET": true,
+      "CONTENT_INFO": false,
+
+      "MESSAGE_CREATE": true,
+      "MESSAGE_FIND_NODE": false,
+      "RECEIVER_TIMEOUT": true,
+
+      "SERVER_RECEIVERS": false,
+      "SERVER_INTERNAL": true,
+
+      "STREAMING": false
+   }
+}

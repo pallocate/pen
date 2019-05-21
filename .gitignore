@@ -2,7 +2,6 @@
 *.ppl
 *.xml
 *.yml
-*.json
 *.log
 *.geany
 eco.jar

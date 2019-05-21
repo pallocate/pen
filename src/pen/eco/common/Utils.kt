@@ -8,17 +8,28 @@ import java.security.MessageDigest
 class NaCl
 {
    var filename = ""
+
    init
    {
-      val osName = System.getProperty( "os.name" )
-      val extension = if (osName.contains( "win", true ))
-                        ".dll"
-                      else
-                         if (osName.contains( "nix", true ) || osName.contains( "nux", true ))
-                           ".so"
-                        else
-                           ""
-      filename = Config.LIBSODIUM_DIR + "libsodium" + System.getProperty( "sun.arch.data.model" ) + extension
+      try
+      {
+         val os = System.getProperty( "os.name" )
+         val arch = System.getProperty( "sun.arch.data.model" )
+
+         val extension = if (os.contains( "win", true ))
+                           ".dll"
+                         else
+                            if (os.contains( "nix", true ) || os.contains( "nux", true ))
+                              ".so"
+                           else
+                           {
+                              Log.err( "NaCl- Unknown OS" )
+                              ""
+                           }
+         filename = Config.LIBSODIUM_DIR + Config.SLASH + "libsodium" + arch + extension
+      }
+      catch (e : Exception)
+      { Log.err( "NaCl- Could not determine OS/architecture" ) }
    }
 }
 

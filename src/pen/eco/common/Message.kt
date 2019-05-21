@@ -1,11 +1,8 @@
 package pen.eco.common
 
 import java.io.Serializable
-import pen.eco.common.PasswordProvider
-import pen.eco.common.Crypto
-import pen.eco.common.Log
 
-/** An encrypted message. */
+/** An encrypted message. Message will probably move to some other package in the future. */
 class Message (var content : ByteArray, val contactID : Long, val messageID : Long, passwordProvider : PasswordProvider,
 pkc_salt : ByteArray, othersPublicKey : ByteArray) : Serializable
 {

@@ -19,7 +19,7 @@ class FileInput (filename : String)
 
    init
    {
-      Log.debug( {"Opening file $filename"}, KSettings.COMMON_FILES )
+      Log.debug( {"FileInput- opening file \"$filename\""}, KSettings.COMMON_FILES )
       try
       { stream = FileInputStream( filename ) }
       catch (e : Exception)
@@ -47,7 +47,7 @@ class FileOutput (filename : String)
 
    init
    {
-      Log.debug( {"Opening file $filename"}, KSettings.COMMON_FILES )
+      Log.debug( {"FileOutput- opening file \"$filename\""}, KSettings.COMMON_FILES )
       try
       { stream = FileOutputStream( filename ) }
       catch (e : Exception)
@@ -100,6 +100,7 @@ object Directory
       return ret
    }
 
+   /** Creates a directory from a path name and returns the same path if successful. */
    fun create (path : String) : String
    {
       Log.debug( {"Creating directory $path"}, KSettings.COMMON_FILES )

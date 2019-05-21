@@ -15,13 +15,14 @@ import pen.eco.common.Log.Level.WARN
 import pen.eco.common.Log.Level.ERROR
 import pen.eco.common.Loggable
 import pen.eco.common.KSerializer
-import pen.eco.common.Directory
 import pen.eco.common.KSettings
 import pen.eco.common.DebugValue
 import pen.eco.common.NoConverter
 import pen.eco.common.Convertable
+import pen.eco.common.Directory
 import pen.eco.common.Config
 import pen.eco.common.Config.getSettings
+import pen.eco.common.Config.SLASH
 import pen.net.kad.dht.KDHT
 import pen.net.kad.dht.KContent
 import pen.net.kad.dht.KStorageEntry
@@ -49,10 +50,10 @@ class KKademliaNode () : Convertable, Loggable
 
          try
          {
-            val dir = storageDir( ownerName ) + File.separator
+            val dir = storageDir( ownerName ) + SLASH
 
             /* Read basic  */
-            var fileReader = FileReader( dir + Constants.SERVICE_NODE_FILE )
+            var fileReader = FileReader(dir + Constants.KAD_FILE)
             val kademliaNode = KSerializer.read<KKademliaNode>( fileReader )
 
             if (kademliaNode is KKademliaNode)
@@ -83,7 +84,26 @@ class KKademliaNode () : Convertable, Loggable
       }
 
       /** @return The name of the content storage folder. */
-      private fun storageDir (ownerName : String) = Directory.create( Config.nodeDir( ownerName ) + File.separator + "nodeState" )
+      fun storageDir (nameDir : String, subDir : String = "nodeState" ) : String
+      {
+         val stringBuilder = StringBuilder()
+
+         stringBuilder.apply {
+            append( Config.USER_HOME )
+            append( SLASH )
+            append( Config.CONFIG_DIR )
+            append( SLASH )
+            append( "kademlia" )
+            append( SLASH )
+            append( nameDir )
+            append( SLASH )
+            append( subDir )
+         }
+         val dirName = stringBuilder.toString()
+         Directory.create( dirName )
+
+         return stringBuilder.toString()
+      }
    }
 
    var ownerName                                  = ""
@@ -203,24 +223,25 @@ class KKademliaNode () : Convertable, Loggable
    private fun saveState ()
    {
       log("saving", getSettings().getValue( DebugValue.MAIN_SAVE_LOAD ))
+      val dir = storageDir( ownerName ) + SLASH
 
       /* Store Basic  data. */
-      var fileWriter = FileWriter(storageDir( ownerName ) + File.separator + Constants.SERVICE_NODE_FILE)
+      var fileWriter = FileWriter( dir + Constants.KAD_FILE )
       KSerializer.write( this, fileWriter )
       fileWriter.close()
 
       /* Save the node state. */
-      fileWriter = FileWriter(storageDir( ownerName ) + File.separator + Constants.NODE_FILE)
+      fileWriter = FileWriter( dir + Constants.NODE_FILE)
       KSerializer.write( node, fileWriter )
       fileWriter.close()
 
       /* Save the routing table. */
-      fileWriter = FileWriter(storageDir( ownerName ) + File.separator + Constants.ROUTING_TABLE_FILE)
+      fileWriter = FileWriter( dir + Constants.ROUTING_TABLE_FILE)
       KSerializer.write( KSerializableRoutingInfo( routingTable ), fileWriter )
       fileWriter.close()
 
       /* Save the DHT. */
-      fileWriter = FileWriter(storageDir( ownerName ) + File.separator + Constants.DHT_FILE)
+      fileWriter = FileWriter( dir + Constants.DHT_FILE)
       KSerializer.write( dht, fileWriter )
       fileWriter.close()
    }

@@ -8,11 +8,10 @@ class KSettings () : Settings, Convertable
 {
    companion object
    {
-      /* Has to be here, to avoid StackOverflowError when deserializing settings from file */
       val SERIALIZE                               = false
       val COMMON_PLACE_HOLDER                     = true
       val COMMON_CONVERSIONS                      = false
-      val COMMON_FILES                            = false
+      val COMMON_FILES                            = true
 
       fun loadFromFile (filename : String) : KSettings
       {
