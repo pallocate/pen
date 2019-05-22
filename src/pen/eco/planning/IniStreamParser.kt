@@ -1,4 +1,4 @@
-package pen.eco.common
+package pen.eco.planning
 
 import java.io.InputStream
 import java.io.BufferedReader

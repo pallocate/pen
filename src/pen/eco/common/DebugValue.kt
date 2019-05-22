@@ -1,6 +1,5 @@
 package pen.eco.common
 
-interface SettingsValue
 enum class DebugValue : SettingsValue
 {
    MAIN_CREATE,

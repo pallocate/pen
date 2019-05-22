@@ -19,7 +19,7 @@ object Config
    val USER_HOME                                  = System.getProperty( "user.home" )
    /** Directory where to save configurations. */
    val CONFIG_DIR                                 = ".pen"
-   /** Directory of the libsodium library. */
+   /** Directory of the dist. */
    val DIST_DIR                                   = "dist"
    /** Directory of the libsodium library. */
    val LIBSODIUM_DIR                              = "${DIST_DIR}${SLASH}lib${SLASH}isc"

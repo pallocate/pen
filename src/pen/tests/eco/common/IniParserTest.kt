@@ -2,7 +2,7 @@ package pen.tests.eco.common
 
 import java.io.ByteArrayInputStream
 import org.junit.jupiter.api.*
-import pen.eco.common.IniStreamParser
+import pen.eco.planning.IniStreamParser
 
 @DisplayName( "IniParser Test" )
 class IniParserTest

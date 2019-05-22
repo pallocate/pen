@@ -38,7 +38,7 @@ object Units
    const val METRE_2             = "Metre square"
    const val METRE_3             = "Metre cubic"
 
-   // Additional units
+   // Some additional units
    const val NONE                = "None"
    const val PIECE               = "Piece"
    const val TONNE               = "Tonne"

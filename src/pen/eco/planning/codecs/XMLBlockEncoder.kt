@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream
 import javax.xml.stream.XMLOutputFactory
 import javax.xml.stream.XMLStreamWriter
 import pen.eco.common.Log
-import pen.eco.common.BlockNode
+import pen.eco.planning.BlockNode
 import pen.eco.planning.Block
 import pen.eco.planning.Blob
 import pen.eco.planning.Product

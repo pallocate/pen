@@ -3,7 +3,7 @@ package pen.eco.planning.codecs
 import java.io.InputStream
 import pen.eco.common.Log
 import pen.eco.common.Config
-import pen.eco.common.IniStreamParser
+import pen.eco.planning.IniStreamParser
 import pen.eco.planning.Constants
 import pen.eco.planning.Proposal
 import pen.eco.planning.VerseProduct

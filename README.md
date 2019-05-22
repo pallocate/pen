@@ -7,9 +7,7 @@ The intention of the PEN project is to provide an implementation of a decentrali
 
 **PEN construction**
 
-The basis for the PEN project is a decentralized peer-to-peer network.
-
-Access to the network will only be for participants and will be controlled through authentication. The technical term for this is F2F or a friend-to-friend network.
+The basis of PEN is a decentralized peer-to-peer network. Access to the network will only be for participants and will be controlled through authentication. This is called friend-to-friend networking.
 
 On top of the network different functionalities are added like the votation block chain and the crypto credit block chain. These functionalities and a lots of other will be available to a user as plugins. 
 
