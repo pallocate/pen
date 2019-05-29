@@ -1,9 +1,9 @@
 package pen.net.kad.messages.receivers
 
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.PlaceHolder
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 import pen.net.kad.messages.Message
 import pen.net.kad.messages.Codes
 

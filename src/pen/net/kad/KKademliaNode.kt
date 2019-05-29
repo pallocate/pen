@@ -9,19 +9,20 @@ import java.util.NoSuchElementException
 import java.util.Timer
 import java.util.TimerTask
 import com.beust.klaxon.Converter
-import pen.eco.common.Log
-import pen.eco.common.Log.Level.INFO
-import pen.eco.common.Log.Level.WARN
-import pen.eco.common.Log.Level.ERROR
-import pen.eco.common.Loggable
-import pen.eco.common.KSerializer
+import pen.eco.Log
+import pen.eco.Log.Level.INFO
+import pen.eco.Log.Level.WARN
+import pen.eco.Log.Level.ERROR
+import pen.eco.Loggable
+import pen.eco.KSerializer
+import pen.eco.KSettings
+import pen.eco.DebugValue
+import pen.eco.NoConverter
+import pen.eco.Convertable
 import pen.eco.common.Directory
-import pen.eco.common.KSettings
-import pen.eco.common.DebugValue
-import pen.eco.common.NoConverter
-import pen.eco.common.Convertable
-import pen.eco.common.Config
-import pen.eco.common.Config.getSettings
+import pen.eco.Config
+import pen.eco.Config.getSettings
+import pen.eco.Config.SLASH
 import pen.net.kad.dht.KDHT
 import pen.net.kad.dht.KContent
 import pen.net.kad.dht.KStorageEntry
@@ -44,15 +45,15 @@ class KKademliaNode () : Convertable, Loggable
       /** Loads  file. */
       fun loadFromFile (ownerName : String) : KKademliaNode?
       {
-         Log.debug({"$ownerName- loading KKademliaNode"}, getSettings().getValue( DebugValue.MAIN_SAVE_LOAD ))
+         Log.debug({"$ownerName- loading KKademliaNode"}, getSettings().getValue( DebugValue.KAD_SAVE_LOAD ))
          var ret : KKademliaNode? = null
 
          try
          {
-            val dir = storageDir( ownerName ) + File.separator
+            val dir = storageDir( ownerName ) + SLASH
 
             /* Read basic  */
-            var fileReader = FileReader( dir + Constants.SERVICE_NODE_FILE )
+            var fileReader = FileReader(dir + Constants.KAD_FILE)
             val kademliaNode = KSerializer.read<KKademliaNode>( fileReader )
 
             if (kademliaNode is KKademliaNode)
@@ -83,7 +84,26 @@ class KKademliaNode () : Convertable, Loggable
       }
 
       /** @return The name of the content storage folder. */
-      private fun storageDir (ownerName : String) = Directory.create( Config.nodeDir( ownerName ) + File.separator + "nodeState" )
+      fun storageDir (nameDir : String, subDir : String = "nodeState" ) : String
+      {
+         val stringBuilder = StringBuilder()
+
+         stringBuilder.apply {
+            append( Config.USER_HOME )
+            append( SLASH )
+            append( Config.CONFIG_DIR )
+            append( SLASH )
+            append( "kademlia" )
+            append( SLASH )
+            append( nameDir )
+            append( SLASH )
+            append( subDir )
+         }
+         val dirName = stringBuilder.toString()
+         Directory.create( dirName )
+
+         return stringBuilder.toString()
+      }
    }
 
    var ownerName                                  = ""
@@ -120,7 +140,7 @@ class KKademliaNode () : Convertable, Loggable
 
    private fun initialize ()
    {
-      log("initializing", getSettings().getValue( DebugValue.MAIN_INITIALIZE ))
+      log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
 
       routingTable.initialize( node )
       dht.initialize( ownerName )
@@ -132,21 +152,21 @@ class KKademliaNode () : Convertable, Loggable
    @Synchronized
    fun bootstrap (otherNode : KNode)
    {
-      log("bootstrapping to (${otherNode})", getSettings().getValue( DebugValue.MAIN_BOOTSTRAP ))
+      log("bootstrapping to (${otherNode})", getSettings().getValue( DebugValue.KAD_BOOTSTRAP ))
       val startTime = System.nanoTime()*1000
       val op = KConnectOperation( server, node, routingTable, dht, otherNode )
 
       try
       {
          op.execute()
-         log("bootstrap complete", Config.getSettings().getValue( DebugValue.MAIN_BOOTSTRAP ))
+         log("bootstrap complete", Config.getSettings().getValue( DebugValue.KAD_BOOTSTRAP ))
 
          val endTime = System.nanoTime()*1000
          Stats.setBootstrapTime( endTime - startTime )
       }
       catch (e: Exception)
       {
-         log("connection failed, ${e.message}", getSettings().getValue( DebugValue.MAIN_BOOTSTRAP ))
+         log("connection failed, ${e.message}", getSettings().getValue( DebugValue.KAD_BOOTSTRAP ))
       }
    }
 
@@ -202,32 +222,33 @@ class KKademliaNode () : Convertable, Loggable
 
    private fun saveState ()
    {
-      log("saving", getSettings().getValue( DebugValue.MAIN_SAVE_LOAD ))
+      log("saving", getSettings().getValue( DebugValue.KAD_SAVE_LOAD ))
+      val dir = storageDir( ownerName ) + SLASH
 
       /* Store Basic  data. */
-      var fileWriter = FileWriter(storageDir( ownerName ) + File.separator + Constants.SERVICE_NODE_FILE)
+      var fileWriter = FileWriter( dir + Constants.KAD_FILE )
       KSerializer.write( this, fileWriter )
       fileWriter.close()
 
       /* Save the node state. */
-      fileWriter = FileWriter(storageDir( ownerName ) + File.separator + Constants.NODE_FILE)
+      fileWriter = FileWriter( dir + Constants.NODE_FILE)
       KSerializer.write( node, fileWriter )
       fileWriter.close()
 
       /* Save the routing table. */
-      fileWriter = FileWriter(storageDir( ownerName ) + File.separator + Constants.ROUTING_TABLE_FILE)
+      fileWriter = FileWriter( dir + Constants.ROUTING_TABLE_FILE)
       KSerializer.write( KSerializableRoutingInfo( routingTable ), fileWriter )
       fileWriter.close()
 
       /* Save the DHT. */
-      fileWriter = FileWriter(storageDir( ownerName ) + File.separator + Constants.DHT_FILE)
+      fileWriter = FileWriter( dir + Constants.DHT_FILE)
       KSerializer.write( dht, fileWriter )
       fileWriter.close()
    }
 
    private fun startRefreshing ()
    {
-      log("start refreshing", getSettings().getValue( DebugValue.SERVICE_NODE_INTERNAL ))
+      log("start refreshing", getSettings().getValue( DebugValue.KAD_INTERNAL ))
       refreshTimer = Timer( true )
       refreshTask = RefreshTimerTask()
       refreshTimer?.schedule( refreshTask, Constants.RESTORE_INTERVAL, Constants.RESTORE_INTERVAL )
@@ -235,7 +256,7 @@ class KKademliaNode () : Convertable, Loggable
 
    private fun stopRefreshing ()
    {
-      log("stop refreshing", getSettings().getValue( DebugValue.SERVICE_NODE_INTERNAL ))
+      log("stop refreshing", getSettings().getValue( DebugValue.KAD_INTERNAL ))
       refreshTask.cancel()
       refreshTimer?.cancel()
       refreshTimer?.purge()
@@ -267,12 +288,12 @@ class KKademliaNode () : Convertable, Loggable
          try
          { refresh() }
          catch (e : IOException)
-         { log("refresh failed!", getSettings().getValue( DebugValue.SERVICE_NODE_INTERNAL ), WARN) }
+         { log("refresh failed!", getSettings().getValue( DebugValue.KAD_INTERNAL ), WARN) }
       }
 
       override fun cancel () : Boolean
       {
-         log("refresh canceled", getSettings().getValue( DebugValue.SERVICE_NODE_INTERNAL ))
+         log("refresh canceled", getSettings().getValue( DebugValue.KAD_INTERNAL ))
          return false
       }
    }

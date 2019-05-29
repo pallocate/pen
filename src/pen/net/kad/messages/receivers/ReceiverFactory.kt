@@ -1,6 +1,6 @@
 package pen.net.kad.messages.receivers
 
-import pen.eco.common.Config
+import pen.eco.Config
 import pen.net.kad.KKademliaNode
 import pen.net.kad.messages.Codes
 

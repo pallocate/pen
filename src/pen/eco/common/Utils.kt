@@ -3,24 +3,8 @@ package pen.eco.common
 import java.util.Base64
 import java.math.BigInteger
 import java.security.MessageDigest
-
-/** Constructs path name to the sodium library depending on OS and architecture. */
-class NaCl
-{
-   var filename = ""
-   init
-   {
-      val osName = System.getProperty( "os.name" )
-      val extension = if (osName.contains( "win", true ))
-                        ".dll"
-                      else
-                         if (osName.contains( "nix", true ) || osName.contains( "nux", true ))
-                           ".so"
-                        else
-                           ""
-      filename = Config.LIBSODIUM_DIR + "libsodium" + System.getProperty( "sun.arch.data.model" ) + extension
-   }
-}
+import pen.eco.KSettings
+import pen.eco.Log
 
 object Utils
 {

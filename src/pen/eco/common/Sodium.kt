@@ -2,6 +2,37 @@ package pen.eco.common
 
 import com.sun.jna.Library
 import com.sun.jna.NativeLong
+import pen.eco.Config
+import pen.eco.Log
+
+/** Constructs path name to the sodium library depending on OS and architecture. */
+class NaCl
+{
+   var filename = ""
+
+   init
+   {
+      try
+      {
+         val os = System.getProperty( "os.name" )
+         val arch = System.getProperty( "sun.arch.data.model" )
+
+         val extension = if (os.contains( "win", true ))
+                           ".dll"
+                         else
+                            if (os.contains( "nix", true ) || os.contains( "nux", true ))
+                              ".so"
+                           else
+                           {
+                              Log.err( "NaCl- Unknown OS" )
+                              ""
+                           }
+         filename = Config.LIBSODIUM_DIR + Config.SLASH + "libsodium" + arch + extension
+      }
+      catch (e : Exception)
+      { Log.err( "NaCl- Could not determine OS/architecture" ) }
+   }
+}
 
 /** An limited interface to the Sodium library. */
 interface Sodium : Library

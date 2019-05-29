@@ -1,8 +1,8 @@
 package pen.net.kad.messages
 
-import pen.eco.common.Log
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.Log
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 
 /** A simple message used for testing the system; Default message constructed if the message type sent is not available */
 class KSimpleMessage () : Message

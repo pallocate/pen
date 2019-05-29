@@ -1,9 +1,9 @@
 package pen.net.kad.messages.receivers
 
 import java.util.NoSuchElementException
-import pen.eco.common.Loggable
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.Loggable
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 import pen.net.kad.KServer
 import pen.net.kad.dht.KDHT
 import pen.net.kad.dht.KStorageEntry

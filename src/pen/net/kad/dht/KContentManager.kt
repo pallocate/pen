@@ -1,10 +1,10 @@
 package pen.net.kad.dht
 
-import pen.eco.common.Log.Level.INFO
-import pen.eco.common.Log.Level.WARN
-import pen.eco.common.Loggable
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.Log.Level.INFO
+import pen.eco.Log.Level.WARN
+import pen.eco.Loggable
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 import pen.net.kad.StorageEntryMetadata
 import pen.net.kad.NoStorageEntryMetadata
 import pen.net.kad.node.KNodeId

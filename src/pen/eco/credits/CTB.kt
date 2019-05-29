@@ -1,6 +1,6 @@
 package pen.eco.credits
 
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.Crypto
 import pen.eco.common.Hashable
 import pen.eco.common.MerkleTree

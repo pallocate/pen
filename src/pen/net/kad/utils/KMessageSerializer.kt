@@ -3,9 +3,9 @@ package pen.net.kad.utils
 import java.io.InputStream
 import java.io.OutputStream
 import com.beust.klaxon.Klaxon
-import pen.eco.common.Log
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.Log
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 import pen.net.kad.messages.Message
 import pen.net.kad.messages.NoMessage
 

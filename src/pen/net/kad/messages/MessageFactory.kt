@@ -1,9 +1,9 @@
 package pen.net.kad.messages
 
 import java.io.InputStream
-import pen.eco.common.Log
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.Log
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 import pen.net.kad.messages.Message
 import pen.net.kad.messages.NoMessage
 import pen.net.kad.utils.KMessageSerializer

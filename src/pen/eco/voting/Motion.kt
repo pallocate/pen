@@ -1,8 +1,8 @@
 package pen.eco.voting
 
-import pen.eco.common.Log
-import pen.eco.planning.Proposal
-import pen.eco.planning.VerseProduct
+import pen.eco.Log
+import pen.eco.plan.Proposal
+import pen.eco.plan.VerseProduct
 
 /** Details about the votatation. */
 interface Motion

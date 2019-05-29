@@ -1,7 +1,6 @@
 package pen.eco.common
 
-import pen.eco.common.Log
-import pen.eco.common.Crypto
+import pen.eco.Log
 
 /** A simple binary indexed merkle tree implementation, uses an array as backing structure. The initial capacity is two MerkleLeaf´s. *//*
  _                                                        _

@@ -3,8 +3,8 @@ package pen.net.kad.node
 import java.io.Serializable
 import java.net.InetAddress
 import java.net.InetSocketAddress
-import pen.eco.common.Log
-import pen.eco.common.Convertable
+import pen.eco.Log
+import pen.eco.Convertable
 import pen.net.kad.utils.KNodeIdConverter
 import pen.net.kad.utils.KInetAddressConverter
 

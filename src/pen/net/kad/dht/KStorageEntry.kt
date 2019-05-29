@@ -1,7 +1,7 @@
 package pen.net.kad.dht
 
 import com.beust.klaxon.Converter
-import pen.eco.common.Convertable
+import pen.eco.Convertable
 import pen.net.kad.StorageEntry
 import pen.net.kad.utils.KNodeIdConverter
 

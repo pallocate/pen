@@ -1,7 +1,7 @@
 package pen.par
 
 import java.io.Serializable
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.Crypto
 import pen.eco.common.PasswordProvider
 import pen.eco.common.NoPasswordProvider

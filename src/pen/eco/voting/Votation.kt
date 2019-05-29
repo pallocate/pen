@@ -1,7 +1,7 @@
 package pen.eco.voting
 
 import java.time.LocalDateTime
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.MerkleTree
 import pen.eco.common.Identifiable
 

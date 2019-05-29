@@ -1,5 +1,8 @@
 package pen.eco.common
 
+import pen.eco.Log
+import pen.eco.KSettings
+
 /** Contains methods for use by a place holder. */
 interface PlaceHolder
 {

@@ -1,9 +1,9 @@
 package pen.net.kad.operations
 
 import java.io.IOException
-import pen.eco.common.Log
-import pen.eco.common.DebugValue
-import pen.eco.common.Config
+import pen.eco.Log
+import pen.eco.DebugValue
+import pen.eco.Config
 import pen.net.kad.Constants
 import pen.net.kad.KServer
 import pen.net.kad.KKademliaNode

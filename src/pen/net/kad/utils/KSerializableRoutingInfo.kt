@@ -1,6 +1,6 @@
 package pen.net.kad.utils
 
-import pen.eco.common.Convertable
+import pen.eco.Convertable
 import pen.net.kad.node.KNode
 import pen.net.kad.routing.KRoutingTable
 import pen.net.kad.routing.KContact

@@ -2,11 +2,11 @@
 package pen.net.kad.operations
 
 import pen.net.kad.messages.receivers.Receiver
-import pen.eco.common.Loggable
-import pen.eco.common.Log.Level.WARN
-import pen.eco.common.DebugValue
-import pen.eco.common.Config
-import pen.eco.common.Config.getSettings
+import pen.eco.Loggable
+import pen.eco.Log.Level.WARN
+import pen.eco.DebugValue
+import pen.eco.Config
+import pen.eco.Config.getSettings
 import pen.net.kad.KServer
 import pen.net.kad.Constants
 import pen.net.kad.KKademliaNode
@@ -71,7 +71,7 @@ class KConnectOperation (private val server : KServer, private val node : KNode,
          KBucketRefreshOperation( server, node, routingTable, dht ).execute()
       }
       catch (e : InterruptedException)
-      { log("interrupted", getSettings().getValue( DebugValue.MAIN_BOOTSTRAP ), WARN) }
+      { log("interrupted", getSettings().getValue( DebugValue.KAD_BOOTSTRAP ), WARN) }
    }
 
    /** Receives an AcknowledgeMessage from the bootstrap node. */

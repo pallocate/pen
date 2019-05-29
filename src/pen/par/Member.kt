@@ -1,11 +1,11 @@
 package pen.par
 
 import java.io.Serializable
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.PasswordProvider
-import pen.eco.common.Message
+import pen.net.Message
 import pen.net.Network
-import pen.eco.planning.Block
+import pen.eco.plan.Block
 import pen.eco.credits.CTB
 import pen.eco.credits.KToken
 

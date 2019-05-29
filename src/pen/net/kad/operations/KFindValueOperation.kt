@@ -6,10 +6,10 @@ import java.util.Comparator
 import java.util.HashMap
 import java.util.SortedMap
 import java.util.TreeMap
-import pen.eco.common.Loggable
-import pen.eco.common.Log.Level.WARN
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.Loggable
+import pen.eco.Log.Level.WARN
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 import pen.net.kad.Constants
 import pen.net.kad.RoutingException
 import pen.net.kad.ContentNotFoundException

@@ -4,7 +4,7 @@ import java.math.BigInteger
 import java.util.Arrays
 import java.util.BitSet
 import java.util.Random
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.Utils
 
 class KNodeId ()

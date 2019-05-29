@@ -1,9 +1,9 @@
 package pen.net.kad.routing
 
 import java.util.TreeSet
-import pen.eco.common.Loggable
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.Loggable
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 import pen.net.kad.node.KKeyComparator
 import pen.net.kad.node.KNode
 import pen.net.kad.node.KNodeId
@@ -16,12 +16,12 @@ class KRoutingTable () : Loggable
    private var buckets = createBuckets()
 
    init
-   { log( "KRoutingTable created", getSettings().getValue( DebugValue.MAIN_CREATE ), pen.eco.common.Log.Level.INFO) }
+   { log( "KRoutingTable created", getSettings().getValue( DebugValue.KAD_CREATE ), pen.eco.Log.Level.INFO) }
 
    fun initialize (kNode : KNode)
    {
       node = kNode
-      log("initializing", getSettings().getValue( DebugValue.MAIN_INITIALIZE ))
+      log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
       insert( node )                                                       // Insert the local node
    }
 

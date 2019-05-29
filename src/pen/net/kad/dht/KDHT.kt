@@ -5,13 +5,16 @@ import java.io.FileReader
 import java.io.FileWriter
 import java.util.NoSuchElementException
 import com.beust.klaxon.Converter
-import pen.eco.common.Log.Level.WARN
-import pen.eco.common.Loggable
-import pen.eco.common.DebugValue
-import pen.eco.common.Config
-import pen.eco.common.Config.getSettings
-import pen.eco.common.KSerializer
-import pen.eco.common.Convertable
+import pen.eco.Log.Level.WARN
+import pen.eco.Loggable
+import pen.eco.DebugValue
+import pen.eco.common.Directory
+import pen.eco.Config
+import pen.eco.Config.getSettings
+import pen.eco.Config.SLASH
+import pen.eco.KSerializer
+import pen.eco.Convertable
+import pen.net.kad.KKademliaNode
 import pen.net.kad.StorageEntry
 import pen.net.kad.NoStorageEntry
 import pen.net.kad.ContentNotFoundException
@@ -25,12 +28,12 @@ class KDHT () : Convertable, Loggable
    var ownerName = ""
 
    init
-   { log("created", getSettings().getValue( DebugValue.MAIN_CREATE )) }
+   { log("created", getSettings().getValue( DebugValue.KAD_CREATE )) }
 
    fun initialize (name : String)
    {
       ownerName = name
-      log("initializing", getSettings().getValue( DebugValue.MAIN_INITIALIZE ))
+      log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
    }
 
    fun store (content : KStorageEntry) : Boolean
@@ -57,7 +60,7 @@ class KDHT () : Convertable, Loggable
       {
          val sEntry = contentManager.put( content.contentMetadata )
 
-         val fileWriter = FileWriter( contentStorageDir( content.contentMetadata.key ) + File.separator + sEntry.hashCode() + ".json" )
+         val fileWriter = FileWriter( contentStorageDir( content.contentMetadata.key ) + SLASH + sEntry.hashCode() + ".json" )
          KSerializer.write( content, fileWriter )                                // Store content to file
          fileWriter.close()
 
@@ -78,7 +81,7 @@ class KDHT () : Convertable, Loggable
    {
       var ret : StorageEntry = NoStorageEntry()
 
-      val fileReader = FileReader( contentStorageDir( key ) + File.separator + hashCode + ".json" )
+      val fileReader = FileReader( contentStorageDir( key ) + SLASH + hashCode + ".json" )
       val readResult = KSerializer.read<KDHT>( fileReader )
 
       if (readResult is StorageEntry)
@@ -122,7 +125,7 @@ class KDHT () : Convertable, Loggable
    fun remove (entry : KStorageEntryMetadata)
    {
       val folder = contentStorageDir( entry.key )
-      val file = File(folder + File.separator + entry.hashCode() + ".json" )
+      val file = File(folder + SLASH + entry.hashCode() + ".json" )
 
       contentManager.remove( entry )
 
@@ -133,16 +136,7 @@ class KDHT () : Convertable, Loggable
    }
 
    /** The first 2 characters of the content id is used as the directory name. */
-   private fun contentStorageDir (nodeId : KNodeId) : String
-   {
-      val folderName = nodeId.toString().substring( 0, 2 )
-      val contentStorageFolder = File(Config.nodeDir( ownerName ) + File.separator + folderName)
-
-      if (!contentStorageFolder.isDirectory())
-         contentStorageFolder.mkdir()
-
-      return contentStorageFolder.toString()
-   }
+   private fun contentStorageDir (nodeId : KNodeId) = KKademliaNode.storageDir(ownerName, nodeId.toString().substring( 0, 2 ))
 
    fun getStorageEntries () = contentManager.allEntries()
    fun putStorageEntries (ientries : MutableList<KStorageEntryMetadata>)

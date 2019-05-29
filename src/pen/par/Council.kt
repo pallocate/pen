@@ -2,9 +2,9 @@ package pen.par
 
 import java.io.Serializable
 import java.time.LocalDateTime
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.PasswordProvider
-import pen.eco.common.Message
+import pen.net.Message
 import pen.net.Network
 import pen.eco.voting.Votation
 import pen.eco.voting.Motion

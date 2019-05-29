@@ -1,10 +1,10 @@
 package pen.eco.credits
 
 import java.time.Instant
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.Utils
 import pen.eco.common.Crypto
-import pen.eco.common.Config
+import pen.eco.Config
 import pen.eco.common.PasswordProvider
 
 sealed class Token

@@ -1,6 +1,6 @@
 package pen.par
 
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.eco.common.PasswordProvider
 import pen.net.Network
 import pen.eco.voting.Votation

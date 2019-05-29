@@ -1,8 +1,8 @@
 package pen.net.kad.messages
 
-import pen.eco.common.Log
-import pen.eco.common.DebugValue
-import pen.eco.common.Config.getSettings
+import pen.eco.Log
+import pen.eco.DebugValue
+import pen.eco.Config.getSettings
 import pen.net.kad.node.KNode
 
 /** A message used to acknowledge a request from a node; can be used in many situations.

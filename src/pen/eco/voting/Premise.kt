@@ -1,6 +1,6 @@
 package pen.eco.voting
 
-import pen.eco.planning.Block
+import pen.eco.plan.Block
 
 /** The premise of a consumption proposal. */
 interface Premise {}

@@ -11,15 +11,15 @@ import java.net.SocketException
 import java.util.Random
 import java.util.Timer
 import java.util.TimerTask
-import pen.eco.common.Log.Level.INFO
-import pen.eco.common.Log.Level.WARN
-import pen.eco.common.Log.Level.ERROR
-import pen.eco.common.Loggable
-import pen.eco.common.DebugValue
+import pen.eco.Log.Level.INFO
+import pen.eco.Log.Level.WARN
+import pen.eco.Log.Level.ERROR
+import pen.eco.Loggable
+import pen.eco.DebugValue
 import pen.net.kad.messages.MessageFactory
 import pen.net.kad.messages.Message
-import pen.eco.common.Config
-import pen.eco.common.Config.getSettings
+import pen.eco.Config
+import pen.eco.Config.getSettings
 import pen.net.kad.NodeMessageListener
 import pen.net.kad.NoNodeMessageListener
 import pen.net.kad.messages.Codes
@@ -51,12 +51,12 @@ class KServer () : Loggable
    var nodeMessageListener : NodeMessageListener = NoNodeMessageListener()
 
    init
-   { log( "created", getSettings().getValue( DebugValue.MAIN_CREATE ), INFO)}
+   { log( "created", getSettings().getValue( DebugValue.KAD_CREATE ), INFO)}
 
    fun initialize (localNode : KKademliaNode, port : Int)
    {
       this.localNode = localNode
-      log("initializing", getSettings().getValue( DebugValue.MAIN_INITIALIZE ))
+      log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
 
       try
       {socket = DatagramSocket( port )}

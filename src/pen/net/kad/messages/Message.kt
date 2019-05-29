@@ -1,6 +1,6 @@
 package pen.net.kad.messages
 
-import pen.eco.common.Log
+import pen.eco.Log
 import pen.net.kad.utils.KInetAddressConverter
 import pen.net.kad.utils.KNodeIdConverter
 

@@ -1,7 +1,7 @@
 package pen.net.kad.operations
 
 import kotlinx.coroutines.*
-import pen.eco.common.Config
+import pen.eco.Config
 import pen.net.kad.KServer
 import pen.net.kad.KKademliaNode
 import pen.net.kad.dht.KDHT

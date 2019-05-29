@@ -3,8 +3,7 @@ package pen.tests.par
 import org.junit.jupiter.api.*
 import pen.eco.common.Crypto
 import pen.net.Network
-import pen.eco.common.Message
-import pen.tests.examples.*
+import pen.net.Message
 
 @DisplayName( "Message test" )
 class MessageTest

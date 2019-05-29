@@ -4,6 +4,8 @@ import java.util.Base64
 import com.sun.jna.Library
 import com.sun.jna.Native
 import com.sun.jna.NativeLong
+import pen.eco.Config
+import pen.eco.Log
 
 /** Cryptographic functionallity, using the Sodium library.*/
 object Crypto

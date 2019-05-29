@@ -4,7 +4,7 @@ import kotlinx.coroutines.*
 import java.io.IOException
 import java.util.ArrayList
 import java.util.TreeMap
-import pen.eco.common.Loggable
+import pen.eco.Loggable
 import pen.net.kad.Constants
 import pen.net.kad.KServer
 import pen.net.kad.KKademliaNode

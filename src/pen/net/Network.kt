@@ -2,8 +2,8 @@ package pen.net
 
 import pen.eco.common.Identifiable
 import pen.eco.common.NoIdentifiable
-import pen.eco.common.Message
 
+/** A stub representing the network */
 object Network
 {
    val stuff = ArrayList<Identifiable>()
@@ -23,6 +23,6 @@ object Network
 
    fun send (message : Message) {}
 
-   var counter = 0L
+   private var counter = 0L
    fun generateID () = ++counter
 }
