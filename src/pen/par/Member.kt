@@ -6,8 +6,7 @@ import pen.eco.common.PasswordProvider
 import pen.net.Message
 import pen.net.Network
 import pen.eco.plan.Block
-import pen.eco.credits.CTB
-import pen.eco.credits.KToken
+import pen.eco.common.KToken
 
 /** A member of a council. */
 abstract class Member () : Participant(), Serializable
@@ -23,7 +22,9 @@ abstract class Member () : Participant(), Serializable
    fun submit (proposal : Block, passwordProvider : PasswordProvider) : Message
    {
       Log.debug( "Submitting proposal" )
-      val signedProposal = proposal.signed( passwordProvider, me.pkcSalt() )
+      // TODO: Proposal signing is now in plugins
+      //val signedProposal = proposal.signed( passwordProvider, me.pkcSalt() )
+      val signedProposal = ByteArray( 0 )
       val message = Message( signedProposal, me.contact.contactID, councilContact.contactID, passwordProvider, me.pkcSalt(), councilContact.publicKey )
 
       Network.send( message )

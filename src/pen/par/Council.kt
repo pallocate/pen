@@ -6,10 +6,7 @@ import pen.eco.Log
 import pen.eco.common.PasswordProvider
 import pen.net.Message
 import pen.net.Network
-import pen.eco.voting.Votation
-import pen.eco.voting.Motion
-import pen.eco.voting.Choise
-import pen.eco.voting.Vote
+import pen.eco.common.KVote
 
 /** A consumption council in the economy. */
 class ConsumptionCouncil : Council()
@@ -22,13 +19,14 @@ class ConsumptionCouncil : Council()
 abstract class Council : Participant(), Serializable
 {
    val members = HashMap<String, Contact>()
-   val votations = ArrayList<Votation>()
+//   val votations = ArrayList<Votation>()
 
    /** Adds a member, mapping name to Contact */
    fun addMember (name : String, contact : Contact) = members.put( name, contact )
    fun member (name : String) : Contact = members.getOrElse(name, { UnContact() })
 
-   /** Starts a new votation.*/
+   // TODO: Voting is now a plugin
+/* Starts a new votation.
    fun startVotation (motion : Motion, expiration : LocalDateTime = LocalDateTime.now().plusWeeks( 3L )) : Long
    {
       Log.debug( "Starting votation" )
@@ -36,13 +34,13 @@ abstract class Council : Participant(), Serializable
       val votation = Votation( votationID, motion, expiration, Network.nrOfCouncils )
 
       Network.publish( votation )
-      votations.add( votation )                                                // Save a local copy
+      votations.add( votation )                                                 // Save a local copy
 
       return votationID
    }
 
-   /** Casts a vote in a votation.
-     * @param choise The choosen option. */
+   / Casts a vote in a votation.
+     * @param choise The choosen option.
    fun castVote (votationID : Long, choise : Choise, passwordProvider : PasswordProvider, pkc_salt : ByteArray)
    {
       val voteID = Network.generateID()
@@ -57,6 +55,7 @@ abstract class Council : Participant(), Serializable
       else
          Log.warn( "Casting vote failed! (votation not found on network)" )
    }
+*/
 
    /** Sends a Message to several members.
      * @param council The council role used for sending message.

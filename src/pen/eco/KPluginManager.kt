@@ -6,22 +6,20 @@ import pen.eco.Log.Level.WARN
 import pen.eco.Log.Level.ERROR
 import pen.eco.Config.getSettings
 
-class KPluginManager () : PluginManager, Loggable
+class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPlugins : KPluginInfo) : Loggable
 {
    /** Loaded plugins */
-   var plugins : Map<String, Plugin> = HashMap<String, Plugin>()
+   val plugins : Map<String, Plugin>
 
    /** Initializes the plugin manager, loads plugins and their dependencies.
     *  @param supportedPlugins Maps plugin names to their class names. */
-   fun initialize (supportedPlugins : Map<String, String>, vararg requestedPlugins : KPluginInfo)
+   init
    {
       log("initializing", getSettings().getValue( DebugValue.PLUGIN_MANAGER ), INFO)
-      val resultMap = HashMap<String, Plugin>()                                 // Plugin names mapped to Plugins
+      plugins = HashMap<String, Plugin>()                                       // Plugin names mapped to Plugins
 
       for (requestedPlugin in requestedPlugins)
-         loadPlugin( supportedPlugins, requestedPlugin, resultMap, 0 )
-
-      plugins = resultMap
+         loadPlugin( supportedPlugins, requestedPlugin, plugins, 0 )
    }
 
    private fun loadPlugin (supportedPlugins : Map<String, String>, requestedPlugInfo : KPluginInfo,
@@ -44,7 +42,7 @@ class KPluginManager () : PluginManager, Loggable
                val plugin = Class.forName( className!! ).newInstance()          // Try to create a plugin from the class name
                if (plugin is Plugin)
                {
-                  /* Check that the version of the plugin instance is acceptable */
+                  /* Check that the version of the plugin instance is acceptable. */
                   if (plugin.info.version >= requestedPlugInfo.version && (plugin.info.version < requestedPlugInfo.max_version || requestedPlugInfo.max_version == 0F))
                   {
                      val resultMapFinding = resultMap.get( requstedName )       // Check if the result map already contains a similar plugin
@@ -57,10 +55,10 @@ class KPluginManager () : PluginManager, Loggable
                         val nrOfDepends = plugin.dependencies.size
                         val initArray = Array<Plugin>( nrOfDepends, {NoPlugin()} )
 
-                        for (i in 0 until nrOfDepends)                          // Process dependencies recursivly
+                        for (i in 0 until nrOfDepends)                          // Process dependencies recursively
                            initArray[i] = loadPlugin( supportedPlugins, plugin.dependencies[i], resultMap, recursiveDepth + 1 )
 
-                        plugin.initialize( initArray )                          // Initialize the plugin with the plugins it requested
+                        plugin.initialize( initArray )                          // Initialize the plugin with the requested dependencies
                         ret = plugin
                      }
                      else
@@ -75,7 +73,7 @@ class KPluginManager () : PluginManager, Loggable
          }
       }
       else
-         log( "dependency cycle detected!", true, WARN )
+         log( "dependency cycle detected!", getSettings().getValue( DebugValue.PLUGIN_MANAGER ), WARN )
 
       return ret
    }

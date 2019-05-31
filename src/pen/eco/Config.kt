@@ -22,10 +22,8 @@ object Config : Configuration
    val USER_HOME                                  = getProperty( "user.home" )
    /** Directory where to save configurations. */
    val CONFIG_DIR                                 = ".pen"
-   /** Directory of the dist. */
-   val DIST_DIR                                   = "dist"
    /** Directory of the libsodium library. */
-   val LIBSODIUM_DIR                              = "${DIST_DIR}${SLASH}lib${SLASH}isc"
+   val LIBSODIUM_DIR                              = "dist${SLASH}lib${SLASH}isc"
    /** Name of the log file. */
    val LOG_FILE                                   = "app.log"
 

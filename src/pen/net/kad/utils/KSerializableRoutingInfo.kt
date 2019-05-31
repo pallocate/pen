@@ -20,6 +20,7 @@ class KSerializableRoutingInfo () : Convertable
    {
       val kRoutingTable = KRoutingTable()
 
+      kRoutingTable.node = localNodeInfo
       for (contact in contactsInfo)
          kRoutingTable.insert( contact )
 

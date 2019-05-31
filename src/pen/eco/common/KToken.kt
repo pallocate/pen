@@ -1,4 +1,4 @@
-package pen.eco.credits
+package pen.eco.common
 
 import java.time.Instant
 import pen.eco.Log
@@ -94,27 +94,5 @@ class KToken (val id : Long, val value : Int, val issuer : Long, passwordProvide
          Log.warn( "Accounting token failed! (should be in USED state)" )
 
       return success
-   }
-
-   override fun toString () : String
-   {
-      val stringBuilder = StringBuilder()
-
-      stringBuilder.apply(
-      {
-         append( "id: $id\n" )
-         append( "value: $value\n" )
-         append( "issuer: $issuer\n" )
-         append( "state: $state\n" )
-         append( "version: $version\n" )
-         append( "timstamp: $timestamp\n" )
-         append( "issuenceSignature: ${Utils.byteArrayToB64String( issuenceSignature )}\n" )
-         append( "userKey: ${Utils.byteArrayToB64String( userKey )}\n" )
-         append( "userKeySignature: ${Utils.byteArrayToB64String( userKeySignature )}\n" )
-         append( "account: $account\n" )
-         append( "accountSignature: ${Utils.byteArrayToB64String( accountSignature )}\n" )
-      })
-
-      return stringBuilder.toString()
    }
 }

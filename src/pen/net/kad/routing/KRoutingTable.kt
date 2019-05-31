@@ -22,7 +22,7 @@ class KRoutingTable () : Loggable
    {
       node = kNode
       log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
-      insert( node )                                                       // Insert the local node
+      insert( node )                                                            // Insert the local node
    }
 
    private fun createBuckets () : Array<KBucket>

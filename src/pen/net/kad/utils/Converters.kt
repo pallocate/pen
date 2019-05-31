@@ -7,7 +7,7 @@ import com.beust.klaxon.JsonValue
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Converter
 import pen.eco.common.Utils
-import pen.eco.common.PlaceHolder
+import pen.eco.PlaceHolder
 import pen.net.kad.routing.KRoutingTable
 import pen.net.kad.node.KNodeId
 

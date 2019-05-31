@@ -1,4 +1,4 @@
-package pen.eco.common
+package pen.eco
 
 import pen.eco.Log
 import pen.eco.KSettings
@@ -26,5 +26,5 @@ interface PlaceHolder
 
    fun string (msg : String?, returnValue : String = "") = logDebug<String>( msg, returnValue )
 
-   fun byteArray (msg : String?, returnValue : ByteArray = ByteArray( 9 )) = logDebug<ByteArray>( msg, returnValue )
+   fun byteArray (msg : String?, returnValue : ByteArray = ByteArray( 0 )) = logDebug<ByteArray>( msg, returnValue )
 }

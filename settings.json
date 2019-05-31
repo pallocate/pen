@@ -3,6 +3,7 @@
     {
       "PLUGIN_MANAGER"           : true,
 
+      "KAD_CREATE"               : true,
       "KAD_SAVE_LOAD"            : true,
       "KAD_INITIALIZE"           : false,
       "KAD_BOOTSTRAP"            : true,
@@ -29,9 +30,8 @@
 
     "supported_plugins":
     {
-        "block_tools"            : "dist.plugins.eco.block_tools.KBlockTools",
+        "blocks_tools"           : "dist.plugins.eco.blocks_tools.KBlocksTools",
         "blocks"                 : "dist.plugins.eco.blocks.KBlocks",
-        "proposals"              : "dist.plugins.eco.proposals.KProposals",
-        "block_examples"         : "dist.plugins.eco.examples.KBlockExamples"
+        "proposals"              : "dist.plugins.eco.proposals.KProposals"
     }
 }

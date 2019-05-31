@@ -1,5 +1,7 @@
 package pen.eco.common
 
+import pen.eco.PlaceHolder
+
 /** A node in a merkle tree. */
 interface MerkleNode
 class NoMerkleNode : MerkleNode {}

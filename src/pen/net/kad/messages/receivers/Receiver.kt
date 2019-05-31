@@ -1,7 +1,7 @@
 package pen.net.kad.messages.receivers
 
 import pen.eco.Log
-import pen.eco.common.PlaceHolder
+import pen.eco.PlaceHolder
 import pen.eco.DebugValue
 import pen.eco.Config.getSettings
 import pen.net.kad.messages.Message

@@ -26,6 +26,7 @@ open class Block () : BlockNode
    constructor (blob : Blob) : this()
    {
       Log.debug( "Converting blob to block" )
+// TODO:
 //      BlockDeserializer.deserialize( this, 0, ByteArrayInputStream( blob.content ))
    }
 

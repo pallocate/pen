@@ -3,11 +3,8 @@ package pen.par
 import pen.eco.Log
 import pen.eco.common.PasswordProvider
 import pen.net.Network
-import pen.eco.voting.Votation
-import pen.eco.voting.Choise
-import pen.eco.voting.ConsumptionMotion
-import pen.eco.credits.CTB
-import pen.eco.credits.KToken
+import pen.eco.common.Choise
+import pen.eco.common.KToken
 
 /** A production council in the economy. */
 class ProductionCouncil : Council()
@@ -17,9 +14,11 @@ class ProductionCouncil : Council()
    var issuedCredits = 0
       private set
 
-   /** Issues a token of a certain value.
+   // TODO: CTB and voting is now plugins
+
+/* Issues a token of a certain value.
      * @param value how many credits the token should represent.
-     * @param votation The votation that constitutes the ground for the token issuence.  */
+     * @param votation The votation that constitutes the ground for the token issuence.  /
    fun issueToken (value : Int, votation : Votation, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : Long
    {
       Log.debug( "Issuing a $value credit token" )
@@ -36,7 +35,8 @@ class ProductionCouncil : Council()
             ret = Network.generateID()
             val newToken = KToken( ret, value, me.contact.contactID, passwordProvider, pkc_salt )
             issuedCredits += value
-            CTB.add( newToken )
+
+            //CTB.add( newToken )
          }
       }
       else
@@ -44,12 +44,13 @@ class ProductionCouncil : Council()
 
       return ret
    }
-
+*/
    /** Defines the user(user key) of a token. */
    fun defineTokenUser (token : KToken, userKey : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray)
    {
       Log.debug( "Defining token user" )
       token.defineUser(userKey, passwordProvider, pkc_salt)
-      CTB.add( token )
+      // TODO:
+      //CTB.add( token )
    }
 }

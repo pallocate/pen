@@ -2,6 +2,7 @@ package pen.eco
 
 import java.io.Writer
 import java.io.Reader
+import kotlin.reflect.KClass
 import com.beust.klaxon.Klaxon
 
 object KSerializer
@@ -10,9 +11,15 @@ object KSerializer
    {
       Log.debug({"KSerializer- reading object"}, KSettings.SERIALIZE )
       var klaxon = Klaxon()
+      var convertable : Convertable = NoConvertable()
 
-      for (converter in T::class.java.newInstance().getConverters())
-         klaxon = klaxon.converter( converter )
+      try
+      { convertable = T::class.java.newInstance() }                             // Try to create an instnce
+      catch (e: Exception) {}
+
+      if (!(convertable is NoConvertable))
+         for (converter in convertable.getConverters())
+            klaxon = klaxon.converter( converter )                              // Add converters from the instance
 
       var parseResult : T? = null
 
@@ -32,15 +39,15 @@ object KSerializer
       }
    }
 
-   fun write (serialisable : Convertable, writer : Writer)
+   fun write (convertable : Convertable, writer : Writer)
    {
       Log.debug( {"KSerializer- writing object"}, KSettings.SERIALIZE )
       var klaxon = Klaxon()
 
-      for (converter in serialisable.getConverters())
+      for (converter in convertable.getConverters())
          klaxon = klaxon.converter( converter )
 
-      writer.write(klaxon.toJsonString( serialisable ))
+      writer.write(klaxon.toJsonString( convertable ))
       writer.flush()
    }
 }
