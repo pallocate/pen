@@ -1,15 +1,15 @@
-package pen.eco.plan
+package pen.eco.planning
 
 import java.io.InputStream
 import pen.eco.Log
-import pen.eco.common.Crypto
 import pen.eco.Config
 import pen.eco.common.PasswordProvider
+import pen.eco.common.Utils as CommonUtils
 
-interface BlockNode
+sealed class BlockNode ()
 
 /** Buliding block of the planning process. */
-open class Block () : BlockNode
+open class Block : BlockNode()
 {
    /** Signature of the hash. */
    var signature                                = ByteArray( Config.SIGN_BYTES )
@@ -21,23 +21,6 @@ open class Block () : BlockNode
    var publicKey                                = ByteArray( Constants.PUBKEY_BYTES )
    /** The block child nodes. */
    val children                                 = ArrayList<BlockNode>()
-
-   /** @constructor Parses a Blob into this Block. */
-   constructor (blob : Blob) : this()
-   {
-      Log.debug( "Converting blob to block" )
-// TODO:
-//      BlockDeserializer.deserialize( this, 0, ByteArrayInputStream( blob.content ))
-   }
-
-   /* Encodes and signes the block.
-   open fun signed (passwordProvider : PasswordProvider, salt : ByteArray) : ByteArray
-   {
-      Log.debug( "Encoding and signing block" )
-      val binaryBlock = BlockEncoder( this ).encode()
-      return Crypto.signatureOf( hash, passwordProvider, salt ) + binaryBlock
-      return ByteArray( 0 )
-   }*/
 
    /** Resets block to a vanilla state.  */
    fun vanilla ()
@@ -115,9 +98,12 @@ open class Block () : BlockNode
 }
 
 
+class Proposal : Block()
+
+
 /** A binary, non parsed block.
   * @constructor Reads content from an InputStream. */
-class Blob (inputStream : InputStream) : BlockNode
+class Blob (inputStream : InputStream) : BlockNode()
 {
    val signature : ByteArray
    val hash : ByteArray
@@ -172,11 +158,46 @@ class Blob (inputStream : InputStream) : BlockNode
 }
 
 
-
 /** This is the most basic representation of a product. */
-open class Product (
-                     /** Product id */
+open class Product ( /** Product id */
                      var id : Long = 0L,
                      /** Quantity */
                      var qty : Long = 0L
-                   ) : BlockNode {}
+                   ) : BlockNode() {}
+
+/** A more comprehensive product with additional information.
+  * @constructor Primary constructor */
+class VerseProduct (id : Long = 0L, qty : Long = 0L, var name : String = "", var desc : String = "", var amount : Float = 0F,
+var prefix : String = "", var unit : String = "", var down : Int = 0, var up : Int = 0, var absolute : Long = 0L,
+var price : Long = 0L, var sensetive : String = "", var analogue : String = "") : Product( id, qty )
+{
+   /** @constructor Does parameter checking/conversion and calls primary constructor. */
+   constructor (id : String, qty : String, name : String, desc : String, amount : String, prefix : String, unit : String,
+   down : String, up : String, absolute : String, price : String, sensetive : String, analogue : String) : this
+   (
+      CommonUtils.stringToLong( id ),
+      CommonUtils.stringToLong( qty ),
+      name,
+      desc,
+      CommonUtils.stringToFloat( amount ),
+      prefix,
+      unit,
+      CommonUtils.stringToInt( down ),
+      CommonUtils.stringToInt( up ),
+      CommonUtils.stringToLong( absolute ),
+      CommonUtils.stringToLong( price ),
+      sensetive,
+      analogue
+   ) {}
+
+   constructor (product : Product) : this ()
+   {
+      id = product.id
+      qty = product.qty
+   }
+
+   override fun toString () : String = name
+
+   fun copy () : VerseProduct
+   { return VerseProduct( id, qty, name, desc, amount, prefix, unit, down, up, absolute, price, sensetive, analogue ) }
+}

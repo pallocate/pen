@@ -5,7 +5,7 @@ import pen.eco.Log
 import pen.eco.common.PasswordProvider
 import pen.net.Message
 import pen.net.Network
-import pen.eco.plan.Block
+import pen.eco.planning.Block
 import pen.eco.common.KToken
 
 /** A member of a council. */

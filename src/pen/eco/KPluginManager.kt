@@ -6,10 +6,10 @@ import pen.eco.Log.Level.WARN
 import pen.eco.Log.Level.ERROR
 import pen.eco.Config.getSettings
 
-class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPlugins : KPluginInfo) : Loggable
+class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPlugins : KPluginInfo) : PluginManager, Loggable
 {
    /** Loaded plugins */
-   val plugins : Map<String, Plugin>
+   override val plugins : Map<String, Plugin>
 
    /** Initializes the plugin manager, loads plugins and their dependencies.
     *  @param supportedPlugins Maps plugin names to their class names. */

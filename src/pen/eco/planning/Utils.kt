@@ -1,4 +1,4 @@
-package pen.eco.plan
+package pen.eco.planning
 
 import java.io.InputStream
 import pen.eco.Log

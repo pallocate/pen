@@ -1,4 +1,4 @@
-package pen.eco.plan
+package pen.eco.planning
 
 import pen.eco.Config
 

@@ -20,5 +20,8 @@ class NoSettings : Settings
 interface SettingsValue
 
 interface PluginManager
+{ val plugins: Map<String, Plugin> }
+class NoPluginManager : PluginManager
+{ override val plugins = HashMap<String, Plugin>() }
 // Authenticator
 
