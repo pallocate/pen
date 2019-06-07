@@ -3,7 +3,6 @@
 *.xml
 *.yml
 *.log
-*.geany
 eco.jar
 per.jar
 net.jar
