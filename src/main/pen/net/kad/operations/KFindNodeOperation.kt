@@ -213,5 +213,5 @@ class KFindNodeOperation
       askNodesorFinish()
    }
 
-   override fun loggingName () = "KFindNodeOperation(${node})"
+   override fun originName () = "KFindNodeOperation(${node})"
 }

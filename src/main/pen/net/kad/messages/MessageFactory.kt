@@ -2,8 +2,8 @@ package pen.net.kad.messages
 
 import java.io.InputStream
 import pen.eco.Log
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.messages.Message
 import pen.net.kad.messages.NoMessage
 import pen.net.kad.utils.KMessageSerializer
@@ -27,7 +27,7 @@ object MessageFactory
          Codes.SIMPLE                     -> KMessageSerializer.read<KSimpleMessage>( inputStream )
          else                             ->
          {
-            Log.debug({"Invalid message code: $code"}, getSettings().getValue( DebugValue.MESSAGE_CREATE ))
+            Log.debug({"Invalid message code: $code"}, Config.flag( "MESSAGE_CREATE" ))
             NoMessage()
          }
       }

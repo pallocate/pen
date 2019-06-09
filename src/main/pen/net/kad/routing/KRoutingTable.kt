@@ -2,8 +2,8 @@ package pen.net.kad.routing
 
 import java.util.TreeSet
 import pen.eco.Loggable
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.node.KKeyComparator
 import pen.net.kad.node.KNode
 import pen.net.kad.node.KNodeId
@@ -16,12 +16,12 @@ class KRoutingTable () : Loggable
    private var buckets = createBuckets()
 
    init
-   { log( "KRoutingTable created", getSettings().getValue( DebugValue.KAD_CREATE ), pen.eco.LogLevel.INFO) }
+   { log( "KRoutingTable created", Config.flag( "KAD_CREATE" ), pen.eco.LogLevel.INFO) }
 
    fun initialize (kNode : KNode)
    {
       node = kNode
-      log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
+      log("initializing", Config.flag( "KAD_INITIALIZE" ))
       insert( node )                                                            // Insert the local node
    }
 
@@ -60,8 +60,8 @@ class KRoutingTable () : Loggable
    @Synchronized
    fun insert (kContact : KContact)
    {
-      log("inserting contact (${kContact.node})", getSettings().getValue( DebugValue.CONTACT_PUT ))
-      log("contact info: {address: ${kContact.node.inetAddress}}, {port: ${kContact.node.port}}", getSettings().getValue( DebugValue.CONTACT_INFO ))
+      log("inserting contact (${kContact.node})", Config.flag( "CONTACT_PUT" ))
+      log("contact info: {address: ${kContact.node.inetAddress}}, {port: ${kContact.node.port}}", Config.flag( "CONTACT_INFO" ))
       buckets[getBucketId( kContact.node.nodeId )].insert(kContact)
    }
 
@@ -69,8 +69,8 @@ class KRoutingTable () : Loggable
    @Synchronized
    fun insert (kNode : KNode)
    {
-      log("inserting node (${kNode})", getSettings().getValue( DebugValue.CONTACT_PUT ))
-      log("node info: {address: ${kNode.inetAddress}}, {port: ${kNode.port}}", getSettings().getValue( DebugValue.CONTACT_INFO ))
+      log("inserting node (${kNode})", Config.flag( "CONTACT_PUT" ))
+      log("node info: {address: ${kNode.inetAddress}}, {port: ${kNode.port}}", Config.flag( "CONTACT_INFO" ))
       buckets[getBucketId( kNode.nodeId )].insert(kNode)
    }
 
@@ -125,7 +125,7 @@ class KRoutingTable () : Loggable
       buckets[bucketId].removeNode( kNode )                                     // Remove the contact
    }
 
-   override fun loggingName () = "KRoutingTable(${node})"
+   override fun originName () = "KRoutingTable(${node})"
 
    @Synchronized
    override fun toString () : String

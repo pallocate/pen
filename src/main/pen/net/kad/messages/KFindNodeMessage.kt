@@ -1,8 +1,8 @@
 package pen.net.kad.messages
 
 import pen.eco.Log
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.node.KNode
 import pen.net.kad.node.KNodeId
 
@@ -15,7 +15,7 @@ class KFindNodeMessage () : Message
    var lookupId                  = KNodeId()
 
    init
-   { Log.debug( {"<FIND_NODE>"}, getSettings().getValue( DebugValue.MESSAGE_FIND_NODE )) }
+   { Log.debug( {"<FIND_NODE>"}, Config.flag( "MESSAGE_FIND_NODE" )) }
 
    constructor (origin : KNode, lookupId : KNodeId) : this()
    {

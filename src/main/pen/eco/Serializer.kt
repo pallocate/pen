@@ -11,7 +11,7 @@ object Serializer
 {
    inline fun <reified T : Convertable>read (reader : Reader) : Convertable
    {
-      Log.debug({"KSerializer- reading object"}, KSettings.SERIALIZE )
+      Log.debug({ "KSerializer- reading object" }, Config.flag( "SERIALIZE" ))
       var klaxon = Klaxon()
       var convertable : Convertable = NoConvertable()
 
@@ -19,7 +19,7 @@ object Serializer
       { convertable = T::class.java.newInstance() }                             // Try to create an instnce
       catch (e: Exception) {}
 
-      if (!(convertable is NoConvertable))
+      if (convertable !is NoConvertable)
          for (converter in convertable.getConverters())
             klaxon = klaxon.converter( converter )                              // Add converters from the instance
 
@@ -43,7 +43,7 @@ object Serializer
 
    fun write (convertable : Convertable, writer : Writer)
    {
-      Log.debug( {"KSerializer- writing object"}, KSettings.SERIALIZE )
+      Log.debug({ "KSerializer- writing object" }, Config.flag( "SERIALIZE" ))
       var klaxon = Klaxon()
 
       for (converter in convertable.getConverters())

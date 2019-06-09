@@ -1,20 +1,21 @@
 package pen.eco
 
-expect fun user_home () : String
-expect fun slash () : String
+expect fun loadConf (filename : String) : Map<String, String>
 
-/** Some global constants and dynamically loadable settings. */
+/** Some loadable settings. */
 object Config
 {
-   /** Settinig are loaded from file if possible. */
-   private var settings : Settings                = NoSettings()
+   val supportedPlugins : Map<String, String> = loadConf( "plugins.conf" )
+   private val debugFlags : Map<String, String> = loadConf( "debug.conf" )
 
-   /** Returns settings possibly loading them from file. */
-   fun getSettings () : KSettings
+   fun flag (name : String) : Boolean
    {
-      if (settings is NoSettings)
-         settings = KSettings.loadFromFile( "settings.json" )
+      var status = false
 
-      return settings as KSettings
+      val getResult = debugFlags.get( name )
+      if (getResult != null)
+         status = getResult.equals( "true" )
+
+      return status
    }
 }

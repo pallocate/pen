@@ -4,9 +4,7 @@ package pen.net.kad.operations
 import pen.net.kad.messages.receivers.Receiver
 import pen.eco.Loggable
 import pen.eco.LogLevel.WARN
-import pen.eco.DebugValue
 import pen.eco.Config
-import pen.eco.Config.getSettings
 import pen.net.kad.KServer
 import pen.net.kad.Constants
 import pen.net.kad.KKademliaNode
@@ -71,14 +69,14 @@ class KConnectOperation (private val server : KServer, private val node : KNode,
          KBucketRefreshOperation( server, node, routingTable, dht ).execute()
       }
       catch (e : InterruptedException)
-      { log("interrupted", getSettings().getValue( DebugValue.KAD_BOOTSTRAP ), WARN) }
+      { log("interrupted", Config.flag( "KAD_BOOTSTRAP" ), WARN) }
    }
 
    /** Receives an AcknowledgeMessage from the bootstrap node. */
    @Synchronized
    override fun receive (message : Message, conversationId : Int)
    {
-      log("received message", getSettings().getValue( DebugValue.CONTACT_CONNECT ))
+      log("received message", Config.flag( "CONTACT_CONNECT" ))
 
       /* The bootstrap node has responded, insert it into our space */
       routingTable.insert( otherNode )
@@ -100,5 +98,5 @@ class KConnectOperation (private val server : KServer, private val node : KNode,
          (this as Object).notify()                                              // We just exit, so notify all other threads that are possibly waiting
    }
 
-   override fun loggingName () = "KConnectOperation(${node})"
+   override fun originName () = "KConnectOperation(${node})"
 }

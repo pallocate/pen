@@ -1,5 +1,8 @@
 package pen.eco
 
+expect fun user_home () : String
+expect fun slash () : String
+
 object Constants
 {
    /** Common specification version. */

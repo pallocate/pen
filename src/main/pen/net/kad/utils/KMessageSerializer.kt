@@ -4,8 +4,8 @@ import java.io.InputStream
 import java.io.OutputStream
 import com.beust.klaxon.Klaxon
 import pen.eco.Log
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.messages.Message
 import pen.net.kad.messages.NoMessage
 
@@ -16,7 +16,7 @@ object KMessageSerializer
 
    inline fun <reified T : Message> read (inputStream : InputStream) : Message
    {
-      Log.debug({"KMessageSerializer- reading object"}, getSettings().getValue( DebugValue.STREAMING ))
+      Log.debug({"KMessageSerializer- reading object"}, Config.flag( "STREAMING" ))
       var klaxon = Klaxon()
 
       klaxon = klaxon.converter( kNodeIdConverter )
@@ -40,7 +40,7 @@ object KMessageSerializer
 
    fun write (message : Message, outputStream : OutputStream)
    {
-      Log.debug({"KMessageSerializer- writing object"}, getSettings().getValue( DebugValue.STREAMING ))
+      Log.debug({"KMessageSerializer- writing object"}, Config.flag( "STREAMING" ))
       var klaxon = Klaxon()
 
       klaxon = klaxon.converter( kNodeIdConverter )

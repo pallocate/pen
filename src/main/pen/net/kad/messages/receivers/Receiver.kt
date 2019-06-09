@@ -2,8 +2,8 @@ package pen.net.kad.messages.receivers
 
 import pen.eco.Log
 import pen.eco.PlaceHolder
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.messages.Message
 import pen.net.kad.messages.Codes
 
@@ -13,7 +13,7 @@ interface Receiver
    fun receive (message : Message, conversationId : Int)
 
    /** If no reply is received in `MessageServer.TIMEOUT`, KServer calls this method. */
-   fun timeout (conversationId : Int) = Log.debug({"message timeout"}, getSettings().getValue( DebugValue.RECEIVER_TIMEOUT ))
+   fun timeout (conversationId : Int) = Log.debug({"message timeout"}, Config.flag( "RECEIVER_TIMEOUT" ))
 }
 class NoReceiver : Receiver, PlaceHolder
 {

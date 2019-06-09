@@ -1,8 +1,8 @@
 package pen.eco.common
 
-import pen.eco.KSettings
+import pen.eco.Config
+import pen.eco.Constants
 import pen.eco.Log
-
 expect fun encode_b64 (bytes : ByteArray) : ByteArray
 expect fun decode_b64 (encoded : String) : ByteArray
 expect fun hash_md5 (bytes : ByteArray) : ByteArray
@@ -11,7 +11,7 @@ expect fun create_dir (path : String)
 /** Convertes a ByteArray to a hex encoded String. */
 fun ByteArray.toHex () : String
 {
-   Log.debug( {"Encoding ByteArray to hex"}, KSettings.COMMON_CONVERSIONS )
+   Log.debug({ "Encoding ByteArray to hex" }, Config.flag( "COMMON_CONVERSIONS" ))
    var ret = ""
 
    forEach {
@@ -72,13 +72,13 @@ object Utils
    /** Convertes a Base64 encoded String to a ByteArray. */
    fun decodeB64 (encoded : String) : ByteArray
    {
-      Log.debug( {"Decoding Base64 encoded string"}, KSettings.COMMON_CONVERSIONS )
+      Log.debug({ "Decoding Base64 encoded string" }, Config.flag( "COMMON_CONVERSIONS" ))
       var ret = ByteArray( 0 )
 
       try
       {ret = decode_b64( encoded )}
       catch (e : Exception)
-      { Log.warn( {"Decoding Base64 failed!"}, KSettings.COMMON_CONVERSIONS ) }
+      { Log.warn( {"Decoding Base64 failed!"}, Config.flag( "COMMON_CONVERSIONS" )) }
 
       return ret
    }

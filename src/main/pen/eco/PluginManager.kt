@@ -1,10 +1,8 @@
 package pen.eco
 
-import pen.eco.DebugValue
 import pen.eco.LogLevel.INFO
 import pen.eco.LogLevel.WARN
 import pen.eco.LogLevel.ERROR
-import pen.eco.Config.getSettings
 
 interface PluginManager
 { val plugins: Map<String, Plugin> }
@@ -20,7 +18,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
     *  @param supportedPlugins Maps plugin names to their class names. */
    init
    {
-      log("initializing", getSettings().getValue( DebugValue.PLUGIN_MANAGER ), INFO)
+      log("initializing", Config.flag( "PLUGIN_MANAGER" ), INFO)
       plugins = HashMap<String, Plugin>()                                       // Plugin names mapped to Plugins
 
       for (requestedPlugin in requestedPlugins)
@@ -53,8 +51,8 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
                      val resultMapFinding = resultMap.get( requstedName )       // Check if the result map already contains a similar plugin
                      if (resultMapFinding == null)
                      {
-                        resultMap.put( requstedName, plugin )                   // Add the plugin to the result map
-                        log( "plugin \"${requstedName}\" loaded", getSettings().getValue( DebugValue.PLUGIN_MANAGER ) )
+                        resultMap.put( requstedName, plugin )                   // Add the plugin
+                        log( "plugin \"${requstedName}\" loaded", Config.flag( "PLUGIN_MANAGER" ) )
 
                         /* Handle dependencies and initialize the plugin */
                         val nrOfDepends = plugin.dependencies.size
@@ -78,10 +76,10 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
          }
       }
       else
-         log( "dependency cycle detected!", getSettings().getValue( DebugValue.PLUGIN_MANAGER ), WARN )
+         log( "dependency cycle detected!", Config.flag( "PLUGIN_MANAGER" ), WARN )
 
       return ret
    }
 
-   override fun loggingName () = "KPluginManager"
+   override fun originName () = "KPluginManager"
 }

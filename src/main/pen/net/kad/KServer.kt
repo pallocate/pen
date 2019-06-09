@@ -15,11 +15,9 @@ import pen.eco.LogLevel.INFO
 import pen.eco.LogLevel.WARN
 import pen.eco.LogLevel.ERROR
 import pen.eco.Loggable
-import pen.eco.DebugValue
 import pen.net.kad.messages.MessageFactory
 import pen.net.kad.messages.Message
 import pen.eco.Config
-import pen.eco.Config.getSettings
 import pen.net.kad.NodeMessageListener
 import pen.net.kad.NoNodeMessageListener
 import pen.net.kad.messages.Codes
@@ -51,12 +49,12 @@ class KServer () : Loggable
    var nodeMessageListener : NodeMessageListener = NoNodeMessageListener()
 
    init
-   { log( "created", getSettings().getValue( DebugValue.KAD_CREATE ), INFO)}
+   { log( "created", Config.flag( "KAD_CREATE" ), INFO)}
 
    fun initialize (localNode : KKademliaNode, port : Int)
    {
       this.localNode = localNode
-      log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
+      log("initializing", Config.flag( "KAD_INITIALIZE" ))
 
       try
       {socket = DatagramSocket( port )}
@@ -91,10 +89,10 @@ class KServer () : Loggable
       if (isRunning)
       {
          conversationID = Random().nextInt()
-         if (!(responseReceiver is NoReceiver))
+         if (responseReceiver !is NoReceiver)
          {
             // Setting up the receiver
-            log("putting receiver", getSettings().getValue( DebugValue.SERVER_RECEIVERS ))
+            log("putting receiver", Config.flag( "SERVER_RECEIVERS" ))
             receivers.put( conversationID, responseReceiver )
             val task = TimeoutTask( conversationID, responseReceiver )
             timer.schedule( task, Constants.RESPONCE_TIMEOUT )
@@ -131,7 +129,7 @@ class KServer () : Loggable
                Stats.sentData( msg.size.toLong() )
 
                /* Monitoring find node sent. */
-               if (message is KFindNodeMessage && !(nodeMessageListener is NoNodeMessageListener))
+               if (message is KFindNodeMessage && nodeMessageListener !is NoNodeMessageListener)
                   nodeMessageListener.findMessageSent()
             }
          })})
@@ -153,7 +151,7 @@ class KServer () : Loggable
    /** Listens for incoming messages in a separate thread. */
    private fun listen ()
    {
-      log("listening to messages", getSettings().getValue( DebugValue.SERVER_INTERNAL ))
+      log("listening to messages", Config.flag( "SERVER_INTERNAL" ))
       try
       {
          while (isRunning)                                                      // Wait for a packet
@@ -181,7 +179,7 @@ class KServer () : Loggable
                val message = MessageFactory.createMessage( messageCode, bais )
 
                /* Monitoring find node reply received. */
-               if (message is KFindNodeReply && !(nodeMessageListener is NoNodeMessageListener))
+               if (message is KFindNodeReply && nodeMessageListener !is NoNodeMessageListener)
                   nodeMessageListener.findReplyReceived()
 
                /* Getting a receiver for this message. */
@@ -208,7 +206,7 @@ class KServer () : Loggable
          }
       }
       catch (e : IOException)
-      { log("message listening failed!", getSettings().getValue( DebugValue.SERVER_INTERNAL ), WARN) }
+      { log("message listening failed!", Config.flag( "SERVER_INTERNAL" ), WARN) }
       finally
       {
          socket?.close()
@@ -220,7 +218,7 @@ class KServer () : Loggable
    @Synchronized
    private fun unregister (conversationID : Int)
    {
-      log("unregistring receiver/task", getSettings().getValue( DebugValue.SERVER_INTERNAL ))
+      log("unregistring receiver/task", Config.flag( "SERVER_INTERNAL" ))
       receivers.remove( conversationID )
       tasks.remove( conversationID )
    }
@@ -242,7 +240,7 @@ class KServer () : Loggable
          println( "Receiver ($r): ${receivers[r]}" )
    }
 
-   override fun loggingName () = if (localNode == null)
+   override fun originName () = if (localNode == null)
                                     "KServer"
                                  else
                                     "KServer(${localNode!!.getNode()})"
@@ -255,7 +253,7 @@ class KServer () : Loggable
    {
       override fun run()
       {
-         log("TimeoutTask running", getSettings().getValue( DebugValue.SERVER_INTERNAL ))
+         log("TimeoutTask running", Config.flag( "SERVER_INTERNAL" ))
 
          if (isRunning)
          {
@@ -265,7 +263,7 @@ class KServer () : Loggable
                receiver.timeout( conversationID )
             }
             catch (e : IOException)
-            { log( "TimeoutTask failed! (${e.message})", getSettings().getValue( DebugValue.SERVER_INTERNAL ), WARN) }
+            { log( "TimeoutTask failed! (${e.message})", Config.flag( "SERVER_INTERNAL" ), WARN) }
          }
       }
    }

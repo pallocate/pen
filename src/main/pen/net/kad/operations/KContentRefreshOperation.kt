@@ -2,7 +2,7 @@ package pen.net.kad.operations
 
 import java.io.IOException
 import pen.eco.Log
-import pen.eco.DebugValue
+
 import pen.eco.Config
 import pen.net.kad.Constants
 import pen.net.kad.KServer
@@ -71,7 +71,7 @@ class KContentRefreshOperation (private val server : KServer, private val node :
             }
          }
          else
-            Log.warn({ "KContentRefreshOperation(${node})- entry not found!"}, Config.getSettings().getValue( DebugValue.CONTENT_PUT_GET ))
+            Log.warn({ "KContentRefreshOperation(${node})- entry not found!"}, Config.flag( "CONTENT_PUT_GET" ))
       }
    }
 }

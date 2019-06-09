@@ -2,8 +2,8 @@ package pen.net.kad.messages.receivers
 
 import java.util.NoSuchElementException
 import pen.eco.Loggable
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.KServer
 import pen.net.kad.dht.KDHT
 import pen.net.kad.dht.KStorageEntry
@@ -22,8 +22,8 @@ class KFindValueReceiver (private val server : KServer, private val node : KNode
    {
       if (message is KFindValueMessage)
       {
-         log({"message received"}, getSettings().getValue( DebugValue.CONTENT_FIND ))
-         log({"content info: {owner: ${message.params.ownerName}}, {type: ${message.params.type}}, {key: \"${message.params.key}\"}"}, getSettings().getValue( DebugValue.CONTENT_INFO ))
+         log({"message received"}, Config.flag( "CONTENT_FIND" ))
+         log({"content info: {owner: ${message.params.ownerName}}, {type: ${message.params.type}}, {key: \"${message.params.key}\"}"}, Config.flag( "CONTENT_INFO" ))
          kRoutingTable.insert( message.origin )
 
          /* Check if we can have this data */
@@ -52,5 +52,5 @@ class KFindValueReceiver (private val server : KServer, private val node : KNode
       }
    }
 
-   override fun loggingName () = "KFindValueReceiver(${node})"
+   override fun originName () = "KFindValueReceiver(${node})"
 }

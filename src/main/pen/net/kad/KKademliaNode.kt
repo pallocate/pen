@@ -15,13 +15,11 @@ import pen.eco.LogLevel.WARN
 import pen.eco.LogLevel.ERROR
 import pen.eco.Loggable
 import pen.eco.Serializer
-import pen.eco.KSettings
-import pen.eco.DebugValue
 import pen.eco.types.NoConverter
 import pen.eco.types.Convertable
 import pen.eco.common.create_dir
 import pen.eco.Constants
-import pen.eco.Config.getSettings
+import pen.eco.Config
 import pen.net.kad.Constants as KadConstants
 import pen.net.kad.dht.KDHT
 import pen.net.kad.dht.KContent
@@ -45,7 +43,7 @@ class KKademliaNode () : Convertable, Loggable
       /** Loads  file. */
       fun loadFromFile (ownerName : String) : KKademliaNode?
       {
-         Log.debug({"$ownerName- loading KKademliaNode"}, getSettings().getValue( DebugValue.KAD_SAVE_LOAD ))
+         Log.debug({"$ownerName- loading KKademliaNode"}, Config.flag( "KAD_SAVE_LOAD" ))
          var ret : KKademliaNode? = null
 
          try
@@ -140,7 +138,7 @@ class KKademliaNode () : Convertable, Loggable
 
    private fun initialize ()
    {
-      log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
+      log("initializing", Config.flag( "KAD_INITIALIZE" ))
 
       routingTable.initialize( node )
       dht.initialize( ownerName )
@@ -152,28 +150,28 @@ class KKademliaNode () : Convertable, Loggable
    @Synchronized
    fun bootstrap (otherNode : KNode)
    {
-      log("bootstrapping to (${otherNode})", getSettings().getValue( DebugValue.KAD_BOOTSTRAP ))
+      log("bootstrapping to (${otherNode})", Config.flag( "KAD_BOOTSTRAP" ))
       val startTime = System.nanoTime()*1000
       val op = KConnectOperation( server, node, routingTable, dht, otherNode )
 
       try
       {
          op.execute()
-         log("bootstrap complete", getSettings().getValue( DebugValue.KAD_BOOTSTRAP ))
+         log("bootstrap complete", Config.flag( "KAD_BOOTSTRAP" ))
 
          val endTime = System.nanoTime()*1000
          Stats.setBootstrapTime( endTime - startTime )
       }
       catch (e: Exception)
       {
-         log("connection failed, ${e.message}", getSettings().getValue( DebugValue.KAD_BOOTSTRAP ))
+         log("connection failed, ${e.message}", Config.flag( "KAD_BOOTSTRAP" ))
       }
    }
 
    fun put(content : KContent) = put(KStorageEntry( content ))
    fun put (entry : KStorageEntry) : Int
    {
-      log("storing entry [${entry.content.key.shortName()}]", getSettings().getValue( DebugValue.CONTENT_PUT_GET ))
+      log("storing entry [${entry.content.key.shortName()}]", Config.flag( "CONTENT_PUT_GET" ))
       val storeOperation = KStoreOperation( server, node, routingTable, dht, entry )
       storeOperation.execute()
 
@@ -183,13 +181,13 @@ class KKademliaNode () : Convertable, Loggable
 
    fun putLocally (content : KContent)
    {
-      log("storing entry [${content.key.shortName()}] locally", getSettings().getValue( DebugValue.CONTENT_PUT_GET ))
+      log("storing entry [${content.key.shortName()}] locally", Config.flag( "CONTENT_PUT_GET" ))
       dht.store(KStorageEntry( content ))
    }
 
    fun get (kGetParameter : KGetParameter) : StorageEntry
    {
-      log("retrieving entry [${kGetParameter.key.shortName()}]", getSettings().getValue( DebugValue.CONTENT_PUT_GET ))
+      log("retrieving entry [${kGetParameter.key.shortName()}]", Config.flag( "CONTENT_PUT_GET" ))
       if (dht.contains( kGetParameter ))
       {
          /* If the content exist in our own KDHT, then return it. */
@@ -222,7 +220,7 @@ class KKademliaNode () : Convertable, Loggable
 
    private fun saveState ()
    {
-      log("saving", getSettings().getValue( DebugValue.KAD_SAVE_LOAD ))
+      log("saving", Config.flag( "KAD_SAVE_LOAD" ))
       val dir = storageDir( ownerName ) + Constants.SLASH
 
       /* Store Basic  data. */
@@ -248,7 +246,7 @@ class KKademliaNode () : Convertable, Loggable
 
    private fun startRefreshing ()
    {
-      log("start refreshing", getSettings().getValue( DebugValue.KAD_INTERNAL ))
+      log("start refreshing", Config.flag( "KAD_INTERNAL" ))
       refreshTimer = Timer( true )
       refreshTask = RefreshTimerTask()
       refreshTimer?.schedule( refreshTask, KadConstants.RESTORE_INTERVAL, KadConstants.RESTORE_INTERVAL )
@@ -256,7 +254,7 @@ class KKademliaNode () : Convertable, Loggable
 
    private fun stopRefreshing ()
    {
-      log("stop refreshing", getSettings().getValue( DebugValue.KAD_INTERNAL ))
+      log("stop refreshing", Config.flag( "KAD_INTERNAL" ))
       refreshTask.cancel()
       refreshTimer?.cancel()
       refreshTimer?.purge()
@@ -273,7 +271,7 @@ class KKademliaNode () : Convertable, Loggable
       return sb.toString()
    }
 
-   override fun loggingName () = "KKademliaNode(${node})"
+   override fun originName () = "KKademliaNode(${node})"
 
    fun getRoutingTable () = routingTable
    fun getNode () = node
@@ -288,12 +286,12 @@ class KKademliaNode () : Convertable, Loggable
          try
          { refresh() }
          catch (e : IOException)
-         { log("refresh failed!", getSettings().getValue( DebugValue.KAD_INTERNAL ), WARN) }
+         { log("refresh failed!", Config.flag( "KAD_INTERNAL" ), WARN) }
       }
 
       override fun cancel () : Boolean
       {
-         log("refresh canceled", getSettings().getValue( DebugValue.KAD_INTERNAL ))
+         log("refresh canceled", Config.flag( "KAD_INTERNAL" ))
          return false
       }
    }

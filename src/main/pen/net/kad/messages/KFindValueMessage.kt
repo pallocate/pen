@@ -1,8 +1,8 @@
 package pen.net.kad.messages
 
 import pen.eco.Log
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.dht.KGetParameter
 import pen.net.kad.node.KNode
 
@@ -13,7 +13,7 @@ class KFindValueMessage () : Message
    var params                    = KGetParameter()
 
    init
-   { Log.debug( {"<FIND_VALUE>"}, getSettings().getValue( DebugValue.MESSAGE_CREATE )) }
+   { Log.debug( {"<FIND_VALUE>"}, Config.flag( "MESSAGE_CREATE" )) }
 
    constructor (origin : KNode, params : KGetParameter) : this()
    {

@@ -7,8 +7,7 @@ import java.util.NoSuchElementException
 import com.beust.klaxon.Converter
 import pen.eco.LogLevel.WARN
 import pen.eco.Loggable
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+import pen.eco.Config
 import pen.eco.Constants.SLASH
 import pen.eco.Serializer
 import pen.eco.types.Convertable
@@ -26,17 +25,17 @@ class KDHT () : Convertable, Loggable
    var ownerName = ""
 
    init
-   { log("created", getSettings().getValue( DebugValue.KAD_CREATE )) }
+   { log("created", Config.flag( "KAD_CREATE" )) }
 
    fun initialize (name : String)
    {
       ownerName = name
-      log("initializing", getSettings().getValue( DebugValue.KAD_INITIALIZE ))
+      log("initializing", Config.flag( "KAD_INITIALIZE" ))
    }
 
    fun store (content : KStorageEntry) : Boolean
    {
-      log("adding content [${content.contentMetadata.key.shortName()}]", getSettings().getValue( DebugValue.CONTENT_PUT_GET ), WARN)
+      log("adding content [${content.contentMetadata.key.shortName()}]", Config.flag( "CONTENT_PUT_GET" ), WARN)
       var ret : Boolean
 
       if (contentManager.contains( content.contentMetadata ))
@@ -66,7 +65,7 @@ class KDHT () : Convertable, Loggable
       }
       catch (e: Exception)
       {
-         log("adding content failed! [${content.contentMetadata.key.shortName()}], ${e.message}", getSettings().getValue( DebugValue.CONTENT_PUT_GET ), WARN)
+         log("adding content failed! [${content.contentMetadata.key.shortName()}], ${e.message}", Config.flag( "CONTENT_PUT_GET" ), WARN)
          ret = false
       }
 
@@ -143,7 +142,7 @@ class KDHT () : Convertable, Loggable
          contentManager.put( e )
    }
 
-   override fun loggingName () = "KDHT(${ownerName})"
+   override fun originName () = "KDHT(${ownerName})"
 
    @Synchronized
    override fun toString () = contentManager.toString()

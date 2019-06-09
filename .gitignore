@@ -4,7 +4,6 @@
 *.yml
 *.log
 eco.jar
-per.jar
+par.jar
 net.jar
-tests.jar
 MANIFEST.MF

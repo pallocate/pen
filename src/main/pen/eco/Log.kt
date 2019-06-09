@@ -1,26 +1,25 @@
 package pen.eco
 
-/** Platform specific implementation expected. */
 expect fun log (message : String, severity : LogLevel = LogLevel.INFO)
 
 enum class LogLevel { DEBUG, INFO, WARN, ERROR, CRITICAL, QUIET }
 
-/** Used to simplify logging. */
+/** Brings conditionallity to the logging. */
 interface Loggable
 {
-   /** Some name that identifies the origin of the log message. */
-   abstract fun loggingName () : String
+   /** A name that identifies the origin of the log message. */
+   abstract fun originName () : String
 
    /** @param execute Enables conditional logging, like if some flag is set */
    fun log (message : String, execute : Boolean = true, severity : LogLevel = LogLevel.DEBUG)
    {
       if (execute)
-         log( loggingName() + "- " + message, severity )
+         log( originName() + "- " + message, severity )
    }
    fun log (message : () -> String, execute : Boolean = true, severity : LogLevel = LogLevel.DEBUG)
    {
       if (execute)
-         log( loggingName() + "- " + message(), severity )
+         log( originName() + "- " + message(), severity )
    }
 }
 

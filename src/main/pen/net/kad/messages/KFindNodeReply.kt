@@ -1,8 +1,8 @@
 package pen.net.kad.messages
 
 import pen.eco.Log
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.node.KNode
 
 /** A message used to connect nodes.
@@ -13,7 +13,7 @@ class KFindNodeReply () : Message
    var nodes                     = ArrayList<KNode>()
 
    init
-   { Log.debug( {"<FIND_NODE_REPLY>"}, getSettings().getValue( DebugValue.MESSAGE_FIND_NODE )) }
+   { Log.debug( {"<FIND_NODE_REPLY>"}, Config.flag( "MESSAGE_FIND_NODE" )) }
 
    constructor (origin : KNode, nodes : ArrayList<KNode>) : this()
    {

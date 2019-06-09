@@ -5,9 +5,7 @@ interface PlaceHolder
 {
    private inline fun <reified T : Any>logDebug (msg : String?, value : Any) : T
    {
-      if (KSettings.COMMON_PLACE_HOLDER)
-         Log.warn( "PlaceHolder- \"$msg\"" )
-
+      Log.warn( {"PlaceHolder- \"$msg\""}, Config.flag( "COMMON_PLACE_HOLDER" ) )
       return value as T
    }
 

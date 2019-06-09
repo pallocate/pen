@@ -8,8 +8,8 @@ import java.util.SortedMap
 import java.util.TreeMap
 import pen.eco.Loggable
 import pen.eco.LogLevel.WARN
-import pen.eco.DebugValue
-import pen.eco.Config.getSettings
+
+import pen.eco.Config
 import pen.net.kad.Constants
 import pen.net.kad.RoutingException
 import pen.net.kad.ContentNotFoundException
@@ -107,7 +107,7 @@ class KFindValueOperation
          }
       }
       catch (e : Exception)
-      { log("interrupted!", getSettings().getValue( DebugValue.CONTENT_FIND ), WARN) }
+      { log("interrupted!", Config.flag( "CONTENT_FIND" ), WARN) }
    }
 
    /** Add nodes from this list to the set of nodes to lookup
@@ -193,7 +193,7 @@ class KFindValueOperation
       {
          if (message is KContentMessage)
          {
-            log("received content message", getSettings().getValue( DebugValue.CONTENT_FIND ))
+            log("received content message", Config.flag( "CONTENT_FIND" ))
             /* The reply received is a content message with the required content, take it in */
 
             /* Add the origin node to our routing table */
@@ -207,7 +207,7 @@ class KFindValueOperation
          else
             if (message is KFindNodeReply)                                      // A KFindNodeReply with nodes closest to the content
             {
-               log("received content reply", getSettings().getValue( DebugValue.CONTENT_FIND ))
+               log("received content reply", Config.flag( "CONTENT_FIND" ))
 
                /* Add the origin node to our routing table */
                val origin = message.origin
@@ -237,7 +237,7 @@ class KFindValueOperation
       val inTransit = messagesTransiting.get( conversationId )
 
       if (inTransit == null)
-         log("invalid conversation id!", getSettings().getValue( DebugValue.RECEIVER_TIMEOUT ), WARN)
+         log("invalid conversation id!", Config.flag( "RECEIVER_TIMEOUT" ), WARN)
       else
       {
          /* Mark this node as failed and inform the routing table that it's unresponsive */
@@ -257,7 +257,7 @@ class KFindValueOperation
       if (isContentFound)
          ret = contentFound
       else
-         log("no value found", getSettings().getValue( DebugValue.CONTENT_PUT_GET ))
+         log("no value found", Config.flag( "CONTENT_PUT_GET" ))
 
       return ret
    }
@@ -265,5 +265,5 @@ class KFindValueOperation
    /** @return How many hops it took in order to get to the content. */
    fun routeLength () = routeLengthChecker.routeLength
 
-   override fun loggingName () = "KFindValueOperation(${node})"
+   override fun originName () = "KFindValueOperation(${node})"
 }

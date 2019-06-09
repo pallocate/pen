@@ -4,39 +4,35 @@ import java.lang.System
 import java.util.Date
 import java.text.SimpleDateFormat
 import java.io.File
-import java.io.FileOutputStream
+import java.io.FileWriter
 
 actual fun log (message : String, severity : LogLevel)
 {
    if (severity >= Log.level)
-      KLogEvent( message, severity )
+      Logger.logMessage( message, severity )
 }
 
-/** A log event. */
-data class KLogEvent (val message : String, val severity : LogLevel)
+/** Does the actual logging. */
+internal object Logger
 {
-   private var fileOutputStream : FileOutputStream? = null
+   private var fileWriter : FileWriter? = null
 
-   init
+   fun logMessage (message : String, severity : LogLevel)
    {
       val dateFormat = SimpleDateFormat( "yyyy-MM-dd hh:mm:ss" )
-         val text = dateFormat.format( Date() ) + " ${severity.name}: $message\n"
+      val timestampedMessage = "${dateFormat.format( Date() )} ${severity.name}: $message\n"
 
       try
       {
-         if (fileOutputStream == null)
+         if (fileWriter == null)
          {
             val file = File( "app.log" )
             file.createNewFile()
-            fileOutputStream = FileOutputStream( file, true )
+            fileWriter = FileWriter( file, true )
          }
-
-         if (fileOutputStream != null)
-            fileOutputStream!!.write( text.toByteArray() )
-         else
-            System.err.println( text )
+         fileWriter!!.write( timestampedMessage )
       }
       catch (e : Exception)
-      { System.err.println( e.message ) }
+      { System.err.println( timestampedMessage ) }
    }
 }
