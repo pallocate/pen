@@ -2,7 +2,6 @@ package pen.net.kad
 
 import java.io.IOException
 import com.beust.klaxon.Converter
-import pen.eco.types.NoConverter
 
 interface NodeMessageListener
 {

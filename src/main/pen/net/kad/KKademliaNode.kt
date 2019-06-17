@@ -15,9 +15,8 @@ import pen.eco.LogLevel.WARN
 import pen.eco.LogLevel.ERROR
 import pen.eco.Loggable
 import pen.eco.Serializer
-import pen.eco.types.NoConverter
-import pen.eco.types.Convertable
-import pen.eco.common.create_dir
+import pen.eco.Convertable
+import pen.eco.create_dir
 import pen.eco.Constants
 import pen.eco.Config
 import pen.net.kad.Constants as KadConstants
@@ -277,7 +276,6 @@ class KKademliaNode () : Convertable, Loggable
    fun getNode () = node
    fun getDHT () = dht
    fun getServer () = server
-   override fun getConverters () = Array<Converter>( 0, {NoConverter()} )
 
    inner class RefreshTimerTask () : TimerTask()
    {

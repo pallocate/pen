@@ -3,6 +3,9 @@ package pen.eco
 import pen.eco.LogLevel.INFO
 import pen.eco.LogLevel.WARN
 import pen.eco.LogLevel.ERROR
+import pen.eco.types.Plugin
+import pen.eco.types.KPluginInfo
+import pen.eco.types.NoPlugin
 
 interface PluginManager
 { val plugins: Map<String, Plugin> }

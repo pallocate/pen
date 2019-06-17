@@ -2,7 +2,7 @@ package pen.eco.types
 
 import java.time.Instant
 import pen.eco.Log
-import pen.eco.common.Utils
+import pen.eco.Utils
 import pen.eco.common.Crypto
 import pen.eco.Constants
 import pen.eco.types.PasswordProvider

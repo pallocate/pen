@@ -4,23 +4,24 @@ import java.io.InputStream
 import java.io.OutputStream
 import com.beust.klaxon.Klaxon
 import pen.eco.Log
-
 import pen.eco.Config
+import pen.eco.KByteArrayConverter
+import pen.eco.KInetAddressConverter
 import pen.net.kad.messages.Message
 import pen.net.kad.messages.NoMessage
 
 object KMessageSerializer
 {
-   val kNodeIdConverter = KNodeIdConverter()
-   val kInetAddressConverter = KInetAddressConverter()
+   val byteArrayConverter = KByteArrayConverter()
+   val inetAddressConverter = KInetAddressConverter()
 
    inline fun <reified T : Message> read (inputStream : InputStream) : Message
    {
       Log.debug({"KMessageSerializer- reading object"}, Config.flag( "STREAMING" ))
       var klaxon = Klaxon()
 
-      klaxon = klaxon.converter( kNodeIdConverter )
-      klaxon = klaxon.converter( kInetAddressConverter )
+      klaxon = klaxon.converter( byteArrayConverter )
+      klaxon = klaxon.converter( inetAddressConverter )
 
       var parseResult : T? = null
 
@@ -43,8 +44,8 @@ object KMessageSerializer
       Log.debug({"KMessageSerializer- writing object"}, Config.flag( "STREAMING" ))
       var klaxon = Klaxon()
 
-      klaxon = klaxon.converter( kNodeIdConverter )
-      klaxon = klaxon.converter( kInetAddressConverter )
+      klaxon = klaxon.converter( byteArrayConverter )
+      klaxon = klaxon.converter( inetAddressConverter )
 
       val json = klaxon.toJsonString( message ).toByteArray()
 

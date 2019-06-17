@@ -5,14 +5,17 @@ import com.sun.jna.Library
 import com.sun.jna.Native
 import com.sun.jna.NativeLong
 import pen.eco.Constants
-import pen.eco.Log
+import pen.eco.Config
+import pen.eco.Loggable
+import pen.eco.LogLevel.WARN
+import pen.eco.LogLevel.ERROR
 import pen.eco.types.PasswordProvider
 import pen.eco.types.NoPasswordProvider
 
 /** Cryptographic functionallity, using the Sodium library.*/
-object Crypto
+object Crypto : Loggable
 {
-   private val sodium = Native.loadLibrary( NaCl().filename, Sodium::class.java ) as Sodium
+   private val sodium = Native.loadLibrary( SodiumName().filename, Sodium::class.java ) as Sodium
    private val B64_SIGN_BYTES = if (Constants.SIGN_BYTES%3 == 1) 4*((Constants.SIGN_BYTES + 2)/3) else
    if (Constants.SIGN_BYTES%3 == 2) 4*((Constants.SIGN_BYTES + 1)/3) else 4*(Constants.SIGN_BYTES/3)
    private val SIGNAGE_LABEL = "\nSignature:".toByteArray()
@@ -37,7 +40,7 @@ object Crypto
       sodium.sodium_init()
       var output = ByteArray( Constants.HASH_BYTES )
       if (sodium.crypto_generichash( output, Constants.HASH_BYTES, input, input.size, null, 0 ) != 0)
-         Log.warn( "Hashing failed!" )
+         log("Hashing failed!", Config.flag( "CRYPTO" ), WARN)
 
       return output
    }
@@ -48,7 +51,7 @@ object Crypto
      * @return The text with an added signature. */
    fun signText (text : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
-      Log.debug( "Signing text.." )
+      log("Signing text", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val secretKey = getKey( passwordProvider, pkc_salt, this::privateKey )
 
@@ -57,12 +60,12 @@ object Crypto
          val signature = ByteArray( sodium.crypto_sign_ed25519_bytes() )
 
          if (sodium.crypto_sign_ed25519_detached( signature, 0L, text, text.size.toLong(), secretKey ) != 0)
-            Log.warn( "Text signing failed!" )
+            log("Text signing failed!", Config.flag( "CRYPTO" ), WARN)
          else
             ret = text + SIGNAGE_LABEL + Base64.getEncoder().encode( signature )
       }
       else
-         Log.warn( "Text signing failed! (invalid key/input)" )
+         log("Text signing failed! (invalid key/input)", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -74,7 +77,7 @@ object Crypto
      * @return The original text. */
    fun verifyText (signedText : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
-      Log.debug( "Verifying text.." )
+      log("Verifying text", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       sodium.sodium_init()
 
@@ -90,10 +93,10 @@ object Crypto
          if (sodium.crypto_sign_ed25519_verify_detached( signature, text, text.size.toLong(), othersPublicKey ) == 0)
             ret = text
          else
-            Log.warn( "Text verification failed!" )
+            log("Text verification failed!", Config.flag( "CRYPTO" ), WARN)
       }
       else
-         Log.warn( "Text verification failed! (invalid key/input)" )
+         log("Text verification failed! (invalid key/input)", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -104,7 +107,7 @@ object Crypto
      * @return The signature. */
    fun signatureOf (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
-      Log.debug( "Getting signature of.." )
+      log("Generating a signature from input", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val secretKey = getKey( passwordProvider, pkc_salt, this::privateKey )
 
@@ -115,10 +118,10 @@ object Crypto
          if (sodium.crypto_sign_ed25519_detached( signature, 0L, input, input.size.toLong(), secretKey ) == 0)
             ret = signature
          else
-            Log.warn( "Signing failed!" )
+            log("Signing failed!", Config.flag( "CRYPTO" ), WARN)
       }
       else
-         Log.warn( "Signing failed! (invalid key/input)" )
+         log("Signing failed! (invalid key/input)", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -131,7 +134,7 @@ object Crypto
      * @return True if signature matches. */
    fun verifySignatureOf (input : ByteArray, signature : ByteArray, othersPublicKey : ByteArray) : Boolean
    {
-      Log.debug( "Verifying signature.." )
+      log("Verifying signature..", Config.flag( "CRYPTO" ))
       var success = false
       sodium.sodium_init()
 
@@ -140,10 +143,10 @@ object Crypto
          if (sodium.crypto_sign_ed25519_verify_detached( signature, input, input.size.toLong(), othersPublicKey) == 0)
             success = true
          else
-            Log.warn( "Verification failed!" )
+            log("Verification failed!", Config.flag( "CRYPTO" ), WARN)
       }
       else
-         Log.warn( "Verification failed! (invalid key/input)" )
+         log("Verification failed! (invalid key/input)", Config.flag( "CRYPTO" ), WARN)
 
       return success
    }
@@ -154,7 +157,7 @@ object Crypto
      * @return The signed binary. */
    fun signBinary (binary : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
-      Log.debug( "Signing binary.." )
+      log("Signing binary", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val secretKey = getKey( passwordProvider, pkc_salt, this::privateKey )
 
@@ -163,10 +166,10 @@ object Crypto
          ret = ByteArray( sodium.crypto_sign_ed25519_bytes() + binary.size )
 
          if (sodium.crypto_sign_ed25519(ret, 0L, binary, binary.size.toLong(), secretKey) != 0)
-            Log.warn( "Binary signing failed!" )
+            log("Binary signing failed!", Config.flag( "CRYPTO" ), WARN)
       }
       else
-         Log.warn( "Binary signing failed! (invalid key/input)" )
+         log("Binary signing failed! (invalid key/input)", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -178,7 +181,7 @@ object Crypto
      * @return The original binary. */
    fun verifyBinary (signedBinary : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
-      Log.debug( "Verifying binary.." )
+      log("Verifying binary", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val mSize = signedBinary.size - sodium.crypto_sign_ed25519_bytes()
       sodium.sodium_init()
@@ -188,12 +191,12 @@ object Crypto
          ret = ByteArray( mSize )
 
          if (sodium.crypto_sign_ed25519_open( ret, 0L, signedBinary, signedBinary.size.toLong(), othersPublicKey ) != 0)
-            Log.warn( "Binary verification failed!" )
+            log("Binary verification failed!", Config.flag( "CRYPTO" ), WARN)
       }
       else
       {
          ret = ret.drop( sodium.crypto_sign_ed25519_bytes() ).toByteArray()     // Drop supposed signature
-         Log.warn( "Binary verification failed! (invalid key/input)" )
+         log("Binary verification failed! (invalid key/input)", Config.flag( "CRYPTO" ), WARN)
       }
 
       return ret
@@ -205,7 +208,7 @@ object Crypto
      * @return The nonce plus the cipher text. */
    fun encrypt (plainText : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
    {
-      Log.debug( "Encrypting.." )
+      log("Encrypting", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val key = getKey( passwordProvider, skc_salt, this::symetricKey )
 
@@ -218,12 +221,12 @@ object Crypto
             ret = nonce + ret
          else
          {
-            Log.warn( "Encryption failed!" )
+            log("Encryption failed!", Config.flag( "CRYPTO" ), WARN)
             ret = ByteArray( 0 )
          }
       }
       else
-         Log.warn( "Encryption failed! (invalid key/input)" )
+         log("Encryption failed! (invalid key/input)", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -234,7 +237,7 @@ object Crypto
      * @return The original plain text. */
    fun decrypt (input : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
    {
-      Log.debug( "Decrypting.." )
+      log("Decrypting", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val nonceSize = (sodium.crypto_secretbox_noncebytes() as Number).toInt()
       val plainTextSize = (input.size - (sodium.crypto_secretbox_macbytes() as Number).toInt()) - nonceSize
@@ -248,12 +251,12 @@ object Crypto
          ret = ByteArray( cipherText.size - (sodium.crypto_box_macbytes() as Number).toInt() )
          if (sodium.crypto_secretbox_open_easy (ret, cipherText, cipherText.size.toLong(), nonce, key) != 0)
          {
-            Log.warn( "Decryption failed!" )
+            log("Decryption failed!", Config.flag( "CRYPTO" ), WARN)
             ret = ByteArray( 0 )
          }
       }
       else
-         Log.err( "Decryption failed! (invalid key/input)" )
+         log("Decryption failed! (invalid key/input)", Config.flag( "CRYPTO" ), ERROR)
 
       return ret
    }
@@ -265,7 +268,7 @@ object Crypto
      * @return The nonce plus the cipher text. */
    fun pkcEncrypt (plainText : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
-      Log.debug( "PKC encrypting.." )
+      log("PKC encrypting", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val secretKey = getKey( passwordProvider, pkc_salt, this::privateKey )
 
@@ -280,12 +283,12 @@ object Crypto
             ret = nonce + ret
          else
          {
-            Log.warn( "PKC encryption failed!" )
+            log("PKC encryption failed!", Config.flag( "CRYPTO" ), WARN)
             ret = ByteArray( 0 )
          }
       }
       else
-         Log.warn( "PKC encryption failed! (invalid keys/input)" )
+         log("PKC encryption failed! (invalid keys/input)", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -297,7 +300,7 @@ object Crypto
      * @return The original plain text. */
    fun pkcDecrypt (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
-      Log.debug( "PKC decrypting.." )
+      log("PKC decrypting..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val nonceSize = (sodium.crypto_box_noncebytes() as Number).toInt()
       val plainTextSize = (input.size - (sodium.crypto_box_macbytes() as Number).toInt()) - nonceSize
@@ -313,12 +316,12 @@ object Crypto
          ret = ByteArray( plainTextSize )
          if (sodium.crypto_box_open_easy(ret, cipherText, cipherText.size.toLong(), nonce, pk, sk) != 0)
          {
-            Log.err( "PKC decryption failed!" )
+            log("PKC decryption failed!", Config.flag( "CRYPTO" ), WARN)
             ret = ByteArray( 0 )
          }
       }
       else
-         Log.err( "PKC decryption failed! (invalid keys/input)" )
+         log("PKC decryption failed! (invalid keys/input)", Config.flag( "CRYPTO" ), ERROR)
 
       return ret
    }
@@ -327,6 +330,7 @@ object Crypto
    fun publicSigningKeySize () = (sodium.crypto_sign_ed25519_publickeybytes() as Number).toInt()
    /** The salt size requiered in the password based key derivation. */
    fun saltSize () = sodium.crypto_pwhash_saltbytes()
+   override fun originName () = "Crypto"
 
    /** generates a symetric key from a password and salt */
    private fun symetricKey (password : ByteArray, salt : ByteArray) : ByteArray
@@ -336,7 +340,7 @@ object Crypto
 
       if (sodium.crypto_pwhash( ret, symKeySize.toLong(), password, password.size.toLong(), salt, sodium.crypto_pwhash_opslimit_moderate(),
       sodium.crypto_pwhash_memlimit_moderate(), sodium.crypto_pwhash_alg_argon2id13() ) != 0)
-         Log.warn( "Key generation failed!" )
+         log("Key generation failed!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -355,10 +359,10 @@ object Crypto
          ret = ByteArray( secretSigningKeySize() )
 
          if (sodium.crypto_sign_seed_keypair( foo, ret, seed ) != 0)
-            Log.warn( "Keypair generation failed!" )
+            log("Keypair generation failed!", Config.flag( "CRYPTO" ), WARN)
       }
       else
-         Log.warn( "Seeding failed!" )
+         log("Seeding failed!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -377,30 +381,31 @@ object Crypto
          val foo = ByteArray( secretSigningKeySize() )
 
          if (sodium.crypto_sign_seed_keypair( ret, foo, seed ) != 0)
-            Log.warn( "Keypair generation failed!" )
+            log("Keypair generation failed!", Config.flag( "CRYPTO" ), WARN)
       }
       else
-         Log.warn( "Seeding failed!" )
+         log("Seeding failed!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
 
-   /** Intiates the sodium library object. Asks the user for a password, and uses this in the supplied key function
-     * @param passwordProvider The PasswordProvider to use to get a password from a user.
+   /** Intiates the sodium library object. Gets a password from the provider,
+     * and uses this in the supplied key function.
+     * @param passwordProvider The PasswordProvider to use.
      * @param salt Salt to use in key function. */
    fun getKey (passwordProvider : PasswordProvider, salt : ByteArray, keyFunction : (ByteArray, ByteArray) -> ByteArray) : ByteArray
    {
       var ret = ByteArray( 0 )
 
       if (passwordProvider is NoPasswordProvider)
-         Log.warn( "Password input needed" )
+         log("Password input needed!", Config.flag( "CRYPTO" ), WARN)
       else
          if (validateSaltSize( salt ))
          {
             val password = passwordProvider.password().toByteArray()
 
             if (password.size == 0)
-               Log.warn( "Invalid password" )
+               log("Invalid password!", Config.flag( "CRYPTO" ), WARN)
             else
             {
                sodium.sodium_init()
@@ -408,7 +413,7 @@ object Crypto
             }
          }
          else
-            Log.warn( "Invalid salt" )
+            log("Invalid salt", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -418,7 +423,7 @@ object Crypto
       var ret = ByteArray( (sodium.crypto_box_publickeybytes() as Number).toInt() )
 
       if (sodium.crypto_sign_ed25519_pk_to_curve25519( ret, publicSigningKey ) != 0)
-         Log.warn( "Key conversion failed!" )
+         log("Key conversion failed!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -428,7 +433,7 @@ object Crypto
       var ret = ByteArray( (sodium.crypto_box_secretkeybytes() as Number).toInt() )
 
       if (sodium.crypto_sign_ed25519_sk_to_curve25519( ret, secretSigningKey ) != 0)
-         Log.warn( "Key conversion failed!" )
+         log("Key conversion failed!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -439,7 +444,7 @@ object Crypto
       if (key.size == (sodium.crypto_secretbox_keybytes() as Number).toInt())
          ret = true
       else
-         Log.warn( "Invalid key!" )
+         log("Invalid key!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -450,7 +455,7 @@ object Crypto
       if (pk.size == publicSigningKeySize())
          ret = true
       else
-         Log.warn( "Invalid public key!" )
+         log("Invalid public key!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -461,7 +466,7 @@ object Crypto
       if (sk.size == secretSigningKeySize())
          ret = true
       else
-         Log.warn( "Invalid secret key!" )
+         log("Invalid secret key!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -472,7 +477,7 @@ object Crypto
       if (salt.size == saltSize())
          ret = true
       else
-         Log.warn( "Invalid salt!" )
+         log("Invalid salt!", Config.flag( "CRYPTO" ), WARN)
 
       return ret
    }

@@ -1,6 +1,6 @@
 package pen.net.kad.utils
 
-import pen.eco.types.Convertable
+import pen.eco.Convertable
 import pen.net.kad.node.KNode
 import pen.net.kad.routing.KRoutingTable
 import pen.net.kad.routing.KContact
@@ -26,6 +26,4 @@ class KSerializableRoutingInfo () : Convertable
 
       return kRoutingTable
    }
-
-   override fun getConverters () = arrayOf( KNodeIdConverter(), KInetAddressConverter() )
 }

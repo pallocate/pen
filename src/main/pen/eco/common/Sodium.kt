@@ -6,7 +6,7 @@ import pen.eco.Constants
 import pen.eco.Log
 
 /** Constructs path name to the sodium library depending on OS and architecture. */
-class NaCl
+class SodiumName
 {
    var filename = ""
 
@@ -24,13 +24,13 @@ class NaCl
                               ".so"
                            else
                            {
-                              Log.err( "NaCl- Unknown OS" )
+                              Log.err( "SodiumName- Unknown OS" )
                               ""
                            }
          filename = Constants.LIBSODIUM_DIR + Constants.SLASH + "libsodium" + arch + extension
       }
       catch (e : Exception)
-      { Log.err( "NaCl- Could not determine OS/architecture" ) }
+      { Log.err( "SodiumName- Could not determine OS/architecture" ) }
    }
 }
 

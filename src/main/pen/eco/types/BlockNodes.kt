@@ -4,7 +4,7 @@ import java.io.InputStream
 import pen.eco.Log
 import pen.eco.Constants
 import pen.eco.types.PasswordProvider
-import pen.eco.common.Utils as CommonUtils
+import pen.eco.Utils as CommonUtils
 
 sealed class BlockNode ()
 

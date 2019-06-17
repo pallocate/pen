@@ -10,13 +10,12 @@ import pen.eco.Loggable
 import pen.eco.Config
 import pen.eco.Constants.SLASH
 import pen.eco.Serializer
-import pen.eco.types.Convertable
+import pen.eco.Convertable
 import pen.net.kad.KKademliaNode
 import pen.net.kad.StorageEntry
 import pen.net.kad.NoStorageEntry
 import pen.net.kad.ContentNotFoundException
 import pen.net.kad.node.KNodeId
-import pen.net.kad.utils.KNodeIdConverter
 
 /** Distributed Hash Table implementation. */
 class KDHT () : Convertable, Loggable
@@ -146,5 +145,4 @@ class KDHT () : Convertable, Loggable
 
    @Synchronized
    override fun toString () = contentManager.toString()
-   override fun getConverters () = arrayOf( KNodeIdConverter() as Converter )
 }

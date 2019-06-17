@@ -5,8 +5,8 @@ import java.util.Arrays
 import java.util.BitSet
 import java.util.Random
 import pen.eco.Log
-import pen.eco.common.Utils
-import pen.eco.common.toHex
+import pen.eco.Utils
+import pen.eco.toHex
 
 class KNodeId ()
 {
@@ -17,15 +17,16 @@ class KNodeId ()
    }
 
    var keyBytes = ByteArray( KEY_BYTES_SIZE )
+
    private val sName by lazy {Utils.smallId( keyBytes )}
 
    init
    { Random().nextBytes( keyBytes ) }
 
-   constructor (bytes : ByteArray) : this()
+   constructor (id : ByteArray) : this()
    {
-      if (bytes.size == KEY_BYTES_SIZE)
-         keyBytes = bytes
+      if (id.size == KEY_BYTES_SIZE)
+         keyBytes = id
    }
 
    /** Construct the KNodeId from a string. */

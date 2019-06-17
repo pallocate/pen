@@ -14,8 +14,6 @@ import pen.net.kad.messages.Message
 import pen.net.kad.messages.KAcknowledgeMessage
 import pen.net.kad.messages.KConnectMessage
 import pen.net.kad.node.KNode
-import pen.net.kad.utils.KNodeIdConverter
-import pen.net.kad.utils.KInetAddressConverter
 import pen.net.kad.routing.KRoutingTable
 
 /** @param server The message server used to send/receive messages

@@ -1,16 +1,12 @@
 package pen.net.kad.dht
 
 import com.beust.klaxon.Converter
-import pen.eco.types.Convertable
+import pen.eco.Convertable
 import pen.net.kad.StorageEntry
-import pen.net.kad.utils.KNodeIdConverter
 
 /** A StorageEntry class that is used to store a content on the DHT */
 class KStorageEntry () : StorageEntry, Convertable
 {
-   companion object
-   { val converters = arrayOf( KNodeIdConverter() as Converter ) }
-
    var content                                    = KContent()
    var contentMetadata                            = KStorageEntryMetadata()
 
@@ -19,6 +15,4 @@ class KStorageEntry () : StorageEntry, Convertable
       this.content = content
       this.contentMetadata = contentMetadata
    }
-
-   override fun getConverters () = converters
 }

@@ -4,9 +4,7 @@ import java.io.Serializable
 import java.net.InetAddress
 import java.net.InetSocketAddress
 import pen.eco.Log
-import pen.eco.types.Convertable
-import pen.net.kad.utils.KNodeIdConverter
-import pen.net.kad.utils.KInetAddressConverter
+import pen.eco.Convertable
 
 /** A Node in the Kademlia network - Contains basic node network information. */
 class KNode () : Convertable
@@ -41,6 +39,4 @@ class KNode () : Convertable
 
    override fun hashCode() = nodeId.hashCode()
    override fun toString () = nodeId.shortName()
-
-   override fun getConverters () = arrayOf( KNodeIdConverter(), KInetAddressConverter() )
 }
