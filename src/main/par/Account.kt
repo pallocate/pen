@@ -5,7 +5,7 @@ import pen.eco.Crypto
 import pen.net.Message
 
 /** User serializable data. */
-class Savable : Serializable
+class Account : Serializable
 {
    /** The different roles in the economy the user has. */
    val roles                                    = ArrayList<Role>()

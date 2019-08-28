@@ -6,7 +6,7 @@ import pen.eco.types.PlaceHolder
 interface PasswordProvider
 { fun password () : String }
 class NoPasswordProvider : PasswordProvider, PlaceHolder
-{ override fun password () = string( "NoPasswordProvider.password()" ) }
+{ override fun password () = string( "NoPasswordProvider" ) }
 
 interface Identifiable
 { val id : Long }

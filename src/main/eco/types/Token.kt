@@ -20,7 +20,7 @@ class KIssuedToken (id : Long, value : Int, issuer : Long, issuenceSignature : B
 Token( id, value, Constants.VERSION, epoch_second(), issuer, issuenceSignature )
 {
    init
-   {Log.debug( "Token issued [$id]" )}
+   {Log.debug( "token issued [$id]" )}
 
    /** Sets the public key of the user of the token. */
    fun defineUser (publicKey : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : Token
@@ -31,7 +31,7 @@ Token( id, value, Constants.VERSION, epoch_second(), issuer, issuenceSignature )
                   KCreditToken( this, publicKey, signature )
                else
                {
-                  Log.warn( "define user failed! (should be in USABLE state)" )
+                  Log.warn( "define user failed!" )
                   NoToken()
                }
    }
@@ -43,19 +43,19 @@ Token( ist.id, ist.value, ist.version, ist.timestamp, ist.issuer, ist.issuenceSi
 userKey, userKeySignature )
 {
    init
-   {Log.debug( "token usable" )}
+   {Log.debug( "token usable [$id]" )}
 
    /** Sets the account of the token and sets the state to USED. */
    fun use (productID : Long, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : Token
    {
-      Log.debug( "using token" )
+      Log.debug( "using token [$id]" )
       val signature = Crypto.signatureOf(encodeLong( productID ), passwordProvider, pkc_salt)
 
       return   if (signature.size == Crypto.publicSigningKeySize())
                   KUsedToken( this, productID, signature )
                else
                {
-                  Log.warn( "use token failed! (should be in USABLE state)" )
+                  Log.warn( "use token failed!" )
                   NoToken()
                }
    }
@@ -68,13 +68,13 @@ ct.userKeySignature, account, accountSignature )
 {
    fun account (userKey : ByteArray) : Token
    {
-      Log.debug( "accounting token" )
+      Log.debug( "accounting token [$id]" )
 
       return   if (Crypto.verifySignatureOf( encodeLong( account ), accountSignature, userKey ))
                   KAccountedToken( this )
                else
                {
-                  Log.warn( "accounting token failed! (signature verification failiure)" )
+                  Log.warn( "accounting token failed!" )
                   NoToken()
                }
    }
@@ -85,7 +85,7 @@ class KAccountedToken (ut : KUsedToken) : Token( ut.id, ut.value, ut.version, ut
 ut.issuer, ut.issuenceSignature, ut.userKey, ut.userKeySignature, ut.account, ut.accountSignature)
 {
    init
-   {Log.debug( "token accounted" )}
+   {Log.debug( "token accounted [$id]" )}
 }
 // val issuenceData = encodeLong( id ) + encodeInt( value ) + encodeLong( issuer ) + encodeLong( timestamp )
 // issuenceSignature = Crypto.signatureOf( issuenceData, passwordProvider, pkc_salt )

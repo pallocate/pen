@@ -14,9 +14,9 @@ expect fun sodiumInstance () : Sodium
 object Crypto : Loggable
 {
    private val sodium = sodiumInstance()
-   private val B64_SIGN_BYTES = if (Constants.SIGN_BYTES%3 == 1) 4*((Constants.SIGN_BYTES + 2)/3) else
-   if (Constants.SIGN_BYTES%3 == 2) 4*((Constants.SIGN_BYTES + 1)/3) else 4*(Constants.SIGN_BYTES/3)
    private val SIGNAGE_LABEL = byteArrayOf( 0x0A, 0x53, 0x69, 0x67, 0x6E, 0x61, 0x74, 0x75, 0x72, 0x65, 0x3A )
+   private val B64_SIGN_BYTES = 4 * if (Constants.SIGN_BYTES%3 == 1) (Constants.SIGN_BYTES + 2)/3 else
+   if (Constants.SIGN_BYTES%3 == 2) (Constants.SIGN_BYTES + 1)/3 else Constants.SIGN_BYTES/3
 
    /** Generates high entropy pseudo random bytes.
      * @param number The number of bytes to be generated.

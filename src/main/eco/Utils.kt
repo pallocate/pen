@@ -52,7 +52,7 @@ object Utils : Loggable
       var ret = ""
 
       try
-      { byteArrayToString(encode_b64( input )) }
+      { ret = byteArrayToString(encode_b64( input )) }
       catch (t : Throwable)
       { log( "Encoding Base64 failed!", Config.flag( "PLATFORM" ), LogLevel.ERROR) }
 

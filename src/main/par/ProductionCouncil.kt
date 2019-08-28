@@ -3,7 +3,6 @@ package pen.par
 import pen.eco.Log
 import pen.eco.types.PasswordProvider
 import pen.net.Network
-import pen.eco.types.Choise
 import pen.eco.types.KIssuedToken
 
 /** A production council in the economy. */

@@ -17,9 +17,10 @@ import pen.eco.types.KMerkleNode
 |_0 1 3  5 7   9 11  13 15  17 19  21  23  25  27  29  31 _|
   ^
   Index zero is not used. */
+
+/* TODO: imutabillity or freeze() or ThreadLocal */
 open class KMerkleTree : Loggable
 {
-   /* TODO: imutabillity or freeze() or ThreadLocal */
    var storage : Array<MerkleNode> = arrayOf( NoMerkleNode(), NoMerkleNode(), KMerkleNode(), NoMerkleNode() )
    var rootIdx = 2                                                              // Root index
    var lastIdx = -1                                                             // Index of last added leaf

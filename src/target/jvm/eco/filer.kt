@@ -28,14 +28,16 @@ object KlaxonFactory
    }
 }
 
-actual object Filer
+actual object Filer : Loggable
 {
+   val EXTENSION = ".json"
+
    actual inline fun <reified T : Filable>read (name : String) : Filable
    {
-      Log.debug({ "Filer- reading object" }, Config.flag( "SERIALIZE" ))
+      log( "reading object", Config.flag( "SAVE_LOAD" ))
 
       val klaxon = KlaxonFactory.forClass( T::class.simpleName )
-      val fileReader = FileReader( "${name}.json" )
+      val fileReader = FileReader( name + EXTENSION )
       var parseResult : T? = null
 
       try
@@ -43,25 +45,26 @@ actual object Filer
          parseResult = klaxon.parse<T>( fileReader )
       }
       catch (e : Exception)
-      {Log.err( "Filer- Klaxon failed! ${e.message}" )}
+      {log( "Klaxon failed! ${e.message}", true, LogLevel.ERROR )}
 
       return if (parseResult != null)
                 parseResult
              else
              {
-                Log.warn( "Serializer- reading object failed!" )
+                log("reading object failed!", Config.flag( "SAVE_LOAD" ), LogLevel.WARN)
                 NoFilable()
              }
    }
 
    actual fun write (filable : Filable, name : String)
    {
-      Log.debug({ "Filer- writing object" }, Config.flag( "SERIALIZE" ))
+      log("writing object", Config.flag( "SAVE_LOAD" ))
 
       val klaxon = KlaxonFactory.forClass( filable::class.simpleName )
-      val fileWriter = FileWriter( "${name}.json" )
+      val fileWriter = FileWriter( name + EXTENSION )
 
       fileWriter.write(klaxon.toJsonString( filable ))
       fileWriter.close()
    }
+   override fun originName () = "Filer"
 }

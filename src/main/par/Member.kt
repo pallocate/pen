@@ -2,10 +2,11 @@ package pen.par
 
 import java.io.Serializable
 import pen.eco.Log
+import pen.eco.Crypto
 import pen.eco.types.PasswordProvider
 import pen.net.Message
 import pen.net.Network
-import pen.eco.types.Block
+import pen.eco.types.proposal.KProposal
 import pen.eco.types.KCreditToken
 
 /** A member of a council. */
@@ -18,17 +19,18 @@ abstract class Member () : Participant(), Serializable
    /** History of submitted proposals. */
    val submitHistory = ArrayList<String>()
 
-   /** Submits a proposal(Block) to the council. */
-   fun submit (proposal : Block, passwordProvider : PasswordProvider) : Message
+   /** Submits a proposal to the council. */
+   fun submit (proposal : KProposal, passwordProvider : PasswordProvider) : Message
    {
       Log.debug( "Submitting proposal" )
-      // TODO: Proposal signing is now in plugins
-      //val signedProposal = proposal.signed( passwordProvider, me.pkcSalt() )
-      val signedProposal = ByteArray( 0 )
-      val message = Message( signedProposal, me.contact.contactID, councilContact.contactID, passwordProvider, me.pkcSalt(), councilContact.publicKey )
 
+      val plainText = proposal.toString().toByteArray()
+      val salt = me.pkcSalt()
+      val signedText = plainText + Crypto.signText( plainText, passwordProvider, salt )
+
+      val message = Message( signedText, me.contact.contactID, councilContact.contactID, passwordProvider, me.pkcSalt(), councilContact.publicKey )
       Network.send( message )
-      submitHistory.add( proposal.progression() )
+      submitHistory.add( proposal.header.progression() )
 
       return message
    }
@@ -75,8 +77,8 @@ open class Consumer : Member(), Serializable
    override var icon = Constants.ICONS_DIR + "system-software-install.png"
 
    /** Pays for a product using token. */
-//   fun pay (productID : Long, token : KToken, passwordProvider : PasswordProvider, pkc_salt : ByteArray) =
-//    token.use( productID, passwordProvider, pkc_salt )
+   fun pay (productID : Long, creditToken : KCreditToken, passwordProvider : PasswordProvider, pkc_salt : ByteArray) =
+    creditToken.use( productID, passwordProvider, pkc_salt )
 }
 
 /** A producer in the economy. */
