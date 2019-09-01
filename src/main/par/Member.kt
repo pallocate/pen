@@ -2,7 +2,6 @@ package pen.par
 
 import java.io.Serializable
 import pen.eco.Log
-import pen.eco.Crypto
 import pen.eco.types.PasswordProvider
 import pen.net.Message
 import pen.net.Network
@@ -24,11 +23,10 @@ abstract class Member () : Participant(), Serializable
    {
       Log.debug( "Submitting proposal" )
 
-      val plainText = proposal.toString().toByteArray()
       val salt = me.pkcSalt()
-      val signedText = plainText + Crypto.signText( plainText, passwordProvider, salt )
+      val signedProposal = proposal.signed( passwordProvider, salt )
+      val message = Message( signedProposal, me.contact.contactID, councilContact.contactID, passwordProvider, salt, councilContact.publicKey )
 
-      val message = Message( signedText, me.contact.contactID, councilContact.contactID, passwordProvider, me.pkcSalt(), councilContact.publicKey )
       Network.send( message )
       submitHistory.add( proposal.header.progression() )
 

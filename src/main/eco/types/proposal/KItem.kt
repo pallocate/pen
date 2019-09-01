@@ -2,9 +2,9 @@ package pen.eco.types.proposal
 
 data class KItem (
                      /** Product id */
-                     open val id : Long = 0L,
+                     val id : Long = 0L,
                      /** Quantity */
-                     open val qty : Long= 0L
+                     val qty : Long= 0L
                   )
 {
    /** Encodes item to text. */
