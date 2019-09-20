@@ -1,18 +1,23 @@
 package pen.eco
 
 import java.net.InetAddress
+import java.util.Base64
+import java.security.MessageDigest
 import com.beust.klaxon.JsonValue
 import com.beust.klaxon.Converter
 import pen.eco.Utils
 
 class KByteArrayConverter : Converter
 {
-   override fun canConvert (cls : Class<*>) = cls == ByteArray::class.java
+   override fun canConvert (cls : Class<*>) = (cls == ByteArray::class.java)
    override fun toJson (value : Any) : String
    {
       var ret = ""
       if (value is ByteArray)
+      {
          ret = "{ \"bytes\" : \"${Utils.encodeB64( value )}\" }"
+         pen.eco.Log.err( "Encoded value: " +  value )
+      }
 
       return ret
    }
@@ -22,7 +27,7 @@ class KByteArrayConverter : Converter
 
 class KInetAddressConverter : Converter
 {
-   override fun canConvert (cls : Class<*>) = cls == InetAddress::class.java
+   override fun canConvert (cls : Class<*>) = (cls == InetAddress::class.java)
    override fun toJson (value : Any) : String
    {
       var ret = ""

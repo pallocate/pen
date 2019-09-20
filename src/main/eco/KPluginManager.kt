@@ -38,7 +38,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
       var ret : Plugin = NoPlugin()
 
       /* Only permitting 10 dependency levels(to avoid dependency cycles). */
-      if (recursiveDepth <= 10)
+      if (recursiveDepth < 10)
       {
          val requstedName = requestedPlugInfo.name
          val className = supportedPlugins.get( requstedName )                   // Lookup the plugin class name
@@ -78,7 +78,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
          }
       }
       else
-         log( "dependency cycle detected!", Config.flag( "PLUGIN_MANAGER" ), WARN )
+         log( "possible dependency cycle detected!", Config.flag( "PLUGIN_MANAGER" ), WARN )
 
       return ret
    }

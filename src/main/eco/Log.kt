@@ -28,7 +28,7 @@ interface Loggable
 object Log
 {
    /** At what minimum level to log events. */
-   var level = LogLevel.WARN
+   var level = LogLevel.DEBUG
 
    /** @param confirmation Confirms conditional logging. */
    fun debug (messageFunction : () -> String, confirmation : Boolean = true)

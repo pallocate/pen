@@ -1,9 +1,10 @@
 package pen.eco.types.proposal
 
 import pen.eco.Crypto
+import pen.eco.Utils
 import pen.eco.types.PasswordProvider
 
-abstract class Proposal (open val header : KHeader = KHeader()) {}
+sealed class Proposal (open val header : KHeader = KHeader()) {}
 
 class KProposal (header : KHeader, val items : List<KItem>) : Proposal( header )
 {
@@ -20,7 +21,7 @@ class KProposal (header : KHeader, val items : List<KItem>) : Proposal( header )
    /** Returns the proposal signed as a array of bytes. */
    fun signed (passwordProvider : PasswordProvider, salt : ByteArray) : ByteArray
    {
-      val plainText = toString().toByteArray()
+      val plainText = Utils.stringToByteArray( toString() )
       return Crypto.signText( plainText, passwordProvider, salt )
    }
 }

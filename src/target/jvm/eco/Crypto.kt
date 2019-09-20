@@ -1,28 +1,20 @@
 package pen.eco
 
-import pen.eco.Constants
-import pen.eco.Config
-import pen.eco.Loggable
 import pen.eco.LogLevel.WARN
 import pen.eco.LogLevel.ERROR
 import pen.eco.types.PasswordProvider
 import pen.eco.types.NoPasswordProvider
 
-expect fun sodiumInstance () : Sodium
-
-/** Cryptographic functionallity, using the Sodium library. */
-object Crypto : Loggable
+actual object Crypto : Loggable
 {
    private val sodium = sodiumInstance()
    private val SIGNAGE_LABEL = byteArrayOf( 0x0A, 0x53, 0x69, 0x67, 0x6E, 0x61, 0x74, 0x75, 0x72, 0x65, 0x3A )
    private val B64_SIGN_BYTES = 4 * if (Constants.SIGN_BYTES%3 == 1) (Constants.SIGN_BYTES + 2)/3 else
    if (Constants.SIGN_BYTES%3 == 2) (Constants.SIGN_BYTES + 1)/3 else Constants.SIGN_BYTES/3
 
-   /** Generates high entropy pseudo random bytes.
-     * @param number The number of bytes to be generated.
-     * @return The output bytes. */
-   fun randomBytes (number : Int) : ByteArray
+   actual fun randomBytes (number : Int) : ByteArray
    {
+      log("Generating random bytes..", Config.flag( "CRYPTO" ))
       sodium.sodium_init()
       val ret = ByteArray( number )
       sodium.randombytes_buf( ret, number )
@@ -30,10 +22,7 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Does a digest of input.
-     * Algorithm: BLAKE2b
-     * @return The hash. */
-   fun digest (input : ByteArray) : ByteArray
+   actual fun digest (input : ByteArray) : ByteArray
    {
       sodium.sodium_init()
       var output = ByteArray( Constants.HASH_BYTES )
@@ -43,13 +32,9 @@ object Crypto : Loggable
       return output
    }
 
-   /** Signs a text with a base64 encoded signature at the end.
-     * Algorithm: Ed25519
-     * @param text The text to be signed.
-     * @return The text with an added signature. */
-   fun signText (text : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
+   actual fun signText (text : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
-      log("Signing text", Config.flag( "CRYPTO" ))
+      log("Signing text..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val secretKey = getKey( passwordProvider, pkc_salt, this::privateKey )
 
@@ -60,7 +45,7 @@ object Crypto : Loggable
          if (sodium.crypto_sign_ed25519_detached( signature, 0L, text, text.size.toLong(), secretKey ) != 0)
             log("Text signing failed!", Config.flag( "CRYPTO" ), WARN)
          else
-            ret = text + SIGNAGE_LABEL + encode_b64( signature )
+            ret = text + SIGNAGE_LABEL + Utils.encodeB64( signature ).toByteArray()
       }
       else
          log("Text signing failed! (invalid key/input)", Config.flag( "CRYPTO" ), WARN)
@@ -68,14 +53,9 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Verifies text using signature message from the end, which is then stripped off.
-     * Algorithm: Ed25519
-     * @param signedText The signed text to be verified.
-     * @param othersPublicKey The senders public key.
-     * @return The original text. */
-   fun verifyText (signedText : ByteArray, othersPublicKey : ByteArray) : ByteArray
+   actual fun verifyText (signedText : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
-      log("Verifying text", Config.flag( "CRYPTO" ))
+      log("Verifying text..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       sodium.sodium_init()
 
@@ -89,7 +69,7 @@ object Crypto : Loggable
 
          var signature = ByteArray( 0 )
          try
-         { signature = decode_b64( signatureBase64 ) }
+         { signature = Utils.decodeB64(String( signatureBase64 )) }
          catch (t : Throwable)
          { log("Decoding Base64 failed!" , Config.flag( "PLATFORM" ), ERROR) }
 
@@ -104,13 +84,9 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Returns only the signature of the input.
-     * Algorithm: Ed25519
-     * @param input The data to calculate signature from.
-     * @return The signature. */
-   fun signatureOf (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
+   actual fun signatureOf (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
-      log("Generating a signature from input", Config.flag( "CRYPTO" ))
+      log("Generating a signature from input..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val secretKey = getKey( passwordProvider, pkc_salt, this::privateKey )
 
@@ -129,13 +105,7 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Verifies some signed data.
-     * Algorithm: Ed25519
-     * @param input The data that was signed.
-     * @param signature The signature of the data.
-     * @param othersPublicKey The signers public key.
-     * @return True if signature matches. */
-   fun verifySignatureOf (input : ByteArray, signature : ByteArray, othersPublicKey : ByteArray) : Boolean
+   actual fun verifySignatureOf (input : ByteArray, signature : ByteArray, othersPublicKey : ByteArray) : Boolean
    {
       log("Verifying signature..", Config.flag( "CRYPTO" ))
       var success = false
@@ -154,13 +124,9 @@ object Crypto : Loggable
       return success
    }
 
-   /** Signs a binary message.
-     * Algorithm: Ed25519
-     * @param binary The binary to be signed.
-     * @return The signed binary. */
-   fun signBinary (binary : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
+   actual fun signBinary (binary : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
-      log("Signing binary", Config.flag( "CRYPTO" ))
+      log("Signing binary..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val secretKey = getKey( passwordProvider, pkc_salt, this::privateKey )
 
@@ -177,14 +143,9 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Verifies a signed binary message.
-     * Algorithm: Ed25519
-     * @param signedBinary The signed message.
-     * @param othersPublicKey The senders public key.
-     * @return The original binary. */
-   fun verifyBinary (signedBinary : ByteArray, othersPublicKey : ByteArray) : ByteArray
+   actual fun verifyBinary (signedBinary : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
-      log("Verifying binary", Config.flag( "CRYPTO" ))
+      log("Verifying binary..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val mSize = signedBinary.size - sodium.crypto_sign_ed25519_bytes()
       sodium.sodium_init()
@@ -205,13 +166,9 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Performes a symetric encryption of the plain text, and puts the used nonce in the beginning.
-     * Algorithm: XSalsa20, Poly1305 MAC
-     * @param plainText The plain text to be encrypted.
-     * @return The nonce plus the cipher text. */
-   fun encrypt (plainText : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
+   actual fun encrypt (plainText : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
    {
-      log("Encrypting", Config.flag( "CRYPTO" ))
+      log("Encrypting..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val key = getKey( passwordProvider, skc_salt, this::symetricKey )
 
@@ -234,13 +191,9 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Does a symetric decryption of the input.
-     * Algorithm: XSalsa20, Poly1305 MAC
-     * @param input Input made up by nonce plus cipher text.
-     * @return The original plain text. */
-   fun decrypt (input : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
+   actual fun decrypt (input : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
    {
-      log("Decrypting", Config.flag( "CRYPTO" ))
+      log("Decrypting..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val nonceSize = (sodium.crypto_secretbox_noncebytes() as Number).toInt()
       val plainTextSize = (input.size - (sodium.crypto_secretbox_macbytes() as Number).toInt()) - nonceSize
@@ -264,14 +217,9 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Encrypts plain text using public key cryptography.
-     * Algorithm: X25519, XSalsa20, Poly1305 MAC
-     * @param plainText The plain text to be encrypted.
-     * @param othersPublicKey The recievers public key.
-     * @return The nonce plus the cipher text. */
-   fun pkcEncrypt (plainText : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
+   actual fun pkcEncrypt (plainText : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
-      log("PKC encrypting", Config.flag( "CRYPTO" ))
+      log("PKC encrypting..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val secretKey = getKey( passwordProvider, pkc_salt, this::privateKey )
 
@@ -296,12 +244,7 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Decrypts input using public key cryptography.
-     * Algorithm: X25519, XSalsa20, Poly1305 MAC
-     * @param input Input made up by nonce plus cipher text.
-     * @param othersPublicKey The senders public key.
-     * @return The original plain text. */
-   fun pkcDecrypt (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
+   actual fun pkcDecrypt (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
       log("PKC decrypting..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
@@ -329,15 +272,13 @@ object Crypto : Loggable
       return ret
    }
 
-   /** The key size requiered by the ed25519 signing algorithm. */
-   fun publicSigningKeySize () = (sodium.crypto_sign_ed25519_publickeybytes() as Number).toInt()
-   /** The salt size requiered in the password based key derivation. */
-   fun saltSize () = sodium.crypto_pwhash_saltbytes()
+   actual fun publicSigningKeySize () = (sodium.crypto_sign_ed25519_publickeybytes() as Number).toInt()
+   actual fun saltSize () = sodium.crypto_pwhash_saltbytes()
    override fun originName () = "Crypto"
 
-   /** generates a symetric key from a password and salt */
    private fun symetricKey (password : ByteArray, salt : ByteArray) : ByteArray
    {
+      log("Generating symetric key..", Config.flag( "CRYPTO" ))
       val symKeySize = (sodium.crypto_secretbox_keybytes() as Number).toInt()
       var ret = ByteArray( symKeySize )
 
@@ -348,9 +289,9 @@ object Crypto : Loggable
       return ret
    }
 
-   /** generates a private key from a password and salt */
    private fun privateKey (password : ByteArray, salt : ByteArray) : ByteArray
    {
+      log("Generating private key..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val seedSize = (sodium.crypto_sign_seedbytes() as Number).toInt()
       val seed = ByteArray( seedSize )
@@ -370,9 +311,9 @@ object Crypto : Loggable
       return ret
    }
 
-   /** generates a public key from a password and salt */
-   fun publicKey (password : ByteArray, salt : ByteArray) : ByteArray
+   actual fun publicKey (password : ByteArray, salt : ByteArray) : ByteArray
    {
+      log("Generating public key..", Config.flag( "CRYPTO" ))
       var ret = ByteArray( 0 )
       val seedSize = (sodium.crypto_sign_seedbytes() as Number).toInt()
       val seed = ByteArray( seedSize )
@@ -392,11 +333,7 @@ object Crypto : Loggable
       return ret
    }
 
-   /** Intiates the sodium library object. Gets a password from the provider,
-     * and uses this in the supplied key function.
-     * @param passwordProvider The PasswordProvider to use.
-     * @param salt Salt to use in key function. */
-   fun getKey (passwordProvider : PasswordProvider, salt : ByteArray, keyFunction : (ByteArray, ByteArray) -> ByteArray) : ByteArray
+   actual fun getKey (passwordProvider : PasswordProvider, salt : ByteArray, keyFunction : (ByteArray, ByteArray) -> ByteArray) : ByteArray
    {
       var ret = ByteArray( 0 )
 
@@ -405,7 +342,7 @@ object Crypto : Loggable
       else
          if (validateSaltSize( salt ))
          {
-            val password = Utils.stringToByteArray( passwordProvider.password() )
+            val password = passwordProvider.password().toByteArray()
 
             if (password.size == 0)
                log("Invalid password!", Config.flag( "CRYPTO" ), WARN)

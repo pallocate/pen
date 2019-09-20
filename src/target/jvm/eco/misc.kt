@@ -4,8 +4,6 @@ import java.lang.System
 import java.io.File
 import java.io.FileReader
 import java.util.Properties
-import java.util.Base64
-import java.security.MessageDigest
 import pen.eco.types.Plugin
 import pen.eco.types.NoPlugin
 

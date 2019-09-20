@@ -1,5 +1,6 @@
 package pen.eco
 
+/** Should derive a short five letter name for debugging. */
 expect fun encode_b64 (bytes : ByteArray) : ByteArray
 expect fun decode_b64 (encoded : ByteArray) : ByteArray
 expect fun hash_md5 (bytes : ByteArray) : ByteArray
@@ -31,6 +32,55 @@ object Utils : Loggable
       return ret
    }
 
+   /** Calculates two to the power of something. */
+   fun pow2 (exponent : Int) : Int
+   {
+      var ret = 0
+
+      if (exponent >= 0)
+      {
+         ret = 1
+         for (n in 1..exponent)
+            ret *= 2
+      }
+
+      return ret
+   }
+
+   fun stringToByteArray (string : String) : ByteArray
+   {
+      val charArray = string.toCharArray()
+      val arraySize = charArray.size
+      val byteArray = ByteArray( arraySize )
+
+      for (a in 0 until arraySize)
+         byteArray[a] = charArray[a].toByte()
+
+      return byteArray
+   }
+
+   fun byteArrayToString (byteArray : ByteArray) : String
+   {
+      val arraySize = byteArray.size
+      val charArray = CharArray( arraySize )
+      for (a in 0 until arraySize)
+      {
+         val byte = byteArray[a]
+         charArray[a] = if (byte < 128) byte.toChar() else 0.toChar()
+      }
+
+      return String( charArray )
+   }
+
+   /** Returns a small name/id, useful for debugging. */
+   fun shortName (input : ByteArray) : String
+   {
+      val hash = hash_md5( input )
+      val b64 = encodeB64( hash )
+
+      return b64.substring( 0, 5 )
+   }
+
    /** Convertes a Base64 encoded String to a ByteArray. */
    fun decodeB64 (encoded : String) : ByteArray
    {
@@ -59,55 +109,7 @@ object Utils : Loggable
       return ret
    }
 
-   /* TODO: Handle ecoding */
-   fun stringToByteArray (string : String) : ByteArray
-   {
-      val charArray = string.toCharArray()
-      val arraySize = charArray.size
-      val byteArray = ByteArray( arraySize )
-
-      for (a in 0 until arraySize)
-         byteArray[a] = charArray[a].toByte()
-
-      return byteArray
-   }
-
-   /* TODO: Handle ecoding */
-   fun byteArrayToString (byteArray : ByteArray) : String
-   {
-      val arraySize = byteArray.size
-      val charArray = CharArray( arraySize )
-      for (a in 0 until arraySize)
-         charArray[a] = byteArray[a].toChar()
-
-      return String( charArray )
-   }
-
-   /** Returns a small name/id, useful for debugging. */
-   fun shortName (input : ByteArray) : String
-   {
-      val hash = hash_md5( input )
-      val b64 = encodeB64( hash )
-
-      return b64.substring( 0, 5 )
-   }
-
-   /** Calculates two to the power of something. */
-   fun pow2 (exponent : Int) : Int
-   {
-      var ret = 0
-
-      if (exponent >= 0)
-      {
-         ret = 1
-         for (n in 1..exponent)
-            ret *= 2
-      }
-
-      return ret
-   }
-
-   /** Returns a valid String. */
+   /** Returns a String(non-null). */
    fun safeString (string : String?) = if (string == null) "" else string
 
    /** Convertes String to a valid Int. */

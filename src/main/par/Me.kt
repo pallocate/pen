@@ -19,13 +19,8 @@ class Me (val contact : Contact = Contact()) : Serializable
       var ret : ByteArray
 
       if (contact.publicKey.size != Crypto.publicSigningKeySize())
-      {
-         Log.debug( "Creating public key" )
-         if (passwordProvider is NoPasswordProvider)
-            Log.warn( "Public key creation failed! (invalid password provider)" )
-         else
-            contact.publicKey = Crypto.publicKey( passwordProvider.password().toByteArray(), pkcSalt() )
-      }
+         contact.publicKey = Crypto.getKey( passwordProvider, pkcSalt(), Crypto::publicKey )
+
       ret = contact.publicKey
 
       return ret
