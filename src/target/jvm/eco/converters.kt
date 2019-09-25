@@ -1,8 +1,6 @@
 package pen.eco
 
 import java.net.InetAddress
-import java.util.Base64
-import java.security.MessageDigest
 import com.beust.klaxon.JsonValue
 import com.beust.klaxon.Converter
 import pen.eco.Utils

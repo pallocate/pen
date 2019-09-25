@@ -4,9 +4,7 @@ import pen.eco.Crypto
 import pen.eco.Utils
 import pen.eco.types.PasswordProvider
 
-sealed class Proposal (open val header : KHeader = KHeader()) {}
-
-class KProposal (header : KHeader, val items : List<KItem>) : Proposal( header )
+class KProposal (val header : KHeader = KHeader(), val items : List<KItem>)
 {
    override fun toString () : String
    {

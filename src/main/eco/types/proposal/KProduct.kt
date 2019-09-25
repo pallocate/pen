@@ -51,8 +51,9 @@ open class KProduct  (
 
       ret += "Id:         ${id}\n"
       ret += "Name:       ${name}\n"
-      ret += "Desc:       ${desc}\n"
 
+      if (name.length > 0)
+         ret += "Desc:       ${desc}\n"
       if (amount != 0F)
          ret += "Amount:     ${amount}\n"
       if (prefix != "" && prefix != "None")

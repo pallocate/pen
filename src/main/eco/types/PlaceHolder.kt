@@ -12,6 +12,8 @@ interface PlaceHolder
       return value as T
    }
 
+   fun any (msg : String?, returnValue : Any) = logDebug<Any>( msg, returnValue )
+
    fun unit (msg : String?) = logDebug<Unit>( msg, Unit )
 
    fun boolean (msg : String?, returnValue : Boolean = false) = logDebug<Boolean>( msg, returnValue )

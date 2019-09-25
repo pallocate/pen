@@ -3,7 +3,7 @@ package pen.par
 import pen.eco.Log
 import pen.eco.types.PasswordProvider
 import pen.net.Network
-import pen.eco.types.KIssuedToken
+import pen.net.bc.mt.KIssuedToken
 
 /** A production council in the economy. */
 class ProductionCouncil : Council()

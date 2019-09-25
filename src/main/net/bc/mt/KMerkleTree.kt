@@ -1,12 +1,9 @@
-package pen.eco
+package pen.net.bc.mt
 
 import pen.eco.Loggable
 import pen.eco.Config
 import pen.eco.Crypto
 import pen.eco.types.Hashable
-import pen.eco.types.MerkleNode
-import pen.eco.types.NoMerkleNode
-import pen.eco.types.KMerkleNode
 
 /** A simple binary indexed merkle tree implementation, uses an array as backing structure. The initial capacity is two MerkleLeaf´s. *//*
  _                                                        _

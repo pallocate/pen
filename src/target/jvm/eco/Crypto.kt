@@ -5,6 +5,7 @@ import pen.eco.LogLevel.ERROR
 import pen.eco.types.PasswordProvider
 import pen.eco.types.NoPasswordProvider
 
+/** Cryptographic functionallity, using the Sodium library. */
 actual object Crypto : Loggable
 {
    private val sodium = sodiumInstance()
@@ -22,6 +23,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using BLAKE2b alorithm from the Sodium library. */
    actual fun digest (input : ByteArray) : ByteArray
    {
       sodium.sodium_init()
@@ -32,6 +34,7 @@ actual object Crypto : Loggable
       return output
    }
 
+   /** Using Ed25519 alorithm from the Sodium library. */
    actual fun signText (text : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
       log("Signing text..", Config.flag( "CRYPTO" ))
@@ -53,6 +56,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using Ed25519 alorithm from the Sodium library. */
    actual fun verifyText (signedText : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
       log("Verifying text..", Config.flag( "CRYPTO" ))
@@ -84,6 +88,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using Ed25519 alorithm from the Sodium library. */
    actual fun signatureOf (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
       log("Generating a signature from input..", Config.flag( "CRYPTO" ))
@@ -105,6 +110,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using Ed25519 alorithm from the Sodium library. */
    actual fun verifySignatureOf (input : ByteArray, signature : ByteArray, othersPublicKey : ByteArray) : Boolean
    {
       log("Verifying signature..", Config.flag( "CRYPTO" ))
@@ -124,6 +130,7 @@ actual object Crypto : Loggable
       return success
    }
 
+   /** Using Ed25519 alorithm from the Sodium library. */
    actual fun signBinary (binary : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
    {
       log("Signing binary..", Config.flag( "CRYPTO" ))
@@ -143,6 +150,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using Ed25519 alorithm from the Sodium library. */
    actual fun verifyBinary (signedBinary : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
       log("Verifying binary..", Config.flag( "CRYPTO" ))
@@ -166,6 +174,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using XSalsa20 and Poly1305 MAC alorithm from the Sodium library. */
    actual fun encrypt (plainText : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
    {
       log("Encrypting..", Config.flag( "CRYPTO" ))
@@ -191,6 +200,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using XSalsa20 and Poly1305 MAC alorithm from the Sodium library. */
    actual fun decrypt (input : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
    {
       log("Decrypting..", Config.flag( "CRYPTO" ))
@@ -217,6 +227,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using X25519, XSalsa20 and Poly1305 MAC alorithm from the Sodium library. */
    actual fun pkcEncrypt (plainText : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
       log("PKC encrypting..", Config.flag( "CRYPTO" ))
@@ -244,6 +255,7 @@ actual object Crypto : Loggable
       return ret
    }
 
+   /** Using X25519, XSalsa20 and Poly1305 MAC alorithm from the Sodium library. */
    actual fun pkcDecrypt (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
       log("PKC decrypting..", Config.flag( "CRYPTO" ))

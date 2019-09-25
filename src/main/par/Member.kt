@@ -6,7 +6,7 @@ import pen.eco.types.PasswordProvider
 import pen.net.Message
 import pen.net.Network
 import pen.eco.types.proposal.KProposal
-import pen.eco.types.KCreditToken
+import pen.net.bc.mt.KCreditToken
 
 /** A member of a council. */
 abstract class Member () : Participant(), Serializable

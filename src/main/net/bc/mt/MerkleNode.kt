@@ -1,4 +1,4 @@
-package pen.eco.types
+package pen.net.bc.mt
 
 /** A node in a merkle tree. */
 interface MerkleNode
