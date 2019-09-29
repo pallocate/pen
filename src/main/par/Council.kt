@@ -14,6 +14,14 @@ class ConsumptionCouncil : Council()
    override var icon = Constants.ICONS_DIR + "applications-development.png"
 }
 
+/** A production council in the economy. */
+class ProductionCouncil : Council()
+{
+   override var name = "Production council"
+   override var icon = Constants.ICONS_DIR + "applications-development.png"
+   var issuedCredits = 0
+}
+
 /** A council in the economy. */
 abstract class Council : Participant(), Serializable
 {

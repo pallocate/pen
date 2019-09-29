@@ -9,9 +9,9 @@ import pen.eco.types.PasswordProvider
 
 expect fun epoch_second () : Long
 
-sealed class Token (val id : Long, val value : Int, val version : Int, val timestamp : Long,
-val issuer : Long, val issuenceSignature : ByteArray, val userKey : ByteArray = ByteArray( 0 ),
-val userKeySignature : ByteArray = ByteArray( 0 ), val account : Long = 0L, val accountSignature : ByteArray = ByteArray( 0 ))
+sealed class Token (val id : Long, val value : Int, val version : Int, val timestamp : Long, val issuer : Long,
+val issuenceSignature : ByteArray, val userKey : ByteArray = ByteArray( 0 ), val userKeySignature : ByteArray =
+ByteArray( 0 ), val account : Long = 0L, val accountSignature : ByteArray = ByteArray( 0 ))
 
 class NoToken : Token(0L, 0, 0, 0L, 0L, ByteArray( 0 ))
 
