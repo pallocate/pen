@@ -14,7 +14,7 @@ import pen.eco.LogLevel.ERROR
 import pen.eco.Loggable
 import pen.eco.Filer
 import pen.eco.Filable
-import pen.eco.create_dir
+import pen.eco.createDir
 import pen.eco.Constants
 import pen.eco.Config
 import pen.net.kad.Constants as KadConstants
@@ -96,7 +96,7 @@ class KKademliaNode () : Filable, Loggable
             append( subDir )
          }
          val dirName = stringBuilder.toString()
-         create_dir( dirName )
+         createDir( dirName )
 
          return stringBuilder.toString()
       }

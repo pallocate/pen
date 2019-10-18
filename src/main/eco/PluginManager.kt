@@ -7,7 +7,7 @@ import pen.eco.types.Plugin
 import pen.eco.types.KPluginInfo
 import pen.eco.types.NoPlugin
 
-expect fun plugin_instance (className : String) : Plugin
+expect fun pluginInstance (className : String) : Plugin
 
 interface PluginManager
 { val plugins: Map<String, Plugin> }
@@ -47,7 +47,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
             log( "plugin not supported \"${requestedPlugInfo}\"", true, ERROR )
          else
          {
-            val plugin = plugin_instance( className )                           // Try to create a plugin from the class name
+            val plugin = pluginInstance( className )                           // Try to create a plugin from the class name
             if (plugin !is NoPlugin)
             {
                /* Check that the version of the plugin instance is acceptable. */

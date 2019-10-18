@@ -5,7 +5,7 @@ import pen.eco.Log
 import pen.eco.types.PasswordProvider
 import pen.net.Message
 import pen.net.Network
-import pen.eco.types.proposal.KProposal
+import pen.eco.types.KProposal
 import pen.net.bc.mt.KCreditToken
 
 /** A member of a council. */

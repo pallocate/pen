@@ -15,7 +15,7 @@ actual fun encode_b64 (bytes : ByteArray) = Base64.getEncoder().encode( bytes )
 actual fun decode_b64 (encoded : ByteArray) = Base64.getDecoder().decode( encoded )
 actual fun hash_md5 (bytes : ByteArray) = MessageDigest.getInstance( "MD5" ).digest( bytes )
 
-actual fun plugin_instance (className : String) : Plugin
+actual fun pluginInstance (className : String) : Plugin
 {
    var tmp : Any = NoPlugin()
 
@@ -32,7 +32,7 @@ actual fun plugin_instance (className : String) : Plugin
             }
 }
 
-actual fun create_dir (path : String)
+actual fun createDir (path : String)
 {
    Log.debug( {"creating directory $path"}, Config.flag( "FILES" ))
 

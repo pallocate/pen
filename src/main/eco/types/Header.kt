@@ -1,4 +1,4 @@
-package pen.eco.types.proposal
+package pen.eco.types
 
 import pen.eco.Constants
 

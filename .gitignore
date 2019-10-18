@@ -7,4 +7,9 @@ eco.jar
 par.jar
 net.jar
 bc.jar
+*output*
+pen_main_tests.jar
+pen_jvm_tests.jar
+plugins_main_tests.jar
+plugins_jvm_tests.jar
 MANIFEST.MF
