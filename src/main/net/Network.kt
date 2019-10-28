@@ -24,5 +24,5 @@ object Network
    fun send (message : Message) {}
 
    private var counter = 0L
-   fun generateID () = ++counter
+   fun generateId () = ++counter
 }

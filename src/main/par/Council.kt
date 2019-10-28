@@ -7,26 +7,12 @@ import pen.eco.types.PasswordProvider
 import pen.net.Message
 import pen.net.Network
 
-/** A consumption council in the economy. */
-class KConsumptionCouncil : Council()
-{
-   override var name = "Consumption council"
-   override var icon = Constants.ICONS_DIR + "applications-development.png"
-}
-
-/** A production council in the economy. */
-class KProductionCouncil : Council()
-{
-   override var name = "Production council"
-   override var icon = Constants.ICONS_DIR + "applications-development.png"
-   var issuedCredits = 0
-}
-
 /** A council in the economy. */
-abstract class Council : Participant(), Serializable
+open class Council : Participant(), Serializable
 {
+   override var name = "Council"
+   override var icon = Constants.ICONS_DIR + "applications-development.png"
    val members = HashMap<String, Contact>()
-   val votations = ArrayList<Votation>()
 
    /** Adds a member, mapping name to Contact */
    fun addMember (name : String, contact : Contact) = members.put( name, contact )

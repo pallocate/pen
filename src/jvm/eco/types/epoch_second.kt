@@ -1,4 +1,4 @@
-package pen.net.bc.mt
+package pen.eco.types
 
 import java.time.Instant
 
