@@ -1,8 +1,6 @@
 package pen.eco.types
 
 import pen.eco.Log
-import pen.eco.Utils.encodeLong
-import pen.eco.Utils.encodeInt
 import pen.eco.Crypto
 import pen.eco.Constants
 import pen.eco.types.PasswordProvider
@@ -25,7 +23,7 @@ issuedToken.value, issuedToken.version, issuedToken.timestamp, issuedToken.issue
 userKey, userKeySignature ) {}
 
 /** A used token. */
-class KUsedToken (creditToken : KCreditToken, account: Long, accountSignature : ByteArray) : Token( creditToken.id,
+class KUsedToken (creditToken : KCreditToken, account : Long, accountSignature : ByteArray) : Token( creditToken.id,
 creditToken.value, creditToken.version, creditToken.timestamp, creditToken.issuer, creditToken.issuenceSignature,
 creditToken.userKey, creditToken.userKeySignature, account, accountSignature ) {}
 

@@ -3,7 +3,7 @@ package pen.par
 import java.io.Serializable
 import pen.eco.Log
 import pen.eco.Crypto
-import pen.eco.Utils.encodeLong
+import pen.eco.toByteArray
 import pen.eco.types.*
 import pen.net.Message
 import pen.net.Network
@@ -25,7 +25,7 @@ abstract class Member () : Participant(), Serializable
 
       val salt = me.pkcSalt()
       val signedProposal = proposal.signed( passwordProvider, salt )
-      val message = Message( signedProposal, me.contact.contactID, councilContact.contactID, passwordProvider, salt, councilContact.publicKey )
+      val message = Message( signedProposal, me.contact.contactId, councilContact.contactId, passwordProvider, salt, councilContact.publicKey )
 
       Network.send( message )
       submitHistory.add( proposal.header.progression() )
@@ -79,7 +79,7 @@ open class KConsumer : Member(), Serializable
    {
       Log.debug( "Using token [${token.id}]" )
       val publicKey = Crypto.getKey( passwordProvider, pkc_salt, Crypto::publicKey )
-      val signature = Crypto.signatureOf(encodeLong( productId ), passwordProvider, pkc_salt)
+      val signature = Crypto.signatureOf( productId.toByteArray(), passwordProvider, pkc_salt)
 
       return KTransaction( productId, signature, publicKey )
    }

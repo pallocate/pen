@@ -12,7 +12,7 @@ class KAcknowledgeMessage () : Message
    var origin = KNode()
 
    init
-   { Log.debug( {"<ACKNOWLEDGE>"}, Config.flag( "MESSAGE_CREATE" )) }
+   { Log.debug( {"<ACKNOWLEDGE>"}, Config.flag( "KAD_MSG_CREATE" )) }
 
    constructor (origin : KNode) : this()
    { this.origin = origin }

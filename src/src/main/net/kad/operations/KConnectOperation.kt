@@ -74,7 +74,7 @@ class KConnectOperation (private val server : KServer, private val node : KNode,
    @Synchronized
    override fun receive (message : Message, conversationId : Int)
    {
-      log("received message", Config.flag( "CONTACT_CONNECT" ))
+      log("received message", Config.flag( "KAD_CONTACT_CONNECT" ))
 
       /* The bootstrap node has responded, insert it into our space */
       routingTable.insert( otherNode )

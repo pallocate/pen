@@ -13,7 +13,7 @@ class KContentMessage (): Message
    var content                   = KStorageEntry()
 
    init
-   { Log.debug( {"<CONTENT>"}, Config.flag( "MESSAGE_CREATE" )) }
+   { Log.debug( {"<CONTENT>"}, Config.flag( "KAD_MSG_CREATE" )) }
 
    constructor (origin : KNode, content : KStorageEntry) : this()
    {

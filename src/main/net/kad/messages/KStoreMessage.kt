@@ -14,7 +14,7 @@ class KStoreMessage () : Message
    var payload                   = KStorageEntry()
 
    init
-   { Log.debug( {"<STORE>"}, Config.flag( "MESSAGE_CREATE" )) }
+   { Log.debug( {"<STORE>"}, Config.flag( "KAD_MSG_CREATE" )) }
 
    constructor (origin : KNode, payload : KStorageEntry) : this()
    {

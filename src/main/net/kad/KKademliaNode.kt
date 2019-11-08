@@ -169,7 +169,7 @@ class KKademliaNode () : Filable, Loggable
    fun put(content : KContent) = put(KStorageEntry( content ))
    fun put (entry : KStorageEntry) : Int
    {
-      log("storing entry [${entry.content.key.shortName()}]", Config.flag( "CONTENT_PUT_GET" ))
+      log("storing entry [${entry.content.key.shortName()}]", Config.flag( "KAD_CONTENT_PUT_GET" ))
       val storeOperation = KStoreOperation( server, node, routingTable, dht, entry )
       storeOperation.execute()
 
@@ -179,13 +179,13 @@ class KKademliaNode () : Filable, Loggable
 
    fun putLocally (content : KContent)
    {
-      log("storing entry [${content.key.shortName()}] locally", Config.flag( "CONTENT_PUT_GET" ))
+      log("storing entry [${content.key.shortName()}] locally", Config.flag( "KAD_CONTENT_PUT_GET" ))
       dht.store(KStorageEntry( content ))
    }
 
    fun get (kGetParameter : KGetParameter) : StorageEntry
    {
-      log("retrieving entry [${kGetParameter.key.shortName()}]", Config.flag( "CONTENT_PUT_GET" ))
+      log("retrieving entry [${kGetParameter.key.shortName()}]", Config.flag( "KAD_CONTENT_PUT_GET" ))
       if (dht.contains( kGetParameter ))
       {
          /* If the content exist in our own KDHT, then return it. */

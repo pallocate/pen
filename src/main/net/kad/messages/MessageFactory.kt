@@ -27,7 +27,7 @@ object MessageFactory
          Codes.SIMPLE                     -> KMessageSerializer.read<KSimpleMessage>( inputStream )
          else                             ->
          {
-            Log.debug({"Invalid message code: $code"}, Config.flag( "MESSAGE_CREATE" ))
+            Log.debug({"Invalid message code: $code"}, Config.flag( "KAD_MSG_CREATE" ))
             NoMessage()
          }
       }

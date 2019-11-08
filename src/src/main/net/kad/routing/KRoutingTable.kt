@@ -60,8 +60,8 @@ class KRoutingTable () : Loggable
    @Synchronized
    fun insert (kContact : KContact)
    {
-      log("inserting contact (${kContact.node})", Config.flag( "CONTACT_PUT" ))
-      log("contact info: {address: ${kContact.node.inetAddress}}, {port: ${kContact.node.port}}", Config.flag( "CONTACT_INFO" ))
+      log("inserting contact (${kContact.node})", Config.flag( "KAD_CONTACT_PUT" ))
+      log("contact info: {address: ${kContact.node.inetAddress}}, {port: ${kContact.node.port}}", Config.flag( "KAD_CONTACT_INFO" ))
       buckets[getBucketId( kContact.node.nodeId )].insert(kContact)
    }
 
@@ -69,8 +69,8 @@ class KRoutingTable () : Loggable
    @Synchronized
    fun insert (kNode : KNode)
    {
-      log("inserting node (${kNode})", Config.flag( "CONTACT_PUT" ))
-      log("node info: {address: ${kNode.inetAddress}}, {port: ${kNode.port}}", Config.flag( "CONTACT_INFO" ))
+      log("inserting node (${kNode})", Config.flag( "KAD_CONTACT_PUT" ))
+      log("node info: {address: ${kNode.inetAddress}}, {port: ${kNode.port}}", Config.flag( "KAD_CONTACT_INFO" ))
       buckets[getBucketId( kNode.nodeId )].insert(kNode)
    }
 

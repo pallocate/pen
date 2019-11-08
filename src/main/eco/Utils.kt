@@ -9,44 +9,20 @@ expect fun createDir (path : String)
 /** Convertes a ByteArray to a hex encoded String. */
 fun ByteArray.toHex () = this.joinToString( "" ) { it.toInt().and( 0xFF ).toString( 16 ).padStart( 2, '0' )}
 
+/** Convertes Long to a ByteArray. */
+fun Long.toByteArray () : ByteArray
+{
+   val BYTE_MASK = 0xFFL
+   val ret = ByteArray( 8 )
+
+   for (i in 0..7)
+      ret[7 - i] = (this shr (8*i) and BYTE_MASK).toByte()
+
+   return ret
+}
+
 object Utils : Loggable
 {
-   fun encodeLong (long : Long) = encodeArbitrary( 8, long )
-   fun encodeInt (int : Int) = encodeArbitrary( 4, int.toLong() )
-
-   /** Convertes a arbitrary sized integer (Long type) to a ArrayList of Bytes.
-     * @param nrOfBytes Nr of bytes in the resulting array.
-     * @param integer The arbitrary sized integer as a Long.
-     * @return The resulting ArrayList. */
-   fun encodeArbitrary (nrOfBytes : Int, integer : Long) : ByteArray
-   {
-      val BYTE_MASK = 0xFFL
-      var ret = ByteArray( 0 )
-
-      if (integer > pow2(nrOfBytes*8 - 1))
-         Log.warn( "Long value to large" )
-      else
-         for (i in (nrOfBytes - 1) downTo 0)
-            ret += (integer shr (8*i) and BYTE_MASK).toByte()
-
-      return ret
-   }
-
-   /** Calculates two to the power of something. */
-   fun pow2 (exponent : Int) : Int
-   {
-      var ret = 0
-
-      if (exponent >= 0)
-      {
-         ret = 1
-         for (n in 1..exponent)
-            ret *= 2
-      }
-
-      return ret
-   }
-
    fun stringToByteArray (string : String) : ByteArray
    {
       val charArray = string.toCharArray()

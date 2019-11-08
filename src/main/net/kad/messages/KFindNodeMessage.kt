@@ -15,7 +15,7 @@ class KFindNodeMessage () : Message
    var lookupId                  = KNodeId()
 
    init
-   { Log.debug( {"<FIND_NODE>"}, Config.flag( "MESSAGE_FIND_NODE" )) }
+   { Log.debug( {"<FIND_NODE>"}, Config.flag( "KAD_MSG_FIND_NODE" )) }
 
    constructor (origin : KNode, lookupId : KNodeId) : this()
    {

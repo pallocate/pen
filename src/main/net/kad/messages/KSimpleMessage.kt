@@ -10,7 +10,7 @@ class KSimpleMessage () : Message
    var content = ""
 
    init
-   { Log.debug( {"<SIMPLE>"}, Config.flag( "MESSAGE_CREATE" )) }
+   { Log.debug( {"<SIMPLE>"}, Config.flag( "KAD_MSG_CREATE" )) }
 
    constructor (content : String) : this()
    {

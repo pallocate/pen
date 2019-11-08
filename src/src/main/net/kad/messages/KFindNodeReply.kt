@@ -13,7 +13,7 @@ class KFindNodeReply () : Message
    var nodes                     = ArrayList<KNode>()
 
    init
-   { Log.debug( {"<FIND_NODE_REPLY>"}, Config.flag( "MESSAGE_FIND_NODE" )) }
+   { Log.debug( {"<FIND_NODE_REPLY>"}, Config.flag( "KAD_MSG_FIND_NODE" )) }
 
    constructor (origin : KNode, nodes : ArrayList<KNode>) : this()
    {

@@ -71,7 +71,7 @@ class KContentRefreshOperation (private val server : KServer, private val node :
             }
          }
          else
-            Log.warn({ "KContentRefreshOperation(${node})- entry not found!"}, Config.flag( "CONTENT_PUT_GET" ))
+            Log.warn({ "KContentRefreshOperation(${node})- entry not found!"}, Config.flag( "KAD_CONTENT_PUT_GET" ))
       }
    }
 }

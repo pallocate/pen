@@ -55,6 +55,6 @@ open class Council : Participant(), Serializable
          Log.warn( "Group Send failed! (no recipients)" )
       else
          for (recipient in recipients)
-            Network.send(Message( message.toByteArray(), recipient.contactID, Network.generateID(), passwordProvider, me.pkcSalt(), recipient.publicKey ))
+            Network.send(Message( message.toByteArray(), recipient.contactId, Network.generateId(), passwordProvider, me.pkcSalt(), recipient.publicKey ))
    }
 }

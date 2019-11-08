@@ -92,7 +92,7 @@ class KServer () : Loggable
          if (responseReceiver !is NoReceiver)
          {
             // Setting up the receiver
-            log("putting receiver", Config.flag( "SERVER_RECEIVERS" ))
+            log("putting receiver", Config.flag( "KAD_SERVER_RECEIVERS" ))
             receivers.put( conversationID, responseReceiver )
             val task = TimeoutTask( conversationID, responseReceiver )
             timer.schedule( task, Constants.RESPONCE_TIMEOUT )
@@ -151,7 +151,7 @@ class KServer () : Loggable
    /** Listens for incoming messages in a separate thread. */
    private fun listen ()
    {
-      log("listening to messages", Config.flag( "SERVER_INTERNAL" ))
+      log("listening to messages", Config.flag( "KAD_SERVER_INTERNAL" ))
       try
       {
          while (isRunning)                                                      // Wait for a packet
@@ -206,7 +206,7 @@ class KServer () : Loggable
          }
       }
       catch (e : IOException)
-      { log("message listening failed!", Config.flag( "SERVER_INTERNAL" ), WARN) }
+      { log("message listening failed!", Config.flag( "KAD_SERVER_INTERNAL" ), WARN) }
       finally
       {
          socket?.close()
@@ -218,7 +218,7 @@ class KServer () : Loggable
    @Synchronized
    private fun unregister (conversationID : Int)
    {
-      log("unregistring receiver/task", Config.flag( "SERVER_INTERNAL" ))
+      log("unregistring receiver/task", Config.flag( "KAD_SERVER_INTERNAL" ))
       receivers.remove( conversationID )
       tasks.remove( conversationID )
    }
@@ -253,7 +253,7 @@ class KServer () : Loggable
    {
       override fun run()
       {
-         log("TimeoutTask running", Config.flag( "SERVER_INTERNAL" ))
+         log("TimeoutTask running", Config.flag( "KAD_SERVER_INTERNAL" ))
 
          if (isRunning)
          {
@@ -263,7 +263,7 @@ class KServer () : Loggable
                receiver.timeout( conversationID )
             }
             catch (e : IOException)
-            { log( "TimeoutTask failed! (${e.message})", Config.flag( "SERVER_INTERNAL" ), WARN) }
+            { log( "TimeoutTask failed! (${e.message})", Config.flag( "KAD_SERVER_INTERNAL" ), WARN) }
          }
       }
    }

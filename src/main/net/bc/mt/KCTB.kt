@@ -1,16 +1,18 @@
 package pen.net.bc.mt
 
-import pen.eco.Log
+import pen.eco.Config
+import pen.eco.Loggable
+import pen.eco.LogLevel.ERROR
 import pen.eco.types.Token
 import pen.eco.types.NoToken
 
 /** Credit Token Blockchain */
-object KCTB : KMerkleTree()
+object KCTB : KMerkleTree(), Loggable
 {
    /** Returns the last occurrence of a token with the specified id. */
    fun last (id : Long) : Token
    {
-      Log.debug( "Finding last occurrence of token \"$id\"" )
+      log("Finding last occurrence of token \"$id\"", Config.flag( "PLUGINS_CTB" ))
       var ret : Token = NoToken()
 
       if (lastIdx > 0)
@@ -20,10 +22,14 @@ object KCTB : KMerkleTree()
             if (leaf is KTokenMerkleLeaf)
             {
                if (leaf.token.id == id)
+               {
                   ret = leaf.token
+                  log("Token found \"$id\"", Config.flag( "PLUGINS_CTB" ))
+                  break
+               }
             }
             else
-               Log.err( "Wrong type! (KTokenMerkleLeaf expected)" )
+               log("Wrong type! (KTokenMerkleLeaf expected)", true, ERROR )
          }
 
       return ret
@@ -35,4 +41,6 @@ object KCTB : KMerkleTree()
       if (token !is NoToken)
          super.add(KTokenMerkleLeaf( token ))
    }
+
+   override fun originName () = "KCTB"
 }

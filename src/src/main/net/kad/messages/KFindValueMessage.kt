@@ -13,7 +13,7 @@ class KFindValueMessage () : Message
    var params                    = KGetParameter()
 
    init
-   { Log.debug( {"<FIND_VALUE>"}, Config.flag( "MESSAGE_CREATE" )) }
+   { Log.debug( {"<FIND_VALUE>"}, Config.flag( "KAD_MSG_CREATE" )) }
 
    constructor (origin : KNode, params : KGetParameter) : this()
    {

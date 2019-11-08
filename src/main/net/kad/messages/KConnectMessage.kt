@@ -10,7 +10,7 @@ class KConnectMessage () : Message
    var origin : KNode = KNode()
 
    init
-   { Log.debug( {"<CONNECT>"}, Config.flag( "MESSAGE_CREATE" )) }
+   { Log.debug( {"<CONNECT>"}, Config.flag( "KAD_MSG_CREATE" )) }
 
    constructor (origin : KNode) : this()
    { this.origin = origin }

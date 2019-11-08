@@ -17,7 +17,7 @@ object KMessageSerializer
 
    inline fun <reified T : Message> read (inputStream : InputStream) : Message
    {
-      Log.debug({"KMessageSerializer- reading object"}, Config.flag( "STREAMING" ))
+      Log.debug({"KMessageSerializer- reading object"}, Config.flag( "KAD_STREAMING" ))
       var klaxon = Klaxon()
 
       klaxon = klaxon.converter( byteArrayConverter )
@@ -41,7 +41,7 @@ object KMessageSerializer
 
    fun write (message : Message, outputStream : OutputStream)
    {
-      Log.debug({"KMessageSerializer- writing object"}, Config.flag( "STREAMING" ))
+      Log.debug({"KMessageSerializer- writing object"}, Config.flag( "KAD_STREAMING" ))
       var klaxon = Klaxon()
 
       klaxon = klaxon.converter( byteArrayConverter )

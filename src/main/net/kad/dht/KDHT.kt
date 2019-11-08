@@ -32,7 +32,7 @@ class KDHT () : Filable, Loggable
 
    fun store (content : KStorageEntry) : Boolean
    {
-      log("adding content [${content.contentMetadata.key.shortName()}]", Config.flag( "CONTENT_PUT_GET" ), WARN)
+      log("adding content [${content.contentMetadata.key.shortName()}]", Config.flag( "KAD_CONTENT_PUT_GET" ), WARN)
       var ret : Boolean
 
       if (contentManager.contains( content.contentMetadata ))
@@ -61,7 +61,7 @@ class KDHT () : Filable, Loggable
       }
       catch (e: Exception)
       {
-         log("adding content failed! [${content.contentMetadata.key.shortName()}], ${e.message}", Config.flag( "CONTENT_PUT_GET" ), WARN)
+         log("adding content failed! [${content.contentMetadata.key.shortName()}], ${e.message}", Config.flag( "KAD_CONTENT_PUT_GET" ), WARN)
          ret = false
       }
 
