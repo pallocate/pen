@@ -34,7 +34,7 @@ actual object Filer : Loggable
 
    actual inline fun <reified T : Filable>read (name : String) : Filable
    {
-      log( "reading object", Config.flag( "SAVE_LOAD" ))
+      log( "reading object", Config.trigger( "SAVE_LOAD" ))
 
       val klaxon = KlaxonFactory.forClass( T::class.simpleName )
       val fileReader = FileReader( name + EXTENSION )
@@ -45,20 +45,20 @@ actual object Filer : Loggable
          parseResult = klaxon.parse<T>( fileReader )
       }
       catch (e : Exception)
-      {log( "Klaxon failed! ${e.message}", true, LogLevel.ERROR )}
+      {log( "Klaxon failed! ${e.message}", Config.trigger( "SAVE_LOAD" ), LogLevel.ERROR )}
 
       return if (parseResult != null)
                 parseResult
              else
              {
-                log("reading object failed!", Config.flag( "SAVE_LOAD" ), LogLevel.WARN)
+                log("reading object failed!", Config.trigger( "SAVE_LOAD" ), LogLevel.WARN)
                 NoFilable()
              }
    }
 
    actual fun write (filable : Filable, name : String)
    {
-      log("writing object", Config.flag( "SAVE_LOAD" ))
+      log("writing object", Config.trigger( "SAVE_LOAD" ))
 
       val klaxon = KlaxonFactory.forClass( filable::class.simpleName )
       val fileWriter = FileWriter( name + EXTENSION )

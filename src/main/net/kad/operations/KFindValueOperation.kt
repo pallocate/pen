@@ -107,7 +107,7 @@ class KFindValueOperation
          }
       }
       catch (e : Exception)
-      { log("interrupted!", Config.flag( "KAD_CONTENT_FIND" ), WARN) }
+      { log("interrupted!", Config.trigger( "KAD_CONTENT_FIND" ), WARN) }
    }
 
    /** Add nodes from this list to the set of nodes to lookup
@@ -193,7 +193,7 @@ class KFindValueOperation
       {
          if (message is KContentMessage)
          {
-            log("received content message", Config.flag( "KAD_CONTENT_FIND" ))
+            log("received content message", Config.trigger( "KAD_CONTENT_FIND" ))
             /* The reply received is a content message with the required content, take it in */
 
             /* Add the origin node to our routing table */
@@ -207,7 +207,7 @@ class KFindValueOperation
          else
             if (message is KFindNodeReply)                                      // A KFindNodeReply with nodes closest to the content
             {
-               log("received content reply", Config.flag( "KAD_CONTENT_FIND" ))
+               log("received content reply", Config.trigger( "KAD_CONTENT_FIND" ))
 
                /* Add the origin node to our routing table */
                val origin = message.origin
@@ -237,7 +237,7 @@ class KFindValueOperation
       val inTransit = messagesTransiting.get( conversationId )
 
       if (inTransit == null)
-         log("invalid conversation id!", Config.flag( "KAD_RECEIVER_TIMEOUT" ), WARN)
+         log("invalid conversation id!", Config.trigger( "KAD_RECEIVER_TIMEOUT" ), WARN)
       else
       {
          /* Mark this node as failed and inform the routing table that it's unresponsive */
@@ -257,7 +257,7 @@ class KFindValueOperation
       if (isContentFound)
          ret = contentFound
       else
-         log("no value found", Config.flag( "KAD_CONTENT_PUT_GET" ))
+         log("no value found", Config.trigger( "KAD_CONTENT_PUT_GET" ))
 
       return ret
    }

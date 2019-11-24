@@ -35,8 +35,6 @@ class KMutableProposal  (
       }
       catch (e : Exception)
       { Log.warn( "Number conversion failed!" ) }
-
-      header.setFlag( Constants.IS_PROPOSAL )
    }
 
    override fun itemSection (map : HashMap<String, String>)
@@ -85,7 +83,7 @@ class KMutableProposal  (
 
       try
       {
-         Files.write(File( filename ).toPath(), toString().toByteArray())
+         Files.write(File( filename ).toPath(), encode().toByteArray())
          success = true
       }
       catch (e : Exception)
@@ -94,12 +92,12 @@ class KMutableProposal  (
       return success
    }
 
-   override fun toString () : String
+   fun encode () : String
    {
-      var ret = header.toString()
+      var ret = header.encode()
 
       for (product in products)
-         ret += ( product )
+         ret += ( product.encode() )
 
       return ret
    }

@@ -1,16 +1,16 @@
 package pen.net.kad.messages
 
-import pen.eco.Log
+import pen.eco.Loggable
 
 import pen.eco.Config
 
 /** A simple message used for testing the system; Default message constructed if the message type sent is not available */
-class KSimpleMessage () : Message
+class KSimpleMessage () : Message, Loggable
 {
    var content = ""
 
    init
-   { Log.debug( {"<SIMPLE>"}, Config.flag( "KAD_MSG_CREATE" )) }
+   { log( {"<SIMPLE>"}, Config.trigger( "KAD_MSG_CREATE" )) }
 
    constructor (content : String) : this()
    {
@@ -18,4 +18,5 @@ class KSimpleMessage () : Message
    }
 
    override fun code () = Codes.SIMPLE
+   override fun originName () = "KSimpleMessage"
 }

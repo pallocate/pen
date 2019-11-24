@@ -16,12 +16,12 @@ class KRoutingTable () : Loggable
    private var buckets = createBuckets()
 
    init
-   { log( "KRoutingTable created", Config.flag( "KAD_CREATE" ), pen.eco.LogLevel.INFO) }
+   { log( "KRoutingTable created", Config.trigger( "KAD_CREATE" ), pen.eco.LogLevel.INFO) }
 
    fun initialize (kNode : KNode)
    {
       node = kNode
-      log("initializing", Config.flag( "KAD_INITIALIZE" ))
+      log("initializing", Config.trigger( "KAD_INITIALIZE" ))
       insert( node )                                                            // Insert the local node
    }
 
@@ -60,8 +60,8 @@ class KRoutingTable () : Loggable
    @Synchronized
    fun insert (kContact : KContact)
    {
-      log("inserting contact (${kContact.node})", Config.flag( "KAD_CONTACT_PUT" ))
-      log("contact info: {address: ${kContact.node.inetAddress}}, {port: ${kContact.node.port}}", Config.flag( "KAD_CONTACT_INFO" ))
+      log("inserting contact (${kContact.node})", Config.trigger( "KAD_CONTACT_PUT" ))
+      log("contact info: {address: ${kContact.node.inetAddress}}, {port: ${kContact.node.port}}", Config.trigger( "KAD_CONTACT_INFO" ))
       buckets[getBucketId( kContact.node.nodeId )].insert(kContact)
    }
 
@@ -69,8 +69,8 @@ class KRoutingTable () : Loggable
    @Synchronized
    fun insert (kNode : KNode)
    {
-      log("inserting node (${kNode})", Config.flag( "KAD_CONTACT_PUT" ))
-      log("node info: {address: ${kNode.inetAddress}}, {port: ${kNode.port}}", Config.flag( "KAD_CONTACT_INFO" ))
+      log("inserting node (${kNode})", Config.trigger( "KAD_CONTACT_PUT" ))
+      log("node info: {address: ${kNode.inetAddress}}, {port: ${kNode.port}}", Config.trigger( "KAD_CONTACT_INFO" ))
       buckets[getBucketId( kNode.nodeId )].insert(kNode)
    }
 

@@ -1,6 +1,7 @@
 package pen.tests
 
 import pen.eco.Constants
+
 import pen.eco.types.*
 import pen.par.*
 
@@ -8,7 +9,7 @@ object Examples
 {
    object Participants
    {
-      object Alice : Member(), PasswordProvider
+      object Alice : TestParticipant(), PasswordProvider
       {
          val account = Account()
 
@@ -16,19 +17,15 @@ object Examples
          {
             me = Me(Contact( 3L ))
             me.pkcSalt()
-            submitHistory.add( "2017:12" )
-            submitHistory.add( "2018:1" )
 
             val producerRole = KProducer()
             val consumerRole = KConsumer()
+
             producerRole.setCouncil( "Acme", Acme.me.contact )
             consumerRole.setCouncil( "St Marys", StMarys.me.contact )
-            consumerRole.submitHistory.add( "Consumption:2018:1" )
-            producerRole.submitHistory.add( "Production:2017:7" )
-            producerRole.me.pkcSalt()
-            producerRole.me.skcSalt()
-            consumerRole.me.pkcSalt()
-            consumerRole.me.skcSalt()
+            consumerRole.submitHistory.add( "2019:7" )
+            producerRole.submitHistory.add( "2019:1" )
+            consumerRole.submitHistory.add( "2020:1" )
 
             account.roles.apply {
                add( producerRole )
@@ -40,11 +37,9 @@ object Examples
          }
 
          override fun password () = "monkey"
-         override var name = "Alice"
-         override var icon = ""
       }
 
-      object Bob : Member(), PasswordProvider
+      object Bob : TestParticipant(), PasswordProvider
       {
          val account = Account()
 
@@ -52,15 +47,15 @@ object Examples
          {
             me = Me(Contact( 4L ))
             me.pkcSalt()
-            submitHistory.add( "2017:12" )
 
             val producerRole = KProducer()
             val consumerRole = KConsumer()
 
             producerRole.setCouncil( "Acme", Acme.me.contact )
             consumerRole.setCouncil( "St Marys", StMarys.me.contact )
-            consumerRole.submitHistory.add( "Consumption:2017:7" )
-            producerRole.submitHistory.add( "Production:2018:1" )
+            consumerRole.submitHistory.add( "2019:7" )
+            producerRole.submitHistory.add( "2019:7" )
+            producerRole.submitHistory.add( "2020:1" )
 
             account.roles.apply {
                add( producerRole )
@@ -100,9 +95,10 @@ object Examples
          override var icon = ""
       }
 
-      object FPC : Council(), PasswordProvider
+      object FPC : TestParticipant(), PasswordProvider
       {
          val account = Account()
+         val councilRole = Council()
 
          init
          { me = Me(Contact( 5L )) }
@@ -112,13 +108,13 @@ object Examples
          override var icon = ""
       }
 
-      object StMarys : Council(), PasswordProvider
+      object StMarys : TestParticipant(), PasswordProvider
       {
          val account = Account()
+         val councilRole = Council()
 
          init
          {
-            val councilRole = Council()
             me = Me(Contact( 2L ))
             councilRole.addMember( "Alice", Alice.me.contact )
             councilRole.addMember( "Bob", Bob.me.contact )
@@ -143,7 +139,6 @@ object Examples
       {
          val header = KHeader(
             level                                = 3,
-            flags                                = Constants.IS_PROPOSAL,
             id                                   = 212,
             iteration                            = 0,
             version                              = 1,
@@ -160,7 +155,6 @@ object Examples
       {
          val header = KMutableHeader(
             level                                = 3,
-            flags                                = Constants.IS_PROPOSAL,
             id                                   = 212,
             iteration                            = 0,
             version                              = 1,
@@ -178,7 +172,7 @@ object Examples
                                              price = 100000L,
                                              analogue = "false"
                                           )
-         product.qty = 1
+         product.qty = 10000
          val products = arrayListOf<KQuantableProduct>( product, product )
 
          return KMutableProposal( header, products )

@@ -6,16 +6,19 @@ expect fun loadConf (filename : String) : Map<String, String>
 object Config
 {
    val supportedPlugins : Map<String, String> = loadConf( "plugins.conf" )
-   private val debugFlags : Map<String, String> = loadConf( "debug.conf" )
+   private val logValues : Map<String, String> = loadConf( "log.conf" )
 
-   fun flag (name : String) : Boolean
+   fun trigger (name : String) : LogLevel
    {
-      var status = false
+      var trigValue = LogLevel.INFO
 
-      val getResult = debugFlags.get( name )
+      val getResult = logValues.get( name )
       if (getResult != null)
-         status = getResult.equals( "true" )
+      {
+         val trig = Utils.stringToInt( getResult, LogLevel.QUIET.ordinal, LogLevel.DEBUG.ordinal, true )
+         trigValue = enumValues<LogLevel>()[trig]
+      }
 
-      return status
+      return trigValue
    }
 }

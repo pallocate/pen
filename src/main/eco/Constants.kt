@@ -7,12 +7,8 @@ object Constants
 {
    /** Common specification version. */
    const val VERSION                              = 1
-   /** Size of hash signature in bytes. */
-   const val SIGN_BYTES                           = 64
    /** Size of block hash in bytes. */
    const val HASH_BYTES                           = 32
-   /** Size of public key. */
-   const val PUBKEY_BYTES                         = 32
 
    /* Definition of some basic directories and files */
    /** OS specific directory separation sign. */
@@ -26,12 +22,10 @@ object Constants
    /** Name of the log file. */
    val LOG_FILE                                   = "app.log"
 
-   /* Block flags */
+   /* Proposal flags */
    /** If it is a production block, otherwise consumption. */
    const val IS_PRODUCTION                        = 1
-   /** If it is a proposal (it only has Product children). */
-   const val IS_PROPOSAL                          = 2
    /** If the proposal contains sensetive information. */
-   const val HAS_SENSETIVE_DATA                   = 4
+   const val HAS_SENSETIVE_DATA                   = 2
    //const val IS_ADJUSTMENT                        = 8
 }

@@ -49,17 +49,17 @@ class KServer () : Loggable
    var nodeMessageListener : NodeMessageListener = NoNodeMessageListener()
 
    init
-   { log( "created", Config.flag( "KAD_CREATE" ), INFO)}
+   { log( "created", Config.trigger( "KAD_CREATE" ), INFO)}
 
    fun initialize (localNode : KKademliaNode, port : Int)
    {
       this.localNode = localNode
-      log("initializing", Config.flag( "KAD_INITIALIZE" ))
+      log("initializing", Config.trigger( "KAD_INITIALIZE" ))
 
       try
       {socket = DatagramSocket( port )}
       catch (e : Exception)
-      { log("create socket failed!", true, ERROR) }
+      { log("create socket failed!", Config.trigger( "KAD_CREATE" ), ERROR) }
 
       if (socket != null)
       {
@@ -92,7 +92,7 @@ class KServer () : Loggable
          if (responseReceiver !is NoReceiver)
          {
             // Setting up the receiver
-            log("putting receiver", Config.flag( "KAD_SERVER_RECEIVERS" ))
+            log("putting receiver", Config.trigger( "KAD_SERVER_RECEIVERS" ))
             receivers.put( conversationID, responseReceiver )
             val task = TimeoutTask( conversationID, responseReceiver )
             timer.schedule( task, Constants.RESPONCE_TIMEOUT )
@@ -101,7 +101,7 @@ class KServer () : Loggable
          sendMessage( recipient, message, conversationID )
       }
       else
-         log( "server down!", true, ERROR )
+         log("server down!", Config.trigger( "KAD_SERVER_RECEIVERS" ), ERROR)
 
       return conversationID
    }
@@ -135,7 +135,7 @@ class KServer () : Loggable
          })})
       }
       catch (e : Exception)
-      { log("send message failed!", true, WARN )}
+      { log("send message failed!", Config.trigger( "KAD_MSG_CREATE" ), WARN) }
    }
 
    /** Replies to a received message. */
@@ -145,13 +145,13 @@ class KServer () : Loggable
       if (isRunning)
          sendMessage( recipient, message, conversationID )
       else
-         log( "server down!", true, ERROR )
+         log("server down!", Config.trigger( "KAD_SERVER_INTERNAL" ), ERROR)
    }
 
    /** Listens for incoming messages in a separate thread. */
    private fun listen ()
    {
-      log("listening to messages", Config.flag( "KAD_SERVER_INTERNAL" ))
+      log("listening to messages", Config.trigger( "KAD_SERVER_INTERNAL" ))
       try
       {
          while (isRunning)                                                      // Wait for a packet
@@ -206,7 +206,7 @@ class KServer () : Loggable
          }
       }
       catch (e : IOException)
-      { log("message listening failed!", Config.flag( "KAD_SERVER_INTERNAL" ), WARN) }
+      { log("message listening failed!", Config.trigger( "KAD_SERVER_INTERNAL" ), WARN) }
       finally
       {
          socket?.close()
@@ -218,7 +218,7 @@ class KServer () : Loggable
    @Synchronized
    private fun unregister (conversationID : Int)
    {
-      log("unregistring receiver/task", Config.flag( "KAD_SERVER_INTERNAL" ))
+      log("unregistring receiver/task", Config.trigger( "KAD_SERVER_INTERNAL" ))
       receivers.remove( conversationID )
       tasks.remove( conversationID )
    }
@@ -227,7 +227,7 @@ class KServer () : Loggable
    @Synchronized
    fun shutdown ()
    {
-      log( "shutting down!", true, INFO )
+      log("shutting down!", Config.trigger( "KAD_SERVER_INTERNAL" ), INFO)
       isRunning = false
       socket?.close()
       timer.cancel()
@@ -253,7 +253,7 @@ class KServer () : Loggable
    {
       override fun run()
       {
-         log("TimeoutTask running", Config.flag( "KAD_SERVER_INTERNAL" ))
+         log("TimeoutTask running", Config.trigger( "KAD_SERVER_INTERNAL" ))
 
          if (isRunning)
          {
@@ -263,7 +263,7 @@ class KServer () : Loggable
                receiver.timeout( conversationID )
             }
             catch (e : IOException)
-            { log( "TimeoutTask failed! (${e.message})", Config.flag( "KAD_SERVER_INTERNAL" ), WARN) }
+            { log( "TimeoutTask failed! (${e.message})", Config.trigger( "KAD_SERVER_INTERNAL" ), WARN) }
          }
       }
    }

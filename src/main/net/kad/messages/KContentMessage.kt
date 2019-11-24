@@ -1,19 +1,19 @@
 package pen.net.kad.messages
 
-import pen.eco.Log
+import pen.eco.Loggable
 
 import pen.eco.Config
 import pen.net.kad.dht.KStorageEntry
 import pen.net.kad.node.KNode
 
 /** A Message used to send content between nodes */
-class KContentMessage (): Message
+class KContentMessage (): Message, Loggable
 {
    var origin                    = KNode()
    var content                   = KStorageEntry()
 
    init
-   { Log.debug( {"<CONTENT>"}, Config.flag( "KAD_MSG_CREATE" )) }
+   { log( {"<CONTENT>"}, Config.trigger( "KAD_MSG_CREATE" )) }
 
    constructor (origin : KNode, content : KStorageEntry) : this()
    {
@@ -22,4 +22,5 @@ class KContentMessage (): Message
    }
 
    override fun code () = Codes.CONTENT
+   override fun originName () = "KContentMessage"
 }

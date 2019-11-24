@@ -13,7 +13,7 @@ interface Receiver
    fun receive (message : Message, conversationId : Int)
 
    /** If no reply is received in `MessageServer.TIMEOUT`, KServer calls this method. */
-   fun timeout (conversationId : Int) = Log.debug({"message timeout"}, Config.flag( "KAD_RECEIVER_TIMEOUT" ))
+   fun timeout (conversationId : Int) = Log.debug( "message timeout" )
 }
 class NoReceiver : Receiver, PlaceHolder
 {

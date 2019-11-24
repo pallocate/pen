@@ -45,7 +45,7 @@ open class KProduct  (
 
    /** Encodes a product to String.
      * @return Returns The product in text form. */
-   override fun toString () : String
+   open fun encode () : String
    {
       var ret = "\n" + "[PRODUCT]\n"
 
@@ -77,4 +77,7 @@ open class KProduct  (
 
       return ret
    }
+
+   override fun toString () = name
+
 }

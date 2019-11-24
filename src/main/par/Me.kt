@@ -9,8 +9,8 @@ import pen.eco.types.NoPasswordProvider
 /** Containing contact and authentication information. */
 class Me (val contact : Contact = Contact()) : Serializable
 {
-   private var skc_salt                         = ByteArray( 0 )
-   private var pkc_salt                         = ByteArray( 0 )
+   private var skcSalt                         = ByteArray( 0 )
+   private var pkcSalt                         = ByteArray( 0 )
 
    /** @param passwordProvider A valid PasswordProvider is necessary to create a new public key.
      * @return Stored key if one exists, otherwise tries to create a new one. */
@@ -30,19 +30,19 @@ class Me (val contact : Contact = Contact()) : Serializable
      * @return Stored salt if it exists, otherwise generates new salt. */
    fun skcSalt () : ByteArray
    {
-      if (skc_salt.size != Crypto.saltSize())
-         skc_salt = Crypto.randomBytes( Crypto.saltSize() )
+      if (skcSalt.size != Crypto.saltSize())
+         skcSalt = Crypto.randomBytes( Crypto.saltSize() )
 
-      return skc_salt
+      return skcSalt
    }
 
    /** Salt for use when generating a asymetric keypair.
      * @return Stored salt if it exists, otherwise generates new salt. */
    fun pkcSalt () : ByteArray
    {
-      if (pkc_salt.size != Crypto.saltSize())
-         pkc_salt = Crypto.randomBytes( Crypto.saltSize() )
+      if (pkcSalt.size != Crypto.saltSize())
+         pkcSalt = Crypto.randomBytes( Crypto.saltSize() )
 
-      return pkc_salt
+      return pkcSalt
    }
 }

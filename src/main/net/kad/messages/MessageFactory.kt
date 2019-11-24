@@ -1,7 +1,7 @@
 package pen.net.kad.messages
 
 import java.io.InputStream
-import pen.eco.Log
+import pen.eco.Loggable
 
 import pen.eco.Config
 import pen.net.kad.messages.Message
@@ -9,7 +9,7 @@ import pen.net.kad.messages.NoMessage
 import pen.net.kad.utils.KMessageSerializer
 
 /** Handles creating messages and receivers */
-object MessageFactory
+object MessageFactory : Loggable
 {
    fun createMessage (code : Byte, inputStream : InputStream) : Message
    {
@@ -27,7 +27,7 @@ object MessageFactory
          Codes.SIMPLE                     -> KMessageSerializer.read<KSimpleMessage>( inputStream )
          else                             ->
          {
-            Log.debug({"Invalid message code: $code"}, Config.flag( "KAD_MSG_CREATE" ))
+            log({"Invalid message code: $code"}, Config.trigger( "KAD_MSG_CREATE" ))
             NoMessage()
          }
       }
@@ -37,4 +37,5 @@ object MessageFactory
 
       return ret
    }
+   override fun originName () = "MessageFactory"
 }

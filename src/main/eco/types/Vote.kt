@@ -2,7 +2,7 @@ package pen.eco.types
 
 
 /** @param nrOfOptions Nr of options, DISMISS incluced. */
-class Choise (val selected : Int, val nrOfOptions : Int = 2)
+data class Choise (val selected : Int, val nrOfOptions : Int = 2)
 {
    companion object
    {
@@ -13,8 +13,8 @@ class Choise (val selected : Int, val nrOfOptions : Int = 2)
 
 interface Vote
 {
-   val votationID : Long
-   val voteID : Long
+   val votationId : Long
+   val voteId : Long
    val choise : Choise
    val signature : ByteArray
 }

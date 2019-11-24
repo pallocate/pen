@@ -1,4 +1,4 @@
-package pen.tests.net
+package pen.tests
 
 import java.net.InetAddress
 import org.junit.jupiter.api.Test

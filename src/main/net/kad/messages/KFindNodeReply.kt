@@ -1,19 +1,19 @@
 package pen.net.kad.messages
 
-import pen.eco.Log
+import pen.eco.Loggable
 
 import pen.eco.Config
 import pen.net.kad.node.KNode
 
 /** A message used to connect nodes.
   * When a NodeLookup Request comes in, we respond with a KFindNodeReply */
-class KFindNodeReply () : Message
+class KFindNodeReply () : Message, Loggable
 {
    var origin                    = KNode()
    var nodes                     = ArrayList<KNode>()
 
    init
-   { Log.debug( {"<FIND_NODE_REPLY>"}, Config.flag( "KAD_MSG_FIND_NODE" )) }
+   { log( {"<FIND_NODE_REPLY>"}, Config.trigger( "KAD_MSG_FIND_NODE" )) }
 
    constructor (origin : KNode, nodes : ArrayList<KNode>) : this()
    {
@@ -22,4 +22,5 @@ class KFindNodeReply () : Message
    }
 
    override fun code () = Codes.FIND_NODE_REPLY
+   override fun originName () = "KFindNodeReply"
 }

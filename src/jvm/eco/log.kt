@@ -13,7 +13,7 @@ actual fun log (message : String, severity : LogLevel)
 }
 
 /** Does the actual logging. */
-internal object Logger
+object Logger
 {
    private var fileWriter : FileWriter? = null
 

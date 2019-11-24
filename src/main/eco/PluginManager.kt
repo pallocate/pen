@@ -23,7 +23,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
     *  @param supportedPlugins Maps plugin names to their class names. */
    init
    {
-      log("initializing", Config.flag( "PLUGIN_MANAGER" ), INFO)
+      log("initializing", Config.trigger( "PLUGIN_MANAGER" ), INFO)
       val resultMap = HashMap<String, Plugin>()
 
       for (requestedPlugin in requestedPlugins)
@@ -44,7 +44,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
          val className = supportedPlugins.get( requstedName )                   // Lookup the plugin class name
 
          if (className == null)
-            log( "plugin not supported \"${requestedPlugInfo}\"", true, ERROR )
+            log( "plugin not supported \"${requestedPlugInfo}\"", Config.trigger( "PLUGIN_MANAGER" ), ERROR )
          else
          {
             val plugin = pluginInstance( className )                           // Try to create a plugin from the class name
@@ -57,7 +57,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
                   if (resultMapFinding == null)
                   {
                      resultMap.put( requstedName, plugin )                      // Add the plugin
-                     log( "plugin \"${requstedName}\" loaded", Config.flag( "PLUGIN_MANAGER" ) )
+                     log( "plugin \"${requstedName}\" loaded", Config.trigger( "PLUGIN_MANAGER" ) )
 
                      /* Handle dependencies and initialize the plugin */
                      val nrOfDepends = plugin.dependencies.size
@@ -73,12 +73,12 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
                      ret = resultMapFinding
                }
                else
-                  log("plugin load failed(unsupported version)! expected: ${requestedPlugInfo}, found: ${plugin.info}", true, ERROR )
+                  log("plugin load failed(unsupported version)! expected: ${requestedPlugInfo}, found: ${plugin.info}", Config.trigger( "PLUGIN_MANAGER" ), ERROR )
             }
          }
       }
       else
-         log( "possible dependency cycle detected!", Config.flag( "PLUGIN_MANAGER" ), WARN )
+         log( "possible dependency cycle detected!", Config.trigger( "PLUGIN_MANAGER" ), WARN )
 
       return ret
    }

@@ -36,9 +36,9 @@ class KQuantableProduct (
 
    constructor (item : KItem) : this( id = item.id ) { qty = item.qty }
 
-   override fun toString () : String
+   override fun encode () : String
    {
-      var ret = super.toString()
+      var ret = super.encode()
       ret += "Qty:        ${qty}\n"
 
       return ret

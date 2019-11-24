@@ -46,7 +46,7 @@ abstract class Member () : Participant(), Serializable
             startSearchAt = submitHistory.size - 10
 
          for (a in startSearchAt until submitHistory.size)
-            if (submitHistory[a] == (name + ":" + progress))
+            if (submitHistory[a] == progress)
                ret = true
       }
 
@@ -75,11 +75,11 @@ open class KConsumer : Member(), Serializable
    override var icon = Constants.ICONS_DIR + "system-software-install.png"
 
    /** Pays for a product using token. */
-   fun pay (productId : Long, token : KCreditToken, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : KTransaction
+   fun pay (productId : Long, token : KCreditToken, passwordProvider : PasswordProvider, pkcSalt : ByteArray) : KTransaction
    {
       Log.debug( "Using token [${token.id}]" )
-      val publicKey = Crypto.getKey( passwordProvider, pkc_salt, Crypto::publicKey )
-      val signature = Crypto.signatureOf( productId.toByteArray(), passwordProvider, pkc_salt)
+      val publicKey = Crypto.getKey( passwordProvider, pkcSalt, Crypto::publicKey )
+      val signature = Crypto.signatureOf( productId.toByteArray(), passwordProvider, pkcSalt)
 
       return KTransaction( productId, signature, publicKey )
    }

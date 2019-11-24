@@ -22,17 +22,17 @@ class KDHT () : Filable, Loggable
    var ownerName = ""
 
    init
-   { log("created", Config.flag( "KAD_CREATE" )) }
+   { log("created", Config.trigger( "KAD_CREATE" )) }
 
    fun initialize (name : String)
    {
       ownerName = name
-      log("initializing", Config.flag( "KAD_INITIALIZE" ))
+      log("initializing", Config.trigger( "KAD_INITIALIZE" ))
    }
 
    fun store (content : KStorageEntry) : Boolean
    {
-      log("adding content [${content.contentMetadata.key.shortName()}]", Config.flag( "KAD_CONTENT_PUT_GET" ), WARN)
+      log("adding content [${content.contentMetadata.key.shortName()}]", Config.trigger( "KAD_CONTENT_PUT_GET" ), WARN)
       var ret : Boolean
 
       if (contentManager.contains( content.contentMetadata ))
@@ -61,7 +61,7 @@ class KDHT () : Filable, Loggable
       }
       catch (e: Exception)
       {
-         log("adding content failed! [${content.contentMetadata.key.shortName()}], ${e.message}", Config.flag( "KAD_CONTENT_PUT_GET" ), WARN)
+         log("adding content failed! [${content.contentMetadata.key.shortName()}], ${e.message}", Config.trigger( "KAD_CONTENT_PUT_GET" ), WARN)
          ret = false
       }
 

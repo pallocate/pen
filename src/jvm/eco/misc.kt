@@ -35,7 +35,7 @@ actual fun pluginInstance (className : String) : Plugin
 
 actual fun createDir (path : String)
 {
-   Log.debug( {"creating directory $path"}, Config.flag( "FILES" ))
+   Log.debug( "creating directory $path" )
 
    try
    { (File( path )).mkdirs() }

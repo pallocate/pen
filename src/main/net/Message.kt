@@ -7,7 +7,7 @@ import pen.eco.types.PasswordProvider
 
 /** An encrypted message. Message will probably move to some other package in the future. */
 class Message (var content : ByteArray, val contactId : Long, val messageId : Long, passwordProvider : PasswordProvider,
-pkc_salt : ByteArray, othersPublicKey : ByteArray) : Serializable
+pkcSalt : ByteArray, othersPublicKey : ByteArray) : Serializable
 {
    init
    {
@@ -15,15 +15,15 @@ pkc_salt : ByteArray, othersPublicKey : ByteArray) : Serializable
       if (content.size == 0 || contactId <= 0 || messageId <= 0)
          Log.warn( "Create message failed! (inclomlete input)" )
       else
-         content = Crypto.pkcEncrypt( content, passwordProvider, pkc_salt, othersPublicKey )
+         content = Crypto.pkcEncrypt( content, passwordProvider, pkcSalt, othersPublicKey )
    }
 
-   fun decrypt (passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
+   fun decrypt (passwordProvider : PasswordProvider, pkcSalt : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
       Log.debug( "Decrypting message" )
       var ret = ByteArray( 0 )
 
-      ret = Crypto.pkcDecrypt( content, passwordProvider, pkc_salt, othersPublicKey )
+      ret = Crypto.pkcDecrypt( content, passwordProvider, pkcSalt, othersPublicKey )
 
       return ret
    }

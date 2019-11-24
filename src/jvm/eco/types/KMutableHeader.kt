@@ -43,6 +43,4 @@ class KMutableHeader(
    }
 
    fun toKHeader () = KHeader( version, id, year, iteration, level, flags, timestamp )
-
-   override fun toString () = encodeIni()
 }

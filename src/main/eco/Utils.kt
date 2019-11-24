@@ -60,13 +60,13 @@ object Utils : Loggable
    /** Convertes a Base64 encoded String to a ByteArray. */
    fun decodeB64 (encoded : String) : ByteArray
    {
-      log("Decoding Base64 encoded string", Config.flag( "PLATFORM" ))
+      log("Decoding Base64 encoded string", Config.trigger( "PLATFORM" ))
       var ret = ByteArray( 0 )
 
       try
       { ret = decode_b64(stringToByteArray( encoded )) }
       catch (t : Throwable)
-      { log( "Decoding Base64 failed!", Config.flag( "PLATFORM" ), LogLevel.ERROR) }
+      { log( "Decoding Base64 failed!", Config.trigger( "PLATFORM" ), LogLevel.ERROR) }
 
       return ret
    }
@@ -74,13 +74,13 @@ object Utils : Loggable
    /** Convertes a ByteArray to a Base64 encoded String. */
    fun encodeB64 (input : ByteArray) : String
    {
-      log("Encoding string to Base64", Config.flag( "PLATFORM" ))
+      log("Encoding string to Base64", Config.trigger( "PLATFORM" ))
       var ret = ""
 
       try
       { ret = byteArrayToString(encode_b64( input )) }
       catch (t : Throwable)
-      { log( "Encoding Base64 failed!", Config.flag( "PLATFORM" ), LogLevel.ERROR) }
+      { log( "Encoding Base64 failed!", Config.trigger( "PLATFORM" ), LogLevel.ERROR) }
 
       return ret
    }
@@ -89,25 +89,37 @@ object Utils : Loggable
    fun safeString (string : String?) = if (string == null) "" else string
 
    /** Convertes String to a valid Int. */
-   fun stringToInt (input : String) : Int
+   fun stringToInt (input : String, min : Int = Int.MIN_VALUE, max : Int = Int.MAX_VALUE, coerce : Boolean = false) : Int
    {
       var output = 0
-      val convertedValue = input.toIntOrNull()
+      val value = input.toIntOrNull()
 
-      if (convertedValue != null)
-         output = convertedValue
+      if (value != null)
+      {      
+         if (coerce)
+            output = value.coerceIn( min, max )
+         else
+            if (value >= min && value <= max)
+               output = value
+      }
 
       return output
    }
 
    /** Convertes String to a valid Long. */
-   fun stringToLong (input : String) : Long
+   fun stringToLong (input : String, min : Long = Long.MIN_VALUE, max : Long = Long.MAX_VALUE, coerce : Boolean = false) : Long
    {
       var output = 0L
-      val convertedValue = input.toLongOrNull()
+      val value = input.toLongOrNull()
 
-      if (convertedValue != null)
-         output = convertedValue
+      if (value != null)
+      {
+         if (coerce)
+            output = value.coerceIn( min, max )
+         else
+            if (value >= min && value <= max)
+               output = value                                                      
+      }
 
       return output
    }
@@ -116,10 +128,10 @@ object Utils : Loggable
    fun stringToFloat (input : String) : Float
    {
       var output = 0F
-      val convertedValue = input.toFloatOrNull()
+      val value = input.toFloatOrNull()
 
-      if (convertedValue != null)
-         output = convertedValue
+      if (value != null)
+         output = value
 
       return output
    }

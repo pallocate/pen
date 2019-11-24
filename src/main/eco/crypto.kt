@@ -18,7 +18,7 @@ expect object Crypto : Loggable
    /** Signs a text with a base64 encoded signature at the end.
      * @param text The text to be signed.
      * @return The text with an added signature. */
-   fun signText (text : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
+   fun signText (text : ByteArray, passwordProvider : PasswordProvider, pkcSalt : ByteArray) : ByteArray
 
    /** Verifies text using signature message from the end, which is then stripped off.
      * @param signedText The signed text to be verified.
@@ -29,7 +29,7 @@ expect object Crypto : Loggable
    /** Returns only the signature of the input.
      * @param input The data to calculate signature from.
      * @return The signature. */
-   fun signatureOf (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
+   fun signatureOf (input : ByteArray, passwordProvider : PasswordProvider, pkcSalt : ByteArray) : ByteArray
 
    /** Verifies some signed data.
      * @param input The data that was signed.
@@ -41,7 +41,7 @@ expect object Crypto : Loggable
    /** Signs a binary message.
      * @param binary The binary to be signed.
      * @return The signed binary. */
-   fun signBinary (binary : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray) : ByteArray
+   fun signBinary (binary : ByteArray, passwordProvider : PasswordProvider, pkcSalt : ByteArray) : ByteArray
 
    /** Verifies a signed binary message.
      * @param signedBinary The signed message.
@@ -52,24 +52,24 @@ expect object Crypto : Loggable
    /** Performes a symetric encryption of the plain text, and puts the used nonce in the beginning.
      * @param plainText The plain text to be encrypted.
      * @return The nonce plus the cipher text. */
-   fun encrypt (plainText : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
+   fun encrypt (plainText : ByteArray, passwordProvider : PasswordProvider, skcSalt : ByteArray) : ByteArray
 
    /** Does a symetric decryption of the input.
      * @param input Input made up by nonce plus cipher text.
      * @return The original plain text. */
-   fun decrypt (input : ByteArray, passwordProvider : PasswordProvider, skc_salt : ByteArray) : ByteArray
+   fun decrypt (input : ByteArray, passwordProvider : PasswordProvider, skcSalt : ByteArray) : ByteArray
 
    /** Encrypts plain text using public key cryptography.
      * @param plainText The plain text to be encrypted.
      * @param othersPublicKey The recievers public key.
      * @return The nonce plus the cipher text. */
-   fun pkcEncrypt (plainText : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
+   fun pkcEncrypt (plainText : ByteArray, passwordProvider : PasswordProvider, pkcSalt : ByteArray, othersPublicKey : ByteArray) : ByteArray
 
    /** Decrypts input using public key cryptography.
      * @param input Input made up by nonce plus cipher text.
      * @param othersPublicKey The senders public key.
      * @return The original plain text. */
-   fun pkcDecrypt (input : ByteArray, passwordProvider : PasswordProvider, pkc_salt : ByteArray, othersPublicKey : ByteArray) : ByteArray
+   fun pkcDecrypt (input : ByteArray, passwordProvider : PasswordProvider, pkcSalt : ByteArray, othersPublicKey : ByteArray) : ByteArray
 
    /** The key size requiered for signatures. */
    fun publicSigningKeySize () : Int

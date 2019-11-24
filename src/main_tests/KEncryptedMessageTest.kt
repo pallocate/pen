@@ -1,4 +1,4 @@
-package pen.tests.net
+package pen.tests
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
@@ -15,7 +15,7 @@ class KEncryptedMessageTest
    @Test
    fun `Alice to Bob` ()
    {
-      val encryptedMessage = Message( testMessage, Network.generateID(), Network.generateID(), Alice, Alice.me.pkcSalt(), Bob.me.publicKey( Bob ) )
+      val encryptedMessage = Message( testMessage, Network.generateId(), Network.generateId(), Alice, Alice.me.pkcSalt(), Bob.me.publicKey( Bob ) )
       val decryptedMessage = encryptedMessage.decrypt( Bob, Bob.me.pkcSalt(), Alice.me.publicKey( Alice ) )
       Assertions.assertArrayEquals( testMessage, decryptedMessage )
    }

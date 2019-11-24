@@ -6,9 +6,9 @@ import pen.eco.types.PasswordProvider
 
 class KProposal (val header : KHeader = KHeader(), val items : List<KItem>)
 {
-   override fun toString () : String
+   fun encode () : String
    {
-      var ret = header.toString()
+      var ret = header.encode()
 
       for (item in items)
          ret += item
@@ -19,7 +19,7 @@ class KProposal (val header : KHeader = KHeader(), val items : List<KItem>)
    /** Returns the proposal signed as a array of bytes. */
    fun signed (passwordProvider : PasswordProvider, salt : ByteArray) : ByteArray
    {
-      val plainText = Utils.stringToByteArray( toString() )
+      val plainText = Utils.stringToByteArray( encode() )
       return Crypto.signText( plainText, passwordProvider, salt )
    }
 }

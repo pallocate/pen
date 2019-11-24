@@ -1,7 +1,9 @@
 package pen.net.kad.operations
 
 import java.io.IOException
-import pen.eco.Log
+import pen.eco.Loggable
+import pen.eco.LogLevel.WARN
+import pen.eco.LogLevel.ERROR
 
 import pen.eco.Config
 import pen.net.kad.Constants
@@ -16,7 +18,7 @@ import pen.net.kad.node.KNode
 import pen.net.kad.routing.KRoutingTable
 
 /** Refresh/Restore the data on this node by sending the data to the K-Closest nodes to the data */
-class KContentRefreshOperation (private val server : KServer, private val node : KNode, private val routingTable : KRoutingTable, private val dht : KDHT) : Operation
+class KContentRefreshOperation (private val server : KServer, private val node : KNode, private val routingTable : KRoutingTable, private val dht : KDHT) : Operation, Loggable
 {
    /** For each content stored on this DHT, distribute it to the K closest nodes
      * Also delete the content if this node is no longer one of the K closest nodes
@@ -67,11 +69,12 @@ class KContentRefreshOperation (private val server : KServer, private val node :
             catch (e : Exception)
             {
                /* It would be weird if the content is not found here */
-               Log.err( "KContentRefreshOperation(${node})- remove local content failed!" )
+               log("KContentRefreshOperation(${node})- remove local content failed!", Config.trigger( "KAD_CONTENT_PUT_GET" ), ERROR)
             }
          }
          else
-            Log.warn({ "KContentRefreshOperation(${node})- entry not found!"}, Config.flag( "KAD_CONTENT_PUT_GET" ))
+            log({ "KContentRefreshOperation(${node})- entry not found!"}, Config.trigger( "KAD_CONTENT_PUT_GET" ), WARN)
       }
    }
+   override fun originName () = "KContentRefreshOperation"
 }

@@ -12,7 +12,7 @@ object KCTB : KMerkleTree(), Loggable
    /** Returns the last occurrence of a token with the specified id. */
    fun last (id : Long) : Token
    {
-      log("Finding last occurrence of token \"$id\"", Config.flag( "PLUGINS_CTB" ))
+      log("Finding last occurrence of token \"$id\"", Config.trigger( "PLUGINS_CTB" ))
       var ret : Token = NoToken()
 
       if (lastIdx > 0)
@@ -24,12 +24,12 @@ object KCTB : KMerkleTree(), Loggable
                if (leaf.token.id == id)
                {
                   ret = leaf.token
-                  log("Token found \"$id\"", Config.flag( "PLUGINS_CTB" ))
+                  log("Token found \"$id\"", Config.trigger( "PLUGINS_CTB" ))
                   break
                }
             }
             else
-               log("Wrong type! (KTokenMerkleLeaf expected)", true, ERROR )
+               log("Wrong type! (KTokenMerkleLeaf expected)", Config.trigger( "PLUGINS_CTB" ), ERROR )
          }
 
       return ret

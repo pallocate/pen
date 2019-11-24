@@ -16,6 +16,11 @@ class NoRole : Role { override var name = ""; override var icon = "" }
 /** An participant in the planning process. */
 abstract class Participant : Role, Serializable
 { var me = Me() }
+open class TestParticipant : Participant()
+{
+   override var name = ""
+   override var icon = ""
+}
 
 /** Other roles in the economy. */
 abstract class Other : Role, Serializable

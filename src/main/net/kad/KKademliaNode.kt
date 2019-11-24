@@ -46,7 +46,7 @@ class KKademliaNode () : Filable, Loggable
       /** Loads  file. */
       fun loadFromFile (ownerName : String) : KKademliaNode?
       {
-         Log.debug({"$ownerName- loading KKademliaNode"}, Config.flag( "KAD_SAVE_LOAD" ))
+         Log.debug( "$ownerName- loading KKademliaNode" )
          var ret : KKademliaNode? = null
 
          try
@@ -136,7 +136,7 @@ class KKademliaNode () : Filable, Loggable
 
    private fun initialize ()
    {
-      log("initializing", Config.flag( "KAD_INITIALIZE" ))
+      log("initializing", Config.trigger( "KAD_INITIALIZE" ))
 
       routingTable.initialize( node )
       dht.initialize( ownerName )
@@ -148,28 +148,28 @@ class KKademliaNode () : Filable, Loggable
    @Synchronized
    fun bootstrap (otherNode : KNode)
    {
-      log("bootstrapping to (${otherNode})", Config.flag( "KAD_BOOTSTRAP" ))
+      log("bootstrapping to (${otherNode})", Config.trigger( "KAD_BOOTSTRAP" ))
       val startTime = System.nanoTime()*1000
       val op = KConnectOperation( server, node, routingTable, dht, otherNode )
 
       try
       {
          op.execute()
-         log("bootstrap complete", Config.flag( "KAD_BOOTSTRAP" ))
+         log("bootstrap complete", Config.trigger( "KAD_BOOTSTRAP" ))
 
          val endTime = System.nanoTime()*1000
          Stats.setBootstrapTime( endTime - startTime )
       }
       catch (e: Exception)
       {
-         log("connection failed, ${e.message}", Config.flag( "KAD_BOOTSTRAP" ))
+         log("connection failed, ${e.message}", Config.trigger( "KAD_BOOTSTRAP" ))
       }
    }
 
    fun put(content : KContent) = put(KStorageEntry( content ))
    fun put (entry : KStorageEntry) : Int
    {
-      log("storing entry [${entry.content.key.shortName()}]", Config.flag( "KAD_CONTENT_PUT_GET" ))
+      log("storing entry [${entry.content.key.shortName()}]", Config.trigger( "KAD_CONTENT_PUT_GET" ))
       val storeOperation = KStoreOperation( server, node, routingTable, dht, entry )
       storeOperation.execute()
 
@@ -179,13 +179,13 @@ class KKademliaNode () : Filable, Loggable
 
    fun putLocally (content : KContent)
    {
-      log("storing entry [${content.key.shortName()}] locally", Config.flag( "KAD_CONTENT_PUT_GET" ))
+      log("storing entry [${content.key.shortName()}] locally", Config.trigger( "KAD_CONTENT_PUT_GET" ))
       dht.store(KStorageEntry( content ))
    }
 
    fun get (kGetParameter : KGetParameter) : StorageEntry
    {
-      log("retrieving entry [${kGetParameter.key.shortName()}]", Config.flag( "KAD_CONTENT_PUT_GET" ))
+      log("retrieving entry [${kGetParameter.key.shortName()}]", Config.trigger( "KAD_CONTENT_PUT_GET" ))
       if (dht.contains( kGetParameter ))
       {
          /* If the content exist in our own KDHT, then return it. */
@@ -218,7 +218,7 @@ class KKademliaNode () : Filable, Loggable
 
    private fun saveState ()
    {
-      log("saving", Config.flag( "KAD_SAVE_LOAD" ))
+      log("saving", Config.trigger( "KAD_SAVE_LOAD" ))
       val dir = storageDir( ownerName ) + Constants.SLASH
 
       /* Store Basic  data. */
@@ -236,7 +236,7 @@ class KKademliaNode () : Filable, Loggable
 
    private fun startRefreshing ()
    {
-      log("start refreshing", Config.flag( "KAD_INTERNAL" ))
+      log("start refreshing", Config.trigger( "KAD_INTERNAL" ))
       refreshTimer = Timer( true )
       refreshTask = RefreshTimerTask()
       refreshTimer?.schedule( refreshTask, KadConstants.RESTORE_INTERVAL, KadConstants.RESTORE_INTERVAL )
@@ -244,7 +244,7 @@ class KKademliaNode () : Filable, Loggable
 
    private fun stopRefreshing ()
    {
-      log("stop refreshing", Config.flag( "KAD_INTERNAL" ))
+      log("stop refreshing", Config.trigger( "KAD_INTERNAL" ))
       refreshTask.cancel()
       refreshTimer?.cancel()
       refreshTimer?.purge()
@@ -275,12 +275,12 @@ class KKademliaNode () : Filable, Loggable
          try
          { refresh() }
          catch (e : IOException)
-         { log("refresh failed!", Config.flag( "KAD_INTERNAL" ), WARN) }
+         { log("refresh failed!", Config.trigger( "KAD_INTERNAL" ), WARN) }
       }
 
       override fun cancel () : Boolean
       {
-         log("refresh canceled", Config.flag( "KAD_INTERNAL" ))
+         log("refresh canceled", Config.trigger( "KAD_INTERNAL" ))
          return false
       }
    }

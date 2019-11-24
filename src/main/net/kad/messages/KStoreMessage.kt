@@ -1,6 +1,6 @@
 package pen.net.kad.messages
 
-import pen.eco.Log
+import pen.eco.Loggable
 
 import pen.eco.Config
 import pen.net.kad.StorageEntry
@@ -8,13 +8,13 @@ import pen.net.kad.dht.KStorageEntry
 import pen.net.kad.node.KNode
 
 /** A KStoreMessage used to send a store message to a node */
-class KStoreMessage () : Message
+class KStoreMessage () : Message, Loggable
 {
    var origin                    = KNode()
    var payload                   = KStorageEntry()
 
    init
-   { Log.debug( {"<STORE>"}, Config.flag( "KAD_MSG_CREATE" )) }
+   { log( {"<STORE>"}, Config.trigger( "KAD_MSG_CREATE" )) }
 
    constructor (origin : KNode, payload : KStorageEntry) : this()
    {
@@ -23,4 +23,5 @@ class KStoreMessage () : Message
    }
 
    override fun code () = Codes.STORE
+   override fun originName () = "KStoreMessage"
 }

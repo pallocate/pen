@@ -22,8 +22,8 @@ class KFindValueReceiver (private val server : KServer, private val node : KNode
    {
       if (message is KFindValueMessage)
       {
-         log({"message received"}, Config.flag( "KAD_CONTENT_FIND" ))
-         log({"content info: {owner: ${message.params.ownerName}}, {type: ${message.params.type}}, {key: \"${message.params.key}\"}"}, Config.flag( "KAD_CONTENT_INFO" ))
+         log({"message received"}, Config.trigger( "KAD_CONTENT_FIND" ))
+         log({"content info: {owner: ${message.params.ownerName}}, {type: ${message.params.type}}, {key: \"${message.params.key}\"}"}, Config.trigger( "KAD_CONTENT_INFO" ))
          kRoutingTable.insert( message.origin )
 
          /* Check if we can have this data */

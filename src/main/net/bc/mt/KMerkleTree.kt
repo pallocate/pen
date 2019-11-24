@@ -26,7 +26,7 @@ open class KMerkleTree : Loggable
      * @param nodeIdx Up to what node to calculate hashes. */
    fun hashes (nodeIdx : Int = rootIdx, updateHashes : Boolean = false) : ByteArray
    {
-      log("Calculates merkle tree hashes", Config.flag( "MERKLE_TREE" ))
+      log("Calculates merkle tree hashes", Config.trigger( "MERKLE_TREE" ))
       return hashesHelper( nodeIdx, nodeIdx, updateHashes )
    }
    private fun hashesHelper (nodeIdx : Int, leftmost : Int, updateHashes : Boolean) : ByteArray
@@ -62,7 +62,7 @@ open class KMerkleTree : Loggable
 
    fun add (merkleNode : KMerkleNode)
    {
-      log("Adding ${merkleNode::class.simpleName} to merkle tree", Config.flag( "MERKLE_TREE" ))
+      log("Adding ${merkleNode::class.simpleName} to merkle tree", Config.trigger( "MERKLE_TREE" ))
       lastIdx += 2
 
       if (lastIdx > rootIdx*2)
@@ -73,7 +73,7 @@ open class KMerkleTree : Loggable
 
    private fun doubleCapacity ()
    {
-      log("Doubling merkle tree capacity", Config.flag( "MERKLE_TREE" ))
+      log("Doubling merkle tree capacity", Config.trigger( "MERKLE_TREE" ))
       rootIdx = rootIdx*2
       var i = 0
       val tmp = Array<MerkleNode>(rootIdx*2, { if (i++ % 2 == 0) KMerkleNode() else NoMerkleNode() }) // Create a new array

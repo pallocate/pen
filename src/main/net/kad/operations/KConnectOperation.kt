@@ -67,14 +67,14 @@ class KConnectOperation (private val server : KServer, private val node : KNode,
          KBucketRefreshOperation( server, node, routingTable, dht ).execute()
       }
       catch (e : InterruptedException)
-      { log("interrupted", Config.flag( "KAD_BOOTSTRAP" ), WARN) }
+      { log("interrupted", Config.trigger( "KAD_BOOTSTRAP" ), WARN) }
    }
 
    /** Receives an AcknowledgeMessage from the bootstrap node. */
    @Synchronized
    override fun receive (message : Message, conversationId : Int)
    {
-      log("received message", Config.flag( "KAD_CONTACT_CONNECT" ))
+      log("received message", Config.trigger( "KAD_CONTACT_CONNECT" ))
 
       /* The bootstrap node has responded, insert it into our space */
       routingTable.insert( otherNode )
