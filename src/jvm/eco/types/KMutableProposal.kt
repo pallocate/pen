@@ -87,7 +87,7 @@ class KMutableProposal  (
          success = true
       }
       catch (e : Exception)
-      { Log.err( "Proposal save failiure!" ) }
+      { Log.error( "Proposal save failiure!" ) }
 
       return success
    }

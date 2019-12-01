@@ -10,15 +10,15 @@ object Config
 
    fun trigger (name : String) : LogLevel
    {
-      var trigValue = LogLevel.INFO
+      var triggerValue = LogLevel.INFO
 
       val getResult = logValues.get( name )
       if (getResult != null)
       {
-         val trig = Utils.stringToInt( getResult, LogLevel.QUIET.ordinal, LogLevel.DEBUG.ordinal, true )
-         trigValue = enumValues<LogLevel>()[trig]
+         val intValue = Utils.stringToInt( getResult, LogLevel.QUIET.ordinal, LogLevel.DEBUG.ordinal, true )
+         triggerValue = enumValues<LogLevel>()[intValue]
       }
 
-      return trigValue
+      return triggerValue
    }
 }

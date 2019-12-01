@@ -31,5 +31,6 @@ creditToken.userKey, creditToken.userKeySignature, account, accountSignature ) {
 class KAccountedToken (usedToken : KUsedToken) : Token( usedToken.id, usedToken.value, usedToken.version,
 usedToken.timestamp, usedToken.issuer, usedToken.issuenceSignature, usedToken.userKey, usedToken.userKeySignature,
 usedToken.account, usedToken.accountSignature ) {}
+
 // val issuenceData = encodeLong( id ) + encodeInt( value ) + encodeLong( issuer ) + encodeLong( timestamp )
 // issuenceSignature = Crypto.signatureOf( issuenceData, passwordProvider, pkcSalt )

@@ -74,7 +74,7 @@ class KKademliaNode () : Filable, Loggable
             }
          }
          catch (e : Exception)
-         { Log.err( "${ownerName}- KKademliaNode load failed! ${e.message}" ) }
+         { Log.error( "${ownerName}- KKademliaNode load failed! ${e.message}" ) }
 
          return ret
       }

@@ -28,7 +28,7 @@ interface IniReader
          Log.info( "Ini file loaded" )
       }
       catch (e : Exception)
-      { Log.err( "Ini file load failiure!" ) }
+      { Log.error( "Ini file load failiure!" ) }
    }
 
    private fun parse (iter : ListIterator<String>)

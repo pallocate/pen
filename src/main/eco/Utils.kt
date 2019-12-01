@@ -5,6 +5,7 @@ expect fun encode_b64 (bytes : ByteArray) : ByteArray
 expect fun decode_b64 (encoded : ByteArray) : ByteArray
 expect fun hash_md5 (bytes : ByteArray) : ByteArray
 expect fun createDir (path : String)
+expect fun now () : Long
 
 /** Convertes a ByteArray to a hex encoded String. */
 fun ByteArray.toHex () = this.joinToString( "" ) { it.toInt().and( 0xFF ).toString( 16 ).padStart( 2, '0' )}

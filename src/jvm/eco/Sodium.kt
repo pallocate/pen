@@ -29,13 +29,13 @@ class SodiumName
                               ".so"
                            else
                            {
-                              Log.err( "SodiumName- Unknown OS" )
+                              Log.error( "SodiumName- Unknown OS" )
                               ""
                            }
          filename = Constants.LIBSODIUM_DIR + Constants.SLASH + "libsodium" + arch + extension
       }
       catch (e : Exception)
-      { Log.err( "SodiumName- Could not determine OS/architecture" ) }
+      { Log.error( "SodiumName- Could not determine OS/architecture" ) }
    }
 }
 

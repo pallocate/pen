@@ -13,21 +13,19 @@ interface PlaceHolder : Loggable
       return value as T
    }
 
-   fun any (msg : String?, returnValue : Any) = logDebug<Any>( msg!!, returnValue )
+   fun unit (origin : String) = logDebug<Unit>( origin, Unit )
 
-   fun unit (msg : String?) = logDebug<Unit>( msg!!, Unit )
+   fun boolean (origin : String) = logDebug<Boolean>( origin, false )
 
-   fun boolean (msg : String?, returnValue : Boolean = false) = logDebug<Boolean>( msg!!, returnValue )
+   fun int (origin : String) = logDebug<Int>( origin, -1 )
 
-   fun int (msg : String?, returnValue : Int = 0) = logDebug<Int>( msg!!, returnValue )
+   fun long (origin : String) = logDebug<Long>( origin, -1L )
 
-   fun long (msg : String?, returnValue : Long = 0L) = logDebug<Long>( msg!!, returnValue )
+   fun double (origin : String) = logDebug<Double>( origin, -1.toDouble() )
 
-   fun double (msg : String?, returnValue : Double = 0.toDouble()) = logDebug<Double>( msg!!, returnValue )
+   fun string (origin : String) = logDebug<String>( origin, "" )
 
-   fun string (msg : String?, returnValue : String = "") = logDebug<String>( msg!!, returnValue )
-
-   fun byteArray (msg : String?, returnValue : ByteArray = ByteArray( 0 )) = logDebug<ByteArray>( msg!!, returnValue )
+   fun byteArray (origin : String) = logDebug<ByteArray>( origin, ByteArray( 0 ) )
 
    override fun originName () = "PlaceHolder"
 }

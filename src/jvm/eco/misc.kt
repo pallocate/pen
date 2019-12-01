@@ -7,6 +7,8 @@ import java.util.Base64
 import java.io.File
 import java.io.FileReader
 import java.security.MessageDigest
+import java.time.Clock
+import java.time.Instant
 import pen.eco.types.Plugin
 import pen.eco.types.NoPlugin
 
@@ -15,6 +17,12 @@ actual fun user_home () = System.getProperty( "user.home" )
 actual fun encode_b64 (bytes : ByteArray) = Base64.getEncoder().encode( bytes )
 actual fun decode_b64 (encoded : ByteArray) = Base64.getDecoder().decode( encoded )
 actual fun hash_md5 (bytes : ByteArray) = MessageDigest.getInstance( "MD5" ).digest( bytes )
+
+actual fun now () : Long
+{
+   val clock = Clock.systemUTC()
+   return Instant.now( clock ).getEpochSecond()
+}
 
 actual fun pluginInstance (className : String) : Plugin
 {
@@ -28,7 +36,7 @@ actual fun pluginInstance (className : String) : Plugin
                tmp
             else
             {
-               Log.err( "plugin instanciation failed \"${className}\"" )
+               Log.error( "plugin instanciation failed \"${className}\"" )
                NoPlugin()
             }
 }
@@ -50,9 +58,9 @@ actual fun loadConf (filename : String) : Map<String, String>
 
    try
    {
-      resultMap.put( "PLATFORM", "true" )
-      resultMap.put( "PLACE_HOLDER", "true" )
-      resultMap.put( "FILES", "true" )
+      resultMap.put( "PLATFORM", "5" )
+      resultMap.put( "PLACE_HOLDER", "5" )
+      resultMap.put( "FILES", "5" )
 
       properties.load(FileReader( filename ))
 

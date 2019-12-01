@@ -14,7 +14,7 @@ class KByteArrayConverter : Converter
       if (value is ByteArray)
       {
          ret = "{ \"bytes\" : \"${Utils.encodeB64( value )}\" }"
-         pen.eco.Log.err( "Encoded value: " +  value )
+         pen.eco.Log.error( "Encoded value: " +  value )
       }
 
       return ret
