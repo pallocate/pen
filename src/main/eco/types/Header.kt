@@ -14,75 +14,63 @@ interface Header
    val iteration : Int
    /** Federative level in the economy. */
    val level : Int
-   /** Flags */
-   val flags : Int
+   /** What economic function the proposal belong to, consumption or production. */
+   val function : EconomicFunction
    /** Epoch seconds timestamp. */
    val timestamp : Long
 
-   /** If this is a production proposal, otherwise consumption. */
-   fun isProduction () : Boolean
-   { return isFlagSet( Constants.IS_PRODUCTION ) }
-
-   /** Progress of the planning process in the form "year:iteration[-P|-C]. Optional extension letter P or C indicates the Production or Consumption trees. */
-   fun progression (treeLetter : Boolean = false) : String
+   /** Progress of the planning process in the form "year:iteration[-P|-C]. Optional extension letter P or C
+     * indicates Production or Consumption. */
+   fun progression (pc : Boolean = false) : String
    {
-      val progress = year.toString() + ":" + iteration.toString()
-      return progress + if (treeLetter)
-                        {
-                           if (isProduction())
-                              "-P"
-                           else
-                              "-C"
-                        }
-                        else
-                           ""
+      val stringBuilder = StringBuilder()
+
+      stringBuilder.append( year.toString() )
+      stringBuilder.append( ":" + iteration )
+      if (pc) stringBuilder.append( function.letter() )
+
+      return stringBuilder.toString()
    }
 
    /** Returns a string that can be used to identify the block header in a log file. */
    fun idString () : String = progression( true ) + " (" + id + ")"
 
-   /** Tests status of the specified flag.
-     * @return True if the flag is set. */
-   fun isFlagSet (flag : Int) : Boolean = (flags and flag > 0)
-
    /** Encodes header to "ini" text. */
    fun encode () : String
    {
-      var ret = "[PROPOSAL]\n"
+      val stringBuilder = StringBuilder()
 
-      ret += ("Version:    ${version}\n")
+      stringBuilder.append( "[PROPOSAL]\n" )
+      stringBuilder.append( "Version:    ${version}\n" )
 
       if (id != 0L)
-         ret += ("Id:         ${id}\n")
-
-      ret += ("Year:       ${year}\n")
-      ret += ("Iteration:  ${iteration}\n")
-      ret += ("Level:      ${level}\n")
-
-      if (isProduction())
-         ret += ("Tree:       Production\n")
-      else
-         ret += ("Tree:       Consumption\n")
-
+         stringBuilder.append( "Id:         ${id}\n" )
+      if (year != 0)
+         stringBuilder.append( "Year:       ${year}\n" )
+      if (iteration != 0)
+         stringBuilder.append( "Iteration:  ${iteration}\n" )
+      if (level != 0)
+         stringBuilder.append( "Level:      ${level}\n" )
+      if (function != EconomicFunction.UNDEFINED)
+         stringBuilder.append( "Function:   ${function}\n" )
       if (timestamp != 0L)
-         ret += ("Timestamp:  ${timestamp}\n")
+         stringBuilder.append( "Timestamp:  ${timestamp}\n" )
 
-
-      return ret
+      return stringBuilder.toString()
    }
 }
 
 /** Proposal header. */
 class KHeader (
-                     override val version : Int                            = Constants.VERSION,
-                     override val id : Long                                = 0L,
-                     override val year : Int                               = 0,
-                     override val iteration : Int                          = 0,
-                     override val level : Int                              = 0,
-                     override val flags : Int                              = 0,
-                     override val timestamp : Long                         = 0L
-                  ) : Header
+                  override val version : Int                            = Constants.VERSION,
+                  override val id : Long                                = 0L,
+                  override val year : Int                               = 0,
+                  override val iteration : Int                          = 0,
+                  override val level : Int                              = 0,
+                  override val function : EconomicFunction              = EconomicFunction.UNDEFINED,
+                  override val timestamp : Long                         = 0L
+               ) : Header
 {
    /** Makes a copy of this header. */
-   fun copy () = KHeader( version, id, year, iteration, level, flags, timestamp )
+   fun copy () = KHeader( version, id, year, iteration, level, function, timestamp )
 }

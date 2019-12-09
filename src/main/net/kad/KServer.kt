@@ -61,8 +61,7 @@ class KServer () : Loggable
       catch (e : Exception)
       { log("create socket failed!", Config.trigger( "KAD_CREATE" ), ERROR) }
 
-      if (socket != null)
-      {
+      socket?.run {
          startListener()                                                        // Start listening for incoming requests in a new thread
          isRunning = true
       }
@@ -240,10 +239,7 @@ class KServer () : Loggable
          println( "Receiver ($r): ${receivers[r]}" )
    }
 
-   override fun originName () = if (localNode == null)
-                                    "KServer"
-                                 else
-                                    "KServer(${localNode!!.getNode()})"
+   override fun originName () = "KServer" + localNode?.getNode()
 
    /** Task that gets called by a separate thread if a timeout for a receiver occurs.
      * When a reply arrives this task must be canceled using the `cancel()`

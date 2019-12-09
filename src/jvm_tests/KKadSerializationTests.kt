@@ -1,8 +1,9 @@
-package pen.tests
+package pen.tests.net
 
 import java.net.InetAddress
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
+import pen.eco.Constants.SLASH
 import pen.eco.Filer
 import pen.net.kad.KKademliaNode
 import pen.net.kad.dht.KContent
@@ -17,6 +18,7 @@ import pen.net.kad.utils.KSerializableRoutingInfo
 class KKadSerializationTests
 {
    val OWNER = "Larsen"
+   val outputFilename = "dist${SLASH}test.out"
    val KEY = ByteArray(20, { 0xFF.toByte() })
 
    @Test
@@ -27,10 +29,10 @@ class KKadSerializationTests
       kServiceNode.ownerName = OWNER
 
       /* Writing KKademliaNode. */
-      Filer.write( kServiceNode, "dist/output" )
+      Filer.write( kServiceNode, outputFilename )
 
       /* Reading KKademliaNode. */
-      val deserialized = Filer.read<KKademliaNode>( "dist/output" )
+      val deserialized = Filer.read<KKademliaNode>( outputFilename )
 
       /* Testing. */
       if (deserialized is KKademliaNode)
@@ -47,10 +49,10 @@ class KKadSerializationTests
       val kNode = KNode( kNodeID, InetAddress.getLocalHost(), 49152 )
 
       /* Writing KNode. */
-      Filer.write( kNode, "dist/output" )
+      Filer.write( kNode, outputFilename )
 
       /* Reading KNode. */
-      val deserialized = Filer.read<KNode>( "dist/output" )
+      val deserialized = Filer.read<KNode>( outputFilename )
 
       /* Tests */
       if (deserialized is KNode)
@@ -73,10 +75,10 @@ class KKadSerializationTests
       kRoutingTable.initialize( kNode )
 
       /* Writing KRoutingTable. */
-      Filer.write(KSerializableRoutingInfo( kRoutingTable ), "dist/output")
+      Filer.write(KSerializableRoutingInfo( kRoutingTable ), outputFilename)
 
       /* Reading KRoutingTable. */
-      val deserialized = Filer.read<KSerializableRoutingInfo>( "dist/output" )
+      val deserialized = Filer.read<KSerializableRoutingInfo>( outputFilename )
 
       /* Testing. */
       if (deserialized is KSerializableRoutingInfo)
@@ -96,10 +98,10 @@ class KKadSerializationTests
       kDHT.initialize( OWNER )
 
       /* Writing KDHT. */
-      Filer.write( kDHT, "dist/output" )
+      Filer.write( kDHT, outputFilename )
 
       /* Reading KDHT. */
-      val deserialized = Filer.read<KDHT>( "dist/output" )
+      val deserialized = Filer.read<KDHT>( outputFilename )
 
       /* Testing. */
       if (deserialized is KDHT)
@@ -117,10 +119,10 @@ class KKadSerializationTests
       val kStorageEntry = KStorageEntry(KContent( OWNER, PAYLOAD ))
 
       /* Writing KContent. */
-      Filer.write( kStorageEntry, "dist/output" )
+      Filer.write( kStorageEntry, outputFilename )
 
       /* Reading KContent. */
-      val deserialized = Filer.read<KStorageEntry>( "dist/output" )
+      val deserialized = Filer.read<KStorageEntry>( outputFilename )
 
       /* Testing. */
       if (deserialized is KStorageEntry)

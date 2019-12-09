@@ -10,10 +10,12 @@ class KProposalTests
    @Test
    fun `Save, read` ()
    {
+      val filename = "dist${pen.eco.Constants.SLASH}test.out"
       val proposal = Examples.Proposal.mutableProposal()
+      Assertions.assertTrue( proposal.save( filename ) )
 
-      println( proposal.toString() )
-
-      Assertions.assertTrue( proposal.save( "dist/output" ) )
+      val mutableProposal = KMutableProposal()
+      mutableProposal.load( filename )
+      Assertions.assertEquals( 10000, mutableProposal.products[0].qty )
    }
 }

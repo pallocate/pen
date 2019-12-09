@@ -27,7 +27,7 @@ object Examples
             producerRole.submitHistory.add( "2019:1" )
             consumerRole.submitHistory.add( "2020:1" )
 
-            account.roles.apply {
+            with( account.roles ) {
                add( producerRole )
                add( consumerRole )
                add( DataSubject() )
@@ -57,7 +57,7 @@ object Examples
             producerRole.submitHistory.add( "2019:7" )
             producerRole.submitHistory.add( "2020:1" )
 
-            account.roles.apply {
+            with( account.roles ) {
                add( producerRole )
                add( consumerRole )
                add( DataSubject() )
@@ -81,7 +81,7 @@ object Examples
             councilRole.addMember( "Alice", Alice.me.contact )
             councilRole.addMember( "Bob", Bob.me.contact )
 
-            account.roles.apply {
+            with( account.roles ) {
                add( councilRole )
                add( KConsumer() )
                add( KProducer() )
@@ -119,7 +119,7 @@ object Examples
             councilRole.addMember( "Alice", Alice.me.contact )
             councilRole.addMember( "Bob", Bob.me.contact )
 
-            account.roles.apply {
+            with( account.roles ) {
                add( councilRole )
                add( KConsumer() )
                add( DataController() )

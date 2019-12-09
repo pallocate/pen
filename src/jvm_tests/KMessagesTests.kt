@@ -1,4 +1,4 @@
-package pen.tests
+package pen.tests.net
 
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream

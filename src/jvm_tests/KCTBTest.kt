@@ -1,4 +1,4 @@
-package pen.tests
+package pen.tests.net
 
 import org.junit.jupiter.api.*
 import pen.eco.Crypto

@@ -43,11 +43,9 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
          val requstedName = requestedPlugInfo.name
          val className = supportedPlugins.get( requstedName )                   // Lookup the plugin class name
 
-         if (className == null)
-            log( "plugin not supported \"${requestedPlugInfo}\"", Config.trigger( "PLUGIN_MANAGER" ), ERROR )
-         else
+         if (className != null)
          {
-            val plugin = pluginInstance( className )                           // Try to create a plugin from the class name
+            val plugin = pluginInstance( className )                            // Try to create a plugin from the class name
             if (plugin !is NoPlugin)
             {
                /* Check that the version of the plugin instance is acceptable. */
@@ -76,6 +74,8 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
                   log("plugin load failed(unsupported version)! expected: ${requestedPlugInfo}, found: ${plugin.info}", Config.trigger( "PLUGIN_MANAGER" ), ERROR )
             }
          }
+         else
+            log( "plugin not supported \"${requestedPlugInfo}\"", Config.trigger( "PLUGIN_MANAGER" ), ERROR )
       }
       else
          log( "possible dependency cycle detected!", Config.trigger( "PLUGIN_MANAGER" ), WARN )

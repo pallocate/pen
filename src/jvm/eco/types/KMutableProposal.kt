@@ -25,16 +25,15 @@ class KMutableProposal  (
       try
       {
          if (map.getOrElse( "version", {"0"} ).toInt() != Constants.VERSION) throw WrongVersionException()
-         if (map.getOrElse( "tree", {"consumption"} ) == "production") header.setFlag( Constants.IS_PRODUCTION )
-         header.apply(
-         {
+
+         with( header ) {
             year = map.getOrElse( "year", {"0"} ).toInt()
             iteration = map.getOrElse( "iteration", {"0"} ).toInt()
             level = map.getOrElse( "level", {"0"} ).toInt()
-         })
+            function = EconomicFunction.fromInt(map.getOrElse( "function", {"0"} ).toInt())         }
       }
-      catch (e : Exception)
-      { Log.warn( "Number conversion failed!" ) }
+       catch (e : Exception)
+      { Log.error( "Wrong version!" ) }
    }
 
    override fun itemSection (map : HashMap<String, String>)

@@ -1,6 +1,20 @@
 package pen.eco.types
 
 import pen.eco.Utils
+import pen.eco.toInt
+import pen.eco.toLong
+
+/** Convertes String to a valid Float. */
+fun String.toFloat () : Float
+{
+   var ret = 0F
+   val value = toFloatOrNull()
+
+   if (value != null)
+      ret = value
+
+   return ret
+}
 
 /** Giving a participant of the economy the necessary and updated information concerning a product.
   * @constructor Primary constructor */
@@ -23,16 +37,16 @@ open class KProduct  (
    constructor (id : String, name : String, desc : String, amount : String, prefix : String, unit : String,
    down : String, up : String, absolute : String, price : String, sensetive : String, analogue : String) : this
    (
-      Utils.stringToLong( id ),
+      id.toLong(),
       name,
       desc,
-      Utils.stringToFloat( amount ),
+      amount.toFloat(),
       prefix,
       unit,
-      Utils.stringToInt( down ),
-      Utils.stringToInt( up ),
-      Utils.stringToLong( absolute ),
-      Utils.stringToLong( price ),
+      down.toInt(),
+      up.toInt(),
+      absolute.toLong(),
+      price.toLong(),
       sensetive,
       analogue
    )

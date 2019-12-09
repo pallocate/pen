@@ -22,6 +22,42 @@ fun Long.toByteArray () : ByteArray
    return ret
 }
 
+/** Convertes String to a valid Long. */
+fun String.toLong (min : Long = Long.MIN_VALUE, max : Long = Long.MAX_VALUE, coerce : Boolean = false) : Long
+{
+   var ret = 0L
+   val value = toLongOrNull()
+
+   if (value != null)
+   {
+      if (coerce)
+         ret = value.coerceIn( min, max )
+      else
+         if (value >= min && value <= max)
+            ret = value
+   }
+
+   return ret
+}
+
+/** Convertes String to a valid Int. */
+fun String.toInt (min : Int = Int.MIN_VALUE, max : Int = Int.MAX_VALUE, coerce : Boolean = false) : Int
+{
+   var ret = 0
+   val value = toIntOrNull()
+
+   if (value != null)
+   {
+      if (coerce)
+         ret = value.coerceIn( min, max )
+      else
+         if (value >= min && value <= max)
+            ret = value
+   }
+
+   return ret
+}
+
 object Utils : Loggable
 {
    fun stringToByteArray (string : String) : ByteArray
@@ -49,7 +85,7 @@ object Utils : Loggable
       return String( charArray )
    }
 
-   /** Returns a small name/id, useful for debugging. */
+   /** A short id that might be useful in debugging. */
    fun shortName (input : ByteArray) : String
    {
       val hash = hash_md5( input )
@@ -88,54 +124,6 @@ object Utils : Loggable
 
    /** Returns a String(non-null). */
    fun safeString (string : String?) = if (string == null) "" else string
-
-   /** Convertes String to a valid Int. */
-   fun stringToInt (input : String, min : Int = Int.MIN_VALUE, max : Int = Int.MAX_VALUE, coerce : Boolean = false) : Int
-   {
-      var output = 0
-      val value = input.toIntOrNull()
-
-      if (value != null)
-      {      
-         if (coerce)
-            output = value.coerceIn( min, max )
-         else
-            if (value >= min && value <= max)
-               output = value
-      }
-
-      return output
-   }
-
-   /** Convertes String to a valid Long. */
-   fun stringToLong (input : String, min : Long = Long.MIN_VALUE, max : Long = Long.MAX_VALUE, coerce : Boolean = false) : Long
-   {
-      var output = 0L
-      val value = input.toLongOrNull()
-
-      if (value != null)
-      {
-         if (coerce)
-            output = value.coerceIn( min, max )
-         else
-            if (value >= min && value <= max)
-               output = value                                                      
-      }
-
-      return output
-   }
-
-   /** Convertes String to a valid Float. */
-   fun stringToFloat (input : String) : Float
-   {
-      var output = 0F
-      val value = input.toFloatOrNull()
-
-      if (value != null)
-         output = value
-
-      return output
-   }
 
    override fun originName () = "Utils"
 }

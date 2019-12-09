@@ -12,10 +12,7 @@ class KByteArrayConverter : Converter
    {
       var ret = ""
       if (value is ByteArray)
-      {
          ret = "{ \"bytes\" : \"${Utils.encodeB64( value )}\" }"
-         pen.eco.Log.error( "Encoded value: " +  value )
-      }
 
       return ret
    }

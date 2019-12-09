@@ -20,14 +20,16 @@ actual object Logger
 
          try
          {
-            if (fileWriter == null)
-            {
+            fileWriter?.run {
                val file = File( "app.log" )
                file.createNewFile()
                fileWriter = FileWriter( file, true )
             }
-            fileWriter?.write( timestampedMessage )
-            fileWriter?.flush()
+
+            fileWriter?.run {
+               write( timestampedMessage )
+               flush()
+            }
          }
          catch (e : Exception)
          { System.err.println( timestampedMessage ) }

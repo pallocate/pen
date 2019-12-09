@@ -80,26 +80,18 @@ class KKademliaNode () : Filable, Loggable
       }
 
       /** @return The name of the content storage folder. */
-      fun storageDir (nameDir : String, subDir : String = "nodeState" ) : String
-      {
-         val stringBuilder = StringBuilder()
-
-         stringBuilder.apply {
-            append( Constants.USER_HOME )
-            append( Constants.SLASH )
-            append( Constants.CONFIG_DIR )
-            append( Constants.SLASH )
-            append( "kademlia" )
-            append( Constants.SLASH )
-            append( nameDir )
-            append( Constants.SLASH )
-            append( subDir )
-         }
-         val dirName = stringBuilder.toString()
-         createDir( dirName )
-
-         return stringBuilder.toString()
-      }
+      fun storageDir (nameDir : String, subDir : String = "nodeState" ) : String = StringBuilder().apply {
+         append( Constants.USER_HOME )
+         append( Constants.SLASH )
+         append( Constants.CONFIG_DIR )
+         append( Constants.SLASH )
+         append( "kademlia" )
+         append( Constants.SLASH )
+         append( nameDir )
+         append( Constants.SLASH )
+         append( subDir )
+         createDir( toString() )
+      }.toString()
    }
 
    var ownerName                                  = ""

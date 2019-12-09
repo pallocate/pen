@@ -21,11 +21,4 @@ object Constants
    val LIBSODIUM_DIR                              = "dist${SLASH}lib${SLASH}isc"
    /** Name of the log file. */
    val LOG_FILE                                   = "app.log"
-
-   /* Proposal flags */
-   /** If it is a production block, otherwise consumption. */
-   const val IS_PRODUCTION                        = 1
-   /** If the proposal contains sensetive information. */
-   const val HAS_SENSETIVE_DATA                   = 2
-   //const val IS_ADJUSTMENT                        = 8
 }
