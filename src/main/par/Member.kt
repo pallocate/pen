@@ -1,10 +1,12 @@
 package pen.par
 
 import java.io.Serializable
-import pen.eco.Log
-import pen.eco.Crypto
-import pen.eco.toByteArray
-import pen.eco.types.*
+import pen.Log
+import pen.Crypto
+import pen.Constants
+import pen.PasswordProvider
+import pen.toByteArray
+import pen.eco.*
 import pen.net.Message
 import pen.net.Network
 
@@ -72,7 +74,7 @@ class UnMember : Member()
 open class KConsumer : Member(), Serializable
 {
    override var name = "Consumption"
-   override var icon = Constants.ICONS_DIR + "system-software-install.png"
+   override var icon = Constants.ICONS_DIR + Constants.SLASH + "system-software-install.png"
 
    /** Pays for a product using token. */
    fun pay (productId : Long, token : KCreditToken, passwordProvider : PasswordProvider, pkcSalt : ByteArray) : KTransaction
@@ -89,5 +91,5 @@ open class KConsumer : Member(), Serializable
 open class KProducer : Member(), Serializable
 {
    override var name = "Production"
-   override var icon = Constants.ICONS_DIR + "applications-development.png"
+   override var icon = Constants.ICONS_DIR + Constants.ICONS_DIR + "applications-development.png"
 }

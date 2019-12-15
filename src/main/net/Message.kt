@@ -1,13 +1,13 @@
 package pen.net
 
-import java.io.Serializable
-import pen.eco.Log
-import pen.eco.Crypto
-import pen.eco.types.PasswordProvider
+import pen.Log
+import pen.Utils
+import pen.Crypto
+import pen.PasswordProvider
 
 /** An encrypted message. Message will probably move to some other package in the future. */
 class Message (var content : ByteArray, val contactId : Long, val messageId : Long, passwordProvider : PasswordProvider,
-pkcSalt : ByteArray, othersPublicKey : ByteArray) : Serializable
+pkcSalt : ByteArray, othersPublicKey : ByteArray)
 {
    init
    {
@@ -29,5 +29,5 @@ pkcSalt : ByteArray, othersPublicKey : ByteArray) : Serializable
    }
 
    override fun toString () : String
-   { return String( content ) }
+   { return Utils.byteArrayToString( content ) }
 }

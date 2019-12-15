@@ -1,6 +1,6 @@
 package pen.par
 
-import pen.eco.Constants.SLASH
+import pen.Constants.SLASH
 
 object Constants
 {

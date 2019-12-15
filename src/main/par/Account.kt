@@ -1,7 +1,7 @@
 package pen.par
 
 import java.io.Serializable
-import pen.eco.Crypto
+import pen.Crypto
 import pen.net.Message
 
 /** User serializable data. */

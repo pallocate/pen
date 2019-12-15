@@ -1,9 +1,10 @@
 package pen.tests
 
-import pen.eco.Constants
+import pen.Constants
 
-import pen.eco.types.*
+import pen.PasswordProvider
 import pen.par.*
+import pen.eco.*
 
 object Examples
 {

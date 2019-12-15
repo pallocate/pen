@@ -2,7 +2,7 @@ package pen.tests.net
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
-import pen.eco.Crypto
+import pen.Crypto
 import pen.net.Network
 import pen.net.Message
 import pen.tests.Examples.Participants.Alice

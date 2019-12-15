@@ -1,9 +1,10 @@
 package pen.par
 
 import java.io.Serializable
-import java.time.LocalDateTime
-import pen.eco.Log
-import pen.eco.types.PasswordProvider
+import pen.Log
+import pen.Utils
+import pen.Constants
+import pen.PasswordProvider
 import pen.net.Message
 import pen.net.Network
 
@@ -11,7 +12,7 @@ import pen.net.Network
 open class Council : Participant(), Serializable
 {
    override var name = "Council"
-   override var icon = Constants.ICONS_DIR + "applications-development.png"
+   override var icon = Constants.ICONS_DIR + Constants.SLASH + "applications-development.png"
    val members = HashMap<String, Contact>()
 
    /** Adds a member, mapping name to Contact */
@@ -55,6 +56,6 @@ open class Council : Participant(), Serializable
          Log.warn( "Group Send failed! (no recipients)" )
       else
          for (recipient in recipients)
-            Network.send(Message( message.toByteArray(), recipient.contactId, Network.generateId(), passwordProvider, me.pkcSalt(), recipient.publicKey ))
+            Network.send( Message(Utils.stringToByteArray( message ), recipient.contactId, Network.generateId(), passwordProvider, me.pkcSalt(), recipient.publicKey) )
    }
 }

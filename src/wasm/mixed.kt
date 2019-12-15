@@ -1,9 +1,9 @@
-package pen.eco
+package pen
 
-import pen.eco.Plugin
-import pen.eco.NoPlugin
+import pen.Plugin
+import pen.NoPlugin
 
-/** Stub code for web assembly. */
+/* Stub code for web assembly. */
 actual fun user_home () = "/home/user_name"
 actual fun slash () = "/"
 
@@ -13,6 +13,7 @@ actual fun hash_md5 (bytes : ByteArray) = ByteArray( 0 )
 actual fun createDir (path : String) {}
 actual fun now () = 0L
 actual fun pluginInstance (className : String) : Plugin = NoPlugin()
+actual fun epoch_second () = 0L
 
 actual fun loadConf (filename : String) : Map<String, String>
 {

@@ -1,6 +1,7 @@
 package pen.par
 
 import java.io.Serializable
+import pen.Constants
 
 /** Represents the different roles a participant can have in the economy. */
 interface Role
@@ -24,7 +25,7 @@ open class TestParticipant : Participant()
 
 /** Other roles in the economy. */
 abstract class Other : Role, Serializable
-{ override var icon = Constants.ICONS_DIR + "emblem-generic.png" }
+{ override var icon = Constants.ICONS_DIR + Constants.SLASH + "emblem-generic.png" }
 //class Trustee : Other() {}
 class CouncilSigner : Other()
 { override var name = "Council signer" }

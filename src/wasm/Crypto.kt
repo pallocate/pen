@@ -1,6 +1,6 @@
-package pen.eco
+package pen
 
-import pen.eco.PasswordProvider
+import pen.PasswordProvider
 
 /** Skeleton code for web assembly. */
 actual object Crypto : Loggable

@@ -1,10 +1,10 @@
 package pen.tests.net
 
 import org.junit.jupiter.api.*
-import pen.eco.Crypto
-import pen.eco.types.KIssuedToken
-import pen.net.bc.mt.KCTB
-import pen.net.bc.mt.KTokenMerkleLeaf
+import pen.Crypto
+import pen.eco.KIssuedToken
+import pen.net.KCTB
+import pen.net.KTokenMerkleLeaf
 
 class KCTBTest
 {

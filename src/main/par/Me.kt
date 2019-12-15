@@ -1,10 +1,10 @@
 package pen.par
 
 import java.io.Serializable
-import pen.eco.Log
-import pen.eco.Crypto
-import pen.eco.types.PasswordProvider
-import pen.eco.types.NoPasswordProvider
+import pen.Log
+import pen.Crypto
+import pen.PasswordProvider
+import pen.NoPasswordProvider
 
 /** Containing contact and authentication information. */
 class Me (val contact : Contact = Contact()) : Serializable

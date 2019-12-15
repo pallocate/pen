@@ -2,7 +2,7 @@ package pen.tests.eco
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
-import pen.eco.Crypto
+import pen.Crypto
 import pen.tests.Examples.Participants.Alice
 import pen.tests.Examples.Participants.Bob
 

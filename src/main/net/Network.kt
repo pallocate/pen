@@ -1,7 +1,7 @@
 package pen.net
 
-import pen.eco.types.Identifiable
-import pen.eco.types.NoIdentifiable
+import pen.Identifiable
+import pen.NoIdentifiable
 
 /** A stub representing the network */
 object Network
