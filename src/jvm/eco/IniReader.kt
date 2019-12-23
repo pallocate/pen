@@ -47,7 +47,7 @@ interface IniReader : Loggable
 
          if (line != "")
          {
-            line = line.filterNot { it <= 180.toChar() }                        // Filter out some unsecure characters
+//            line = line.filterNot { it <= 180.toChar() }                        // Filter out some unsecure characters
 
             if (line.startsWith( '[' ) && line.endsWith( ']' ))                 // It´s a section
             {

@@ -3,6 +3,7 @@ package pen
 import java.io.FileWriter
 import java.io.FileReader
 import com.beust.klaxon.Klaxon
+import com.beust.klaxon.EnumConverter
 
 object KlaxonFactory
 {
@@ -13,6 +14,8 @@ object KlaxonFactory
       if (className != null)
          ret = when (className)
          {
+            "Alice", "Bob" ->                                                   // TODO: More general
+               ret.converter( KByteArrayConverter() ).converter( EnumConverter() )
             "KNode" ->
                ret.converter( KByteArrayConverter() ).converter( KInetAddressConverter() )
             "KSerializableRoutingInfo" ->
@@ -45,7 +48,7 @@ actual object Filer : Loggable
          parseResult = klaxon.parse<T>( fileReader )
       }
       catch (e : Exception)
-      {log( "Klaxon failed! ${e.message}", Config.trigger( "SAVE_LOAD" ), LogLevel.ERROR )}
+      {log( "Klaxon failed! (${e.message})", Config.trigger( "SAVE_LOAD" ), LogLevel.ERROR )}
 
       return if (parseResult != null)
                 parseResult
@@ -63,8 +66,14 @@ actual object Filer : Loggable
       val klaxon = KlaxonFactory.forClass( filable::class.simpleName )
       val fileWriter = FileWriter( name + EXTENSION )
 
-      fileWriter.write(klaxon.toJsonString( filable ))
-      fileWriter.close()
+      try
+      {
+         val jsonString = klaxon.toJsonString( filable )
+         fileWriter.write( jsonString )
+         fileWriter.close()
+      }
+      catch (e : Exception)
+      { Log.error( "Filer- ${e.message}" )}
    }
    override fun originName () = "Filer"
 }

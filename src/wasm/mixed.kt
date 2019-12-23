@@ -13,7 +13,6 @@ actual fun hash_md5 (bytes : ByteArray) = ByteArray( 0 )
 actual fun createDir (path : String) {}
 actual fun now () = 0L
 actual fun pluginInstance (className : String) : Plugin = NoPlugin()
-actual fun epoch_second () = 0L
 
 actual fun loadConf (filename : String) : Map<String, String>
 {

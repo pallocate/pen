@@ -1,4 +1,4 @@
-![PEN](docs/media/pen.jpg)
+![PEN](docs/pen.jpg)
 
 ### Participatory Economy Network
 
@@ -7,7 +7,7 @@ The intention of the PEN project is to provide an implementation of a decentrali
 
 #### PEN construction
 
-The basis of PEN is a decentralized peer-to-peer network. Access to the network will be for participants only. and will be controlled through authentication. This is called friend-to-friend networking.
+The basis of PEN is a decentralized peer-to-peer [network](https://github.com/pallocate/plugins). Access to the network will be for participants only. and will be controlled through authentication. This is called friend-to-friend networking.
 
 On top of the network different functionalities are added like the voting block chain and the crypto credit block chain. These functionalities and others will be available as [plugins](https://github.com/pallocate/plugins). 
 

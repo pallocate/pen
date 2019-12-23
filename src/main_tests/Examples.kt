@@ -2,6 +2,7 @@ package pen.tests
 
 import pen.Constants
 
+import pen.Filable
 import pen.PasswordProvider
 import pen.par.*
 import pen.eco.*
@@ -10,127 +11,119 @@ object Examples
 {
    object Participants
    {
-      object Alice : TestParticipant(), PasswordProvider
+      object Alice : Member, PasswordProvider, Filable
       {
-         val account = Account()
+         override val me = KMe( 3L, "Alice" )
+         override var cRelation = KRelation()
+         override var pRelation = KRelation()
+         override val submitHistory = ArrayList<String>()
 
          init
          {
-            me = Me(Contact( 3L ))
-            me.pkcSalt()
+            me.salt()
 
-            val producerRole = KProducer()
-            val consumerRole = KConsumer()
+            val acme = KContact( 1L, "Acme" )
+            val acmeRoles = ArrayList<Role>()
+            acmeRoles.add( Roles.MEMBER )
+            acmeRoles.add( Roles.PRODUCER )
+            pRelation = KRelation( acme, acmeRoles )
 
-            producerRole.setCouncil( "Acme", Acme.me.contact )
-            consumerRole.setCouncil( "St Marys", StMarys.me.contact )
-            consumerRole.submitHistory.add( "2019:7" )
-            producerRole.submitHistory.add( "2019:1" )
-            consumerRole.submitHistory.add( "2020:1" )
+            val stMarys = KContact( 2L, "St Marys" )
+            val stMarysRoles = ArrayList<Role>()
+            stMarysRoles.add( Roles.MEMBER )
+            stMarysRoles.add( Roles.CONSUMER )
+            stMarysRoles.add( Roles.DATA_SUBJECT )
+            stMarysRoles.add( Roles.COUNCIL_SIGNER )
+            cRelation = KRelation( stMarys, stMarysRoles )
 
-            with( account.roles ) {
-               add( producerRole )
-               add( consumerRole )
-               add( DataSubject() )
-               add( CouncilSigner() )
-            }
-            account.isLoaded = true
+            submitHistory.add( "2019:7-C" )
+            submitHistory.add( "2019:1-P" )
+            submitHistory.add( "2020:1-C" )
+
          }
 
          override fun password () = "monkey"
       }
 
-      object Bob : TestParticipant(), PasswordProvider
+      object Bob : Member, PasswordProvider, Filable
       {
-         val account = Account()
+         override val me = KMe( 4L, "Bob" )
+         override var cRelation = KRelation()
+         override var pRelation = KRelation()
+         override val submitHistory = ArrayList<String>()
 
          init
          {
-            me = Me(Contact( 4L ))
-            me.pkcSalt()
+            me.salt()
 
-            val producerRole = KProducer()
-            val consumerRole = KConsumer()
+            val acme = KContact( 1L, "Bob" )
+            val acmeRoles = ArrayList<Role>()
+            acmeRoles.add( Roles.MEMBER )
+            acmeRoles.add( Roles.PRODUCER )
+            pRelation = KRelation( acme, acmeRoles )
 
-            producerRole.setCouncil( "Acme", Acme.me.contact )
-            consumerRole.setCouncil( "St Marys", StMarys.me.contact )
-            consumerRole.submitHistory.add( "2019:7" )
-            producerRole.submitHistory.add( "2019:7" )
-            producerRole.submitHistory.add( "2020:1" )
+            val stMarys = KContact( 2L, "St Marys" )
+            val stMarysRoles = ArrayList<Role>()
+            stMarysRoles.add( Roles.MEMBER )
+            stMarysRoles.add( Roles.CONSUMER )
+            stMarysRoles.add( Roles.DATA_SUBJECT )
+            cRelation = KRelation( stMarys, stMarysRoles )
+            submitHistory.add( "2019:7-C" )
+            submitHistory.add( "2019:7-P" )
+            submitHistory.add( "2020:1-P" )
 
-            with( account.roles ) {
-               add( producerRole )
-               add( consumerRole )
-               add( DataSubject() )
-            }
-            account.isLoaded = true
          }
 
          override fun password () = "123456"
-         override var name = "Bob"
-         override var icon = ""
       }
 
-      object Acme : Council(), PasswordProvider
+      object Acme : Council, PasswordProvider
       {
-         val account = Account()
+         override val me = KMe( 1L, "Acme" )
+         override val relations = ArrayList<KRelation>()
 
          init
          {
-            val councilRole = Council()
-            me = Me(Contact( 1L ))
-            councilRole.addMember( "Alice", Alice.me.contact )
-            councilRole.addMember( "Bob", Bob.me.contact )
+            val alice = KContact( 3L, "Alice" )
+            val aliceRoles = ArrayList<Role>()
+            aliceRoles.add( Roles.COUNCIL )
+            relations.add(KRelation( alice, aliceRoles ))
 
-            with( account.roles ) {
-               add( councilRole )
-               add( KConsumer() )
-               add( KProducer() )
-               add( DataController() )
-            }
-            account.isLoaded = true
+            val bob = KContact( 4L, "Bob" )
+            val bobsRoles = ArrayList<Role>()
+            bobsRoles.add( Roles.COUNCIL )
+            relations.add(KRelation( bob, bobsRoles ))
          }
 
          override fun password () = "password"
-         override var name = "Acme"
-         override var icon = ""
       }
 
-      object FPC : TestParticipant(), PasswordProvider
+      object FPC : Council, PasswordProvider
       {
-         val account = Account()
-         val councilRole = Council()
-
-         init
-         { me = Me(Contact( 5L )) }
-
-         override fun password () = "123456"
-         override var name = "pipe2019"
-         override var icon = ""
+         override val me = KMe( 5L, "FPC" )
+         override val relations = ArrayList<KRelation>()
+         override fun password () = "pipe2019"
       }
 
-      object StMarys : TestParticipant(), PasswordProvider
+      object StMarys : Council, PasswordProvider
       {
-         val account = Account()
-         val councilRole = Council()
+         override val me = KMe( 2L, "St Marys" )
+         override val relations = ArrayList<KRelation>()
 
          init
          {
-            me = Me(Contact( 2L ))
-            councilRole.addMember( "Alice", Alice.me.contact )
-            councilRole.addMember( "Bob", Bob.me.contact )
+            val alice = KContact( 3L, "Alice" )
+            val aliceRoles = ArrayList<Role>()
+            aliceRoles.add( Roles.COUNCIL )
+            relations.add(KRelation( alice, aliceRoles ))
 
-            with( account.roles ) {
-               add( councilRole )
-               add( KConsumer() )
-               add( DataController() )
-            }
-            account.isLoaded = true
+            val bob = KContact( 4L, "Bob" )
+            val bobsRoles = ArrayList<Role>()
+            bobsRoles.add( Roles.COUNCIL )
+            relations.add(KRelation( bob, bobsRoles ))
          }
 
          override fun password () = "residents"
-         override var name = "StMarys"
-         override var icon = ""
       }
    }
 

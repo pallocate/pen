@@ -15,8 +15,8 @@ class KEncryptedMessageTest
    @Test
    fun `Alice to Bob` ()
    {
-      val encryptedMessage = Message( testMessage, Network.generateId(), Network.generateId(), Alice, Alice.me.pkcSalt(), Bob.me.publicKey( Bob ) )
-      val decryptedMessage = encryptedMessage.decrypt( Bob, Bob.me.pkcSalt(), Alice.me.publicKey( Alice ) )
+      val encryptedMessage = Message( testMessage, Network.generateId(), Network.generateId(), Alice, Alice.me.salt(), Bob.me.publicKey( Bob ) )
+      val decryptedMessage = encryptedMessage.decrypt( Bob, Bob.me.salt(), Alice.me.publicKey( Alice ) )
       Assertions.assertArrayEquals( testMessage, decryptedMessage )
    }
 }
