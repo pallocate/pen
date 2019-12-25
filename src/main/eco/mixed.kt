@@ -1,7 +1,6 @@
 package pen.eco
 
 data class KTransaction (val productId : Long, val signature : ByteArray, val userKey : ByteArray)
-{}
 
 interface EconomicFunctionLetter
 { fun letter () : Char }

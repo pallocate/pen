@@ -7,6 +7,8 @@ import pen.NoPasswordProvider
 interface Contact
 class NoContact : Contact
 
+interface Me
+
 /** Contact information. */
 open class KContact () : Contact
 {
@@ -32,7 +34,7 @@ open class KContact () : Contact
    }
 }
 
-class KMe () : KContact ()
+class KMe () : Me, KContact ()
 {
    constructor (contactId : Long, name : String) : this()
    {

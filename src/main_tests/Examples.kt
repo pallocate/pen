@@ -2,7 +2,6 @@ package pen.tests
 
 import pen.Constants
 
-import pen.Filable
 import pen.PasswordProvider
 import pen.par.*
 import pen.eco.*
@@ -11,119 +10,103 @@ object Examples
 {
    object Participants
    {
-      object Alice : Member, PasswordProvider, Filable
-      {
-         override val me = KMe( 3L, "Alice" )
-         override var cRelation = KRelation()
-         override var pRelation = KRelation()
-         override val submitHistory = ArrayList<String>()
+      val alicePwd = object : PasswordProvider { override fun password () = "monkey" }
+      val bobsPwd = object : PasswordProvider { override fun password () = "123456" }
+      val acmePwd = object : PasswordProvider { override fun password () = "password" }
+      val fpcPwd = object : PasswordProvider { override fun password () = "pipe2019" }
+      val stMarysPwd = object : PasswordProvider { override fun password () = "residents" }
 
-         init
-         {
-            me.salt()
+      fun alice () = KMember().apply {
+         me.contactId = 3L
+         me.name = "Alice"
+         me.salt()
 
-            val acme = KContact( 1L, "Acme" )
-            val acmeRoles = ArrayList<Role>()
-            acmeRoles.add( Roles.MEMBER )
-            acmeRoles.add( Roles.PRODUCER )
-            pRelation = KRelation( acme, acmeRoles )
-
-            val stMarys = KContact( 2L, "St Marys" )
-            val stMarysRoles = ArrayList<Role>()
-            stMarysRoles.add( Roles.MEMBER )
-            stMarysRoles.add( Roles.CONSUMER )
-            stMarysRoles.add( Roles.DATA_SUBJECT )
-            stMarysRoles.add( Roles.COUNCIL_SIGNER )
-            cRelation = KRelation( stMarys, stMarysRoles )
-
-            submitHistory.add( "2019:7-C" )
-            submitHistory.add( "2019:1-P" )
-            submitHistory.add( "2020:1-C" )
-
+         producerRelation = KRelation().apply {
+            other = KContact( 1L, "Acme" )
+            roles = ArrayList<Role>().apply {
+               add( Role.SUBMITTER )
+               add( Role.PRODUCER )
+            }
          }
 
-         override fun password () = "monkey"
+         consumerRelation = KRelation().apply {
+            other = KContact( 2L, "St Marys" )
+            roles = ArrayList<Role>().apply {
+               add( Role.SUBMITTER )
+               add( Role.CONSUMER )
+               add( Role.DATA_SUBJECT )
+               add( Role.COUNCIL_SIGNER )
+            }
+         }
+//         submitHistory.add( "2019:7-C" )
       }
 
-      object Bob : Member, PasswordProvider, Filable
-      {
-         override val me = KMe( 4L, "Bob" )
-         override var cRelation = KRelation()
-         override var pRelation = KRelation()
-         override val submitHistory = ArrayList<String>()
+      fun bob () = KMember().apply {
+         me.contactId = 4L
+         me.name = "Bob"
+         me.salt()
 
-         init
-         {
-            me.salt()
-
-            val acme = KContact( 1L, "Bob" )
-            val acmeRoles = ArrayList<Role>()
-            acmeRoles.add( Roles.MEMBER )
-            acmeRoles.add( Roles.PRODUCER )
-            pRelation = KRelation( acme, acmeRoles )
-
-            val stMarys = KContact( 2L, "St Marys" )
-            val stMarysRoles = ArrayList<Role>()
-            stMarysRoles.add( Roles.MEMBER )
-            stMarysRoles.add( Roles.CONSUMER )
-            stMarysRoles.add( Roles.DATA_SUBJECT )
-            cRelation = KRelation( stMarys, stMarysRoles )
-            submitHistory.add( "2019:7-C" )
-            submitHistory.add( "2019:7-P" )
-            submitHistory.add( "2020:1-P" )
-
+         consumerRelation = KRelation().apply {
+            other = KContact( 2L, "St Marys" )
+            roles = ArrayList<Role>().apply {
+               add( Role.SUBMITTER )
+               add( Role.CONSUMER )
+               add( Role.DATA_SUBJECT )
+            }
          }
 
-         override fun password () = "123456"
-      }
-
-      object Acme : Council, PasswordProvider
-      {
-         override val me = KMe( 1L, "Acme" )
-         override val relations = ArrayList<KRelation>()
-
-         init
-         {
-            val alice = KContact( 3L, "Alice" )
-            val aliceRoles = ArrayList<Role>()
-            aliceRoles.add( Roles.COUNCIL )
-            relations.add(KRelation( alice, aliceRoles ))
-
-            val bob = KContact( 4L, "Bob" )
-            val bobsRoles = ArrayList<Role>()
-            bobsRoles.add( Roles.COUNCIL )
-            relations.add(KRelation( bob, bobsRoles ))
+         producerRelation = KRelation().apply {
+            other = KContact( 1L, "Bob" )
+            roles = ArrayList<Role>().apply {
+               add( Role.SUBMITTER )
+               add( Role.PRODUCER )
+            }
          }
-
-         override fun password () = "password"
       }
 
-      object FPC : Council, PasswordProvider
-      {
-         override val me = KMe( 5L, "FPC" )
-         override val relations = ArrayList<KRelation>()
-         override fun password () = "pipe2019"
+      fun acme () = KCouncil().apply {
+         me.contactId = 1L
+         me.name = "Acme"
+
+         relations.add(KRelation().apply {
+            other = KContact( 5L, "FPC" )
+            roles.add( Role.SUPPLIER )
+         })
+
+         relations.add(KRelation().apply {
+            other = KContact( 3L, "Alice" )
+            roles.add( Role.CONSIDER )
+         })
+
+         relations.add(KRelation().apply {
+            other = KContact( 4L, "Bob" )
+            roles.add( Role.CONSIDER )
+         })
       }
 
-      object StMarys : Council, PasswordProvider
-      {
-         override val me = KMe( 2L, "St Marys" )
-         override val relations = ArrayList<KRelation>()
+      fun fpc () = KCouncil().apply {
+         me.contactId = 5L
+         me.name = "FPC"
 
-         init
-         {
-            val alice = KContact( 3L, "Alice" )
-            val aliceRoles = ArrayList<Role>()
-            aliceRoles.add( Roles.COUNCIL )
-            relations.add(KRelation( alice, aliceRoles ))
+         relations.add(KRelation().apply {
+            other = KContact( 1L, "Acme" )
+            roles.add( Role.CUSTOMER )
+         })
+      }
 
-            val bob = KContact( 4L, "Bob" )
-            val bobsRoles = ArrayList<Role>()
-            bobsRoles.add( Roles.COUNCIL )
-            relations.add(KRelation( bob, bobsRoles ))
-         }
+      fun stMarys () = KCouncil().apply {
+         me.contactId = 2L
+         me.name = "St Marys"
 
-         override fun password () = "residents"
+         relations.add(KRelation().apply {
+            other = KContact( 3L, "Alice" )
+            roles.add( Role.CONSIDER )
+         })
+
+         relations.add(KRelation().apply {
+            other = KContact( 4L, "Bob" )
+            roles.add( Role.CONSIDER )
+         })
       }
    }
 

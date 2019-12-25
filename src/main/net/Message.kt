@@ -5,9 +5,12 @@ import pen.Utils
 import pen.Crypto
 import pen.PasswordProvider
 
+interface Message
+class NoMessage : Message
+
 /** An encrypted message. Message will probably move to some other package in the future. */
-class Message (var content : ByteArray, val contactId : Long, val messageId : Long, passwordProvider : PasswordProvider,
-pkcSalt : ByteArray, othersPublicKey : ByteArray)
+class KMessage (var content : ByteArray, val contactId : Long, val messageId : Long, passwordProvider : PasswordProvider,
+pkcSalt : ByteArray, othersPublicKey : ByteArray) : Message
 {
    init
    {

@@ -14,7 +14,7 @@ object KlaxonFactory
       if (className != null)
          ret = when (className)
          {
-            "Alice", "Bob" ->                                                   // TODO: More general
+            "KMember", "KCouncil" ->
                ret.converter( KByteArrayConverter() ).converter( EnumConverter() )
             "KNode" ->
                ret.converter( KByteArrayConverter() ).converter( KInetAddressConverter() )
