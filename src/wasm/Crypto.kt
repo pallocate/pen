@@ -1,7 +1,5 @@
 package pen
 
-import pen.PasswordProvider
-
 /** Skeleton code for web assembly. */
 actual object Crypto : Loggable
 {

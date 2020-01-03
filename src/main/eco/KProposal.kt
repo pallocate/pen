@@ -1,10 +1,12 @@
 package pen.eco
 
+import kotlinx.serialization.Serializable
 import pen.Crypto
 import pen.Utils
 import pen.PasswordProvider
 
-class KProposal (val header : KHeader = KHeader(), val items : List<KItem>)
+@Serializable
+class KProposal (val header : KHeader, val items : List<KItem>)
 {
    fun encode () : String
    {

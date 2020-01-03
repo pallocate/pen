@@ -106,13 +106,13 @@ object Utils : Loggable
    /** Convertes a Base64 encoded String to a ByteArray. */
    fun decodeB64 (encoded : String) : ByteArray
    {
-      log("Decoding Base64 encoded string", Config.trigger( "PLATFORM" ))
+      log("Decoding Base64 encoded string", Config.trigger( "DECODE" ))
       var ret = ByteArray( 0 )
 
       try
       { ret = decode_b64(stringToByteArray( encoded )) }
       catch (t : Throwable)
-      { log( "Decoding Base64 failed!", Config.trigger( "PLATFORM" ), LogLevel.ERROR) }
+      { log( "Decoding Base64 failed!", Config.trigger( "DECODE" ), LogLevel.ERROR) }
 
       return ret
    }
@@ -120,13 +120,13 @@ object Utils : Loggable
    /** Convertes a ByteArray to a Base64 encoded String. */
    fun encodeB64 (input : ByteArray) : String
    {
-      log("Encoding string to Base64", Config.trigger( "PLATFORM" ))
+      log("Encoding string to Base64", Config.trigger( "ENCODE" ))
       var ret = ""
 
       try
       { ret = byteArrayToString(encode_b64( input )) }
       catch (t : Throwable)
-      { log( "Encoding Base64 failed!", Config.trigger( "PLATFORM" ), LogLevel.ERROR) }
+      { log( "Encoding Base64 failed!", Config.trigger( "ENCODE" ), LogLevel.ERROR) }
 
       return ret
    }

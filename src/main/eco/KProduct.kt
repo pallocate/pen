@@ -3,6 +3,7 @@ package pen.eco
 import pen.Utils
 import pen.toInt
 import pen.toLong
+import pen.toFloat
 
 /** Giving a participant of the economy the necessary and updated information concerning a product.
   * @constructor Primary constructor */

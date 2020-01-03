@@ -2,17 +2,17 @@ package pen.eco
 
 data class KTransaction (val productId : Long, val signature : ByteArray, val userKey : ByteArray)
 
-interface EconomicFunctionLetter
-{ fun letter () : Char }
+interface InitialCharacter
+{ fun char () : Char }
 
 /** What economic function something has in the economy. */
-enum class EconomicFunction : EconomicFunctionLetter {
-   UNDEFINED { override fun letter () = 'U' },
-   CONSUMPTION { override fun letter () = 'C' },
-   PRODUCTION { override fun letter () = 'P' };
+enum class Target : InitialCharacter {
+   UNDEFINED { override fun char () = 'U' },
+   CONSUMPTION { override fun char () = 'C' },
+   PRODUCTION { override fun char () = 'P' };
 
    companion object
    {
-      fun fromInt (int : Int) : EconomicFunction = values()[int.coerceIn( UNDEFINED.ordinal, PRODUCTION.ordinal )]
+      fun fromInt (int : Int) : Target = values()[int.coerceIn( UNDEFINED.ordinal, PRODUCTION.ordinal )]
    }
 }

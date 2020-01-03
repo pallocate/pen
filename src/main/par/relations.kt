@@ -1,22 +1,16 @@
 package pen.par
 
-
-interface Contract
-class NoContract : Contract
-class KContract () : Contract
+import kotlinx.serialization.Serializable
+import pen.eco.Target
 
 enum class Role
 {
-   /* Represents a unset or empty value */
    NO_ROLE,
-   /* Might be useful inbetween people */
    ACQUAINTANCE,
 
    /* General roles */
-   CONSIDER,
-   SUBMITTER,
-   PRODUCER,
-   CONSUMER,
+   CONCEDER,
+   PROPOSER,
 
    /* Inter council roles */
    SUPPLIER,
@@ -28,14 +22,21 @@ enum class Role
    DATA_SUBJECT
 }
 
-class KRelation ()
+interface Relation
+class NoRelation : Relation
+@Serializable
+class KRelation () : Relation
 {
    var other = KContact()
+   var target = Target.UNDEFINED
    var roles : ArrayList<Role> = ArrayList<Role>()
 
-   constructor (other : KContact, roles : ArrayList<Role>) : this()
+   constructor (other : KContact, target : Target, roles : ArrayList<Role>) : this()
    {
       this.other = other
+      this.target = target
       this.roles = roles
    }
+
+   override fun toString () = "${other.name} (${target.char()})"
 }

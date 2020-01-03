@@ -15,12 +15,12 @@ class KMutableHeader(
                         /** Federative level in the economy. */
                         override var level : Int                                = 0,
                         /** Flags */
-                        override var function : EconomicFunction                = EconomicFunction.UNDEFINED,
+                        override var target : Target                            = Target.UNDEFINED,
                        /** Epoch seconds timestamp. */
                         override var timestamp : Long                           = 0L
                      ) : Header
 {
-   constructor (header : KHeader) : this( header.version, header.id, header.year, header.iteration, header.level, header.function, header.timestamp ) {}
+   constructor (header : KHeader) : this( header.version, header.id, header.year, header.iteration, header.level, header.target, header.timestamp ) {}
 
    fun vanilla ()
    {
@@ -29,9 +29,9 @@ class KMutableHeader(
       year = 0
       iteration = 0
       level = 0
-      function = EconomicFunction.UNDEFINED
+      target = Target.UNDEFINED
       timestamp = 0L
    }
 
-   fun toKHeader () = KHeader( version, id, year, iteration, level, function, timestamp )
+   fun toKHeader () = KHeader( version, id, year, iteration, level, target, timestamp )
 }

@@ -1,5 +1,8 @@
 package pen.eco
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class KItem (
                      /** Product id */
                      val id : Long = 0L,

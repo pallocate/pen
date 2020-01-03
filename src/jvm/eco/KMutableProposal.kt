@@ -30,7 +30,7 @@ class KMutableProposal  (
             year = map.getOrElse( "year", {"0"} ).toInt()
             iteration = map.getOrElse( "iteration", {"0"} ).toInt()
             level = map.getOrElse( "level", {"0"} ).toInt()
-            function = EconomicFunction.fromInt(map.getOrElse( "function", {"0"} ).toInt())         }
+            target = Target.fromInt(map.getOrElse( "target", {"0"} ).toInt())         }
       }
        catch (e : Exception)
       { Log.error( "Wrong version!" ) }

@@ -5,40 +5,53 @@ import pen.Constants
 import pen.PasswordProvider
 import pen.par.*
 import pen.eco.*
+import pen.eco.Target
 
 object Examples
 {
+   object Passwords
+   {
+      private val passwords = arrayOf( "monkey", "123456", "password", "pipe2019", "residents" )
+
+      fun password (n : Int) = object : PasswordProvider {
+         override fun password () = passwords[n - 1]
+      }
+   }
+
    object Participants
    {
-      val alicePwd = object : PasswordProvider { override fun password () = "monkey" }
-      val bobsPwd = object : PasswordProvider { override fun password () = "123456" }
-      val acmePwd = object : PasswordProvider { override fun password () = "password" }
-      val fpcPwd = object : PasswordProvider { override fun password () = "pipe2019" }
-      val stMarysPwd = object : PasswordProvider { override fun password () = "residents" }
-
       fun alice () = KMember().apply {
          me.contactId = 3L
          me.name = "Alice"
          me.salt()
 
-         producerRelation = KRelation().apply {
-            other = KContact( 1L, "Acme" )
-            roles = ArrayList<Role>().apply {
-               add( Role.SUBMITTER )
-               add( Role.PRODUCER )
-            }
-         }
-
          consumerRelation = KRelation().apply {
             other = KContact( 2L, "St Marys" )
+            target = Target.CONSUMPTION
             roles = ArrayList<Role>().apply {
-               add( Role.SUBMITTER )
-               add( Role.CONSUMER )
+               add( Role.PROPOSER )
                add( Role.DATA_SUBJECT )
                add( Role.COUNCIL_SIGNER )
             }
          }
-//         submitHistory.add( "2019:7-C" )
+
+         producerRelations.add(KRelation().apply {
+            other = KContact( 1L, "Acme" )
+            target = Target.PRODUCTION
+            roles = ArrayList<Role>().apply {
+               add( Role.PROPOSER )
+               add( Role.DATA_SUBJECT )
+            }
+         })
+
+         producerRelations.add(KRelation().apply {
+            other = KContact( 5L, "FPC" )
+            target = Target.PRODUCTION
+            roles = ArrayList<Role>().apply {
+               add( Role.PROPOSER )
+               add( Role.DATA_SUBJECT )
+            }
+         })
       }
 
       fun bob () = KMember().apply {
@@ -48,20 +61,21 @@ object Examples
 
          consumerRelation = KRelation().apply {
             other = KContact( 2L, "St Marys" )
+            target = Target.CONSUMPTION
             roles = ArrayList<Role>().apply {
-               add( Role.SUBMITTER )
-               add( Role.CONSUMER )
+               add( Role.PROPOSER )
                add( Role.DATA_SUBJECT )
             }
          }
 
-         producerRelation = KRelation().apply {
-            other = KContact( 1L, "Bob" )
+         producerRelations.add(KRelation().apply {
+            other = KContact( 1L, "Acme" )
+            target = Target.PRODUCTION
             roles = ArrayList<Role>().apply {
-               add( Role.SUBMITTER )
-               add( Role.PRODUCER )
+               add( Role.PROPOSER )
+               add( Role.DATA_SUBJECT )
             }
-         }
+         })
       }
 
       fun acme () = KCouncil().apply {
@@ -75,12 +89,14 @@ object Examples
 
          relations.add(KRelation().apply {
             other = KContact( 3L, "Alice" )
-            roles.add( Role.CONSIDER )
+            roles.add( Role.CONCEDER )
+            roles.add( Role.DATA_CONTROLLER )
          })
 
          relations.add(KRelation().apply {
             other = KContact( 4L, "Bob" )
-            roles.add( Role.CONSIDER )
+            roles.add( Role.CONCEDER )
+            roles.add( Role.DATA_CONTROLLER )
          })
       }
 
@@ -92,6 +108,12 @@ object Examples
             other = KContact( 1L, "Acme" )
             roles.add( Role.CUSTOMER )
          })
+
+         relations.add(KRelation().apply {
+            other = KContact( 3L, "Alice" )
+            roles.add( Role.CONCEDER )
+            roles.add( Role.DATA_CONTROLLER )
+         })
       }
 
       fun stMarys () = KCouncil().apply {
@@ -100,12 +122,14 @@ object Examples
 
          relations.add(KRelation().apply {
             other = KContact( 3L, "Alice" )
-            roles.add( Role.CONSIDER )
+            roles.add( Role.CONCEDER )
+            roles.add( Role.DATA_CONTROLLER )
          })
 
          relations.add(KRelation().apply {
             other = KContact( 4L, "Bob" )
-            roles.add( Role.CONSIDER )
+            roles.add( Role.CONCEDER )
+            roles.add( Role.DATA_CONTROLLER )
          })
       }
    }
