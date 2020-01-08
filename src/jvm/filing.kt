@@ -9,44 +9,43 @@ import kotlinx.serialization.json.*
 import pen.par.KMember
 import pen.par.KCouncil
 
-actual object Filer : Loggable
+/** Serializes object and writes it to file */
+actual inline fun <reified T : Any>writeObject (obj : T, serializerFunction : () -> KSerializer<T>, filename : String) : Boolean
 {
-   val EXTENSION = ".json"
+   Log.debug( "writing object" )// , Config.trigger( "SAVE_LOAD" )
+   var success = false
+   val json = Json( JsonConfiguration.Stable )
+   val fileWriter = FileWriter( filename )
 
-   actual inline fun <reified T : Any>write (serialFun : () -> KSerializer<T>, obj : T, name : String)
+   try
    {
-      log("writing object", Config.trigger( "SAVE_LOAD" ))
-      val json = Json( JsonConfiguration.Stable )
-      val fileWriter = FileWriter( name + EXTENSION )
-
-      try
-      {
-         val jsonString = json.stringify( serialFun(), obj )
-         fileWriter.write( jsonString )
-         fileWriter.close()
-      }
-      catch (e : Exception)
-      { Log.error( e.message!! )}
+      val jsonString = json.stringify( serializerFunction(), obj )
+      fileWriter.write( jsonString )
+      fileWriter.close()
+      success = true
    }
+   catch (e : Exception)
+   {Log.error( "writing object failed! (${e.message})" )}
 
-   actual inline fun <reified T : Any>read (serialFun : () -> KSerializer<T>, name : String) : T?
+   return success
+}
+
+/** Reads json from file and deserializes it to a object */
+actual inline fun <reified T : Any>readObject (serializerFunction : () -> KSerializer<T>, filename : String) : T?
+{
+   Log.debug(  "reading object" )
+   val json = Json( JsonConfiguration.Stable )
+   var ret : T? =null
+
+   try
    {
-      log( "reading object", Config.trigger( "SAVE_LOAD" ))
-      val json = Json( JsonConfiguration.Stable )
-      val ret : T? =null
-
-      try
-      {
-         val path = Paths.get( name + EXTENSION )
-         val jsonBytes = Files.readAllBytes( path )
-         val jsonString = String( jsonBytes )
-         val ret = Json.parse( serialFun(), jsonString )
-      }
-      catch (e : Exception)
-      {log( "Reading object failed! (${e.message})", Config.trigger( "SAVE_LOAD" ), LogLevel.ERROR )}
-
-      return ret
+      val path = Paths.get( filename )
+      val jsonBytes = Files.readAllBytes( path )
+      val jsonString = String( jsonBytes )
+      ret = json.parse( serializerFunction(), jsonString )
    }
+   catch (e : Exception)
+   { Log.error( "reading object failed! (${e.message})" ) }
 
-   override fun originName () = "Filer"
+   return ret
 }

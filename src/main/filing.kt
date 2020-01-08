@@ -2,9 +2,5 @@ package pen
 
 import kotlinx.serialization.KSerializer
 
-expect object Filer
-{
-   inline fun <reified T : Any>write (serialFun : () -> KSerializer<T>, obj : T, name : String)
-   inline fun <reified T : Any>read (serialFun : () -> KSerializer<T>, name : String) : T?
-}
-
+expect inline fun <reified T : Any>writeObject (obj : T, serializerFunction : () -> KSerializer<T>, filename : String) : Boolean
+expect inline fun <reified T : Any>readObject (serializerFunction : () -> KSerializer<T>, filename : String) : T?

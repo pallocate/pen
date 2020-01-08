@@ -2,7 +2,7 @@ package pen
 
 expect fun loadConf (filename : String) : Map<String, String>
 
-/** Some loadable settings. */
+/** Coniguration settings loaded from file. */
 object Config
 {
    val supportedPlugins : Map<String, String> = loadConf( "plugins.conf" )

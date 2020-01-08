@@ -7,44 +7,17 @@ import pen.NoPasswordProvider
 
 interface Contact
 class NoContact : Contact
-
 interface Me
 
 /** Contact information. */
 @Serializable
-open class KContact () : Contact
-{
-   var contactId : Long                                 = 0L
-   var name : String                                    = ""
-   var publicKey : ByteArray                            = ByteArray( 0 )
-   var group : String                                   = ""
-   var icon : String                                    = ""
-
-   constructor (contactId : Long, name : String, publicKey : ByteArray, group : String, icon : String) : this()
-   {
-      this.contactId = contactId
-      this.name = name
-      this.publicKey = publicKey
-      this.group = group
-      this.icon = icon
-   }
-   constructor (contactId : Long, name : String) : this()
-   {
-      this.contactId = contactId
-      this.name = name
-   }
-}
+open class KContact (var contactId : Long = 0L, var name : String = "", var publicKey : ByteArray = ByteArray( 0 ),
+var group : String = "", var icon : String = "") : Contact {}
 
 @Serializable
 class KMe () : Me, KContact ()
 {
-   var salt                                             = ByteArray( 0 )
-
-   constructor (contactId : Long, name : String) : this()
-   {
-      this.contactId = contactId
-      this.name = name
-   }
+   var salt = ByteArray( 0 )
 
    /** @param passwordProvider A valid PasswordProvider is necessary to create a new public key.
      * @return Stored key if one exists, otherwise tries to create a new one. */

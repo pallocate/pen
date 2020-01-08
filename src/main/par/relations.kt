@@ -24,19 +24,7 @@ enum class Role
 
 interface Relation
 class NoRelation : Relation
+
 @Serializable
-class KRelation () : Relation
-{
-   var other = KContact()
-   var target = Target.UNDEFINED
-   var roles : ArrayList<Role> = ArrayList<Role>()
-
-   constructor (other : KContact, target : Target, roles : ArrayList<Role>) : this()
-   {
-      this.other = other
-      this.target = target
-      this.roles = roles
-   }
-
-   override fun toString () = "${other.name} (${target.char()})"
-}
+data class KRelation (var other : KContact = KContact(), var target : Target = Target.UNDEFINED, var roles : ArrayList<Role> = ArrayList<Role>()) : Relation
+{ override fun toString () = "${other.name} (${target.char()})" }

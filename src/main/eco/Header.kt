@@ -20,57 +20,30 @@ interface Header
    /** Epoch seconds timestamp. */
    val timestamp : Long
 
-   /** Progress of the planning process in the form "year:iteration[-P|-C]. Optional initial P or C
-     * indicates Production or Consumption. */
-   fun progression (pc : Boolean = false) : String
-   {
-      val stringBuilder = StringBuilder()
-
-      stringBuilder.append( year.toString() )
-      stringBuilder.append( ":" + iteration )
-      if (pc) stringBuilder.append( target.char() )
-
-      return stringBuilder.toString()
-   }
+   /** Progress of the planning process in the form "year:iteration. */
+   fun progression () = year.toString() +  ":" + iteration
 
    /** Returns a string that can be used to identify the block header in a log file. */
-   fun idString () : String = progression( true ) + " (" + id + ")"
+   fun idString () : String = progression() + " (" + id + ")"
 
-   /** Encodes header to "ini" text. */
+   /** Encodes header to json. */
    fun encode () : String
    {
-      val stringBuilder = StringBuilder()
 
-      stringBuilder.append( "[PROPOSAL]\n" )
-      stringBuilder.append( "Version:    ${version}\n" )
-
-      if (id != 0L)
-         stringBuilder.append( "Id:         ${id}\n" )
-      if (year != 0)
-         stringBuilder.append( "Year:       ${year}\n" )
-      if (iteration != 0)
-         stringBuilder.append( "Iteration:  ${iteration}\n" )
-      if (level != 0)
-         stringBuilder.append( "Level:      ${level}\n" )
-      if (target != Target.UNDEFINED)
-         stringBuilder.append( "Function:   ${target}\n" )
-      if (timestamp != 0L)
-         stringBuilder.append( "Timestamp:  ${timestamp}\n" )
-
-      return stringBuilder.toString()
+      return ""
    }
 }
 
 /** Proposal header. */
 @Serializable
 class KHeader (
-                  override val version : Int                            = Constants.VERSION,
-                  override val id : Long                                = 0L,
-                  override val year : Int                               = 0,
-                  override val iteration : Int                          = 0,
-                  override val level : Int                              = 0,
-                  override val target : Target              = Target.UNDEFINED,
-                  override val timestamp : Long                         = 0L
+                  override val version : Int           = Constants.VERSION,
+                  override val id : Long               = 0L,
+                  override val year : Int              = 0,
+                  override val iteration : Int         = 0,
+                  override val level : Int             = 0,
+                  override val target : Target         = Target.UNDEFINED,
+                  override val timestamp : Long        = 0L
                ) : Header
 {
    /** Makes a copy of this header. */

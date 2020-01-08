@@ -17,6 +17,8 @@ object Constants
    val USER_HOME                                  = user_home()
    /** Directory where to save configurations. */
    val CONFIG_DIR                                 = ".pen"
+   /** Directory where to save configurations. */
+   val JSON_EXTENSION                             = ".json"
    /** Directory of the libsodium library. */
    val LIBSODIUM_DIR                              = "dist${SLASH}lib${SLASH}isc"
    /** Directory where application icons are stored. */

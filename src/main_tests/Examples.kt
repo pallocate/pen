@@ -146,37 +146,12 @@ object Examples
             timestamp                            = 0L
          )
 
-         val item = KItem( 1L, 27131505L )
-         val items = listOf<KItem>( item )
+         val product = KProduct( 1L, 10000L )
+         val items = listOf<KProduct>( product )
 
          return KProposal( header, items )
       }
 
-      fun mutableProposal () : KMutableProposal
-      {
-         val header = KMutableHeader(
-            level                                = 3,
-            id                                   = 212,
-            iteration                            = 0,
-            version                              = 1,
-            timestamp                            = 0L
-         )
-
-         val product = KQuantableProduct  (
-                                             id = 27131505L,
-                                             name = "Pneumatic drill",
-                                             desc = "Heavy pneumatic drill",
-                                             amount = 1F,
-                                             unit = "piece",
-                                             down = 5,
-                                             up = 5,
-                                             price = 100000L,
-                                             analogue = "false"
-                                          )
-         product.qty = 10000
-         val products = arrayListOf<KQuantableProduct>( product, product )
-
-         return KMutableProposal( header, products )
-      }
+      fun mutableProposal () = KMutableProposal( proposal() )
    }
 }

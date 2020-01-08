@@ -2,7 +2,9 @@ package pen.tests.eco
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
-import pen.eco.KMutableProposal
+import pen.writeObject
+import pen.readObject
+import pen.eco.KProposal
 import pen.tests.Examples
 
 class KProposalTests
@@ -11,11 +13,11 @@ class KProposalTests
    fun `Save, read` ()
    {
       val filename = "dist${pen.Constants.SLASH}test.out"
-      val proposal = Examples.Proposal.mutableProposal()
-      Assertions.assertTrue( proposal.save( filename ) )
+      val proposal = Examples.Proposal.proposal()
 
-      val mutableProposal = KMutableProposal()
-      mutableProposal.load( filename )
-      Assertions.assertEquals( 10000, mutableProposal.products[0].qty )
+      writeObject( proposal, {KProposal.serializer()}, filename )
+      val obj = readObject<KProposal>( {KProposal.serializer()}, filename )
+
+      Assertions.assertEquals( 10000, obj!!.products[0].qty )
    }
 }

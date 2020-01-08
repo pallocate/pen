@@ -1,8 +1,10 @@
 package pen.eco
 
 import pen.Constants
+import kotlinx.serialization.Serializable
 
-/** A mutable block header. */
+/** A mutable proposal header. */
+@Serializable
 class KMutableHeader(
                         /** Spec version. */
                         override var version : Int                              = Constants.VERSION,

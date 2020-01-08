@@ -24,11 +24,7 @@ pkcSalt : ByteArray, othersPublicKey : ByteArray) : Message
    fun decrypt (passwordProvider : PasswordProvider, pkcSalt : ByteArray, othersPublicKey : ByteArray) : ByteArray
    {
       Log.debug( "Decrypting message" )
-      var ret = ByteArray( 0 )
-
-      ret = Crypto.pkcDecrypt( content, passwordProvider, pkcSalt, othersPublicKey )
-
-      return ret
+      return Crypto.pkcDecrypt( content, passwordProvider, pkcSalt, othersPublicKey )
    }
 
    override fun toString () : String
