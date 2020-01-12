@@ -14,27 +14,25 @@ interface ProductInfo
    val amount : Float
    val prefix : String
    val unit : String
-   val down : Int
-   val up : Int
-   val absolute : Long
+   val change : Int
    val price : Long
    val sensitive : String
    val analogue : String
 }
 class NoProductInfo : ProductInfo
-{override val id = 0L; override val name = ""; override val desc = ""; override val amount = 0F; override val prefix = "";
-override val unit = ""; override val down = 0; override val up = 0; override val absolute = 0L; override val price = 0L;
+{override val id = 0L; override val name = ""; override val desc = ""; override val amount = 0F;
+override val prefix = ""; override val unit = ""; override val change = 0; override val price = 0L;
 override val sensitive = ""; override val analogue = ""}
 
 @Serializable
 open class KProductInfo (override val id : Long = 0L, override val name : String = "", override val desc : String = "",
-override val amount : Float = 0F, override val prefix : String = "", override val unit : String = "", override val down : Int = 0,
-override val up : Int = 0, override val absolute : Long = 0L, override val price : Long = 0L, override val sensitive : String = "",
+override val amount : Float = 0F, override val prefix : String = "", override val unit : String = "",
+override val change : Int = 0, override val price : Long = 0L, override val sensitive : String = "",
 override val analogue : String = "") : ProductInfo
 {
    /** @constructor Does some parameter checking/conversion and calls primary constructor. */
    constructor (id : String, name : String, desc : String, amount : String, prefix : String, unit : String,
-   down : String, up : String, absolute : String, price : String, sensitive : String, analogue : String) : this
+   change : String, price : String, sensitive : String, analogue : String) : this
    (
       id.toLong(),
       name,
@@ -42,9 +40,7 @@ override val analogue : String = "") : ProductInfo
       amount.toFloat(),
       prefix,
       unit,
-      down.toInt(),
-      up.toInt(),
-      absolute.toLong(),
+      change.toInt(),
       price.toLong(),
       sensitive,
       analogue
@@ -53,9 +49,9 @@ override val analogue : String = "") : ProductInfo
    override fun toString () = name
 }
 
-class KQuantableProductInfo (id : Long = 0L, name : String = "", desc : String = "", amount : Float = 0F, prefix : String = "",
-unit : String = "", down : Int = 0, up : Int = 0, absolute : Long = 0L, price : Long = 0L, sensitive : String = "", analogue : String = ""
-) : KProductInfo( id, name, desc, amount, prefix, unit, down, up, absolute, price, sensitive, analogue )
+class KQuantableProductInfo (id : Long = 0L, name : String = "", desc : String = "", amount : Float = 0F,
+prefix : String = "", unit : String = "", change : Int = 0, price : Long = 0L, sensitive : String = "",
+analogue : String = "") : KProductInfo( id, name, desc, amount, prefix, unit, change, price, sensitive, analogue )
 {
    var qty = 0L
 
@@ -66,9 +62,7 @@ unit : String = "", down : Int = 0, up : Int = 0, absolute : Long = 0L, price : 
       productInfo.amount,
       productInfo.prefix,
       productInfo.unit,
-      productInfo.down,
-      productInfo.up,
-      productInfo.absolute,
+      productInfo.change,
       productInfo.price,
       productInfo.sensitive,
       productInfo.analogue

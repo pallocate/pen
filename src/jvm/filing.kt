@@ -12,7 +12,7 @@ import pen.par.KCouncil
 /** Serializes object and writes it to file */
 actual inline fun <reified T : Any>writeObject (obj : T, serializerFunction : () -> KSerializer<T>, filename : String) : Boolean
 {
-   Log.debug( "writing object" )// , Config.trigger( "SAVE_LOAD" )
+   Log.debug( "Writing object" )// , Config.trigger( "SAVE_LOAD" )
    var success = false
    val json = Json( JsonConfiguration.Stable )
    val fileWriter = FileWriter( filename )
@@ -25,7 +25,7 @@ actual inline fun <reified T : Any>writeObject (obj : T, serializerFunction : ()
       success = true
    }
    catch (e : Exception)
-   {Log.error( "writing object failed! (${e.message})" )}
+   {Log.error( "Writing object failed! (${e.message})" )}
 
    return success
 }
@@ -33,7 +33,7 @@ actual inline fun <reified T : Any>writeObject (obj : T, serializerFunction : ()
 /** Reads json from file and deserializes it to a object */
 actual inline fun <reified T : Any>readObject (serializerFunction : () -> KSerializer<T>, filename : String) : T?
 {
-   Log.debug(  "reading object" )
+   Log.debug(  "Reading object file \"$filename\"" )
    val json = Json( JsonConfiguration.Stable )
    var ret : T? =null
 
@@ -45,7 +45,7 @@ actual inline fun <reified T : Any>readObject (serializerFunction : () -> KSeria
       ret = json.parse( serializerFunction(), jsonString )
    }
    catch (e : Exception)
-   { Log.error( "reading object failed! (${e.message})" ) }
+   { Log.error( "Reading object file failed!" ) }
 
    return ret
 }

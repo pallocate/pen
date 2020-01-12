@@ -53,6 +53,7 @@ actual fun createDir (path : String)
 
 actual fun loadConf (filename : String) : Map<String, String>
 {
+   Log.debug( "Loding config file \"$filename\"" )
    val properties = Properties()
    val resultMap = HashMap<String, String>()
 
@@ -69,7 +70,7 @@ actual fun loadConf (filename : String) : Map<String, String>
          resultMap.put(key as String, properties.get( key ) as String)
    }
    catch (e : Exception)
-   { Log.warn( "Conf-file load failed!" ) }
+   { Log.warn( "Load config failed!" ) }
 
    return resultMap
 }
