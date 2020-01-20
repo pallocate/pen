@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions
 import pen.writeObject
 import pen.readObject
 import pen.eco.KProposal
-import pen.tests.Examples
+import pen.tests.ExampleProposals
 
 class KProposalTests
 {
@@ -13,7 +13,7 @@ class KProposalTests
    fun `Save, read` ()
    {
       val filename = "dist${pen.Constants.SLASH}test.out"
-      val proposal = Examples.Proposal.proposal()
+      val proposal = ExampleProposals.proposal()
 
       writeObject( proposal, {KProposal.serializer()}, filename )
       val obj = readObject<KProposal>( {KProposal.serializer()}, filename )

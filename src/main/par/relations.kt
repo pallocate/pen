@@ -27,4 +27,10 @@ class NoRelation : Relation
 
 @Serializable
 data class KRelation (var other : KContact = KContact(), var target : Target = Target.UNDEFINED, var roles : ArrayList<Role> = ArrayList<Role>()) : Relation
-{ override fun toString () = "${other.name} (${target.char()})" }
+{
+   fun isUndefined () = (target == Target.UNDEFINED)
+   override fun toString () = "${other.name}" + if (isUndefined())
+                                                   ""
+                                                else
+                                                   " (${target.char()})"
+}
