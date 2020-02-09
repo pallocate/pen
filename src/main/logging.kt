@@ -8,21 +8,18 @@ expect object Logger
 enum class LogLevel { QUIET, CRITICAL, ERROR, WARN, INFO, DEBUG }
 
 /** Trigged logging. */
-interface Loggable
+interface Loggable : Tagged
 {
-   /** A name that identifies the origin of the log message. */
-   abstract fun originName () : String
-
    fun log (message : String, trigger : LogLevel = LogLevel.WARN, logLevel : LogLevel = LogLevel.DEBUG)
    {
       if (trigger >= logLevel)
-         Logger.logMessage( originName() + "- " + message, logLevel )
+         Logger.logMessage( tag() + "- " + message, logLevel )
    }
 
    fun log (message : () -> String, trigger : LogLevel = LogLevel.WARN, logLevel : LogLevel = LogLevel.DEBUG)
    {
       if (trigger >= logLevel)
-         Logger.logMessage( originName() + "- " + message(), logLevel )
+         Logger.logMessage( tag() + "- " + message(), logLevel )
    }
 }
 

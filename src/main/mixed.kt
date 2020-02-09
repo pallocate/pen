@@ -14,5 +14,7 @@ class NoIdentifiable : Identifiable
 interface Hashable
 { abstract fun hash () : ByteArray }
 
-class WrongVersionException : Exception()
+interface Tagged
+{ fun tag () : String }
 
+class WrongVersionException : Exception()

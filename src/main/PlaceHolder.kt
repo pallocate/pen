@@ -27,5 +27,5 @@ interface PlaceHolder : Loggable
 
    fun byteArray (origin : String) = logDebug<ByteArray>( origin, ByteArray( 0 ) )
 
-   override fun originName () = "PlaceHolder"
+   override fun tag () = "PlaceHolder"
 }

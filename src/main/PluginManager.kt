@@ -83,5 +83,5 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
       return ret
    }
 
-   override fun originName () = "KPluginManager"
+   override fun tag () = "KPluginManager"
 }

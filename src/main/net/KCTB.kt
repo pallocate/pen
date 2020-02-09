@@ -42,5 +42,5 @@ object KCTB : KMerkleTree(), Loggable
          super.add(KTokenMerkleLeaf( token ))
    }
 
-   override fun originName () = "KCTB"
+   override fun tag () = "KCTB"
 }

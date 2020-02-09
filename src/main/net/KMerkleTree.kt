@@ -94,5 +94,5 @@ open class KMerkleTree : Loggable
       return stringBuilder.toString()
    }
 
-   override fun originName () = "KMerkleTree"
+   override fun tag () = "KMerkleTree"
 }

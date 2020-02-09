@@ -5,20 +5,18 @@ import pen.Constants
 
 interface Header
 {
-   /** Spec version. */
-   val version : Int
    /** User id */
    val id : Long
    /** The year of the planning process. */
    val year : Int
    /** Iteration number of the planning process. */
    val iteration : Int
-   /** Federative level in the economy. */
-   val level : Int
    /** What economic function the proposal belong to, consumption or production. */
    val target : Target
    /** Epoch seconds timestamp. */
    val timestamp : Long
+   /** Spec version. */
+   val version : Int
 
    /** Progress of the planning process in the form "year:iteration. */
    fun progression () = year.toString() +  ":" + iteration
@@ -37,15 +35,14 @@ interface Header
 /** Proposal header. */
 @Serializable
 class KHeader (
-                  override val version : Int           = Constants.VERSION,
                   override val id : Long               = 0L,
                   override val year : Int              = 0,
                   override val iteration : Int         = 0,
-                  override val level : Int             = 0,
                   override val target : Target         = Target.UNDEFINED,
-                  override val timestamp : Long        = 0L
+                  override val timestamp : Long        = 0L,
+                  override val version : Int           = Constants.VERSION
                ) : Header
 {
    /** Makes a copy of this header. */
-   fun copy () = KHeader( version, id, year, iteration, level, target, timestamp )
+   fun copy () = KHeader( id, year, iteration, target, timestamp )
 }

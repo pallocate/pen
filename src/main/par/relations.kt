@@ -32,5 +32,5 @@ data class KRelation (var other : KContact = KContact(), var target : Target = T
    override fun toString () = "${other.name}" + if (isUndefined())
                                                    ""
                                                 else
-                                                   " (${target.char()})"
+                                                   " (${target.tag()})"
 }

@@ -1,5 +1,12 @@
 package pen
 
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.SerialDescriptor
+import kotlinx.serialization.internal.HexConverter
+import kotlinx.serialization.internal.StringDescriptor
+
 /** Should derive a short five letter name for debugging. */
 expect fun encode_b64 (bytes : ByteArray) : ByteArray
 expect fun decode_b64 (encoded : ByteArray) : ByteArray
@@ -8,7 +15,7 @@ expect fun createDir (path : String)
 expect fun now () : Long
 
 /** Convertes a ByteArray to a hex encoded String. */
-fun ByteArray.toHex () = this.joinToString( "" ) { it.toInt().and( 0xFF ).toString( 16 ).padStart( 2, '0' )}
+fun ByteArray.toHex () = HexConverter.printHexBinary( this )
 
 /** Convertes Long to a ByteArray. */
 fun Long.toByteArray () : ByteArray
@@ -56,15 +63,6 @@ fun String.toInt (min : Int = Int.MIN_VALUE, max : Int = Int.MAX_VALUE, coerce :
    }
 
    return ret
-}
-
-fun String.toFloat () : Float
-{
-   val value = toFloatOrNull()
-   return   if (value != null)
-               value
-            else
-               0F
 }
 
 object Utils : Loggable
@@ -131,5 +129,5 @@ object Utils : Loggable
       return ret
    }
 
-   override fun originName () = "Utils"
+   override fun tag () = "Utils"
 }

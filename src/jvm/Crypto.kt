@@ -287,7 +287,7 @@ actual object Crypto : Loggable
 
    actual fun publicSigningKeySize () = (sodium.crypto_sign_ed25519_publickeybytes() as Number).toInt()
    actual fun saltSize () = sodium.crypto_pwhash_saltbytes()
-   override fun originName () = "Crypto"
+   override fun tag () = "Crypto"
 
    private fun symetricKey (password : ByteArray, salt : ByteArray) : ByteArray
    {
