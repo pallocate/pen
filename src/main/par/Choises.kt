@@ -4,7 +4,7 @@ package pen.par
   * @param description Description of the alterantive. */
 enum class Alternatives (var description : String = "")
 {
-   BLANK( "Nothing" ),
+   BLANK( "Blank" ),
    ALT_1( "Dismiss" ),
    ALT_2( "Approve" ),
    ALT_3, ALT_4, ALT_5, ALT_6, ALT_7, ALT_8, ALT_9;

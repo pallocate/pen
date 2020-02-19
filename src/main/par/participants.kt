@@ -18,9 +18,7 @@ class NoParticipant : Participant
 { override val me = KMe() }
 
 @Serializable
-class KCouncil () : Participant
-{
-   override val me = KMe()
+class KCouncil (override val me : KMe) : Participant {
    val relations = ArrayList<KRelation>()
 }
 
@@ -31,13 +29,17 @@ interface Member : Participant
 
    fun economicRelations () : Array<KRelation>
 }
-class NoMember () : Member { override val me = KMe(); override var consumerRelation = KRelation(); override val producerRelations = ArrayList<KRelation>(); override fun economicRelations () = Array<KRelation>( 0, {KRelation()} )}
-
-@Serializable
-class KMember () : Member
+class NoMember () : Member
 {
    override val me = KMe()
-   override var consumerRelation = KRelation()
+   override var consumerRelation = KRelation( KContact() )
+   override val producerRelations = ArrayList<KRelation>()
+   override fun economicRelations () = Array<KRelation>( 0, {KRelation( KContact() )} )
+}
+
+@Serializable
+class KMember (override val me : KMe, override var consumerRelation : KRelation = KRelation( KContact() )) : Member
+{
    override val producerRelations = ArrayList<KRelation>()
 
    override fun economicRelations () : Array<KRelation> = arrayOf( consumerRelation ) + producerRelations

@@ -1,41 +1,62 @@
 package pen.par
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 import pen.Crypto
+import pen.safePath
 import pen.PasswordProvider
 import pen.NoPasswordProvider
 
-interface Contact
-class NoContact : Contact
-interface Me
+abstract class Contact
+{
+   abstract protected val _name : String
+   abstract protected val _icon : String
+   abstract val contactId : Long
+   abstract val publicKey : ByteArray
+   abstract val group : String
+
+   fun name () = _name.safePath()
+   fun icon () = _icon.safePath()
+}
+class NoContact : Contact()
+{
+   final override val contactId = 0L
+   final override val publicKey = ByteArray( 0 )
+   final override val group = ""
+   final override protected val _name = ""
+   final override protected val _icon = ""
+}
 
 /** Contact information. */
 @Serializable
-open class KContact (var contactId : Long = 0L, var name : String = "", var publicKey : ByteArray = ByteArray( 0 ),
-var group : String = "", var icon : String = "") : Contact {}
+open class KContact (final override val contactId : Long = 0L,
+                     @SerialName( "name" )
+                     final override protected val _name : String = "",
+                     final override val publicKey : ByteArray = ByteArray( 0 ),
+                     final override val group : String = "",
+                     @SerialName( "icon" )
+                     final override protected val _icon : String = "") : Contact()
+{
+   fun copy () = KContact( contactId, _name, publicKey, group, _icon )
+}
 
 @Serializable
-class KMe () : Me, KContact ()
+class KMe ( final override val contactId : Long = 0L,
+            @SerialName( "name" )
+            final override protected val _name : String = "",
+            final override val publicKey : ByteArray = ByteArray( 0 ),
+            final override val group : String = "",
+            @SerialName( "icon" )
+            final override protected val _icon : String = "") : Contact()
 {
-   var salt = ByteArray( 0 )
+   val salt = Crypto.randomBytes( Crypto.saltSize() )
 
-   /** @param passwordProvider A valid PasswordProvider is necessary to create a new public key.
-     * @return Stored key if one exists, otherwise tries to create a new one. */
-   fun publicKey (passwordProvider : PasswordProvider) : ByteArray
-   {
-      if (publicKey.size != Crypto.publicSigningKeySize() && passwordProvider !is NoPasswordProvider)
-         publicKey = Crypto.getKey( passwordProvider, this.salt(), Crypto::publicKey )
-
-      return publicKey
-   }
-
-   /** Salt for use when generating keys.
-     * @return Stored salt if it exists, otherwise generates new salt. */
-   fun salt () : ByteArray
-   {
-      if (salt.size != Crypto.saltSize())
-         salt = Crypto.randomBytes( Crypto.saltSize() )
-
-      return salt
-   }
+   fun keyMe (passwordProvider : PasswordProvider) =
+      if (passwordProvider is NoPasswordProvider)
+         this
+      else
+      {
+         val pubKey = Crypto.getKey( passwordProvider, this.salt, Crypto::publicKey )
+         KMe( contactId, _name, pubKey, group, _icon )
+      }
 }

@@ -9,14 +9,14 @@ import pen.tests.ExamplePasswords.password
 class KCryptoTests
 {
    val message = "\"Test message\"".toByteArray()
-   val alice = KMe().apply { name = "Alice" }
-   val bob = KMe().apply { name = "Bob" }
+   val alice = KMe( _name = "Alice" ).keyMe(password( 3 ))
+   val bob = KMe( _name = "Bob" ).keyMe(password( 4 ))
 
    @Test
    fun `Alice to Bob signed` ()
    {
-      val signedMessage = Crypto.signText(message, password( 4 ), bob.salt())
-      val verifiedMessage = Crypto.verifyText(signedMessage, bob.publicKey( password( 4 ) ))
+      val signedMessage = Crypto.signText(message, password( 4 ), bob.salt)
+      val verifiedMessage = Crypto.verifyText( signedMessage, bob.publicKey )
 
       Assertions.assertArrayEquals( message, verifiedMessage )
    }
@@ -25,9 +25,9 @@ class KCryptoTests
    fun `Alice to Bob encrypted` ()
    {
       /* Alice signs message using her private key, and encrypts it using Bob´s public key. */
-      val encryptedMessage = Crypto.pkcEncrypt(message, password( 3 ), alice.salt(), bob.publicKey( password( 4 ) ))
+      val encryptedMessage = Crypto.pkcEncrypt(message, password( 3 ), alice.salt, bob.publicKey)
       /* Bob decrypts message using his private key, and verifies it using Alice´s public key */
-      val decryptedMessage = Crypto.pkcDecrypt(encryptedMessage, password( 4 ), bob.salt(), alice.publicKey( password( 3 ) ))
+      val decryptedMessage = Crypto.pkcDecrypt(encryptedMessage, password( 4 ), bob.salt, alice.publicKey)
 
       Assertions.assertArrayEquals( message, decryptedMessage )
    }
@@ -35,8 +35,8 @@ class KCryptoTests
    @Test
    fun `Symetric encryption` ()
    {
-      val encryptedMessage = Crypto.encrypt( message, password( 3 ), alice.salt() )
-      val decryptedMessage = Crypto.decrypt( encryptedMessage, password( 3 ), alice.salt() )
+      val encryptedMessage = Crypto.encrypt( message, password( 3 ), alice.salt )
+      val decryptedMessage = Crypto.decrypt( encryptedMessage, password( 3 ), alice.salt )
 
       Assertions.assertArrayEquals( message, decryptedMessage )
    }

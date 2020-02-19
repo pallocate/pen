@@ -26,10 +26,12 @@ interface Relation
 class NoRelation : Relation
 
 @Serializable
-data class KRelation (var other : KContact = KContact(), var target : Target = Target.UNDEFINED, var roles : ArrayList<Role> = ArrayList<Role>()) : Relation
+data class KRelation (val other : KContact, val target : Target = Target.UNDEFINED) : Relation
 {
+   val roles : ArrayList<Role> = ArrayList<Role>()
+
    fun isUndefined () = (target == Target.UNDEFINED)
-   override fun toString () = "${other.name}" + if (isUndefined())
+   override fun toString () = "${other.name()}" + if (isUndefined())
                                                    ""
                                                 else
                                                    " (${target.tag()})"

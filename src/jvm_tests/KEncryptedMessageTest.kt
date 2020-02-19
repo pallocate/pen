@@ -11,14 +11,14 @@ import pen.tests.ExamplePasswords.password
 class KEncryptedMessageTest
 {
    val testMessage = "\"Test message\"".toByteArray()
-   val alice = KMe().apply { name = "Alice" }
-   val bob = KMe().apply { name = "Bob" }
+   val alice = KMe( _name = "Alice" ).keyMe(password( 3 ))
+   val bob = KMe( _name = "Bob" ).keyMe(password( 4 ))
 
    @Test
    fun `Alice to Bob` ()
    {
-      val encryptedMessage = KMessage( testMessage, Network.generateId(), Network.generateId(), password( 3 ), alice.salt(), bob.publicKey( password( 4 ) ) )
-      val decryptedMessage = encryptedMessage.decrypt( password( 4 ), bob.salt(), alice.publicKey( password( 3 ) ) )
+      val encryptedMessage = KMessage( testMessage, Network.generateId(), Network.generateId(), password( 3 ), alice.salt, bob.publicKey )
+      val decryptedMessage = encryptedMessage.decrypt( password( 4 ), bob.salt, alice.publicKey )
       Assertions.assertArrayEquals( testMessage, decryptedMessage )
    }
 }

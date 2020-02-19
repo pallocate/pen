@@ -28,6 +28,13 @@ fun Long.toByteArray () : ByteArray
 
    return ret
 }
+/** Filters out unsafe characters. */
+fun String.safePath () = filter  {
+                                    ('0'..'9').contains( it ) ||
+                                    ('A'..'Z').contains( it ) ||
+                                    ('a'..'z').contains( it ) ||
+                                    it > 191.toChar()
+                                 }
 
 /** Convertes String to a valid Long. */
 fun String.toLong (min : Long = Long.MIN_VALUE, max : Long = Long.MAX_VALUE, coerce : Boolean = false) : Long

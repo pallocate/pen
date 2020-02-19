@@ -24,8 +24,8 @@ class KTender (override val proposal : KProposal, override val relation : KRelat
 {
    fun submit (me : KMe, passwordProvider : PasswordProvider) : KMessage
    {
-      val signedProposal = proposal.signed( passwordProvider, me.salt() )
-      val message = KMessage( signedProposal, me.contactId, relation.other.contactId, passwordProvider, me.salt(), relation.other.publicKey )
+      val signedProposal = proposal.signed( passwordProvider, me.salt )
+      val message = KMessage( signedProposal, me.contactId, relation.other.contactId, passwordProvider, me.salt, relation.other.publicKey )
 
       Network.send( message )
       return message
