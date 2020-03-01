@@ -1,10 +1,14 @@
 package pen.par
 
-interface Vote
+import pen.Crypto
+import pen.Utils
+
+abstract class Vote ()
 {
-   val votationId : Long
-//   val councilId : Long
-   val voteId : Long
-   val choise : Choise
-   val signature : ByteArray
+   abstract val votingId : Long
+   abstract val voteId : Long
+   abstract val selection : Alternatives
+   abstract val signature : ByteArray
+
+   override fun toString () = "votation: { id: ${votingId}, vote: { id: ${voteId}, selection: ${selection} } }"
 }

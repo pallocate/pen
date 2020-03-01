@@ -9,8 +9,8 @@ import pen.tests.ExamplePasswords.password
 class KCryptoTests
 {
    val message = "\"Test message\"".toByteArray()
-   val alice = KMe( _name = "Alice" ).keyMe(password( 3 ))
-   val bob = KMe( _name = "Bob" ).keyMe(password( 4 ))
+   val alice = KMe.factory( 3L, "Alice", "", password( 3 ))
+   val bob = KMe.factory( 4L, "Bob", "", password( 4 ))
 
    @Test
    fun `Alice to Bob signed` ()

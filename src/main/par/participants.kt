@@ -15,7 +15,7 @@ interface Participant
    val me : KMe
 }
 class NoParticipant : Participant
-{ override val me = KMe() }
+{ override val me = KMe( 0L ) }
 
 @Serializable
 class KCouncil (override val me : KMe) : Participant {
@@ -31,7 +31,7 @@ interface Member : Participant
 }
 class NoMember () : Member
 {
-   override val me = KMe()
+   override val me = KMe( 0L )
    override var consumerRelation = KRelation( KContact() )
    override val producerRelations = ArrayList<KRelation>()
    override fun economicRelations () = Array<KRelation>( 0, {KRelation( KContact() )} )
