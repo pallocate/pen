@@ -1,5 +1,7 @@
 package pen
 
+import pen.PasswordProvider
+
 /** Skeleton code for web assembly. */
 actual object Crypto : Loggable
 {
@@ -15,8 +17,8 @@ actual object Crypto : Loggable
    actual fun decrypt (input : ByteArray, passwordProvider : PasswordProvider, skcSalt : ByteArray) = ByteArray( 0 )
    actual fun pkcEncrypt (plainText : ByteArray, passwordProvider : PasswordProvider, pkcSalt : ByteArray, othersPublicKey : ByteArray) = ByteArray( 0 )
    actual fun pkcDecrypt (input : ByteArray, passwordProvider : PasswordProvider, pkcSalt : ByteArray, othersPublicKey : ByteArray) = ByteArray( 0 )
-   actual fun publicSigningKeySize () = -1
-   actual fun saltSize () = -1
+   actual fun publicSigningKeySize () = 0
+   actual fun saltSize () = 0
    actual fun publicKey (password : ByteArray, salt : ByteArray) = ByteArray( 0 )
    actual fun getKey (passwordProvider : PasswordProvider, salt : ByteArray, keyFunction : (ByteArray, ByteArray) -> ByteArray) = ByteArray( 0 )
    override fun originName () = ""
