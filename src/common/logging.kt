@@ -28,21 +28,23 @@ interface Loggable : Tagged
 /** Simple logging. */
 object Log
 {
-   /** A Global log level */
+   /** Global log level. If not set warnings and errors will be logged.  */
    var level : LogLevel = LogLevel.UNSET
 
    private fun doLog (message : String, severity : LogLevel)
    {
       if (level == LogLevel.UNSET)
+      {
          if (severity <= LogLevel.WARN )
             Logger.logMessage( message, severity )
+      }
       else
          Logger.logMessage( message, severity )
    }
+
    fun debug (message : String) = doLog( message, LogLevel.DEBUG )
    fun info (message : String) = doLog( message, LogLevel.INFO )
    fun warn (message : String) = doLog( message, LogLevel.WARN )
    fun error (message : String) = doLog( message, LogLevel.ERROR )
    fun critical (message : String) = doLog( message, LogLevel.CRITICAL )
 }
-

@@ -15,9 +15,9 @@ object Constants
    /** Directory where to save configurations. */
    val JSON_EXTENSION                             = ".json"
    /** Directory of the libsodium library. */
-   val LIBSODIUM_DIR                              = "dist${SLASH}lib${SLASH}isc"
+   val LIBSODIUM_DIR                              = "build${SLASH}lib${SLASH}libsodium"
    /** Directory where application icons are stored. */
-   val ICONS_DIR                                  = "dist${SLASH}resources${SLASH}icons"
+   val ICONS_DIR                                  = "build${SLASH}dist${SLASH}resources${SLASH}icons"
    /** Name of the log file. */
    val LOG_FILE                                   = "app.log"
 }

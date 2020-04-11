@@ -21,7 +21,11 @@ interface Tagged
 
 class WrongVersionException : Exception()
 
+enum class KeyType
+{ SYMETRIC, PUBLIC, SECRET }
+
 /** Convertes a ByteArray to a hex encoded String. */
+@kotlinx.serialization.InternalSerializationApi
 fun ByteArray.toHex () = HexConverter.printHexBinary( this )
 
 fun Long.coerceToInt () = this.coerceIn( -2147483648L, 2147483647L ).toInt()

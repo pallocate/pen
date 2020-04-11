@@ -10,7 +10,17 @@ interface Na : Sodium, Library
 
 actual fun sodiumInstance () : Sodium
 {
-   return Native.loadLibrary( pathNa(), Sodium::class.java ) as Na
+   Log.debug( "Loading libsodium" )
+   var sodium : Sodium = NoSodium()
+
+   try
+   {
+      sodium = Native.loadLibrary( pathNa(), Na::class.java ) as Na
+   }
+   catch (t : Throwable)
+   { Log.error( "Loading libsodium failed!" ) }
+
+   return sodium
 }
 
 /** Constructs path name to the sodium library depending on OS and architecture. */

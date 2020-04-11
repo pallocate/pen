@@ -2,10 +2,7 @@ package pen.par
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
-import pen.Crypto
-import pen.safePath
-import pen.PasswordProvider
-import pen.NoPasswordProvider
+import pen.*
 
 abstract class Contact
 {
@@ -48,7 +45,7 @@ class KMe ( final override val contactId : Long,
       fun factory (contactId : Long = 0L, name : String = "", icon : String = "", passwordProvider : PasswordProvider) : KMe
       {
          val salt = Crypto.randomBytes( Crypto.saltSize() )
-         val pubKey = Crypto.getKey( passwordProvider, salt, Crypto::publicKey )
+         val pubKey = Crypto.key( passwordProvider, salt, KeyType.PUBLIC )
          return KMe( contactId, name, icon, pubKey, salt )
       }
    }

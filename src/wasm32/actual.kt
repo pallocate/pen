@@ -1,5 +1,6 @@
 package pen
 
+import pen.Sodium
 import pen.Plugin
 import pen.NoPlugin
 
@@ -24,3 +25,4 @@ actual fun loadConf (filename : String) : Map<String, String>
 }
 
 actual fun createDir (path : String) {}
+actual fun sodiumInstance () : Sodium = KSodium()

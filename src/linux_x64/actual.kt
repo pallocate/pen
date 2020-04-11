@@ -2,6 +2,7 @@ package pen
 
 import pen.Plugin
 import pen.NoPlugin
+import pen.NoSodium
 
 actual fun now () = 1584518401L
 actual fun slash () = "/"
@@ -20,4 +21,4 @@ actual fun loadConf (filename : String) : Map<String, String>
 }
 
 actual fun createDir (path : String) {}
-actual fun sodiumInstance () : Sodium = KSodium()
+actual fun sodiumInstance () : Sodium = NoSodium()

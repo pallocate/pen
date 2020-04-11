@@ -1,6 +1,6 @@
 package pen
 
-/* Adopted Jetbrains example code, encoding ByteArray to Base64. */
+/* Adopted JetBrains example code, encoding ByteArray to Base64. */
 actual fun encode_b64 (bytes : ByteArray) : ByteArray
 {
    val BASE64_ALPHABET: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"

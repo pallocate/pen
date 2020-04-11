@@ -19,7 +19,7 @@ object Crypto : Loggable
       log("Generating random bytes", Config.trigger( "CRYPTO" ))
       sodium.sodium_init()
       val ret = ByteArray( number )
-      sodium.randombytes_buf( ret, number )
+      sodium.randombytes_buf( ret, number.toLong() )
 
       return ret
    }
@@ -29,7 +29,7 @@ object Crypto : Loggable
    {
       sodium.sodium_init()
       var output = ByteArray( Constants.HASH_BYTES )
-      if (sodium.crypto_generichash( output, Constants.HASH_BYTES, input, input.size, null, 0 ) != 0)
+      if (sodium.crypto_generichash( output, Constants.HASH_BYTES.toLong(), input, input.size.toLong(), null, 0 ) != 0)
          log("Hashing failed!", Config.trigger( "CRYPTO" ), WARN)
 
       return output
@@ -40,7 +40,7 @@ object Crypto : Loggable
    {
       log("Signing text", Config.trigger( "CRYPTO" ))
       var ret = ByteArray( 0 )
-      val secretKey = getKey( passwordProvider, pkcSalt, this::privateKey )
+      val secretKey = key( passwordProvider, pkcSalt, KeyType.SECRET )
 
       if (validateSKSize( secretKey ) && text.size > 0)
       {
@@ -94,7 +94,7 @@ object Crypto : Loggable
    {
       log("Generating a signature from input", Config.trigger( "CRYPTO" ))
       var ret = ByteArray( 0 )
-      val secretKey = getKey( passwordProvider, pkcSalt, this::privateKey )
+      val secretKey = key( passwordProvider, pkcSalt, KeyType.SECRET )
 
       if (validateSKSize( secretKey ) && input.size > 0)
       {
@@ -136,7 +136,7 @@ object Crypto : Loggable
    {
       log("Signing binary", Config.trigger( "CRYPTO" ))
       var ret = ByteArray( 0 )
-      val secretKey = getKey( passwordProvider, pkcSalt, this::privateKey )
+      val secretKey = key( passwordProvider, pkcSalt, KeyType.SECRET )
 
       if (validateSKSize( secretKey ) && binary.size > 0)
       {
@@ -180,7 +180,7 @@ object Crypto : Loggable
    {
       log("Encrypting", Config.trigger( "CRYPTO" ))
       var ret = ByteArray( 0 )
-      val key = getKey( passwordProvider, skcSalt, this::symetricKey )
+      val key = key( passwordProvider, skcSalt, KeyType.SECRET )
 
       if (validateKeySize( key ) && plainText.size > 0)
       {
@@ -208,7 +208,7 @@ object Crypto : Loggable
       var ret = ByteArray( 0 )
       val nonceSize = (sodium.crypto_secretbox_noncebytes() as Number).toInt()
       val plainTextSize = (input.size - (sodium.crypto_secretbox_macbytes() as Number).toInt()) - nonceSize
-      val key = getKey( passwordProvider, skcSalt, this::symetricKey )
+      val key = key( passwordProvider, skcSalt, KeyType.SECRET )
 
       if (validateKeySize( key ) && plainTextSize > 0)
       {
@@ -233,7 +233,7 @@ object Crypto : Loggable
    {
       log("PKC encrypting", Config.trigger( "CRYPTO" ))
       var ret = ByteArray( 0 )
-      val secretKey = getKey( passwordProvider, pkcSalt, this::privateKey )
+      val secretKey = key( passwordProvider, pkcSalt, KeyType.SECRET )
 
       if (validateSKSize( secretKey ) && validatePKSize( othersPublicKey ) && plainText.size > 0)
       {
@@ -263,7 +263,7 @@ object Crypto : Loggable
       var ret = ByteArray( 0 )
       val nonceSize = (sodium.crypto_box_noncebytes() as Number).toInt()
       val plainTextSize = (input.size - (sodium.crypto_box_macbytes() as Number).toInt()) - nonceSize
-      val secretKey = getKey( passwordProvider, pkcSalt, this::privateKey )
+      val secretKey = key( passwordProvider, pkcSalt, KeyType.SECRET )
 
       if (validateSKSize( secretKey ) && validatePKSize( othersPublicKey ) && plainTextSize > 0)
       {
@@ -285,91 +285,64 @@ object Crypto : Loggable
       return ret
    }
 
-   fun publicSigningKeySize () = (sodium.crypto_sign_ed25519_publickeybytes() as Number).toInt()      
-
+   fun symetricKeySize () = sodium.crypto_secretbox_keybytes().coerceToInt()
+   fun seedSize () = sodium.crypto_sign_ed25519_seedbytes().coerceToInt()
+   fun publicSigningKeySize () = sodium.crypto_sign_ed25519_publickeybytes().coerceToInt()
+   fun secretSigningKeySize () = sodium.crypto_sign_ed25519_secretkeybytes().coerceToInt()
    fun saltSize () = sodium.crypto_pwhash_saltbytes().coerceToInt()
    private fun signBytes () = sodium.crypto_sign_ed25519_bytes().coerceToInt()
-
    override fun tag () = "Crypto"
 
-   private fun symetricKey (password : ByteArray, salt : ByteArray) : ByteArray
+   fun key (passwordProvider : PasswordProvider, salt : ByteArray, keyType : KeyType = KeyType.SYMETRIC) : ByteArray
    {
-      log("Generating symetric key", Config.trigger( "CRYPTO" ))
-      val symKeySize = (sodium.crypto_secretbox_keybytes() as Number).toInt()
-      var ret = ByteArray( symKeySize )
-
-      if (sodium.crypto_pwhash( ret, symKeySize.toLong(), password, password.size.toLong(), salt, sodium.crypto_pwhash_opslimit_moderate(),
-      sodium.crypto_pwhash_memlimit_moderate(), sodium.crypto_pwhash_alg_default() ) != 0)
-         log("Key generation failed!", Config.trigger( "CRYPTO" ), WARN)
-
-      return ret
-   }
-
-   private fun privateKey (password : ByteArray, salt : ByteArray) : ByteArray
-   {
-      log("Generating private key", Config.trigger( "CRYPTO" ))
-      var ret = ByteArray( 0 )
-      val seedSize = (sodium.crypto_sign_ed25519_seedbytes() as Number).toInt()
-      val seed = ByteArray( seedSize )
-
-      if (sodium.crypto_pwhash( seed, seedSize.toLong(), password, password.size.toLong(), salt, sodium.crypto_pwhash_opslimit_moderate(),
-      sodium.crypto_pwhash_memlimit_moderate(), sodium.crypto_pwhash_alg_default() ) == 0)
-      {
-         val foo = ByteArray( publicSigningKeySize() )
-         ret = ByteArray( secretSigningKeySize() )
-
-         if (sodium.crypto_sign_seed_keypair( foo, ret, seed ) != 0)
-            log("Keypair generation failed!", Config.trigger( "CRYPTO" ), WARN)
-      }
-      else
-         log("Password seeding failed!", Config.trigger( "CRYPTO" ), WARN)
-
-      return ret
-   }
-
-   fun publicKey (password : ByteArray, salt : ByteArray) : ByteArray
-   {
-      log("Generating public key", Config.trigger( "CRYPTO" ))
-      var ret = ByteArray( 0 )
-      val seedSize = (sodium.crypto_sign_ed25519_seedbytes() as Number).toInt()
-      val seed = ByteArray( seedSize )
-
-      if (sodium.crypto_pwhash( seed, seedSize.toLong(), password, password.size.toLong(), salt, sodium.crypto_pwhash_opslimit_moderate(),
-      sodium.crypto_pwhash_memlimit_moderate(), sodium.crypto_pwhash_alg_default() ) == 0)
-      {
-         ret = ByteArray( publicSigningKeySize() )
-         val foo = ByteArray( secretSigningKeySize() )
-
-         if (sodium.crypto_sign_seed_keypair( ret, foo, seed ) != 0)
-            log("Keypair generation failed!", Config.trigger( "CRYPTO" ), WARN)
-      }
-      else
-         log("Password seeding failed!", Config.trigger( "CRYPTO" ), WARN)
-
-      return ret
-   }
-
-   fun getKey (passwordProvider : PasswordProvider, salt : ByteArray, keyFunction : (ByteArray, ByteArray) -> ByteArray) : ByteArray
-   {
+      log("Generating key", Config.trigger( "CRYPTO" ))
       var ret = ByteArray( 0 )
 
-      if (passwordProvider is NoPasswordProvider)
-         log("Password input needed!", Config.trigger( "CRYPTO" ), WARN)
-      else
+      if (passwordProvider !is NoPasswordProvider)
          if (validateSaltSize( salt ))
          {
             val password = Utils.stringToByteArray( passwordProvider.password() )
-
-            if (password.size == 0)
-               log("Invalid password!", Config.trigger( "CRYPTO" ), WARN)
-            else
+            if (password.size > 0)
             {
                sodium.sodium_init()
-               ret = keyFunction( password, salt )
+
+               /* Key derivation. */
+               val symKeySize = symetricKeySize()
+               val derivedKey = ByteArray( symKeySize )
+
+               if (sodium.crypto_pwhash( derivedKey, symKeySize.toLong(), password, password.size.toLong(), salt, sodium.crypto_pwhash_opslimit_moderate(),
+               sodium.crypto_pwhash_memlimit_moderate(), sodium.crypto_pwhash_alg_default() ) == 0)
+                  if (keyType == KeyType.SYMETRIC)
+                     ret = derivedKey                                           // The derived key is used as symetric key
+                  else
+                     if (symKeySize == seedSize())                              // Both are currently 32B
+                     {
+                        val publicKey = ByteArray( publicSigningKeySize() )
+                        val secretKey = ByteArray( secretSigningKeySize() )
+
+                        /* Keypair generation. The derived key is used as seed for generating key pair. */
+                        if (sodium.crypto_sign_ed25519_seed_keypair( publicKey, secretKey, derivedKey ) == 0)
+                        {
+                           if (keyType == KeyType.PUBLIC)
+                              ret = publicKey
+                           else
+                              ret = secretKey
+                        }
+                        else
+                           log("Key generation failed! (keypair)", Config.trigger( "CRYPTO" ), WARN)
+                     }
+                     else
+                        log("Implementation error!", Config.trigger( "CRYPTO" ), ERROR)
+               else
+                  log("Key generation failed! (derivation)", Config.trigger( "CRYPTO" ), WARN)
             }
+            else
+               log("Key generation failed! (password)", Config.trigger( "CRYPTO" ), WARN)
          }
          else
-            log("Invalid salt", Config.trigger( "CRYPTO" ), WARN)
+            log("Key generation failed! (salt)", Config.trigger( "CRYPTO" ), WARN)
+      else
+         log("Key generation failed! (provider)", Config.trigger( "CRYPTO" ), WARN)
 
       return ret
    }
@@ -437,6 +410,4 @@ object Crypto : Loggable
 
       return ret
    }
-
-   private fun secretSigningKeySize () = (sodium.crypto_sign_ed25519_secretkeybytes() as Number).toInt()
 }
