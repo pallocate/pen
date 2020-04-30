@@ -1,10 +1,11 @@
 package pen
 
+import platform.posix.time
 import pen.Plugin
 import pen.NoPlugin
 import pen.NoSodium
 
-actual fun now () = 1584518401L
+actual fun now () = time( null )
 actual fun slash () = "/"
 
 /* Stubs */

@@ -32,4 +32,3 @@ actual fun encode_b64 (bytes : ByteArray) : ByteArray
 
 /* Stub */
 actual fun decode_b64 (encoded : ByteArray) = ByteArray( 0 )
-
