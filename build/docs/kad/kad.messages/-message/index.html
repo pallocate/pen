@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Message - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kad.messages</a>&nbsp;/&nbsp;<a href="./index.html">Message</a><br/>
+<br/>
+<h1>Message</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Message</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">Message</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-k-acknowledge-message/index.html">KAcknowledgeMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KAcknowledgeMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code>
+<p>A message used to acknowledge a request from a node; can be used in many situations.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-k-connect-message/index.html">KConnectMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KConnectMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code>
+<p>A message sent to another node requesting to connect to them</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-k-content-message/index.html">KContentMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KContentMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code>
+<p>A Message used to send content between nodes</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-k-find-node-message/index.html">KFindNodeMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KFindNodeMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code>
+<p>A message sent to other nodes requesting the K-Closest nodes to a key sent in this message</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-k-find-node-reply/index.html">KFindNodeReply</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KFindNodeReply</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code>
+<p>A message used to connect nodes.
+When a NodeLookup Request comes in, we respond with a KFindNodeReply</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-k-find-value-message/index.html">KFindValueMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KFindValueMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code>
+<p>Messages used to send to another node requesting content</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-k-simple-message/index.html">KSimpleMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KSimpleMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code>
+<p>A simple message used for testing the system; Default message constructed if the message type sent is not available</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-k-store-message/index.html">KStoreMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KStoreMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code>
+<p>A KStoreMessage used to send a store message to a node</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-no-message/index.html">NoMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">NoMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">Message</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

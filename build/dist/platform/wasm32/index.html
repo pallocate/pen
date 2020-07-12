@@ -1,0 +1,29 @@
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>PEN</title
+   </head>
+
+   <body>
+
+      <!-- Calls main with no arguments -->
+      <script wasm="pen.wasm" src="pen.wasm.js"></script>
+      <script>
+
+         // Adds new functionallity to konan.
+         konan.libraries.push({
+            jsNow : function() {
+               return Date.now()/1000
+            }
+         });
+
+         fetch( "pen.wasm" ).then(
+            response => response.arrayBuffer()
+         ).then(
+            buffer => instantiateAndRun( buffer, "01" )                         // Calls main with argument "1"
+         );
+
+       </script>
+   </body>
+</html>
+

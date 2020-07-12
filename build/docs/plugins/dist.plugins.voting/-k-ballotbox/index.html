@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KBallotbox - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">dist.plugins.voting</a>&nbsp;/&nbsp;<a href="./index.html">KBallotbox</a><br/>
+<br/>
+<h1>KBallotbox</h1>
+<code><span class="keyword">class </span><span class="identifier">KBallotbox</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../dist.plugins.interfaces/-ballotbox.html"><span class="identifier">Ballotbox</span></a></code>
+<p>Used to agree in a change to the current state of the economy.</p>
+<h3>Parameters</h3>
+<p><a name="id"></a>
+<code>id</code> - A id unique to the votation.</p>
+<p><a name="motion"></a>
+<code>motion</code> - The change detailed.</p>
+<p><a name="expiration"></a>
+<code>expiration</code> - When the voting ends.</p>
+<p><a name="nrOfCouncils"></a>
+<code>nrOfCouncils</code> - Number of participating councils.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">KBallotbox</span><span class="symbol">(</span><span class="identifier" id="dist.plugins.voting.KBallotbox$<init>(kotlin.Long, dist.plugins.voting.Motion, kotlin.Long, kotlin.Int)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="dist.plugins.voting.KBallotbox$<init>(kotlin.Long, dist.plugins.voting.Motion, kotlin.Long, kotlin.Int)/motion">motion</span><span class="symbol">:</span>&nbsp;<a href="../-motion.html"><span class="identifier">Motion</span></a><span class="symbol">, </span><span class="identifier" id="dist.plugins.voting.KBallotbox$<init>(kotlin.Long, dist.plugins.voting.Motion, kotlin.Long, kotlin.Int)/expiration">expiration</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="dist.plugins.voting.KBallotbox$<init>(kotlin.Long, dist.plugins.voting.Motion, kotlin.Long, kotlin.Int)/nrOfCouncils">nrOfCouncils</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code>
+<p>Used to agree in a change to the current state of the economy.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="expiration.html">expiration</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">expiration</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code>
+<p>When the voting ends.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="id.html">id</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code>
+<p>A id unique to the votation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="motion.html">motion</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">motion</span><span class="symbol">: </span><a href="../-motion.html"><span class="identifier">Motion</span></a></code>
+<p>The change detailed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="nr-of-councils.html">nrOfCouncils</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">nrOfCouncils</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Number of participating councils.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add.html">add</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">add</span><span class="symbol">(</span><span class="identifier" id="dist.plugins.voting.KBallotbox$add()/vote">vote</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="close.html">close</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">close</span><span class="symbol">(</span><span class="identifier" id="dist.plugins.voting.KBallotbox$close(dist.plugins.voting.KSentinel)/sentinel">sentinel</span><span class="symbol">:</span>&nbsp;<a href="../-k-sentinel/index.html"><span class="identifier">KSentinel</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="count.html">count</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="count.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span> <span class="identifier">count</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="../-vote-counter/index.html"><span class="identifier">VoteCounter</span></a><span class="symbol">&gt;</span></code>
+<p>Counts the votes.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-open.html">isOpen</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isOpen</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="nr-of-votes.html">nrOfVotes</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">nrOfVotes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="tag.html">tag</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">tag</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

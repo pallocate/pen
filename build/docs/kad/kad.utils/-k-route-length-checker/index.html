@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KRouteLengthChecker - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kad.utils</a>&nbsp;/&nbsp;<a href="./index.html">KRouteLengthChecker</a><br/>
+<br/>
+<h1>KRouteLengthChecker</h1>
+<code><span class="keyword">class </span><span class="identifier">KRouteLengthChecker</span></code>
+<p>Class that helps compute the route length taken to complete an operation.</p>
+<p>Only used for routing operations - mainly the NodeLookup and ContentLookup Operations.</p>
+<p>Idea:</p>
+<ul><li>Add the original set of nodes with route length 0;</li>
+<li>When we get a node reply with a set of nodes, we add those nodes and set the route length to their sender route length + 1</li>
+</ul>
+<p><strong>Author</strong><br/>
+Joshua Kissoon</p>
+<p><strong>Since</strong><br/>
+20140510</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">KRouteLengthChecker</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Class that helps compute the route length taken to complete an operation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="route-length.html">routeLength</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">routeLength</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Get the route length of the operation!</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-initial-nodes.html">addInitialNodes</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addInitialNodes</span><span class="symbol">(</span><span class="identifier" id="kad.utils.KRouteLengthChecker$addInitialNodes(kotlin.collections.Collection((kad.node.KNode)))/initialNodes">initialNodes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Add the initial nodes in the routing operation</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="add-nodes.html">addNodes</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addNodes</span><span class="symbol">(</span><span class="identifier" id="kad.utils.KRouteLengthChecker$addNodes(kotlin.collections.Collection((kad.node.KNode)), kad.node.KNode)/inputSet">inputSet</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="kad.utils.KRouteLengthChecker$addNodes(kotlin.collections.Collection((kad.node.KNode)), kad.node.KNode)/sender">sender</span><span class="symbol">:</span>&nbsp;<a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Add any nodes that we get from a node reply.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

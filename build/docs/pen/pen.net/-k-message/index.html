@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KMessage - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">pen.net</a>&nbsp;/&nbsp;<a href="./index.html">KMessage</a><br/>
+<br/>
+<h1>KMessage</h1>
+<code><span class="keyword">class </span><span class="identifier">KMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-message.html"><span class="identifier">Message</span></a></code>
+<p>An encrypted message. Message will probably move to some other package in the future.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">KMessage</span><span class="symbol">(</span><span class="identifier" id="pen.net.KMessage$<init>(kotlin.ByteArray, kotlin.Long, kotlin.Long, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/content">content</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.net.KMessage$<init>(kotlin.ByteArray, kotlin.Long, kotlin.Long, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/contactId">contactId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.net.KMessage$<init>(kotlin.ByteArray, kotlin.Long, kotlin.Long, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/messageId">messageId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.net.KMessage$<init>(kotlin.ByteArray, kotlin.Long, kotlin.Long, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../../pen/-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.net.KMessage$<init>(kotlin.ByteArray, kotlin.Long, kotlin.Long, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/pkcSalt">pkcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.net.KMessage$<init>(kotlin.ByteArray, kotlin.Long, kotlin.Long, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/othersPublicKey">othersPublicKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span></code>
+<p>An encrypted message. Message will probably move to some other package in the future.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="contact-id.html">contactId</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">contactId</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="content.html">content</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">content</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="message-id.html">messageId</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">messageId</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="decrypt.html">decrypt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">decrypt</span><span class="symbol">(</span><span class="identifier" id="pen.net.KMessage$decrypt(pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../../pen/-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.net.KMessage$decrypt(pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/pkcSalt">pkcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.net.KMessage$decrypt(pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/othersPublicKey">othersPublicKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="to-string.html">toString</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

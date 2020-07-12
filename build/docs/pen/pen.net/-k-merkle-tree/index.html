@@ -1,0 +1,116 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KMerkleTree - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">pen.net</a>&nbsp;/&nbsp;<a href="./index.html">KMerkleTree</a><br/>
+<br/>
+<h1>KMerkleTree</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">KMerkleTree</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../pen/-loggable/index.html"><span class="identifier">Loggable</span></a></code>
+<p>A simple binary indexed merkle tree implementation, uses an array as backing structure. The initial capacity is two MerkleLeaf´s.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">KMerkleTree</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>A simple binary indexed merkle tree implementation, uses an array as backing structure. The initial capacity is two MerkleLeaf´s.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="last-idx.html">lastIdx</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">lastIdx</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="root-idx.html">rootIdx</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">rootIdx</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="storage.html">storage</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">storage</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="../-merkle-node.html"><span class="identifier">MerkleNode</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add.html">add</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">add</span><span class="symbol">(</span><span class="identifier" id="pen.net.KMerkleTree$add(pen.net.KMerkleNode)/merkleNode">merkleNode</span><span class="symbol">:</span>&nbsp;<a href="../-k-merkle-node/index.html"><span class="identifier">KMerkleNode</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="hashes.html">hashes</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hashes</span><span class="symbol">(</span><span class="identifier" id="pen.net.KMerkleTree$hashes(kotlin.Int, kotlin.Boolean)/nodeIdx">nodeIdx</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;rootIdx<span class="symbol">, </span><span class="identifier" id="pen.net.KMerkleTree$hashes(kotlin.Int, kotlin.Boolean)/updateHashes">updateHashes</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Calculates hashes recursively.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="tag.html">tag</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">tag</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="to-string.html">toString</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../pen/-loggable/log.html">log</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="pen.Loggable$log(kotlin.String, pen.LogLevel, pen.LogLevel)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="pen.Loggable$log(kotlin.String, pen.LogLevel, pen.LogLevel)/trigger">trigger</span><span class="symbol">:</span>&nbsp;<a href="../../pen/-log-level/index.html"><span class="identifier">LogLevel</span></a>&nbsp;<span class="symbol">=</span>&nbsp;LogLevel.WARN<span class="symbol">, </span><span class="identifier" id="pen.Loggable$log(kotlin.String, pen.LogLevel, pen.LogLevel)/severity">severity</span><span class="symbol">:</span>&nbsp;<a href="../../pen/-log-level/index.html"><span class="identifier">LogLevel</span></a>&nbsp;<span class="symbol">=</span>&nbsp;LogLevel.DEBUG<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="pen.Loggable$log(kotlin.Function0((kotlin.String)), pen.LogLevel, pen.LogLevel)/message">message</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="pen.Loggable$log(kotlin.Function0((kotlin.String)), pen.LogLevel, pen.LogLevel)/trigger">trigger</span><span class="symbol">:</span>&nbsp;<a href="../../pen/-log-level/index.html"><span class="identifier">LogLevel</span></a>&nbsp;<span class="symbol">=</span>&nbsp;LogLevel.WARN<span class="symbol">, </span><span class="identifier" id="pen.Loggable$log(kotlin.Function0((kotlin.String)), pen.LogLevel, pen.LogLevel)/severity">severity</span><span class="symbol">:</span>&nbsp;<a href="../../pen/-log-level/index.html"><span class="identifier">LogLevel</span></a>&nbsp;<span class="symbol">=</span>&nbsp;LogLevel.DEBUG<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-k-c-t-b/index.html">KCTB</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">KCTB</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">KMerkleTree</span></a><span class="symbol">, </span><a href="../../pen/-loggable/index.html"><span class="identifier">Loggable</span></a></code>
+<p>Credit Token Blockchain</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -14,7 +14,7 @@ abstract class Contact
    fun name () = _name.safePath()
    fun icon () = _icon.safePath()
 }
-class NoContact : Contact() {override val contactId=0L;override val publicKey=ByteArray(0);override protected val _name="";override protected val _icon =""}
+class NoContact : Contact() {override val contactId=0L;override val publicKey = ByteArray(0);override protected val _name="";override protected val _icon =""}
 
 /** Contact information. */
 @Serializable
@@ -24,6 +24,8 @@ open class KContact (final override val contactId : Long = 0L,
                      @SerialName( "icon" )
                      final override protected val _icon : String = "",
 
+                     /* 'with' parameter is´nt supported by kotlin native yet */
+                     @Serializable //( with = ByteArraySerialiser::class )
                      final override val publicKey : ByteArray = ByteArray( 0 ),
                      val group : String = "") : Contact()
 {
@@ -37,7 +39,9 @@ class KMe ( final override val contactId : Long,
             @SerialName( "icon" )
             final override protected val _icon : String = "",
 
+            @Serializable //( with = ByteArraySerialiser::class )
             final override val publicKey : ByteArray = ByteArray( 0 ),
+            @Serializable //( with = ByteArraySerialiser::class )
             val salt : ByteArray = ByteArray( 0 )) : Contact()
 {
    companion object

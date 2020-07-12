@@ -1,0 +1,37 @@
+#!/bin/sh
+
+cd /home/projects/tedit/current
+
+task="all"
+if [ $1 ]; then
+   task=$1
+fi
+
+DEPEND=$PEN:$PLUGINS:$PEN_TESTS
+
+if [ $task = "all" ]; then
+   DEPEND=$DEPEND:$SERIAL_RUN:build/dist/platform/jvm/tedit/apps.jar
+   cmd-timed "kotlinc -d build/dist/platform/jvm/tedit/tedit.jar -cp $DEPEND -Xplugin=$SERIAL_PLUG src/tedit"
+
+elif [ $task = "apps" ]; then
+   cmd-timed "kotlinc -d build/dist/platform/jvm/tedit/apps.jar -cp $DEPEND src/apps"
+
+elif [ $task = "run" ]; then
+   echo Running..
+   DEPEND=$JNA:$SERIAL_RUN:$TEDIT:$DEPEND
+   kotlin -cp $DEPEND tedit.Main $2
+
+elif [ $task = "api" ]; then
+   clear
+   echo "Creating api docs.." ; echo
+   java -cp build/lib/apache/kotlin-stdlib.jar -jar /home/local/lib/dokka-fatjar.jar src -output /home/projects/build/docs/tedit
+
+else
+   echo "Usage: $0 task"
+   echo
+   echo "Tasks:"
+   echo "apps       tedit          run"
+   echo "api"
+fi
+echo
+

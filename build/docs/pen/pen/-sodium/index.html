@@ -1,0 +1,229 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Sodium - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">pen</a>&nbsp;/&nbsp;<a href="./index.html">Sodium</a><br/>
+<br/>
+<h1>Sodium</h1>
+<code><span class="keyword">interface </span><span class="identifier">Sodium</span></code>
+<p>An limited interface to the Sodium library.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="crypto_box_easy.html">crypto_box_easy</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_box_easy</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_box_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/c">c</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/mlen">mlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/n">n</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/pk">pk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/sk">sk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_box_macbytes.html">crypto_box_macbytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_box_macbytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_box_noncebytes.html">crypto_box_noncebytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_box_noncebytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_box_open_easy.html">crypto_box_open_easy</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_box_open_easy</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_box_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/c">c</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/clen">clen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/n">n</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/pk">pk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_box_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/sk">sk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_box_publickeybytes.html">crypto_box_publickeybytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_box_publickeybytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_box_secretkeybytes.html">crypto_box_secretkeybytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_box_secretkeybytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_generichash.html">crypto_generichash</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_generichash</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_generichash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long)/output">output</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_generichash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long)/outlen">outlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_generichash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long)/input">input</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_generichash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long)/inlen">inlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_generichash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_generichash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long)/keylen">keylen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_pwhash.html">crypto_pwhash</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_pwhash</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_pwhash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.Long, kotlin.Int)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_pwhash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.Long, kotlin.Int)/keylen">keylen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_pwhash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.Long, kotlin.Int)/passwd">passwd</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_pwhash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.Long, kotlin.Int)/passwdlen">passwdlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_pwhash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.Long, kotlin.Int)/salt">salt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_pwhash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.Long, kotlin.Int)/opslimit">opslimit</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_pwhash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.Long, kotlin.Int)/memlimit">memlimit</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_pwhash(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.Long, kotlin.Int)/alg">alg</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_pwhash_alg_default.html">crypto_pwhash_alg_default</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_pwhash_alg_default</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_pwhash_memlimit_moderate.html">crypto_pwhash_memlimit_moderate</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_pwhash_memlimit_moderate</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_pwhash_opslimit_moderate.html">crypto_pwhash_opslimit_moderate</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_pwhash_opslimit_moderate</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_pwhash_saltbytes.html">crypto_pwhash_saltbytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_pwhash_saltbytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_secretbox_easy.html">crypto_secretbox_easy</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_secretbox_easy</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_secretbox_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/c">c</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_secretbox_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_secretbox_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/mlen">mlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_secretbox_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/n">n</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_secretbox_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/k">k</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_secretbox_keybytes.html">crypto_secretbox_keybytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_secretbox_keybytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_secretbox_macbytes.html">crypto_secretbox_macbytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_secretbox_macbytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_secretbox_noncebytes.html">crypto_secretbox_noncebytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_secretbox_noncebytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_secretbox_open_easy.html">crypto_secretbox_open_easy</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_secretbox_open_easy</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_secretbox_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_secretbox_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/c">c</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_secretbox_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/clen">clen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_secretbox_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/n">n</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_secretbox_open_easy(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.ByteArray)/k">k</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519.html">crypto_sign_ed25519</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/sm">sm</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/smlen_p">smlen_p</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/mlen">mlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/sk">sk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_bytes.html">crypto_sign_ed25519_bytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_bytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_detached.html">crypto_sign_ed25519_detached</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_detached</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_detached(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/sig">sig</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_detached(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/siglen_p">siglen_p</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_detached(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_detached(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/mlen">mlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_detached(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/sk">sk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_open.html">crypto_sign_ed25519_open</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_open</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_open(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_open(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/mlen_p">mlen_p</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_open(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/sm">sm</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_open(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/smlen">smlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_open(kotlin.ByteArray, kotlin.Long, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/pk">pk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_pk_to_curve25519.html">crypto_sign_ed25519_pk_to_curve25519</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_pk_to_curve25519</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_pk_to_curve25519(kotlin.ByteArray, kotlin.ByteArray)/curve25519_pk">curve25519_pk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_pk_to_curve25519(kotlin.ByteArray, kotlin.ByteArray)/ed25519_pk">ed25519_pk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_publickeybytes.html">crypto_sign_ed25519_publickeybytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_publickeybytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_secretkeybytes.html">crypto_sign_ed25519_secretkeybytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_secretkeybytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_seed_keypair.html">crypto_sign_ed25519_seed_keypair</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_seed_keypair</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_seed_keypair(kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/pk">pk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_seed_keypair(kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/sk">sk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_seed_keypair(kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/seed">seed</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_seedbytes.html">crypto_sign_ed25519_seedbytes</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_seedbytes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_sk_to_curve25519.html">crypto_sign_ed25519_sk_to_curve25519</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_sk_to_curve25519</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_sk_to_curve25519(kotlin.ByteArray, kotlin.ByteArray)/curve25519_sk">curve25519_sk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_sk_to_curve25519(kotlin.ByteArray, kotlin.ByteArray)/ed25519_sk">ed25519_sk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="crypto_sign_ed25519_verify_detached.html">crypto_sign_ed25519_verify_detached</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">crypto_sign_ed25519_verify_detached</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_verify_detached(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/sig">sig</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_verify_detached(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/m">m</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_verify_detached(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/mlen">mlen</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$crypto_sign_ed25519_verify_detached(kotlin.ByteArray, kotlin.ByteArray, kotlin.Long, kotlin.ByteArray)/pk">pk</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="randombytes_buf.html">randombytes_buf</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">randombytes_buf</span><span class="symbol">(</span><span class="identifier" id="pen.Sodium$randombytes_buf(kotlin.ByteArray, kotlin.Long)/buf">buf</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Sodium$randombytes_buf(kotlin.ByteArray, kotlin.Long)/size">size</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="sodium_init.html">sodium_init</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">sodium_init</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

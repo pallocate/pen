@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KContact - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kad.routing</a>&nbsp;/&nbsp;<a href="./index.html">KContact</a><br/>
+<br/>
+<h1>KContact</h1>
+<code><span class="keyword">class </span><span class="identifier">KContact</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html"><span class="identifier">Comparable</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">KContact</span></a><span class="symbol">&gt;</span></code>
+<p>Keeps information about contacts of the Node contacts are stored in the Buckets in the Routing Table.
+Contacts are used instead of nodes because more information is needed than just the node information.</p>
+<ul><li>Information such as
+-- Last seen time</li>
+</ul>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">KContact</span><span class="symbol">(</span><span class="identifier" id="kad.routing.KContact$<init>(kad.node.KNode)/node">node</span><span class="symbol">:</span>&nbsp;<a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a><span class="symbol">)</span></code>
+<p>Keeps information about contacts of the Node contacts are stored in the Buckets in the Routing Table.
+Contacts are used instead of nodes because more information is needed than just the node information.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="last-seen.html">lastSeen</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">lastSeen</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code>
+<p>The last time this contact was seen.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="node.html">node</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">node</span><span class="symbol">: </span><a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="stale-count.html">staleCount</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">staleCount</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Stale as described by Kademlia paper page 64
+When a contact fails to respond, if the replacement cache is empty and there is no replacement for the contact,
+just mark it as stale.
+Now when a new contact is added, if the contact is stale, it is removed.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="compare-to.html">compareTo</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">compareTo</span><span class="symbol">(</span><span class="identifier" id="kad.routing.KContact$compareTo(kad.routing.KContact)/other">other</span><span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">KContact</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Compares contacts using last seen timestamps</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="equals.html">equals</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">equals</span><span class="symbol">(</span><span class="identifier" id="kad.routing.KContact$equals(kotlin.Any)/other">other</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="hash-code.html">hashCode</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hashCode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="increment-stale-count.html">incrementStaleCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">incrementStaleCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Increments the amount of times this count has failed to respond to a request.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="reset-stale-count.html">resetStaleCount</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">resetStaleCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Reset the stale count of the contact if it's recently seen</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-seen-now.html">setSeenNow</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setSeenNow</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>When a Node sees a contact a gain, the Node will want to update that it's seen recently,
+this method updates the last seen timestamp for this contact.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="to-string.html">toString</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

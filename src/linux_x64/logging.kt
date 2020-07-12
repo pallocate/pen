@@ -4,8 +4,7 @@ import platform.posix.fdopen
 import platform.posix.fprintf
 import platform.posix.fflush
 
-/** Skeleton code for web assembly. */
-actual object Logger
+actual object LogManager
 {
    val STDERR = fdopen( 2, "w" )
 

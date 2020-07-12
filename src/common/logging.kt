@@ -1,6 +1,6 @@
 package pen
 
-expect object Logger
+expect object LogManager
 {
    fun logMessage (message : String, severity : LogLevel)
 }
@@ -14,37 +14,47 @@ interface Loggable : Tagged
    fun log (message : String, trigger : LogLevel = LogLevel.WARN, severity : LogLevel = LogLevel.DEBUG)
    {
       if (trigger >= severity)
-         Logger.logMessage( tag() + "- " + message, severity )
+         LogManager.logMessage( prependix() + message, severity )
    }
 
    /** @param trigger At what level to trigger the actual logging. The value could for example be read from a config file. */
    fun log (message : () -> String, trigger : LogLevel = LogLevel.WARN, severity : LogLevel = LogLevel.DEBUG)
    {
       if (trigger >= severity)
-         Logger.logMessage( tag() + "- " + message(), severity )
+         LogManager.logMessage( prependix() + message(), severity )
    }
+
+   fun log (trigger : LogLevel)
+   {
+      if (trigger >= LogLevel.DEBUG)
+         LogManager.logMessage( tag(), LogLevel.DEBUG )
+   }
+
+   private fun prependix () = if (tag() == "") "" else tag() + "- "
 }
 
-/** Simple logging. */
-object Log
+/** Simple logging. Implementing the Loggable interface also gives access to trigged logging. */
+object Log : Loggable
 {
-   /** Global log level. If not set warnings and errors will be logged.  */
+   /** Global log level. If not explicitly set warnings and errors will be logged.  */
    var level : LogLevel = LogLevel.UNSET
 
-   private fun doLog (message : String, severity : LogLevel)
+   private fun logMessage (message : String, severity : LogLevel)
    {
       if (level == LogLevel.UNSET)
       {
          if (severity <= LogLevel.WARN )
-            Logger.logMessage( message, severity )
+            LogManager.logMessage( message, severity )
       }
       else
-         Logger.logMessage( message, severity )
+         LogManager.logMessage( message, severity )
    }
 
-   fun debug (message : String) = doLog( message, LogLevel.DEBUG )
-   fun info (message : String) = doLog( message, LogLevel.INFO )
-   fun warn (message : String) = doLog( message, LogLevel.WARN )
-   fun error (message : String) = doLog( message, LogLevel.ERROR )
-   fun critical (message : String) = doLog( message, LogLevel.CRITICAL )
+   fun debug (message : String) = logMessage( message, LogLevel.DEBUG )
+   fun info (message : String) = logMessage( message, LogLevel.INFO )
+   fun warn (message : String) = logMessage( message, LogLevel.WARN )
+   fun error (message : String) = logMessage( message, LogLevel.ERROR )
+   fun critical (message : String) = logMessage( message, LogLevel.CRITICAL )
+
+   override fun tag () = ""
 }

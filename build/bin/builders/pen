@@ -1,0 +1,78 @@
+#!/bin/sh
+
+cd /home/projects/pen/current
+
+###  Print usage  ###
+printUsage () {
+   echo "Usage: pen task [option]"
+   echo
+   echo "Tasks:"
+   echo "all            linux          tests"
+   echo "wasm           api"
+}
+
+task="all"
+if [ $1 ]; then
+   task=$1
+fi
+
+###  All  ###
+if [ $task = "all" ]; then
+   DEPEND=$JNA:$SERIAL_RUN
+   cmd-timed "kotlinc -d build/dist/platform/jvm/pen/pen.jar -cp $DEPEND -Xmulti-platform -Xplugin=$SERIAL_PLUG src/common src/jvm"
+
+###  Wasm  ###
+elif [ $task = "wasm" ]; then
+   if [ $2 -a $2 = "serv" ]; then
+      cd build/dist/platform/wasm32
+      python -m RangeHTTPServer
+   else
+      echo Compiling..
+      cmd-timed "kotlinc-native -o pen -target wasm32 -Xmulti-platform src/common src/native_serializtion_hack src/wasm32 src/wasm32_tests"
+      mv pen.wasm pen.wasm.js build/dist/platform/wasm32
+# -g -generate debug DWARF information usaful to the GDB
+   fi
+
+###  Linux  ###
+elif [ $1 = "linux" ]; then
+   echo Compiling..
+
+   if [ $2 -a $2 = "sodium" ]; then
+      echo Making sodium.klib
+      cinterop -def src/linux_x64/sodium.def -compiler-option -I/usr/include -o sodium
+      rm -Rf sodium-build
+   else
+      SOURCES="src/common src/native_serializtion_hack src/linux_x64 src/linux_x64_tests"
+      kotlinc-native -o linux-tests -Xmulti-platform $SOURCES -library sodium -linker-options "-L/usr/lib -lsodium"
+
+      if [ $? -eq 0 ]; then
+         mv linux-tests.kexe sodium.klib build/dist/platform/linux_x64
+         cd build/dist/platform/linux_x64
+
+         echo Running..
+         ./linux-tests.kexe
+      fi
+   fi
+
+###  Tests  ###
+elif [ $task = "tests" ]; then
+   DEPEND=$JUNIT:$PEN:$JNA:$SERIAL_RUN
+   kotlinc -d build/dist/platform/jvm/pen/examples.jar -cp $DEPEND -Xmulti-platform src/common_tests
+
+   if [ $? -eq 0 ]; then
+      DEPEND=$DEPEND:build/dist/platform/jvm/pen/examples.jar
+      cmd-timed "kotlinc -d build/dist/platform/jvm/pen/tests.jar -cp $DEPEND -Xmulti-platform src/jvm_tests"
+   fi
+
+###  Api  ###
+elif [ $task = "api" ]; then
+   clear
+   echo "Creating api docs.." ; echo
+   java -cp build/lib/kotlin/kotlin-stdlib.jar -jar $DOKKA src/common -output build/docs/pen
+
+else
+   printUsage
+
+fi
+echo
+#kotlinc -nowarn  # Silent compile

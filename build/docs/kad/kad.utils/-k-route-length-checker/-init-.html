@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KRouteLengthChecker.<init> - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kad.utils</a>&nbsp;/&nbsp;<a href="index.html">KRouteLengthChecker</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="kad.utils.KRouteLengthChecker$&lt;init&gt;()"></a>
+<code><span class="identifier">KRouteLengthChecker</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Class that helps compute the route length taken to complete an operation.</p>
+<p>Only used for routing operations - mainly the NodeLookup and ContentLookup Operations.</p>
+<p>Idea:</p>
+<ul><li>Add the original set of nodes with route length 0;</li>
+<li>When we get a node reply with a set of nodes, we add those nodes and set the route length to their sender route length + 1</li>
+</ul>
+<p><strong>Author</strong><br/>
+Joshua Kissoon</p>
+<p><strong>Since</strong><br/>
+20140510</p>
+</BODY>
+</HTML>

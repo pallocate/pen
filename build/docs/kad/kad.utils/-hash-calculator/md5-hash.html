@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>HashCalculator.md5Hash - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kad.utils</a>&nbsp;/&nbsp;<a href="index.html">HashCalculator</a>&nbsp;/&nbsp;<a href="./md5-hash.html">md5Hash</a><br/>
+<br/>
+<h1>md5Hash</h1>
+<a name="kad.utils.HashCalculator$md5Hash(kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="identifier">md5Hash</span><span class="symbol">(</span><span class="identifier" id="kad.utils.HashCalculator$md5Hash(kotlin.String)/toHash">toHash</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Computes the MD5 Hash.</p>
+<h3>Parameters</h3>
+<p><a name="toHash"></a>
+<code>toHash</code> - The string to hash</p>
+<h3>Exceptions</h3>
+<p><a name="java.security.NoSuchAlgorithmException"></a>
+<code>java.security.NoSuchAlgorithmException</code> - </p>
+<p><strong>Return</strong><br/>
+byte<a href="#">16</a> The hashed string</p>
+<a name="kad.utils.HashCalculator$md5Hash(kotlin.String, kotlin.String)"></a>
+<code><span class="keyword">fun </span><span class="identifier">md5Hash</span><span class="symbol">(</span><span class="identifier" id="kad.utils.HashCalculator$md5Hash(kotlin.String, kotlin.String)/toHash">toHash</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="kad.utils.HashCalculator$md5Hash(kotlin.String, kotlin.String)/salt">salt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Computes the MD5 Hash using a salt.</p>
+<h3>Parameters</h3>
+<p><a name="toHash"></a>
+<code>toHash</code> - The string to hash</p>
+<p><a name="salt"></a>
+<code>salt</code> - A salt used to blind the hash</p>
+<h3>Exceptions</h3>
+<p><a name="java.security.NoSuchAlgorithmException"></a>
+<code>java.security.NoSuchAlgorithmException</code> - </p>
+<p><strong>Return</strong><br/>
+byte<a href="#">16</a> The hashed string</p>
+</BODY>
+</HTML>

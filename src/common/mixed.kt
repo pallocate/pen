@@ -1,7 +1,5 @@
 package pen
 
-import kotlinx.serialization.internal.HexConverter
-
 /** Implementing classes should provide a password every time the password function is called. */
 interface PasswordProvider
 { fun password () : String }
@@ -25,8 +23,7 @@ enum class KeyType
 { SYMETRIC, PUBLIC, SECRET }
 
 /** Convertes a ByteArray to a hex encoded String. */
-@kotlinx.serialization.InternalSerializationApi
-fun ByteArray.toHex () = HexConverter.printHexBinary( this )
+fun ByteArray.toHex () = this.joinToString( "" ) { it.toInt().and( 0xFF ).toString( 16 ).padStart( 2, '0' )}
 
 fun Long.coerceToInt () = this.coerceIn( -2147483648L, 2147483647L ).toInt()
 
@@ -42,7 +39,7 @@ fun Long.toByteArray () : ByteArray
    return ret
 }
 /** Filters out possibly unsafe characters. */
-fun String.safePath () = filter  {
+fun String.safePath () =  filter {
                                     ('0'..'9').contains( it ) ||
                                     ('A'..'Z').contains( it ) ||
                                     ('a'..'z').contains( it ) ||

@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KServer - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kad</a>&nbsp;/&nbsp;<a href="./index.html">KServer</a><br/>
+<br/>
+<h1>KServer</h1>
+<code><span class="keyword">class </span><span class="identifier">KServer</span></code>
+<p>The server that handles sending and receiving messages between nodes on the Kad Network.</p>
+<h3>Parameters</h3>
+<p><a name="port"></a>
+<code>port</code> - The port to listen on</p>
+<p><a name="receiverFactory"></a>
+<code>receiverFactory</code> - Factory used to create receivers</p>
+<p><a name="node"></a>
+<code>node</code> - Local node on which this server runs on</p>
+<p><a name="stats"></a>
+<code>stats</code> - A stats to manage the server statistics</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">KServer</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>The server that handles sending and receiving messages between nodes on the Kad Network.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="is-running.html">isRunning</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">isRunning</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="stats.html">stats</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">stats</span><span class="symbol">: </span><a href="../-k-stats/index.html"><span class="identifier">KStats</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="initialize.html">initialize</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">initialize</span><span class="symbol">(</span><span class="identifier" id="kad.KServer$initialize(kad.messages.receivers.KReceiverFactory, kotlin.Int)/receiverFactory">receiverFactory</span><span class="symbol">:</span>&nbsp;<a href="../../kad.messages.receivers/-k-receiver-factory/index.html"><span class="identifier">KReceiverFactory</span></a><span class="symbol">, </span><span class="identifier" id="kad.KServer$initialize(kad.messages.receivers.KReceiverFactory, kotlin.Int)/port">port</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="print-receivers.html">printReceivers</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">printReceivers</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="reply.html">reply</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">reply</span><span class="symbol">(</span><span class="identifier" id="kad.KServer$reply(kad.node.KNode, kad.messages.Message, kotlin.Int)/recipient">recipient</span><span class="symbol">:</span>&nbsp;<a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a><span class="symbol">, </span><span class="identifier" id="kad.KServer$reply(kad.node.KNode, kad.messages.Message, kotlin.Int)/message">message</span><span class="symbol">:</span>&nbsp;<a href="../../kad.messages/-message/index.html"><span class="identifier">Message</span></a><span class="symbol">, </span><span class="identifier" id="kad.KServer$reply(kad.node.KNode, kad.messages.Message, kotlin.Int)/conversationID">conversationID</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Replies to a received message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="send-message.html">sendMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">sendMessage</span><span class="symbol">(</span><span class="identifier" id="kad.KServer$sendMessage(kad.node.KNode, kad.messages.Message, kad.messages.receivers.Receiver)/recipient">recipient</span><span class="symbol">:</span>&nbsp;<a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a><span class="symbol">, </span><span class="identifier" id="kad.KServer$sendMessage(kad.node.KNode, kad.messages.Message, kad.messages.receivers.Receiver)/message">message</span><span class="symbol">:</span>&nbsp;<a href="../../kad.messages/-message/index.html"><span class="identifier">Message</span></a><span class="symbol">, </span><span class="identifier" id="kad.KServer$sendMessage(kad.node.KNode, kad.messages.Message, kad.messages.receivers.Receiver)/responseReceiver">responseReceiver</span><span class="symbol">:</span>&nbsp;<a href="../../kad.messages.receivers/-receiver/index.html"><span class="identifier">Receiver</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Sends a message.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="shutdown.html">shutdown</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">shutdown</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Stops listening and shuts down the server</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="tag.html">tag</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">tag</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+cd /home/projects/kad/current
+
+task="all"
+if [ $1 ]; then
+   task=$1
+fi
+
+if [ $task = "all" ]; then
+   DEPENDS=$JNA:$PEN:$COROUTINES:$SERIAL_RUN
+   cmd-timed "kotlinc -d $KAD -cp $DEPENDS -Xplugin=$SERIAL_PLUG src/jvm"
+
+elif [ $task = "tests" ]; then
+   DEPENDS=$JUNIT:$PEN:$KAD:$SERIAL_RUN:build/lib/kademlia/Kademlia.jar
+   cmd-timed "kotlinc -d build/dist/platform/jvm/kad/tests.jar -cp $DEPENDS src/jvm_tests"
+
+elif [ $task = "api" ]; then
+   clear
+   echo "Creating api docs.." ; echo
+   java -cp $STDLIB -jar $DOKKA src -output build/docs/kad
+
+else
+   echo "Usage: $0 task"
+   echo
+   echo "Tasks:"
+   echo "all            run             api"
+fi
+echo

@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KFindNodeOperation.<init> - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kad.operations</a>&nbsp;/&nbsp;<a href="index.html">KFindNodeOperation</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+<a name="kad.operations.KFindNodeOperation$&lt;init&gt;(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.node.KNodeId)"></a>
+<code><span class="identifier">KFindNodeOperation</span><span class="symbol">(</span><span class="identifier" id="kad.operations.KFindNodeOperation$<init>(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.node.KNodeId)/server">server</span><span class="symbol">:</span>&nbsp;<a href="../../kad/-k-server/index.html"><span class="identifier">KServer</span></a><span class="symbol">, </span><span class="identifier" id="kad.operations.KFindNodeOperation$<init>(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.node.KNodeId)/node">node</span><span class="symbol">:</span>&nbsp;<a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a><span class="symbol">, </span><span class="identifier" id="kad.operations.KFindNodeOperation$<init>(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.node.KNodeId)/routingTable">routingTable</span><span class="symbol">:</span>&nbsp;<a href="../../kad.routing/-k-routing-table/index.html"><span class="identifier">KRoutingTable</span></a><span class="symbol">, </span><span class="identifier" id="kad.operations.KFindNodeOperation$<init>(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.node.KNodeId)/lookupId">lookupId</span><span class="symbol">:</span>&nbsp;<a href="../../kad.node/-k-node-id/index.html"><span class="identifier">KNodeId</span></a><span class="symbol">)</span></code>
+<p>Finds the K closest nodes to a specified identifier
+The algorithm terminates when it has gotten responses from the K closest nodes it has seen.
+Nodes that fail to respond are removed from consideration</p>
+<h3>Parameters</h3>
+<p><a name="server"></a>
+<code>server</code> - Server used for communication</p>
+<p><a name="kadNode"></a>
+<code>kadNode</code> - The local node making the communication</p>
+<p><a name="lookupId"></a>
+<code>lookupId</code> - The ID for which to find nodes close to</p>
+</BODY>
+</HTML>

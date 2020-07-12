@@ -1,0 +1,187 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Crypto - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">pen</a>&nbsp;/&nbsp;<a href="./index.html">Crypto</a><br/>
+<br/>
+<h1>Crypto</h1>
+<code><span class="keyword">object </span><span class="identifier">Crypto</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-loggable/index.html"><span class="identifier">Loggable</span></a></code>
+<p>Cryptographic functionallity, using the Sodium library.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="decrypt.html">decrypt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">decrypt</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$decrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/input">input</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$decrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$decrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/skcSalt">skcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using XSalsa20 and Poly1305 MAC alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="digest.html">digest</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">digest</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$digest(kotlin.ByteArray)/input">input</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using BLAKE2b alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="encrypt.html">encrypt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">encrypt</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$encrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/plainText">plainText</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$encrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$encrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/skcSalt">skcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using XSalsa20 and Poly1305 MAC alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="key.html">key</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">key</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$key(pen.PasswordProvider, kotlin.ByteArray, pen.KeyType)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$key(pen.PasswordProvider, kotlin.ByteArray, pen.KeyType)/salt">salt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$key(pen.PasswordProvider, kotlin.ByteArray, pen.KeyType)/keyType">keyType</span><span class="symbol">:</span>&nbsp;<a href="../-key-type/index.html"><span class="identifier">KeyType</span></a>&nbsp;<span class="symbol">=</span>&nbsp;KeyType.SYMETRIC<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="pkc-decrypt.html">pkcDecrypt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">pkcDecrypt</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$pkcDecrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/input">input</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$pkcDecrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$pkcDecrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/pkcSalt">pkcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$pkcDecrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/othersPublicKey">othersPublicKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using X25519, XSalsa20 and Poly1305 MAC alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="pkc-encrypt.html">pkcEncrypt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">pkcEncrypt</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$pkcEncrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/plainText">plainText</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$pkcEncrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$pkcEncrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/pkcSalt">pkcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$pkcEncrypt(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray, kotlin.ByteArray)/othersPublicKey">othersPublicKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using X25519, XSalsa20 and Poly1305 MAC alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="public-signing-key-size.html">publicSigningKeySize</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">publicSigningKeySize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="random-bytes.html">randomBytes</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">randomBytes</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$randomBytes(kotlin.Int)/number">number</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="salt-size.html">saltSize</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">saltSize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="secret-signing-key-size.html">secretSigningKeySize</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">secretSigningKeySize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="seed-size.html">seedSize</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">seedSize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="signature-of.html">signatureOf</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">signatureOf</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$signatureOf(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/input">input</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$signatureOf(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$signatureOf(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/pkcSalt">pkcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using Ed25519 alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="sign-binary.html">signBinary</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">signBinary</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$signBinary(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/binary">binary</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$signBinary(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$signBinary(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/pkcSalt">pkcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using Ed25519 alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="sign-text.html">signText</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">signText</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$signText(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$signText(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/passwordProvider">passwordProvider</span><span class="symbol">:</span>&nbsp;<a href="../-password-provider/index.html"><span class="identifier">PasswordProvider</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$signText(kotlin.ByteArray, pen.PasswordProvider, kotlin.ByteArray)/pkcSalt">pkcSalt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using Ed25519 alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="symetric-key-size.html">symetricKeySize</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">symetricKeySize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="tag.html">tag</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">tag</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="verify-binary.html">verifyBinary</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">verifyBinary</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$verifyBinary(kotlin.ByteArray, kotlin.ByteArray)/signedBinary">signedBinary</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$verifyBinary(kotlin.ByteArray, kotlin.ByteArray)/othersPublicKey">othersPublicKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using Ed25519 alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="verify-signature-of.html">verifySignatureOf</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">verifySignatureOf</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$verifySignatureOf(kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/input">input</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$verifySignatureOf(kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/signature">signature</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$verifySignatureOf(kotlin.ByteArray, kotlin.ByteArray, kotlin.ByteArray)/othersPublicKey">othersPublicKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Using Ed25519 alorithm from the Sodium library.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="verify-text.html">verifyText</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">verifyText</span><span class="symbol">(</span><span class="identifier" id="pen.Crypto$verifyText(kotlin.ByteArray, kotlin.ByteArray)/signedText">signedText</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">, </span><span class="identifier" id="pen.Crypto$verifyText(kotlin.ByteArray, kotlin.ByteArray)/othersPublicKey">othersPublicKey</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html"><span class="identifier">ByteArray</span></a></code>
+<p>Using Ed25519 alorithm from the Sodium library.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-loggable/log.html">log</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="pen.Loggable$log(kotlin.String, pen.LogLevel, pen.LogLevel)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="pen.Loggable$log(kotlin.String, pen.LogLevel, pen.LogLevel)/trigger">trigger</span><span class="symbol">:</span>&nbsp;<a href="../-log-level/index.html"><span class="identifier">LogLevel</span></a>&nbsp;<span class="symbol">=</span>&nbsp;LogLevel.WARN<span class="symbol">, </span><span class="identifier" id="pen.Loggable$log(kotlin.String, pen.LogLevel, pen.LogLevel)/severity">severity</span><span class="symbol">:</span>&nbsp;<a href="../-log-level/index.html"><span class="identifier">LogLevel</span></a>&nbsp;<span class="symbol">=</span>&nbsp;LogLevel.DEBUG<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="pen.Loggable$log(kotlin.Function0((kotlin.String)), pen.LogLevel, pen.LogLevel)/message">message</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="pen.Loggable$log(kotlin.Function0((kotlin.String)), pen.LogLevel, pen.LogLevel)/trigger">trigger</span><span class="symbol">:</span>&nbsp;<a href="../-log-level/index.html"><span class="identifier">LogLevel</span></a>&nbsp;<span class="symbol">=</span>&nbsp;LogLevel.WARN<span class="symbol">, </span><span class="identifier" id="pen.Loggable$log(kotlin.Function0((kotlin.String)), pen.LogLevel, pen.LogLevel)/severity">severity</span><span class="symbol">:</span>&nbsp;<a href="../-log-level/index.html"><span class="identifier">LogLevel</span></a>&nbsp;<span class="symbol">=</span>&nbsp;LogLevel.DEBUG<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

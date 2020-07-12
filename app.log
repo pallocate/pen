@@ -1,3 +1,10 @@
-2020-03-31 07:27:24 DEBUG: Loding config file "plugins.conf"
-2020-03-31 07:27:24 WARN: Load config failed!
-2020-03-31 07:27:24 DEBUG: Loding config file "log.conf"
+2020-07-04 02:14:33 WARN: Load config failed!
+2020-07-04 02:14:33 DEBUG: KCTB- Adding KTokenMerkleLeaf to merkle tree
+2020-07-04 02:14:33 DEBUG: KCTB- Adding KTokenMerkleLeaf to merkle tree
+2020-07-04 02:14:33 DEBUG: KCTB- Adding KTokenMerkleLeaf to merkle tree
+2020-07-04 02:14:33 DEBUG: KCTB- Doubling merkle tree capacity
+2020-07-05 06:45:37 WARN: Load config failed!
+2020-07-05 06:45:37 DEBUG: KCTB- Adding KTokenMerkleLeaf to merkle tree
+2020-07-05 06:45:37 DEBUG: KCTB- Adding KTokenMerkleLeaf to merkle tree
+2020-07-05 06:45:37 DEBUG: KCTB- Adding KTokenMerkleLeaf to merkle tree
+2020-07-05 06:45:37 DEBUG: KCTB- Doubling merkle tree capacity

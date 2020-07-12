@@ -35,41 +35,36 @@ actual fun pluginInstance (className : String) : Plugin
                tmp
             else
             {
-               Log.error( "plugin instanciation failed \"${className}\"" )
+               Log.log("plugin instanciation failed \"${className}\"", Config.trigger( "PLUGINS" ), LogLevel.ERROR)
                NoPlugin()
             }
 }
 
 actual fun createDir (path : String)
 {
-   Log.debug( "creating directory $path" )
+   Log.log("creating directory $path", Config.trigger( "FILES" ))
 
    try
    { (File( path )).mkdirs() }
    catch (e : Exception)
-   {Log.warn( "directory create failed" )}
+   {Log.log("directory create failed", Config.trigger( "FILES" ), LogLevel.WARN)}
 }
 
 actual fun loadConf (filename : String) : Map<String, String>
 {
-   Log.debug( "Loding config file \"$filename\"" )
+   Log.debug( "loding config file \"$filename\"" )
    val properties = Properties()
    val resultMap = HashMap<String, String>()
 
    try
    {
-      /* Setting some default log levels. */
-      resultMap.put( "PLATFORM", "5" )
-      resultMap.put( "PLACE_HOLDER", "5" )
-      resultMap.put( "FILES", "5" )
-
       properties.load(FileReader( filename ))
 
       for (key in properties.keys())
          resultMap.put(key as String, properties.get( key ) as String)
    }
    catch (e : Exception)
-   { Log.warn( "Load config failed!" ) }
+   {Log.warn( "load config failed!" )}
 
    return resultMap
 }

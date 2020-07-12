@@ -1,0 +1,18 @@
+#!/bin/sh
+
+cd /home/projects/build/bin/builders
+
+case $1 in
+   "kad" | "pen" | "plugins" | "sim" | "tedit")
+       ./$1 $2 $3
+   ;;
+
+   *)
+      echo "Usage: $0 project [options]"
+      echo
+      echo "Projects:"
+      echo "kad       pen            plugins"
+      echo "sim       tedit"
+   ;;
+esac
+

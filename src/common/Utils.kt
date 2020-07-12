@@ -27,35 +27,21 @@ object Utils : Loggable
       return String( charArray )
    }
 
-   /** A short id that might be useful in debugging. */
-   fun shortName (input : ByteArray) : String
-   {
-      val hash = hash_md5( input )
-      val base64String = byteArrayToString(encode_b64( hash ))
-
-      return base64String.substring( 0, 5 )
-   }
-
-   override fun tag () = "Utils"
-}
-
-/*
-
-   ** Decodes a base-64 ByteArray. *
+   /** Decodes a base-64 ByteArray. */
    fun decodeB64 (encoded : ByteArray) : ByteArray
    {
       log("Decoding Base64 encoded string", Config.trigger( "DECODE" ))
       var ret = ByteArray( 0 )
 
       try
-      { ret = decode_b64(stringToByteArray( encoded )) }
+      {ret = decode_b64( encoded )}
       catch (t : Throwable)
       { log( "Decoding Base64 failed!", Config.trigger( "DECODE" ), LogLevel.ERROR) }
 
       return ret
    }
 
-   ** Convertes a ByteArray to a Base64 encoded String. *
+   /** Convertes a ByteArray to a Base64 encoded String. */
    fun encodeB64 (input : ByteArray) : String
    {
       log("Encoding string to Base64", Config.trigger( "ENCODE" ))
@@ -68,4 +54,15 @@ object Utils : Loggable
 
       return ret
    }
- */
+
+   /** A short id that might be useful in debugging. */
+   fun shortName (input : ByteArray) : String
+   {
+      val hash = hash_md5( input )
+      val base64String = byteArrayToString(encode_b64( hash ))
+
+      return base64String.substring( 0, 5 )
+   }
+
+   override fun tag () = "Utils"
+}

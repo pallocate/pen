@@ -7,11 +7,21 @@ import java.io.File
 import java.io.FileWriter
 
 /** Does the actual logging. */
-actual object Logger
+actual object LogManager
+{
+   var logAgent : LogAgent = DefaultLogAgent()
+
+   actual fun logMessage (message : String, severity : LogLevel) = logAgent.logMessage( message, severity )
+}
+
+interface LogAgent
+{ fun logMessage (message : String, severity : LogLevel) }
+
+class DefaultLogAgent : LogAgent
 {
    private var fileWriter : FileWriter? = null
 
-   actual fun logMessage (message : String, severity : LogLevel)
+   override fun logMessage (message : String, severity : LogLevel)
    {
       if (severity <= Log.level && severity > LogLevel.QUIET)
       {

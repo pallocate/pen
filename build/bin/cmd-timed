@@ -1,0 +1,20 @@
+#!/bin/sh
+
+secs=0
+status=0
+
+$1 &
+
+while ps | grep $! &>/dev/null; do
+   echo -ne "Building.. ${secs}s\r"
+   secs=$((secs + 1))
+   sleep 1
+done
+
+wait %1
+status=$?
+
+if [ $status -eq 0 ]; then
+   echo; echo; echo "Completed!"
+fi
+echo

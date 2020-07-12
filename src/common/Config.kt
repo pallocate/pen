@@ -5,8 +5,8 @@ expect fun loadConf (filename : String) : Map<String, String>
 /** Coniguration settings loaded from file. */
 object Config
 {
-   val supportedPlugins : Map<String, String> = loadConf( "plugins.conf" )
    private val logValues : Map<String, String> = loadConf( "log.conf" )
+   val supportedPlugins : Map<String, String> = loadConf( "plugins.conf" )
 
    fun trigger (name : String) : LogLevel
    {

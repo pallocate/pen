@@ -1,0 +1,9 @@
+$dokka.format:html
+$dokka.linkExtension:html
+
+plugins.accounting
+plugins.db
+plugins.interfaces
+plugins.minting
+plugins.transacting
+plugins.voting

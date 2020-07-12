@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KFindValueOperation - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kad.operations</a>&nbsp;/&nbsp;<a href="./index.html">KFindValueOperation</a><br/>
+<br/>
+<h1>KFindValueOperation</h1>
+<code><span class="keyword">class </span><span class="identifier">KFindValueOperation</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-operation/index.html"><span class="identifier">Operation</span></a><span class="symbol">, </span><a href="../../kad.messages.receivers/-receiver/index.html"><span class="identifier">Receiver</span></a></code>
+<p>Looks up a specified identifier and returns the value associated with it</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">KFindValueOperation</span><span class="symbol">(</span><span class="identifier" id="kad.operations.KFindValueOperation$<init>(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.dht.KGetParameter)/server">server</span><span class="symbol">:</span>&nbsp;<a href="../../kad/-k-server/index.html"><span class="identifier">KServer</span></a><span class="symbol">, </span><span class="identifier" id="kad.operations.KFindValueOperation$<init>(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.dht.KGetParameter)/node">node</span><span class="symbol">:</span>&nbsp;<a href="../../kad.node/-k-node/index.html"><span class="identifier">KNode</span></a><span class="symbol">, </span><span class="identifier" id="kad.operations.KFindValueOperation$<init>(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.dht.KGetParameter)/routingTable">routingTable</span><span class="symbol">:</span>&nbsp;<a href="../../kad.routing/-k-routing-table/index.html"><span class="identifier">KRoutingTable</span></a><span class="symbol">, </span><span class="identifier" id="kad.operations.KFindValueOperation$<init>(kad.KServer, kad.node.KNode, kad.routing.KRoutingTable, kad.dht.KGetParameter)/params">params</span><span class="symbol">:</span>&nbsp;<a href="../../kad.dht/-k-get-parameter/index.html"><span class="identifier">KGetParameter</span></a><span class="symbol">)</span></code>
+<p>Looks up a specified identifier and returns the value associated with it</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="is-content-found.html">isContentFound</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">isContentFound</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Whether the content was found or not.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="execute.html">execute</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">execute</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Starts an operation and returns when the operation is finished</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-content-found.html">getContentFound</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getContentFound</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../kad/-storage-entry.html"><span class="identifier">StorageEntry</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="receive.html">receive</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">receive</span><span class="symbol">(</span><span class="identifier" id="kad.operations.KFindValueOperation$receive(kad.messages.Message, kotlin.Int)/message">message</span><span class="symbol">:</span>&nbsp;<a href="../../kad.messages/-message/index.html"><span class="identifier">Message</span></a><span class="symbol">, </span><span class="identifier" id="kad.operations.KFindValueOperation$receive(kad.messages.Message, kotlin.Int)/conversationId">conversationId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="route-length.html">routeLength</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">routeLength</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="tag.html">tag</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">tag</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="timeout.html">timeout</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">timeout</span><span class="symbol">(</span><span class="identifier" id="kad.operations.KFindValueOperation$timeout(kotlin.Int)/conversationId">conversationId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>A node does not respond or a packet was lost, we set this node as failed</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

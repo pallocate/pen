@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>kad.messages.receivers - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="./index.html">kad.messages.receivers</a><br/>
+<br/>
+<h2>Package kad.messages.receivers</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-k-connect-receiver/index.html">KConnectReceiver</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KConnectReceiver</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-receiver/index.html"><span class="identifier">Receiver</span></a></code>
+<p>Receives a ConnectMessage and sends an AcknowledgeMessage as reply.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-k-find-node-receiver/index.html">KFindNodeReceiver</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KFindNodeReceiver</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-receiver/index.html"><span class="identifier">Receiver</span></a></code>
+<p>Receives a KFindNodeMessage and sends a KFindNodeReply as reply with the K-Closest nodes to the ID sent.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-k-find-value-receiver/index.html">KFindValueReceiver</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KFindValueReceiver</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-receiver/index.html"><span class="identifier">Receiver</span></a></code>
+<p>Responds to a KFindValueMessage by sending a ContentMessage containing the requested content;
+if the requested content is not found, a KFindNodeReply containing the K closest nodes to the request key is sent.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-k-receiver-factory/index.html">KReceiverFactory</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KReceiverFactory</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-receiver-factory/index.html"><span class="identifier">ReceiverFactory</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-k-simple-receiver/index.html">KSimpleReceiver</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KSimpleReceiver</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-receiver/index.html"><span class="identifier">Receiver</span></a></code>
+<p>Default receiver if none other is called</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-k-store-receiver/index.html">KStoreReceiver</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KStoreReceiver</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-receiver/index.html"><span class="identifier">Receiver</span></a></code>
+<p>Receiver for incoming KStoreMessage</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-no-receiver/index.html">NoReceiver</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">NoReceiver</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-receiver/index.html"><span class="identifier">Receiver</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-no-receiver-factory/index.html">NoReceiverFactory</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">NoReceiverFactory</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-receiver-factory/index.html"><span class="identifier">ReceiverFactory</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-receiver/index.html">Receiver</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Receiver</span></code>
+<p>A receiver waits for incoming messages and perform some action when the message is received</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-receiver-factory/index.html">ReceiverFactory</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ReceiverFactory</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

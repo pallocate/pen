@@ -21,7 +21,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
     *  @param supportedPlugins Maps plugin names to their class names. */
    init
    {
-      log("initializing", Config.trigger( "PLUGIN_MANAGER" ), INFO)
+      log("initializing", Config.trigger( "PLUGINS" ), INFO)
       val resultMap = HashMap<String, Plugin>()
 
       for (requestedPlugin in requestedPlugins)
@@ -53,7 +53,7 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
                   if (resultMapFinding == null)
                   {
                      resultMap.put( requstedName, plugin )                      // Add the plugin
-                     log( "plugin \"${requstedName}\" loaded", Config.trigger( "PLUGIN_MANAGER" ) )
+                     log( "plugin \"${requstedName}\" loaded", Config.trigger( "PLUGINS" ) )
 
                      /* Handle dependencies and initialize the plugin */
                      val nrOfDepends = plugin.dependencies.size
@@ -69,14 +69,14 @@ class KPluginManager (supportedPlugins : Map<String, String>, vararg requestedPl
                      ret = resultMapFinding
                }
                else
-                  log("plugin load failed(unsupported version)! expected: ${requestedPlugInfo}, found: ${plugin.info}", Config.trigger( "PLUGIN_MANAGER" ), ERROR )
+                  log("plugin load failed(unsupported version)! expected: ${requestedPlugInfo}, found: ${plugin.info}", Config.trigger( "PLUGINS" ), ERROR )
             }
          }
          else
-            log( "plugin not supported \"${requestedPlugInfo}\"", Config.trigger( "PLUGIN_MANAGER" ), ERROR )
+            log( "plugin not supported \"${requestedPlugInfo}\"", Config.trigger( "PLUGINS" ), ERROR )
       }
       else
-         log( "possible dependency cycle detected!", Config.trigger( "PLUGIN_MANAGER" ), WARN )
+         log( "possible dependency cycle detected!", Config.trigger( "PLUGINS" ), WARN )
 
       return ret
    }
