@@ -22,17 +22,14 @@ enum class Role
    DATA_SUBJECT
 }
 
-interface Relation
-class NoRelation : Relation
-
 @Serializable
-data class KRelation (val other : KContact, val target : Target = Target.UNDEFINED) : Relation
+class KRelation (val other : KContact, val target : Target = Target.UNDEFINED)
 {
+   companion object
+   { fun void () = KRelation(KContact( 0L, KContactInfo() )) }
+
    val roles : ArrayList<Role> = ArrayList<Role>()
 
-   fun isUndefined () = (target == Target.UNDEFINED)
-   override fun toString () = "${other.name()}" + if (isUndefined())
-                                                   ""
-                                                else
-                                                   " (${target.tag()})"
+   fun isVoid () = (other.id == 0L)
+   override fun toString () = "${other.info.name}" + if (target == Target.UNDEFINED) "" else " (${target.tag()})"
 }

@@ -1,6 +1,6 @@
 package pen
 
-import java.lang.System
+//import java.lang.System
 import java.util.Date
 import java.text.SimpleDateFormat
 import java.io.File
@@ -19,6 +19,7 @@ interface LogAgent
 
 class DefaultLogAgent : LogAgent
 {
+   private var logFilename = System.getenv( "LOG_FILENAME" ) ?: "app.log"
    private var fileWriter : FileWriter? = null
 
    override fun logMessage (message : String, severity : LogLevel)
@@ -32,7 +33,7 @@ class DefaultLogAgent : LogAgent
          {
             if (fileWriter == null)
             {
-               val file = File( "app.log" )
+               val file = File( logFilename )
                file.createNewFile()
                fileWriter = FileWriter( file, true )
             }

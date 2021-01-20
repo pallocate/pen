@@ -20,5 +20,3 @@ object Config
       return triggerValue
    }
 }
-
-//kotlinx.serialization.registerSerializer("kotlin.ByteArray", ByteArraySerializer)

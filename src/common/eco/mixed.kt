@@ -2,8 +2,6 @@ package pen.eco
 
 import pen.Tagged
 
-data class KTransaction (val productId : Long, val signature : ByteArray, val userKey : ByteArray)
-
 /** What economic function something has in the economy. */
 enum class Target : Tagged {
    UNDEFINED { override fun tag () = "U" },
@@ -71,4 +69,3 @@ fun String.toPrefix () =   when (this.toUpperCase())
                               Prefix.EXA.name -> Prefix.EXA
                               else -> Prefix.NONE
                            }
-

@@ -1,8 +1,17 @@
 package pen.eco
 
-class KQuantableProductInfo (id : Long = 0L, name : String = "", desc : String = "", amount : Float = 0F,
-prefix : Prefix = Prefix.NONE, unit : Units = Units.NONE, change : Int = 0, price : Long = 0L, sensitive : Boolean = false,
-analogue : Boolean = false) : KProductInfo( id, name, desc, amount, prefix, unit, change, price, sensitive, analogue )
+class KQuantableProductInfo (
+   id : Long = 0L,
+   name : String = "",
+   desc : String = "",
+   amount : Float = 0F,
+   prefix : Prefix = Prefix.NONE,
+   unit : Units = Units.NONE,
+   change : Int = 0,
+   price : Long = 0L,
+   sensitive : Boolean = false,
+   analogue : Boolean = false
+) : KProductInfo( id, name, desc, amount, prefix, unit, change, price, sensitive, analogue )
 {
    var qty = 0L
 

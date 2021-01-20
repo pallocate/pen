@@ -1,56 +1,36 @@
+@file:kotlinx.serialization.UseSerializers( ByteArraySerialiser::class )
+
 package pen.par
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
-import pen.*
-
-abstract class Contact
-{
-   abstract protected val _name : String
-   abstract protected val _icon : String
-   abstract val contactId : Long
-   abstract val publicKey : ByteArray
-
-   fun name () = _name.safePath()
-   fun icon () = _icon.safePath()
-}
-class NoContact : Contact() {override val contactId=0L;override val publicKey = ByteArray(0);override protected val _name="";override protected val _icon =""}
-
-/** Contact information. */
-@Serializable
-open class KContact (final override val contactId : Long = 0L,
-                     @SerialName( "name" )
-                     final override protected val _name : String = "",
-                     @SerialName( "icon" )
-                     final override protected val _icon : String = "",
-
-                     /* 'with' parameter is´nt supported by kotlin native yet */
-                     @Serializable //( with = ByteArraySerialiser::class )
-                     final override val publicKey : ByteArray = ByteArray( 0 ),
-                     val group : String = "") : Contact()
-{
-   fun copy () = KContact( contactId, _name, _icon, publicKey, group )
-}
+import pen.ByteArraySerialiser
+import pen.PasswordProvider
+import pen.Constants
+import pen.randomBytes
 
 @Serializable
-class KMe ( final override val contactId : Long,
-            @SerialName( "name" )
-            final override protected val _name : String = "",
-            @SerialName( "icon" )
-            final override protected val _icon : String = "",
+data class KContactInfo (
+   val name : String = "",
+   val publicKey : ByteArray = ByteArray( 0 ),
+   val icon : String = "",
+   val group : String = ""
+) {}
 
-            @Serializable //( with = ByteArraySerialiser::class )
-            final override val publicKey : ByteArray = ByteArray( 0 ),
-            @Serializable //( with = ByteArraySerialiser::class )
-            val salt : ByteArray = ByteArray( 0 )) : Contact()
+@Serializable
+data class KContact (val id : Long, val info : KContactInfo = KContactInfo())
 {
    companion object
-   {
-      fun factory (contactId : Long = 0L, name : String = "", icon : String = "", passwordProvider : PasswordProvider) : KMe
-      {
-         val salt = Crypto.randomBytes( Crypto.saltSize() )
-         val pubKey = Crypto.key( passwordProvider, salt, KeyType.PUBLIC )
-         return KMe( contactId, name, icon, pubKey, salt )
-      }
-   }
+   {fun void () = KContact( 0L, KContactInfo() )}
+
+   fun isVoid () = (id == 0L)
 }
+
+@Serializable
+class KMe (val id : Long, val info : KContactInfo, private val salt : ByteArray = randomBytes( Constants.SALT_SIZE ))
+{
+   /** @param otherKey Public key of the recipient */
+   fun crypto (passwordProvider : PasswordProvider, otherKey : ByteArray = ByteArray(0)) =
+      KCrypto( passwordProvider, salt, otherKey )
+}
+//@Serializable (with=ByteArraySerialiser::class)
