@@ -9,10 +9,10 @@ import org.bouncycastle.crypto.generators.SCrypt
 import jp.co.soramitsu.crypto.ed25519.Ed25519Sha3
 
 class KEd25519Sha3 (
-   private val passwordProvider : PasswordProvider = NoPasswordProvider(),
+   private val passwordProvider : PasswordProvider = NoPasswordProvider,
    private val salt : ByteArray = ByteArray(0),
    private val othersPublickKey : ByteArray = ByteArray(0)
-) : Crypto
+)
 {
    private val keyPair by lazy {genKeyPair()}
 

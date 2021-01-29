@@ -3,7 +3,7 @@ package pen
 /** Implementing classes should provide a password every time the password function is called. */
 interface PasswordProvider
 { fun password () : String }
-class NoPasswordProvider : PasswordProvider
+object NoPasswordProvider : PasswordProvider
 { override fun password () = "" }
 
 interface Tagged

@@ -13,6 +13,8 @@ import pen.eco.KProposal
 import pen.eco.KProposalEncoder
 import pen.eco.KProposalDecoder
 
+//expect fun readTender () : 
+
 @Serializable
 class KTender (val proposal : KProposal, val conceder : Long, val proposer : Long)
 {
@@ -34,7 +36,7 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
                val binaryProposal = crypto.aes().decryptFromStream( dataInputStream )
                val byteArrayInputStream = ByteArrayInputStream( binaryProposal )
                val proposal = KProposalDecoder( byteArrayInputStream ).decodeSerializableValue( KProposal.serializer() )
-               ret = KTender(proposal, conceder, proposer)
+               ret = KTender( proposal, conceder, proposer )
             }
          }
          catch (e : Exception)
@@ -63,3 +65,4 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
       }
    }
 }
+

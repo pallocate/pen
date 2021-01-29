@@ -24,6 +24,11 @@ object Patricia
             roles.add( Role.DATA_SUBJECT )
       })
 
+      relations.add(KRelation( ContactList.newsbureau, Target.PRODUCTION ).apply {
+            roles.add( Role.PROPOSER )
+            roles.add( Role.DATA_SUBJECT )
+      })
+
       relations.add(KRelation( ContactList.university, Target.PRODUCTION ).apply {
          roles.add( Role.PROPOSER )
          roles.add( Role.DATA_SUBJECT )

@@ -29,8 +29,9 @@ data class KContact (val id : Long, val info : KContactInfo = KContactInfo())
 @Serializable
 class KMe (val id : Long, val info : KContactInfo, private val salt : ByteArray = randomBytes( Constants.SALT_SIZE ))
 {
-   /** @param otherKey Public key of the recipient */
+   /** @param otherKey Public key of the other part of the communication. */
    fun crypto (passwordProvider : PasswordProvider, otherKey : ByteArray = ByteArray(0)) =
       KCrypto( passwordProvider, salt, otherKey )
 }
 //@Serializable (with=ByteArraySerialiser::class)
+

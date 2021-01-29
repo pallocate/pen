@@ -20,15 +20,12 @@ import pen.PasswordProvider
 import pen.NoPasswordProvider
 
 class KAes (
-   private val passwordProvider : PasswordProvider = NoPasswordProvider(),
+   private val passwordProvider : PasswordProvider = NoPasswordProvider,
    private val salt : ByteArray = ByteArray(0)
-) : Crypto
+)
 {
    private fun aesCipher (forEncryption : Boolean, nonce : ByteArray) : PaddedBufferedBlockCipher
    {
-      if (passwordProvider is NoPasswordProvider)
-         Log.warn( "A valid PasswordProvider is required!" )
-
       val passwordChars = passwordProvider.password().toCharArray()
       val keySpec = PBEKeySpec( passwordChars, salt, 100000, Constants.AES_KEY_BITS )
       val keyFactory = SecretKeyFactory.getInstance( Constants.PKBD_ALGORITHM )

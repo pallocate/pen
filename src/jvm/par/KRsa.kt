@@ -6,7 +6,6 @@ import org.bouncycastle.crypto.engines.RSAEngine
 //import org.bouncycastle.crypto.encodings.PKCS1Encoding
 
 class KRsa (private val othersPublickKey : ByteArray = ByteArray(0))
-: Crypto
 {
    fun encrypt (plainText : ByteArray) : ByteArray
    {
@@ -17,9 +16,9 @@ class KRsa (private val othersPublickKey : ByteArray = ByteArray(0))
       return cipher.processBlock( plainText, 0, plainText.size )
    }
 
-   fun decrypt (plainText : ByteArray) : ByteArray
+   fun decrypt (cipherText : ByteArray) : ByteArray
    {
-      val privateKey = PrivateKeyFactory.createKey( othersPublickKey );
+      val privateKey = PrivateKeyFactory.createKey( othersPublickKey )
       return ByteArray( 0 )
    }
 }
