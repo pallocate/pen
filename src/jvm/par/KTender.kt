@@ -13,8 +13,6 @@ import pen.eco.KProposal
 import pen.eco.KProposalEncoder
 import pen.eco.KProposalDecoder
 
-//expect fun readTender () : 
-
 @Serializable
 class KTender (val proposal : KProposal, val conceder : Long, val proposer : Long)
 {
@@ -65,4 +63,3 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
       }
    }
 }
-
