@@ -12,7 +12,7 @@ object Farmlands
    private val salt = "cb0812c14288ff2c70fd79fecf8cc27a2b553799be3f5092664223fd988b371a".parseAsHex()
    val crypto = KCrypto( passwordProvider, salt )
 
-   fun user () = KUser( KMe(7L, KContactInfo( "Farmlands", crypto.ed25519Sha3().publicKey() ), salt) ).apply {
+   fun user () = KUser( KMe(7L, KContactInfo( "Farmlands", crypto.pkSignatures().publicKey() ), salt) ).apply {
 
       relations.add(KRelation( ContactList.patricia, Target.PRODUCTION ).apply {
          roles.add( Role.CONCEDER )
@@ -25,6 +25,6 @@ object Farmlands
       })
    }
 
-   fun publicKey () = crypto.ed25519Sha3().publicKey().toHex()
+   fun publicKey () = crypto.pkSignatures().publicKey().toHex()
 }
 // pk: "e41ab2d67e444ad52a93dbc2974609a1b4eb44219d0c5345acebae05a694cadd"

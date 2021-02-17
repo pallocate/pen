@@ -12,7 +12,7 @@ object Patricia
    private val salt = "37163236602e39253bc8f013dea1d772acd2cd650cc4aa2d6bbfecd379d05e22".parseAsHex()
    val crypto = KCrypto( passwordProvider, salt )
 
-   fun user () = KUser( KMe(3L, KContactInfo( "Patricia", crypto.ed25519Sha3().publicKey() ), salt) ).apply {
+   fun user () = KUser( KMe(3L, KContactInfo( "Patricia", crypto.pkSignatures().publicKey() ), salt) ).apply {
 
       relations.add(KRelation( ContactList.artysan, Target.CONSUMPTION ).apply {
          roles.add( Role.PROPOSER )
@@ -41,6 +41,6 @@ object Patricia
       })
    }
 
-   fun publicKey () = crypto.ed25519Sha3().publicKey().toHex()
+   fun publicKey () = crypto.pkSignatures().publicKey().toHex()
 }
 // pk: "ebbd39c028069d05328155a5485ee49a129382c49dffb847e88d20864d492ac0"

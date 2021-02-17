@@ -1,7 +1,5 @@
 package pen.par
 
-interface Crypto
-
 enum class Role
 {
    NO_ROLE,

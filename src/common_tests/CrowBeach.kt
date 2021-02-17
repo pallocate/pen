@@ -12,7 +12,7 @@ object CrowBeach
    private val salt = "cf7ab9dc5bbebd3670c91d255706e5da6941aaa5fca2fecb569c6fca437f5be7".parseAsHex()
    val crypto = KCrypto( passwordProvider, salt )
 
-   fun user () = KUser( KMe(8L, KContactInfo( "Crow beach", crypto.ed25519Sha3().publicKey() ), salt) ).apply {
+   fun user () = KUser( KMe(8L, KContactInfo( "Crow beach", crypto.pkSignatures().publicKey() ), salt) ).apply {
 
       relations.add(KRelation( ContactList.david, Target.CONSUMPTION ).apply {
          roles.add( Role.CONCEDER )
@@ -20,6 +20,6 @@ object CrowBeach
       })
    }
 
-   fun publicKey () = crypto.ed25519Sha3().publicKey().toHex()
+   fun publicKey () = crypto.pkSignatures().publicKey().toHex()
 }
 // pk: "d6f9d33c5a15dcbbff232c9bd2f4dbe78b2ff6528f1c4ff94ec1f6ac90d1fd0e"

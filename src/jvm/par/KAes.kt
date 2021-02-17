@@ -22,7 +22,7 @@ import pen.NoPasswordProvider
 class KAes (
    private val passwordProvider : PasswordProvider = NoPasswordProvider,
    private val salt : ByteArray = ByteArray(0)
-)
+) : BlockCipher
 {
    private fun aesCipher (forEncryption : Boolean, nonce : ByteArray) : PaddedBufferedBlockCipher
    {

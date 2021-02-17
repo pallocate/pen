@@ -31,7 +31,7 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
                val conceder = dataInputStream.readLong()
                val proposer = dataInputStream.readLong()
 
-               val binaryProposal = crypto.aes().decryptFromStream( dataInputStream )
+               val binaryProposal = crypto.blockCipher().decryptFromStream( dataInputStream )
                val byteArrayInputStream = ByteArrayInputStream( binaryProposal )
                val proposal = KProposalDecoder( byteArrayInputStream ).decodeSerializableValue( KProposal.serializer() )
                ret = KTender( proposal, conceder, proposer )
@@ -59,7 +59,7 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
          val byteArrayOutputStream = ByteArrayOutputStream()
          KProposalEncoder( byteArrayOutputStream ).encodeSerializableValue( KProposal.serializer(), proposal )
 
-         crypto.aes().encryptToStream( byteArrayOutputStream.toByteArray(), dataOutputStream )
+         crypto.blockCipher().encryptToStream( byteArrayOutputStream.toByteArray(), dataOutputStream )
       }
    }
 }

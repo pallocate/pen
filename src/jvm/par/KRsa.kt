@@ -5,7 +5,7 @@ import org.bouncycastle.crypto.util.PrivateKeyFactory
 import org.bouncycastle.crypto.engines.RSAEngine
 //import org.bouncycastle.crypto.encodings.PKCS1Encoding
 
-class KRsa (private val othersPublickKey : ByteArray = ByteArray(0))
+class KRsa (private val othersPublickKey : ByteArray = ByteArray(0)) : SymetricCipher
 {
    fun encrypt (plainText : ByteArray) : ByteArray
    {

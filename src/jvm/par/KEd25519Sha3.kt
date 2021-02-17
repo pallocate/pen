@@ -12,7 +12,7 @@ class KEd25519Sha3 (
    private val passwordProvider : PasswordProvider = NoPasswordProvider,
    private val salt : ByteArray = ByteArray(0),
    private val othersPublickKey : ByteArray = ByteArray(0)
-)
+) : PublicKeySignatures
 {
    private val keyPair by lazy {genKeyPair()}
 
