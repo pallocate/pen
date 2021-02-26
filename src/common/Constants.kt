@@ -4,6 +4,8 @@ object Constants
 {
    /** Common specification version. */
    const val VERSION                              = 1
+   /** Size of block hash in bytes. */
+   const val HASH_BYTES                           = 32
 
    /** OS specific directory separation sign. */
    val SLASH                                      = slash()
@@ -11,6 +13,7 @@ object Constants
    val JSON_EXTENSION                             = ".json"
    /** Name of the log file. */
    val LOG_FILE                                   = "app.log"
+
    /** Size of salt used by SCrypt password hashing function. */
    val SALT_SIZE = 32
    /** Seed size for the Ed25519Sha3 function. */

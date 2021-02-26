@@ -10,7 +10,7 @@ object University
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "university" }
    private val salt = "38a5a3f320bf5bd0813c71cfa41123567302158dbaec12d311b63dbd082b47f8".parseAsHex()
-   val crypto = KCrypto( passwordProvider, salt )
+   val crypto = KIrohaCrypto( passwordProvider, salt )
 
    fun user () = KUser( KMe(1L, KContactInfo( "University", crypto.pkSignatures().publicKey() ), salt) ).apply {
 

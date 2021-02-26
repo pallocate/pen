@@ -3,11 +3,16 @@ package pen
 /** Implementing classes should provide a password every time the password function is called. */
 interface PasswordProvider
 { fun password () : String }
-object NoPasswordProvider : PasswordProvider
+object VoidPasswordProvider : PasswordProvider
 { override fun password () = "" }
 
 interface Tagged
 { fun tag () : String }
+
+enum class KeyType
+{ SYMETRIC, PUBLIC, SECRET }
+
+fun Long.coerceToInt () = this.coerceIn( -2147483648L, 2147483647L ).toInt()
 
 /** Convertes String to a valid Long. */
 fun String.toLong (min : Long = Long.MIN_VALUE, max : Long = Long.MAX_VALUE, coerce : Boolean = false) : Long

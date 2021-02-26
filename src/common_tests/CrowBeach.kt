@@ -10,7 +10,7 @@ object CrowBeach
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "crowbeach" }
    private val salt = "cf7ab9dc5bbebd3670c91d255706e5da6941aaa5fca2fecb569c6fca437f5be7".parseAsHex()
-   val crypto = KCrypto( passwordProvider, salt )
+   val crypto = KIrohaCrypto( passwordProvider, salt )
 
    fun user () = KUser( KMe(8L, KContactInfo( "Crow beach", crypto.pkSignatures().publicKey() ), salt) ).apply {
 

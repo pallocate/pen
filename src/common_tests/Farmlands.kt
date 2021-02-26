@@ -10,7 +10,7 @@ object Farmlands
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "farmlands" }
    private val salt = "cb0812c14288ff2c70fd79fecf8cc27a2b553799be3f5092664223fd988b371a".parseAsHex()
-   val crypto = KCrypto( passwordProvider, salt )
+   val crypto = KIrohaCrypto( passwordProvider, salt )
 
    fun user () = KUser( KMe(7L, KContactInfo( "Farmlands", crypto.pkSignatures().publicKey() ), salt) ).apply {
 

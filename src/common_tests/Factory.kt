@@ -10,7 +10,7 @@ object Factory
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "factory" }
    private val salt = "3d4e366579f5e6d14a0e05fcf5c12b521fa1101d6f3cc740fbd219a1d8978477".parseAsHex()
-   val crypto = KCrypto( passwordProvider, salt )
+   val crypto = KIrohaCrypto( passwordProvider, salt )
 
    fun user () = KUser( KMe(5L, KContactInfo( "Furniture Factory", crypto.pkSignatures().publicKey() ), salt) ).apply {
 

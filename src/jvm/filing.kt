@@ -4,7 +4,6 @@ import java.nio.file.Paths
 import java.nio.file.Files
 import java.io.FileWriter
 import kotlinx.serialization.KSerializer
-//import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.json.*
 
 /** Reads json from file and deserializes it to a object */
@@ -12,12 +11,12 @@ actual inline fun <reified T : Any>deserializeFromFile (filename : String, seria
 {
    Log.log("Reading object file \"$filename\"", Config.trigger( "SAVE_LOAD" ))
    var ret : T? = null
+   val path = Paths.get( filename )
 
    try
    {
-      val path = Paths.get( filename )
-      val jsonString = String(Files.readAllBytes( path ))
-      ret = Json.decodeFromString<T>( serializer, jsonString )
+      val jsonBytes = String(Files.readAllBytes( path ))
+      ret = Json.decodeFromString<T>( serializer, jsonBytes )
    }
    catch (e : Exception)
    {Log.log("Reading object file failed!", Config.trigger( "SAVE_LOAD" ), LogLevel.ERROR)}
@@ -30,13 +29,12 @@ actual inline fun <reified T : Any>serializeToFile (obj : T, filename : String, 
 {
    Log.log("Writing object", Config.trigger( "SAVE_LOAD" ))
    var success = false
-   val fileWriter = FileWriter( filename )
+   val path = Paths.get( filename )
 
    try
    {
-      val jsonString = Json.encodeToString( serializer, obj )
-      fileWriter.write( jsonString )
-      fileWriter.close()
+      val jsonBytes = Json.encodeToString( serializer, obj ).toByteArray()
+      Files.write( path, jsonBytes )
       success = true
    }
    catch (e : Exception)
@@ -44,3 +42,4 @@ actual inline fun <reified T : Any>serializeToFile (obj : T, filename : String, 
 
    return success
 }
+//import kotlinx.serialization.modules.SerializersModule

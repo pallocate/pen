@@ -4,13 +4,13 @@ import pen.toHex
 import pen.parseAsHex
 import pen.PasswordProvider
 import pen.par.KMe
-import pen.par.KCrypto
+import pen.par.KIrohaCrypto
 
 object Credmin
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "credmin" }
    private val salt = "112c8707c1a59774fd32d3424dd38072ad3a1fbe12a590c3a3e6840ff961dc16".parseAsHex()
-   val crypto = KCrypto( passwordProvider, salt )
+   val crypto = KIrohaCrypto( passwordProvider, salt )
 
    fun publicKey () = crypto.pkSignatures().publicKey().toHex()
 }
