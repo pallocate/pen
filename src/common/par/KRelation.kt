@@ -1,16 +1,17 @@
 package pen.par
 
 import kotlinx.serialization.Serializable
+import pen.Voidable
 import pen.eco.Target
 
 @Serializable
-class KRelation (val other : KContact, val target : Target = Target.UNDEFINED)
+class KRelation (val other : KContact, val target : Target = Target.UNDEFINED) : Voidable
 {
    companion object
-   { fun void () = KRelation(KContact( 0L, KContactInfo() )) }
+   {fun void () = KRelation( KContact.void() )}
 
    val roles : ArrayList<Role> = ArrayList<Role>()
 
-   fun isVoid () = (other.id == 0L)
+   override fun isVoid () = (other.id == 0L)
    override fun toString () = "${other.info.name}" + if (target == Target.UNDEFINED) "" else " (${target.tag()})"
 }

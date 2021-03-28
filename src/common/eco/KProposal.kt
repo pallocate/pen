@@ -1,13 +1,13 @@
 package pen.eco
 
 import kotlinx.serialization.Serializable
-import pen.PasswordProvider
+import pen.Voidable
 
 @Serializable
-data class KProposal (val header : KHeader = KHeader(), val products : ArrayList<KProduct> = ArrayList<KProduct>())
+data class KProposal (val header : KHeader = KHeader(), val products : ArrayList<KProduct> = ArrayList<KProduct>()) : Voidable
 {
    companion object
    { fun void () = KProposal() }
 
-   fun isVoid () = (header.id == 0L)
+   override fun isVoid () = (header.id == 0L)
 }

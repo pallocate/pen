@@ -1,6 +1,5 @@
 package pen.tests
 
-import pen.toHex
 import pen.parseAsHex
 import pen.PasswordProvider
 import pen.eco.Target
@@ -10,16 +9,24 @@ object Artysan
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "artysan" }
    private val salt = "21842d52a0339468907591d6989213e8cc5f53522a0af6ad17966c6891a887a3".parseAsHex()
-   val crypto = KIrohaCrypto( passwordProvider, salt )
 
-   fun participant () = KUser( KMe(2L, KContactInfo( "Artysan", crypto.pkSignatures().publicKey() ), salt) ).apply {
+   val contact = KContact(
+      2L,
+      KContact.KInfo( "Artysan" ),
+      KContact.KAddress(
+         "artysan", "commons", "daa12f254464355b1fd4c6cdb5d70e13f11fb00cb9612bd7f919f5ded83f7209".parseAsHex()
+      )
+   )
 
-      relations.add(KRelation( ContactList.patricia, Target.CONSUMPTION ).apply {
+
+   private val me by lazy {KMe( contact, salt )}
+
+   fun irohaSigner () = me.irohaSigner( passwordProvider )
+
+   fun user () = KUser( me ).apply {
+      relations.add(KRelation( Contacts.patricia, Target.CONSUMPTION ).apply {
          roles.add( Role.CONCEDER )
          roles.add( Role.DATA_CONTROLLER )
       })
    }
-
-   fun publicKey () = crypto.pkSignatures().publicKey().toHex()
 }
-// pk: "16f8a186263327290b0e8e12140499adefa7ad1e6ca35772a1b6058efa291c3c"

@@ -19,7 +19,7 @@ interface LogAgent
 
 class DefaultLogAgent : LogAgent
 {
-   private var logFilename = System.getenv( "LOG_FILENAME" ) ?: "app.log"
+   private var logFilename = System.getenv( "PEN_LOG" ) ?: "app.log"
    private var fileWriter : FileWriter? = null
 
    override fun logMessage (message : String, severity : LogLevel)

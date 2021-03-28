@@ -5,26 +5,21 @@ package pen.par
 import pen.ByteArraySerialiser
 import kotlinx.serialization.Serializable
 import pen.PasswordProvider
-import pen.Constants
 import pen.randomBytes
-
-expect fun ed25519Sha3 (seed : ByteArray) : IrohaCrypto
-
-interface IrohaCrypto
-{
-   fun sign (input : ByteArray) : ByteArray
-   fun publicKey () : ByteArray
-}
+import pen.KCrypto
+import pen.IrohaSigner
+import pen.ed25519Sha3
 
 @Serializable
-class KMe (val id : Long, val info : KContactInfo, private val salt : ByteArray = randomBytes( Constants.SALT_SIZE ))
+class KMe (val contact : KContact, private val salt : ByteArray = randomBytes( KCrypto.SALT_SIZE ))
 {
-   fun crypto (passwordProvider : PasswordProvider) =
-      KCrypto( passwordProvider, salt )
+   fun crypto (passwordProvider : PasswordProvider) = KCrypto( passwordProvider, salt )
 
-   fun irohaCrypto (passwordProvider : PasswordProvider) : IrohaCrypto
+   fun irohaSigner (passwordProvider : PasswordProvider) : IrohaSigner
    {
       val seed = crypto( passwordProvider ).deriveKey()
-      return KEd25519Sha3( seed )
+      return ed25519Sha3( seed )
    }
+
+//   fun toContact () = KContact( id, info )
 }

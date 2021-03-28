@@ -3,6 +3,7 @@ package pen.eco
 import kotlinx.serialization.Serializable
 import pen.toLong
 import pen.toInt
+import pen.Voidable
 
 @Serializable
 open class KProductInfo (
@@ -15,7 +16,8 @@ open class KProductInfo (
    val change : Int = 0,
    val price : Long = 0L,
    val sensitive : Boolean = false,
-   val analogue : Boolean = false)
+   val analogue : Boolean = false
+) : Voidable
 {
    /** @constructor Does some parameter checking/conversion and calls primary constructor. */
    constructor (id : String, name : String, desc : String, amount : String, prefix : String, unit : String,
@@ -55,6 +57,6 @@ open class KProductInfo (
       return stringBuilder.toString()
    }
 
-   fun isVoid () = (id == 0L)
+   override fun isVoid () = (id == 0L)
    override fun toString () = name
 }

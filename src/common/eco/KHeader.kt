@@ -1,7 +1,6 @@
 package pen.eco
 
 import kotlinx.serialization.Serializable
-import pen.Constants
 import pen.now
 
 /** Proposal header. */
@@ -12,6 +11,5 @@ data class KHeader (
    val iteration : Int         = 0,
    val target : Target         = Target.UNDEFINED,
    val timestamp : Long        = now(),
-   val version : Int           = Constants.VERSION
+   val version : Int           = 1
 ) {}
-

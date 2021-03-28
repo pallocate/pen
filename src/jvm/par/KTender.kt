@@ -7,6 +7,8 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import pen.KCrypto
+import pen.Voidable
 import pen.serializeToFile
 import pen.deserializeFromFile
 import pen.eco.KProposal
@@ -14,7 +16,7 @@ import pen.eco.KProposalEncoder
 import pen.eco.KProposalDecoder
 
 @Serializable
-class KTender (val proposal : KProposal, val conceder : Long, val proposer : Long)
+class KTender (val proposal : KProposal, val conceder : Long, val proposer : Long) : Voidable
 {
    companion object
    {
@@ -27,12 +29,14 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
                ret = deserializeFromFile<KTender>( filename, KTender.serializer() )!!
             else
             {
-               val dataInputStream = DataInputStream(FileInputStream( filename ))
-               val conceder = dataInputStream.readLong()
-               val proposer = dataInputStream.readLong()
+               /* Read from file */
+               val input = DataInputStream(FileInputStream( filename ))
+               val conceder = input.readLong()
+               val proposer = input.readLong()
+               val encryptedProposal = ByteArray( input.available() ).also {input.read( it )}
 
-//               val binaryProposal = crypto.blockCipher().decryptFromStream( dataInputStream )
-               val binaryProposal = ByteArray(0)
+               /* Decrypt and deserialize proposal */
+               val binaryProposal = crypto.decrypt( encryptedProposal )
                val byteArrayInputStream = ByteArrayInputStream( binaryProposal )
                val proposal = KProposalDecoder( byteArrayInputStream ).decodeSerializableValue( KProposal.serializer() )
                ret = KTender( proposal, conceder, proposer )
@@ -53,14 +57,18 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
          serializeToFile<KTender>( this, filename, KTender.serializer() )
       else
       {
-         val dataOutputStream = DataOutputStream(FileOutputStream( filename ))
-         dataOutputStream.writeLong( conceder )
-         dataOutputStream.writeLong( proposer )
-
+         /* Serialize and encrypt proposal */
          val byteArrayOutputStream = ByteArrayOutputStream()
          KProposalEncoder( byteArrayOutputStream ).encodeSerializableValue( KProposal.serializer(), proposal )
+         val encryptedProposal = crypto.encrypt( byteArrayOutputStream.toByteArray() )
 
-//         crypto.blockCipher().encryptToStream( byteArrayOutputStream.toByteArray(), dataOutputStream )
+         /* Write to file */
+         val output = DataOutputStream(FileOutputStream( filename ))
+         output.writeLong( conceder )
+         output.writeLong( proposer )
+         output.write( encryptedProposal )
       }
    }
+
+   override fun isVoid () = proposal.isVoid()
 }

@@ -1,13 +1,14 @@
 
 package pen.par
 
+import pen.Voidable
 import kotlinx.serialization.Serializable
 
 @Serializable
-class KUser (val me : KMe, val language : String = "English")
+class KUser (val me : KMe, val language : String = "English") : Voidable
 {
    companion object
-   { fun void () = KUser(KMe( 0L, KContactInfo() )) }
+   { fun void () = KUser(KMe( KContact.void() )) }
 
    val relations = ArrayList<KRelation>()
 
@@ -15,6 +16,6 @@ class KUser (val me : KMe, val language : String = "English")
       relation -> id == relation.other.id
    } ?: KRelation.void()
 
-   fun isVoid () = (me.id == 0L)
-   override fun toString () = "${me.info.name}"
+   override fun isVoid () = me.contact.isVoid()
+   override fun toString () = "${me.contact.info.name}"
 }

@@ -1,17 +1,21 @@
 package pen.tests
 
-import pen.toHex
 import pen.parseAsHex
 import pen.PasswordProvider
 import pen.par.KMe
-import pen.par.KIrohaCrypto
+import pen.par.KContact
 
 object Credmin
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "credmin" }
    private val salt = "112c8707c1a59774fd32d3424dd38072ad3a1fbe12a590c3a3e6840ff961dc16".parseAsHex()
-   val crypto = KIrohaCrypto( passwordProvider, salt )
 
-   fun publicKey () = crypto.pkSignatures().publicKey().toHex()
+   val contact = KContact(
+      0L,
+      KContact.KInfo( "Credmin" ),
+      KContact.KAddress( "credmin", "system" )
+   )
+
+   fun irohaSigner () = KMe( contact, salt ).irohaSigner( passwordProvider )
 }
-// pk: "d9bb072d1c464bf5a8e47e037497ebd9a64f470f77fc46e489cff80a3236ef96"
+// pk: "fc754dd079e58de4cfdebbc06364d9b4e636287bb0a658f6f3550180bf5ad3ef"

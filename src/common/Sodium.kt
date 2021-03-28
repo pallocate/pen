@@ -1,6 +1,4 @@
-package pen.par
-
-expect fun sodiumInstance () : Sodium
+package pen
 
 /** An limited interface to the Sodium library. */
 interface Sodium

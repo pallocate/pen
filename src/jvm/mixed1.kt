@@ -1,5 +1,7 @@
 package pen
 
+import java.io.File
+import java.security.SecureRandom
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.encoding.Encoder
@@ -8,12 +10,16 @@ import kotlinx.serialization.descriptors.*
 import org.apache.commons.codec.binary.Hex
 import org.bouncycastle.jcajce.provider.digest.SHA3
 
+/* TODO: A more collision safer algorithm. */
+fun generateId () = now()
+
+fun slash () = File.separator
+
 fun String.parseAsHex () = Hex.decodeHex( this )
 
 fun sha3Digest (bytes : ByteArray) = SHA3.Digest256().digest( bytes )
 
-/* TODO: A more collision safer algorithm. */
-fun generateId () = now()
+fun randomBytes (size : Int) = ByteArray( size ).also { SecureRandom().nextBytes(it) }
 
 @Serializer( forClass = ByteArray::class )
 object ByteArraySerialiser : KSerializer<ByteArray>
@@ -30,3 +36,4 @@ object ByteArraySerialiser : KSerializer<ByteArray>
       return decoder.decodeString().parseAsHex()
    }
 }
+

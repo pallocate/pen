@@ -9,8 +9,10 @@ object VoidPasswordProvider : PasswordProvider
 interface Tagged
 { fun tag () : String }
 
-enum class KeyType
-{ SYMETRIC, PUBLIC, SECRET }
+interface Voidable
+{ fun isVoid () : Boolean }
+
+val VOID_BYTES = ByteArray( 0 )
 
 fun Long.coerceToInt () = this.coerceIn( -2147483648L, 2147483647L ).toInt()
 
@@ -48,4 +50,10 @@ fun String.toInt (min : Int = Int.MIN_VALUE, max : Int = Int.MAX_VALUE, coerce :
    }
 
    return ret
+}
+
+interface IrohaSigner
+{
+   fun sign (input : ByteArray) : String
+   fun publicKey () : String
 }

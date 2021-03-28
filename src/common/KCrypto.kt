@@ -1,24 +1,22 @@
-package pen.par
+package pen
 
-import pen.Config
-import pen.Constants
-import pen.coerceToInt
-import pen.Loggable
 import pen.LogLevel.WARN
 import pen.LogLevel.ERROR
-import pen.PasswordProvider
-import pen.VoidPasswordProvider
+import pen.VOID_BYTES
+import pen.Na.sodium
 
 /** Cryptographic functionallity, using the Sodium library. */
-class KCrypto (private val passwordProvider : PasswordProvider, private val salt : ByteArray) : Loggable
+class KCrypto (private val passwordProvider : PasswordProvider, private val salt : ByteArray) : Loggable, Voidable
 {
    companion object
    {
-      val VOID_BYTES = ByteArray( 0 )
+      /** Size of resulting hash in bytes. */
+      val HASH_SIZE = 32
+      /** Size of salt used by the  password derivation function. */
+      val SALT_SIZE = 32
+
       fun void () = KCrypto( VoidPasswordProvider, VOID_BYTES )
    }
-
-   private val sodium = sodiumInstance()
 
    fun randomBytes (number : Int) : ByteArray
    {
@@ -33,8 +31,8 @@ class KCrypto (private val passwordProvider : PasswordProvider, private val salt
       log("Hashing input", Config.trigger( "CRYPTO" ))
 
       sodium.sodium_init()
-      return ByteArray( Constants.HASH_BYTES ).also {
-         if (sodium.crypto_generichash( it, Constants.HASH_BYTES.toLong(), input, input.size.toLong(), null, 0 ) != 0)
+      return ByteArray( HASH_SIZE ).also {
+         if (sodium.crypto_generichash( it, HASH_SIZE.toLong(), input, input.size.toLong(), null, 0 ) != 0)
             log("Hashing failed!", Config.trigger( "CRYPTO" ), WARN)
       }
    }
@@ -129,7 +127,7 @@ class KCrypto (private val passwordProvider : PasswordProvider, private val salt
    {
       log("Encrypting", Config.trigger( "CRYPTO" ))
       var ret = VOID_BYTES
-      val key = keyPairKey( secret = true )
+      val key = deriveKey()
 
       if (validateKeySize( key ) && plainText.size > 0)
       {
@@ -157,7 +155,7 @@ class KCrypto (private val passwordProvider : PasswordProvider, private val salt
       var ret = VOID_BYTES
       val nonceSize = (sodium.crypto_secretbox_noncebytes() as Number).toInt()
       val plainTextSize = (input.size - (sodium.crypto_secretbox_macbytes() as Number).toInt()) - nonceSize
-      val key = keyPairKey( secret = true )
+      val key = deriveKey()
 
       if (validateKeySize( key ) && plainTextSize > 0)
       {
@@ -300,7 +298,7 @@ class KCrypto (private val passwordProvider : PasswordProvider, private val salt
    fun secretSigningKeySize () = sodium.crypto_sign_ed25519_secretkeybytes().coerceToInt()
    fun saltSize () = sodium.crypto_pwhash_saltbytes().coerceToInt()
    private fun signBytes () = sodium.crypto_sign_ed25519_bytes().coerceToInt()
-   fun isVoid () = passwordProvider is VoidPasswordProvider && salt.size == 0
+   override fun isVoid () = passwordProvider is VoidPasswordProvider && salt.size == 0
    override fun tag () = "Crypto"
 
    private fun convertPK (publicSigningKey : ByteArray) : ByteArray

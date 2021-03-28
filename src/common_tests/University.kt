@@ -1,6 +1,5 @@
 package pen.tests
 
-import pen.toHex
 import pen.parseAsHex
 import pen.PasswordProvider
 import pen.eco.Target
@@ -10,21 +9,29 @@ object University
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "university" }
    private val salt = "38a5a3f320bf5bd0813c71cfa41123567302158dbaec12d311b63dbd082b47f8".parseAsHex()
-   val crypto = KIrohaCrypto( passwordProvider, salt )
 
-   fun user () = KUser( KMe(1L, KContactInfo( "University", crypto.pkSignatures().publicKey() ), salt) ).apply {
+   val contact = KContact(
+      1L,
+      KContact.KInfo( "University" ),
+      KContact.KAddress(
+         "university", "commons", "6ae9b78e89aa41bfc5ab9d188f3c3b4723c512cb43068ab2b73a70e0173ec2e9".parseAsHex()
+      )
+   )
 
-      relations.add(KRelation( ContactList.patricia, Target.PRODUCTION ).apply {
+
+   private val me by lazy {KMe( contact, salt )}
+
+   fun irohaSigner () = me.irohaSigner( passwordProvider )
+
+   fun user () = KUser( me ).apply {
+      relations.add(KRelation( Contacts.patricia, Target.PRODUCTION ).apply {
          roles.add( Role.CONCEDER )
          roles.add( Role.DATA_CONTROLLER )
       })
 
-      relations.add(KRelation( ContactList.david, Target.PRODUCTION ).apply {
+      relations.add(KRelation( Contacts.david, Target.PRODUCTION ).apply {
          roles.add( Role.CONCEDER )
          roles.add( Role.DATA_CONTROLLER )
       })
    }
-
-   fun publicKey () = crypto.pkSignatures().publicKey().toHex()
 }
-// pk: "74b9149a328539da8a167479cd1106310b1caaa4195bf7c6476bb6386d9b5cc3"

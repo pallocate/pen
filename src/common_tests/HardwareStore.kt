@@ -1,17 +1,22 @@
 package pen.tests
 
-import pen.toHex
 import pen.parseAsHex
 import pen.PasswordProvider
 import pen.par.KMe
-import pen.par.KIrohaCrypto
+import pen.par.KContact
 
 object HardwareStore
 {
    private val passwordProvider = object : PasswordProvider {override fun password () = "hardwarestore" }
    private val salt = "4e28dc4a0269839a9505896cd1747b174e5b5d15c8448d30012051666a8fd570".parseAsHex()
-   val crypto = KIrohaCrypto( passwordProvider, salt )
 
-   fun publicKey () = crypto.pkSignatures().publicKey().toHex()
+   val contact = KContact(
+      10L,
+      address = KContact.KAddress(
+         "hardware", "supplier", "4e28dc4a0269839a9505896cd1747b174e5b5d15c8448d30012051666a8fd570".parseAsHex()
+      )
+   )
+
+
+   fun irohaSigner () = KMe( contact, salt ).irohaSigner( passwordProvider )
 }
-// pk: "d136ef69a5bd7ebc5586ee1902f4ed6ca96d52d57c95ea2d96f79a693c94ca0c"
