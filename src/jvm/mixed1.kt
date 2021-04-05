@@ -2,6 +2,8 @@ package pen
 
 import java.io.File
 import java.security.SecureRandom
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineName
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.encoding.Encoder
@@ -37,3 +39,4 @@ object ByteArraySerialiser : KSerializer<ByteArray>
    }
 }
 
+fun newScope () = CoroutineScope(CoroutineName( name = (now()-1616336000000L).toString() ))
