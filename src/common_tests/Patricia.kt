@@ -30,12 +30,12 @@ object Patricia
          roles.add( Role.DATA_SUBJECT )
       })
 
-      relations.add(KRelation( Contacts.factory, Target.PRODUCTION ).apply {
+      relations.add(KRelation( Contacts.newsbureau, Target.PRODUCTION ).apply {
             roles.add( Role.PROPOSER )
             roles.add( Role.DATA_SUBJECT )
       })
 
-      relations.add(KRelation( Contacts.newsbureau, Target.PRODUCTION ).apply {
+      relations.add(KRelation( Contacts.factory, Target.PRODUCTION ).apply {
             roles.add( Role.PROPOSER )
             roles.add( Role.DATA_SUBJECT )
       })

@@ -12,8 +12,8 @@ object Contacts
    val farmlands = Farmlands.contact
    val crowbeach = CrowBeach.contact
    val university = University.contact
-   val hardwarestore = HardwareStore.contact
+   val store = Store.contact
    val newsbureau = KContact(9L, KContact.KInfo( "News bureau" ))
 
-   fun toArray () = arrayOf( university, artysan, patricia, david, factory, hospital, farmlands, crowbeach, hardwarestore )
+   fun toArray () = arrayOf( university, artysan, patricia, david, factory, hospital, farmlands, crowbeach, store )
 }

@@ -34,12 +34,12 @@ object David
          roles.add( Role.DATA_SUBJECT )
       })
 
-      relations.add(KRelation( Contacts.hospital, Target.PRODUCTION ).apply {
+      relations.add(KRelation( Contacts.farmlands, Target.PRODUCTION ).apply {
          roles.add( Role.PROPOSER )
          roles.add( Role.DATA_SUBJECT )
       })
 
-      relations.add(KRelation( Contacts.farmlands, Target.PRODUCTION ).apply {
+      relations.add(KRelation( Contacts.hospital, Target.PRODUCTION ).apply {
          roles.add( Role.PROPOSER )
          roles.add( Role.DATA_SUBJECT )
       })
