@@ -10,6 +10,7 @@ import kotlinx.serialization.encoding.AbstractEncoder
 import kotlinx.serialization.encoding.AbstractDecoder
 import kotlinx.serialization.encoding.CompositeEncoder
 
+/** Encodes a proposal to compact binary format. */
 class KProposalEncoder (outputStream : OutputStream) : AbstractEncoder()
 {
    val output = DataOutputStream( outputStream )
@@ -26,6 +27,7 @@ class KProposalEncoder (outputStream : OutputStream) : AbstractEncoder()
    override fun endStructure (descriptor: SerialDescriptor) {}
 }
 
+/** Decodes a proposal to compact binary format. */
 class KProposalDecoder (inputStream : InputStream) : AbstractDecoder()
 {
    val input = DataInputStream( inputStream )
