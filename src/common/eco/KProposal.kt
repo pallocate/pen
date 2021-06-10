@@ -1,6 +1,7 @@
 package pen.eco
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 import pen.Voidable
 
 @Serializable

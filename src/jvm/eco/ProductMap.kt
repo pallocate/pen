@@ -6,6 +6,7 @@ import pen.KCrypto
 
 /** As an alternative to map products with quantities. */
 typealias ProductMap = HashMap<Long,Long>
+
 fun ProductMap.addProduct (productId : Long, qty : Long)
 {
    var saldo = getOrElse( productId, {0L} )
@@ -13,8 +14,14 @@ fun ProductMap.addProduct (productId : Long, qty : Long)
    saldo += qty
    put( productId, saldo )
 }
+
 fun ProductMap.toJson () = Json.encodeToString( serializer(), this )
+fun ProductMap.fromJson (json : String) = Json.decodeFromString<ProductMap>( serializer(), json )
+
 fun ProductMap.signature (crypto : KCrypto = KCrypto.void()) = if (crypto.isVoid())
       ByteArray( 0 )
    else
       crypto.signDetached( toJson().toByteArray() )
+
+//fun newProductMap (json : String) = Json.decodeFromString<ProductMap>( ProductMap.serializer(), json )
+//fun String.toProductMap () = Json.decodeFromString<ProductMap>( ProductMap.serializer(), this )

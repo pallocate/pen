@@ -28,7 +28,7 @@ fun String.toBool () =  if (this == "true")
                            else
                               false
 
-fun String.toUnit () =  when (this.toUpperCase())
+fun String.toUnit () =  when (this.uppercase())
                         {
                            Units.GRAM.name -> Units.GRAM
                            Units.LITRE.name -> Units.LITRE
@@ -50,7 +50,7 @@ fun String.toUnit () =  when (this.toUpperCase())
                            else -> Units.NONE
                         }
 
-fun String.toPrefix () =   when (this.toUpperCase())
+fun String.toPrefix () =   when (this.uppercase())
                            {
                               Prefix.ATTO.name -> Prefix.ATTO
                               Prefix.FEMTO.name -> Prefix.FEMTO
