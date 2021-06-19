@@ -1,12 +1,14 @@
 package pen.eco
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 import pen.toLong
 import pen.toInt
 import pen.Voidable
 
 @Serializable
-open class KProductInfo (
+@SerialName("Product")
+open class KProduct_v1 (
    val id : Long = 0L,
    val name : String = "",
    val desc : String = "",
@@ -36,7 +38,7 @@ open class KProductInfo (
    )
 
    companion object
-   { fun void () = KProductInfo() }
+   { fun void () = KProduct_v1() }
 
    fun apu () : String
    {

@@ -12,8 +12,8 @@ import pen.Voidable
 import pen.serializeToFile
 import pen.deserializeFromFile
 import pen.eco.KProposal
-import pen.eco.KProposalEncoder
-import pen.eco.KProposalDecoder
+import pen.eco.KProposalBinaryEncoder
+import pen.eco.KProposalBinaryDecoder
 
 @Serializable
 class KTender (val proposal : KProposal, val conceder : Long, val proposer : Long) : Voidable
@@ -38,7 +38,7 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
                /* Decrypt and deserialize proposal */
                val binaryProposal = crypto.decrypt( encryptedProposal )
                val byteArrayInputStream = ByteArrayInputStream( binaryProposal )
-               val proposal = KProposalDecoder( byteArrayInputStream ).decodeSerializableValue( KProposal.serializer() )
+               val proposal = KProposalBinaryDecoder( byteArrayInputStream ).decodeSerializableValue( KProposal.serializer() )
                ret = KTender( proposal, conceder, proposer )
             }
          }
@@ -59,7 +59,7 @@ class KTender (val proposal : KProposal, val conceder : Long, val proposer : Lon
       {
          /* Serialize and encrypt proposal */
          val byteArrayOutputStream = ByteArrayOutputStream()
-         KProposalEncoder( byteArrayOutputStream ).encodeSerializableValue( KProposal.serializer(), proposal )
+         KProposalBinaryEncoder( byteArrayOutputStream ).encodeSerializableValue( KProposal.serializer(), proposal )
          val encryptedProposal = crypto.encrypt( byteArrayOutputStream.toByteArray() )
 
          /* Write to file */
