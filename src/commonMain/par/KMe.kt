@@ -1,4 +1,4 @@
-//@file:kotlinx.serialization.UseSerializers( ByteArraySerialiser::class )
+@file:kotlinx.serialization.UseSerializers( ByteArraySerialiser::class )
 
 package pen.par
 
