@@ -14,12 +14,12 @@ interface Voidable
 
 val VOID_BYTES = ByteArray( 0 )
 
-interface IrohaSigner
+interface IrohaSignatory
 {
    fun sign (input : ByteArray) : String
    fun publicKey () : String
 }
-object VoidIrohaSigner : IrohaSigner
+object VoidIrohaSignatory : IrohaSignatory
 {override fun sign (input : ByteArray)="";override fun publicKey () = ""}
 
 fun Long.coerceToInt () = this.coerceIn( -2147483648L, 2147483647L ).toInt()

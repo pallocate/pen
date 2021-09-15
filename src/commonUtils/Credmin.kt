@@ -16,6 +16,6 @@ object Credmin
       KContact.KAddress( "credmin", "system" )
    )
 
-   fun irohaSigner () = KMe( contact, salt ).irohaSigner( passwordProvider )
+   fun irohaSignatory () = KMe( contact, salt ).irohaSignatory( passwordProvider )
 }
 // pk: "fc754dd079e58de4cfdebbc06364d9b4e636287bb0a658f6f3550180bf5ad3ef"

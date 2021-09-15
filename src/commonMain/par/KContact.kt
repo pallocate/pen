@@ -2,7 +2,7 @@
 
 package pen.par
 
-//import pen.ByteArraySerialiser
+import pen.ByteArraySerialiser
 import pen.VOID_BYTES
 import pen.Voidable
 import kotlinx.serialization.Serializable

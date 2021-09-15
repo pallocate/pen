@@ -16,6 +16,6 @@ object Admin
       KContact.KAddress( "admin", "system" )
    )
 
-   fun irohaSigner () = KMe( contact, salt ).irohaSigner( passwordProvider )
+   fun irohaSignatory () = KMe( contact, salt ).irohaSignatory( passwordProvider )
 }
 // pk: "d22675d937af2c0cea3a54057148e8c3467fea9ae08236c2fd2a2e06f68fba79"

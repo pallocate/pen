@@ -34,4 +34,4 @@ actual fun loadConf (filename : String) : Map<String, String>
 }
 
 actual fun libsodiumPath () = Paths.get( "build", "lib", "libsodium", "libsodium" ).toString()
-actual fun ed25519Sha3 (seed : ByteArray) : IrohaSigner = KIrohaSigner( seed )
+actual fun ed25519Sha3 (seed : ByteArray) : IrohaSignatory = KIrohaSignatory( seed )

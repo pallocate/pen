@@ -7,7 +7,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.*
 
 /** Reads json from file and deserializes it to a object */
-actual inline fun <reified T : Any>deserializeFromFile (filename : String, serializer : KSerializer<T>) : T?
+actual inline fun <reified T>deserializeFromFile (filename : String, serializer : KSerializer<T>) : T?
 {
    Log.log("Reading object file \"$filename\"", Config.trigger( "SAVE_LOAD" ))
    var ret : T? = null
@@ -25,7 +25,7 @@ actual inline fun <reified T : Any>deserializeFromFile (filename : String, seria
 }
 
 /** Serializes object and writes it to file */
-actual inline fun <reified T : Any>serializeToFile (obj : T, filename : String, serializer : KSerializer<T>) : Boolean
+actual inline fun <reified T>serializeToFile (obj : T, filename : String, serializer : KSerializer<T>) : Boolean
 {
    Log.log("Writing object", Config.trigger( "SAVE_LOAD" ))
    var success = false
@@ -42,4 +42,3 @@ actual inline fun <reified T : Any>serializeToFile (obj : T, filename : String, 
 
    return success
 }
-//import kotlinx.serialization.modules.SerializersModule

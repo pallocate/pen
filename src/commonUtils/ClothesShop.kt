@@ -17,5 +17,5 @@ object ClothesShop
       )
    )
 
-   fun irohaSigner () = KMe( contact, salt ).irohaSigner( passwordProvider )
+   fun irohaSignatory () = KMe( contact, salt ).irohaSignatory( passwordProvider )
 }

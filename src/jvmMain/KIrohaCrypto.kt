@@ -4,7 +4,7 @@ import java.security.KeyPair
 import jp.co.soramitsu.crypto.ed25519.Ed25519Sha3
 import org.bouncycastle.jcajce.provider.digest.SHA3
 
-class KIrohaSigner (private val seed : ByteArray) : IrohaSigner
+class KIrohaSignatory (private val seed : ByteArray) : IrohaSignatory
 {
    private val keyPair by lazy {genKeyPair()}
 

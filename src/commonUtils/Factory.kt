@@ -21,7 +21,7 @@ object Factory
 
    private val me by lazy {KMe( contact, salt )}
 
-   fun irohaSigner () = me.irohaSigner( passwordProvider )
+   fun irohaSignatory () = me.irohaSignatory( passwordProvider )
 
    fun user () = KUser( me ).apply {
 
